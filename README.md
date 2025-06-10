@@ -36,8 +36,8 @@ The Self Hosted Server Survival Guide
         - [Setting Up a Network Bridge](https://github.com/paradoxresearch/SHSSG/blob/main/Manuals/md/004_Networking_Fundamentals/001_Interfaces/001_network_bridging.md)
       - [Protocols](https://github.com/paradoxresearch/SHSSG/tree/main/Manuals/md/004_Networking_Fundamentals/003_Protocols)
         - **SSH**
-          - [Using SSH On Ubuntu](https://github.com/paradoxresearch/SHSSG/blob/main/Manuals/md/004_Networking_Fundamentals/003_Protocols/001_using_ssh_on_ubuntu.md)
-          - [Restrict SSH Access with TCP Wrappers](https://github.com/paradoxresearch/SHSSG/blob/main/Manuals/md/004_Networking_Fundamentals/003_Protocols/002_restrict_ssh_access_with_tcp_wrappers.md)
+          - [Using SSH On Ubuntu](https://github.com/paradoxresearch/SHSSG/blob/main/Manuals/md/004_Networking_Fundamentals/003_Protocols/000_SSH/001_using_ssh_on_ubuntu.md)
+          - [Restrict SSH Access with TCP Wrappers](https://github.com/paradoxresearch/SHSSG/blob/main/Manuals/md/004_Networking_Fundamentals/003_Protocols/000_SSH/002_restrict_ssh_access_with_tcp_wrappers.md)
     - [System Monitoring and Logging](https://github.com/paradoxresearch/SHSSG/tree/main/Manuals/md/005_System_Monitoring_and_Logging)
       - [System Monitoring](https://github.com/paradoxresearch/SHSSG/tree/main/Manuals/md/005_System_Monitoring_and_Logging/000_System_Monitoring)
         - [Using top, htop, vmstat to Monitor System Resources](https://github.com/paradoxresearch/SHSSG/blob/main/Manuals/md/005_System_Monitoring_and_Logging/000_System_Monitoring/001_using_top_htop_and_vmstat_to_monitor_system_resources.md)
