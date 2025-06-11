@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="setting-up-local-backups-with-rsync">Setting Up Local Backups with <code>rsync</code></h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#setting-up-local-backups-with-rsync">Setting Up Local Backups with <code>rsync</code></a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#understanding-basic-backup-concepts-and-rsync">Understanding Basic Backup Concepts and <code>rsync</code></a></li>
+</ul></li>
+<li><a href="#installing-rsync-and-basic-syntax">Installing <code>rsync</code> and Basic Syntax</a>
+<ul>
+<li><a href="#basic-syntax">Basic Syntax</a></li>
+<li><a href="#rsync-options"><code>rsync</code> Options</a></li>
+</ul></li>
+<li><a href="#performing-full-backups-with-rsync">Performing Full Backups with <code>rsync</code></a>
+<ul>
+<li><a href="#important-considerations-when-choosing-a-backup-destination-for-your-local-backups">Important Considerations when Choosing a Backup Destination for Your Local Backups</a></li>
+</ul></li>
+<li><a href="#implementing-incremental-backups-with-rsync">Implementing Incremental Backups with <code>rsync</code></a>
+<ul>
+<li><a href="#a-practical-example-of-incremental-backups">A Practical Example of Incremental Backups</a></li>
+</ul></li>
+<li><a href="#automating-backups-with-cron">Automating Backups with <code>cron</code></a>
+<ul>
+<li><a href="#example-automated-backup-script-scheduled-with-cron">Example Automated Backup Script Scheduled with <code>cron</code></a></li>
+</ul></li>
+<li><a href="#backup-strategies-and-best-practices">Backup Strategies and Best Practices</a>
+<ul>
+<li><a href="#backup-strategies">Backup Strategies</a></li>
+<li><a href="#best-practices">Best Practices</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<h3 id="understanding-basic-backup-concepts-and-rsync">Understanding Basic Backup Concepts and <code>rsync</code></h3>
+<p>Think of backups as your server&#39;s safety net. Imagine accidentally deleting important configuration files or experiencing a hard drive failure. Without a backup, that data could be lost forever – a real headache for any system administrator! Backups are essentially copies of your data that you can restore in case of such disasters. They provide peace of mind and business continuity.</p>
+<p>Now, let&#39;s talk about <code>rsync</code>. It&#39;s a command-line tool in Linux that&#39;s like a super-efficient file copier. But it&#39;s much smarter than a simple <code>cp</code> command. Here are some of its key strengths:</p>
+<ul>
+<li><strong>Efficiency</strong>: <code>rsync</code> only copies the differences between the source and destination files. If a file hasn&#39;t changed since the last backup, <code>rsync</code> skips it, saving time and bandwidth. This is especially useful for regular backups.</li>
+<li><strong>Incremental Backups</strong>: As mentioned, it can perform incremental backups, meaning after the first full backup, it only copies the changes.</li>
+<li><strong>Versatility</strong>: It works for both local backups (copying files on the same machine) and remote backups (copying files to another server). We&#39;ll focus on local backups for now.</li>
+<li><strong>Preservation of Attributes</strong>: <code>rsync</code> can preserve file permissions, ownership, timestamps, and other important attributes, ensuring your backups are faithful copies of the original data.</li>
+</ul>
+<p>Think of <code>rsync</code> as a meticulous librarian who, after the first full cataloging of your books (full backup), only notes down any new books or changes to existing ones (incremental backup) in subsequent visits.</p>
+<h2 id="installing-rsync-and-basic-syntax">Installing <code>rsync</code> and Basic Syntax</h2>
+<p>Since these guides are based on Debian-based Linux distributions, you can easily install <code>rsync</code> using the <code>apt</code> package manager. Open your terminal and run the following command:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install rsync</span></code></pre></div>
+<p>The first command <code>sudo apt update</code> refreshes the package lists, ensuring you have the latest information about available software. The second command <code>sudo apt install rsync</code> downloads and installs the <code>rsync</code> tool. You&#39;ll likely be prompted to enter your password to authorize the installation.</p>
+<p>Once installed, you can verify it by running:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">--version</span></span></code></pre></div>
+<p>This should display the version of <code>rsync</code> that&#39;s installed on your system.</p>
+<h3 id="basic-syntax">Basic Syntax</h3>
+<p>Now, let&#39;s look at the basic syntax of the <code>rsync</code> command:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="pp">[</span><span class="ss">options</span><span class="pp">]</span> source destination</span></code></pre></div>
+<ul>
+<li><code>rsync</code>: This is the command itself.</li>
+<li><code>[options]</code>: These are flags that modify how <code>rsync</code> works. We&#39;ll learn about some important ones shortly.</li>
+<li><code>source</code>: This is the file or directory you want to back up.</li>
+<li><code>destination</code>: This is where you want to store the backup. It can be another directory on the same machine or a different storage device mounted on your server.</li>
+</ul>
+<p>Think of it like saying, &quot;Hey <code>rsync</code>, using these <code>[options]</code>, please copy this <code>source</code> to this <code>destination</code>.&quot;</p>
+<h3 id="rsync-options"><code>rsync</code> Options</h3>
+<p>Now that you know the basic structure of the rsync command, let&#39;s explore some essential options that will significantly enhance its functionality.</p>
+<p>Here are three fundamental options you&#39;ll use frequently:</p>
+<ul>
+<li><p><code>-v</code> <strong>(verbose)</strong>: This option tells <code>rsync</code> to be more talkative and display detailed information about what files are being transferred and what actions are being taken. It&#39;s very helpful for understanding what <code>rsync</code> is doing, especially when you&#39;re starting out or troubleshooting. Think of it as the librarian giving you a detailed list of every book they handle.</p></li>
+<li><p><code>-a</code> <strong>(archive mode)</strong>: This is a very powerful and commonly used option. It&#39;s actually a shorthand for several other options that ensure a comprehensive backup. Specifically, it includes:</p>
+<ul>
+<li><code>-r</code> <strong>(recursive)</strong>: Copies directories and their contents recursively.</li>
+<li><code>-l</code> <strong>(links)</strong>: Preserves symbolic links.</li>
+<li><code>-p</code> <strong>(perms)</strong>: Preserves permissions.</li>
+<li><code>-t</code> <strong>(times)</strong>: Preserves modification times.</li>
+<li><code>-g</code> <strong>(group)</strong>: Preserves group ownership.</li>
+<li><code>-o</code> <strong>(owner)</strong>: Preserves owner (requires superuser privileges).</li>
+<li><code>-D</code>: Preserves special and block devices. Essentially, <code>-a</code> aims to create an exact copy of your source data, preserving most of its attributes. It&#39;s like telling the librarian to make sure all the details about the books (like their genre, when they were last shelved, etc.) are also copied.</li>
+</ul></li>
+<li><p><code>-n</code> <strong>(dry run)</strong>: This is an incredibly useful option for testing your rsync commands without actually making any changes to the destination. It shows you exactly what rsync would do if you ran the command without <code>-n</code>. This allows you to preview the actions and catch any potential mistakes before they happen. It&#39;s like asking the librarian to tell you which books they would move without actually moving them.</p></li>
+</ul>
+<p>Here are a couple of examples to illustrate their usage:</p>
+<p>To see a detailed output of what would happen when backing up a directory named <code>important_files</code> to a directory named <code>backup</code> in the current location, you would use:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-avn</span> important_files/ backup/</span></code></pre></div>
+<p>Notice the trailing slashes. They can be important and affect whether <code>rsync</code> creates a subdirectory within the destination.</p>
+<p>To perform an actual backup while preserving attributes and seeing the progress, you&#39;d use:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-av</span> important_files/ backup/</span></code></pre></div>
+<h2 id="performing-full-backups-with-rsync">Performing Full Backups with <code>rsync</code></h2>
+<p>Imagine you have a crucial directory on your Ubuntu Server called <code>/etc/nginx/sites-available</code> that contains the configuration files for your websites. You want to create a backup of this entire directory to another local directory, say <code>/var/backup/nginx-config-full</code>.</p>
+<p>Here&#39;s the <code>rsync</code> command you would use:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rsync <span class="at">-av</span> /etc/nginx/sites-available/ /var/backup/nginx-config-full/</span></code></pre></div>
+<p>Let&#39;s break down this command:</p>
+<ul>
+<li><code>sudo</code>: We use <code>sudo</code> because backing up system configuration files often requires administrator privileges.</li>
+<li><code>rsync</code>: The command itself.</li>
+<li><code>-a</code>: This is our trusty archive mode, ensuring that all the files and directories within <code>/etc/nginx/sites-available</code> are copied recursively, and their permissions, ownership, timestamps, and symbolic links are preserved.</li>
+<li><code>-v</code>: The verbose option, which will show you the details of each file and directory being copied.</li>
+<li><code>/etc/nginx/sites-available/</code>: This is the <strong>source</strong> directory – the one we want to back up. Notice the trailing slash. It&#39;s important! If you omit it, <code>rsync</code> will copy the <code>sites-available</code> directory itself into the destination, creating <code>/var/backup/nginx-config-full/sites-available</code>. With the trailing slash, it copies the contents of <code>sites-available</code> directly into <code>/var/backup/nginx-config-full</code>.</li>
+<li><code>/var/backup/nginx-config-full/</code>: This is the <strong>destination</strong> directory – where the backup will be stored. <code>rsync</code> will create this directory if it doesn&#39;t already exist. Again, the trailing slash here means <code>rsync</code> will copy the contents of the source into this directory.</li>
+</ul>
+<p>When you run this command, <code>rsync</code> will go through all the files and directories within <code>/etc/nginx/sites-available</code> and copy them to <code>/var/backup/nginx-config-full</code>, preserving their attributes.</p>
+<h3 id="important-considerations-when-choosing-a-backup-destination-for-your-local-backups">Important Considerations when Choosing a Backup Destination for Your Local Backups</h3>
+<ul>
+<li><p><strong>Separate Physical Storage</strong>: Ideally, your backup destination should be on a completely separate physical storage device from your primary data. This protects against hardware failures of your main hard drive. Imagine if both your original files and their backups were on the same failing drive – that wouldn&#39;t be very helpful! This could be a second internal hard drive, an external USB drive, or even a Network Attached Storage (NAS) device on your local network (though that blurs the line a bit between local and remote).</p></li>
+<li><p><strong>Sufficient Capacity</strong>: Your backup storage needs to have enough capacity to hold all the data you plan to back up, and ideally, some extra space for future growth and multiple backup versions (which we&#39;ll discuss later with incremental backups). Running out of space mid-backup is a common and frustrating issue.</p></li>
+<li><p><strong>Accessibility</strong>: The backup location needs to be accessible to the user or process performing the backup. This usually means having the correct file system permissions.</p></li>
+<li><p><strong>Mount Point</strong>: If you&#39;re using a separate drive or partition, it needs to be properly mounted to a directory on your system (like <code>/mnt/backupdrive</code> as we mentioned).</p></li>
+<li><p><strong>File System</strong>: The file system on your backup destination should be compatible with the types of files and attributes you are backing up. Most Linux file systems (like ext4) work well with <code>rsync</code>.</p></li>
+</ul>
+<p>Think of it this way: if your main server is a house, you wouldn&#39;t want to keep the emergency blueprints inside the same house! You&#39;d want them in a separate, fireproof safe (the backup storage) that&#39;s easy to get to if something goes wrong.</p>
+<h2 id="implementing-incremental-backups-with-rsync">Implementing Incremental Backups with <code>rsync</code></h2>
+<p>Now that we&#39;ve covered full backups, let&#39;s talk about <strong>incremental backups</strong>. This is where <code>rsync</code> really shines in terms of efficiency for ongoing backups.</p>
+<p>Imagine you&#39;ve done a full backup of your <code>/etc/nginx/sites-available directory</code>, which we&#39;ll call your base backup. Now, a week later, only a few configuration files have been changed. Instead of copying the entire <code>sites-available</code> directory again (which would be time-consuming and use a lot of space), an incremental backup only copies the files that have changed since the last backup.</p>
+<p><code>rsync</code> achieves this by comparing the files in the source directory with the files in the destination directory from the previous backup. It then only transfers the new or modified files. This saves significant time and storage space, especially for frequently changing data.</p>
+<p>To implement incremental backups with <code>rsync</code>, we often use a combination of the <code>--delete</code> option and hard links (achieved using <code>-H</code> and <code>--link-dest</code>). Let&#39;s break these down:</p>
+<ul>
+<li><p><code>--delete</code>: This option tells <code>rsync</code> to delete files in the destination directory that no longer exist in the source directory. This is important for keeping your backup synchronized with the original data. If you delete a file in <code>/etc/nginx/sites-available</code>, using <code>--delete</code> in your backup command will also remove it from your backup on the next run. Think of it as the librarian removing records of books that have been discarded.</p></li>
+<li><p><strong>Hard Links (</strong><code>-H</code> <strong>and</strong> <code>--link-dest</code><strong>)</strong>: This is the clever part that saves space.</p>
+<ul>
+<li><code>-H</code> tells <code>rsync</code> to preserve hard links in the source.</li>
+<li><code>--link-dest=DIR</code> tells <code>rsync</code> that if a file in the source has not changed since the backup in <code>DIR</code>, instead of copying the entire file again, it should create a <strong>hard link</strong> to the unchanged file in <code>DIR</code>.</li>
+</ul></li>
+</ul>
+<p>A <strong>hard</strong> link is essentially another name for the same file data on the disk. It doesn&#39;t take up extra space. So, in our incremental backup, if a configuration file hasn&#39;t changed since the last backup, <code>rsync</code> just creates a new &quot;pointer&quot; (the hard link) to the existing version of the file in your previous backup directory. Only the truly new or modified files are actually copied, saving a ton of space!</p>
+<h3 id="a-practical-example-of-incremental-backups">A Practical Example of Incremental Backups</h3>
+<p>Let&#39;s say we want to back up our <code>/etc/nginx/sites-available</code> directory to <code>/var/backup/nginx-config-incremental</code>. We&#39;ll create a new subdirectory within this for each backup.</p>
+<ol type="1">
+<li><p><strong>Initial Full Backup</strong></p>
+<p>First, we perform a full backup. We&#39;ll name the first backup directory <code>backup.0</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rsync <span class="at">-av</span> /etc/nginx/sites-available/ /var/backup/nginx-config-incremental/backup.0/</span></code></pre></div>
+<p>This command will copy all the files and directories from <code>/etc/nginx/sites-available</code> to <code>/var/backup/nginx-config-incremental/backup.0/</code>.</p></li>
+<li><p><strong>First Incremental Backup</strong></p>
+<p>Now, let&#39;s say some changes have been made to the configuration files. To create our first incremental backup (let&#39;s call it <code>backup.1</code>), we&#39;ll use the <code>--link-dest</code> option, pointing it to our base backup (<code>backup.0</code>), and also include the <code>--delete</code> option.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rsync <span class="at">-av</span> <span class="at">--delete</span> <span class="at">--link-dest</span><span class="op">=</span>/var/backup/nginx-config-incremental/backup.0/ /etc/nginx/sites-available/ /var/backup/nginx-config-incremental/backup.1/</span></code></pre></div>
+<p>Here&#39;s what&#39;s happening:</p>
+<ul>
+<li><code>--link-dest=/var/backup/nginx-config-incremental/backup.0/</code>: This tells rsync to look at the backup.0 directory. If a file in <code>/etc/nginx/sites-available/</code> has the same content and attributes as a file in <code>backup.0</code>, it will create a hard link to that file in <code>backup.1</code> instead of copying the entire file again.</li>
+<li><code>--delete</code>: This ensures that if any files were deleted from <code>/etc/nginx/sites-available/</code> since the last backup, they will also be deleted from <code>backup.1</code>.</li>
+<li>The other options (<code>-a</code> and <code>-v</code>) work as we discussed before.</li>
+</ul>
+<p>Only the files that have been added or modified since the <code>backup.0</code> will be fully copied into the <code>backup.1</code> directory. The rest will be hard links to the files in <code>backup.0</code>, saving space.</p></li>
+<li><p><strong>Subsequent Incremental Backups</strong></p>
+<p>For the next incremental backup (e.g., <code>backup.2</code>), you would repeat the process, but this time, you would point <code>--link-dest</code> to the previous successful backup (<code>backup.1</code> in this case).</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rsync <span class="at">-av</span> <span class="at">--delete</span> <span class="at">--link-dest</span><span class="op">=</span>/var/backup/nginx-config-incremental/backup.1/ /etc/nginx/sites-available/ /var/backup/nginx-config-incremental/backup.2/</span></code></pre></div>
+<p>And so on. Each new backup directory will only contain the changes since the immediately preceding backup, with the unchanged files being hard links to the versions in the previous backup.</p>
+<p>This way, you can maintain a history of your backups without taking up excessive disk space.</p></li>
+</ol>
+<h2 id="automating-backups-with-cron">Automating Backups with <code>cron</code></h2>
+<p>Now that we&#39;ve covered how to perform full and incremental backups with <code>rsync</code>, the next logical step is to <strong>automate</strong> this process. You don&#39;t want to have to manually run these <code>rsync</code> commands every day (or however often you need to back up)!</p>
+<p>This is where <code>cron</code> comes in. <code>cron</code> is a time-based job scheduler in Unix-like operating systems. It allows you to schedule commands or scripts to run automatically at specific times, dates, or intervals. Think of it as your server&#39;s personal assistant that takes care of routine tasks for you, like running your backups.</p>
+<p>To use <code>cron</code>, you need to edit a special file called a <strong>crontab</strong> (cron table). Each line in the crontab represents a scheduled job. The syntax for a crontab entry looks like this:</p>
+<pre class="shell"><code>minute hour day_of_month month day_of_week command_to_run</code></pre>
+<p>Let&#39;s break down each field:</p>
+<ul>
+<li><code>minute</code>: The minute of the hour when the command will run (0-59).</li>
+<li><code>hour</code>: The hour of the day when the command will run (0-23, where 0 is midnight).</li>
+<li><code>day_of_month</code>: The day of the month when the command will run (1-31).</li>
+<li><code>month</code>: The month of the year when the command will run (1-12, or you can use abbreviations like jan, feb, etc.).</li>
+<li><code>day_of_week</code>: The day of the week when the command will run (0-6, where 0 is Sunday, or you can use abbreviations like <code>sun</code>, <code>mon</code>, etc.).</li>
+<li><code>command_to_run</code>: The actual command or script you want cron to execute.</li>
+</ul>
+<p>For example, if you wanted to run your incremental backup script every day at 2:00 AM, your crontab entry might look something like this:</p>
+<pre class="shell"><code>0 2 * * * /path/to/your/backup_script.sh</code></pre>
+<p>Here, <code>0</code> in the <code>minute</code> field means the job will run at the beginning of the hour. <code>2</code> in the <code>hour</code> field means 2 AM. The asterisks <code>*</code> in the <code>day_of_month</code>, <code>month</code>, and <code>day_of_week</code> fields mean that the job will run every day, every month, and every day of the week. <code>/path/to/your/backup_script.sh</code> is the full path to a script that contains your <code>rsync</code> command.</p>
+<h3 id="example-automated-backup-script-scheduled-with-cron">Example Automated Backup Script Scheduled with <code>cron</code></h3>
+<p>Here is an example of a script that will</p>
+<p>You can use a text editor like <code>nano</code> to create this script. Let&#39;s say you want to create a script called <code>backup_nginx.sh</code> in your home directory (<code>~</code>).</p>
+<ol type="1">
+<li><p><strong>Open a new file in</strong> <code>nano</code>:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> ~/backup_nginx.sh</span></code></pre></div></li>
+<li><p><strong>Enter your</strong> <code>rsync</code> <strong>command into the file</strong>. For example, to perform an incremental backup as we discussed, you might put something like this in your script:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="va">BACKUP_DIR</span><span class="op">=</span><span class="st">&quot;/var/backup/nginx-config-incremental&quot;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="va">SOURCE_DIR</span><span class="op">=</span><span class="st">&quot;/etc/nginx/sites-available&quot;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="va">DATE</span><span class="op">=</span><span class="va">$(</span><span class="fu">date</span> +%Y-%m-%d_%H-%M-%S<span class="va">)</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="va">PREVIOUS_BACKUP</span><span class="op">=</span><span class="va">$(</span><span class="fu">ls</span> <span class="at">-d</span> <span class="st">&quot;</span><span class="va">$BACKUP_DIR</span><span class="st">&quot;</span>/backup.<span class="pp">*</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-rV</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 1<span class="va">)</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-z</span> <span class="st">&quot;</span><span class="va">$PREVIOUS_BACKUP</span><span class="st">&quot;</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># First backup: perform a full backup</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rsync</span> <span class="at">-av</span> <span class="st">&quot;</span><span class="va">$SOURCE_DIR</span><span class="st">&quot;</span>/ <span class="st">&quot;</span><span class="va">$BACKUP_DIR</span><span class="st">&quot;</span>/backup.<span class="st">&quot;</span><span class="va">$DATE</span><span class="st">&quot;</span>/</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Subsequent backups: perform an incremental backup</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rsync</span> <span class="at">-av</span> <span class="at">--delete</span> <span class="at">--link-dest</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$PREVIOUS_BACKUP</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="va">$SOURCE_DIR</span><span class="st">&quot;</span>/ <span class="st">&quot;</span><span class="va">$BACKUP_DIR</span><span class="st">&quot;</span>/backup.<span class="st">&quot;</span><span class="va">$DATE</span><span class="st">&quot;</span>/</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div>
+<p>Let&#39;s break down this script:</p>
+<ul>
+<li><code>#!/bin/bash</code>: This is a shebang line, which tells the system to execute the script using Bash.</li>
+<li><code>BACKUP_DIR=&quot;/var/backup/nginx-config-incremental&quot;</code>: This sets a variable for your main backup directory.</li>
+<li><code>SOURCE_DIR=&quot;/etc/nginx/sites-available&quot;</code>: This sets a variable for the directory you&#39;re backing up.</li>
+<li><code>DATE=$(date +%Y-%m-%d_%H-%M-%S)</code>: This creates a variable containing the current date and time, which we&#39;ll use to name our backup directories.</li>
+<li><code>PREVIOUS_BACKUP=$(ls -d &quot;$BACKUP_DIR&quot;/backup.* | sort -rV | head -n 1)</code>: This line finds the most recent previous backup directory.</li>
+<li>The <code>if</code> statement checks if it&#39;s the first backup (if <code>$PREVIOUS_BACKUP</code> is empty). If it is, it performs a full backup.</li>
+<li>Otherwise, it performs an incremental backup using <code>--link-dest</code> pointing to the previous backup.</li>
+</ul></li>
+<li><p><strong>Make the script executable</strong>: After you&#39;ve saved the script in <code>nano</code> (Ctrl+O, then Enter, then Ctrl+X), you need to give it execute permissions:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x ~/backup_nginx.sh</span></code></pre></div></li>
+</ol>
+<p>Now you have a script that will perform either a full backup (if it&#39;s the first run) or an incremental backup (for subsequent runs).</p>
+<p><strong>Next, you need to tell</strong> <code>cron</code> <strong>to run this script at your desired schedule</strong>. To edit your crontab, run:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">crontab</span> <span class="at">-e</span></span></code></pre></div>
+<p>This will open your crontab file in a text editor (usually <code>nano</code> by default). Add a line like this (adjusting the time as needed):</p>
+<pre class="shell"><code>0 2 * * * ~/backup_nginx.sh</code></pre>
+<p>This will run your <code>backup_nginx.sh</code> script every day at 2:00 AM.</p>
+<p>After adding the line, save and close the crontab file. <code>cron</code> will automatically pick up the changes.</p>
+<h2 id="backup-strategies-and-best-practices">Backup Strategies and Best Practices</h2>
+<h3 id="backup-strategies">Backup Strategies</h3>
+<p>Let&#39;s talk about different backup strategies. Understanding these will help you make informed decisions about how you want to protect your data.</p>
+<p>We&#39;ve already discussed <strong>full backups</strong> (copying everything every time) and <strong>incremental</strong> backups (copying only changes since the last backup). These are two fundamental strategies, but there&#39;s another important one called <strong>differential backups</strong>.</p>
+<p>Here&#39;s a quick comparison:</p>
+<ul>
+<li><p><strong>Full Backup</strong>: As we know, this copies all selected data. It&#39;s straightforward to restore from a full backup, as everything you need is in one place. However, it takes the longest time and the most storage space for each backup.</p></li>
+<li><p><strong>Incremental Backup</strong>: This copies only the data that has changed since the last backup (which could be a full or a previous incremental backup). They are fast and use minimal storage space for each run. However, restoring from an incremental backup requires having the last full backup and all subsequent incremental backups in the correct order. If any one of the incremental backups is corrupted or missing, the restore process can fail.</p></li>
+<li><p><strong>Differential Backup</strong>: This is like a middle ground. A differential backup copies all the data that has changed since the last full backup. So, on Monday, you might do a full backup. On Tuesday, the differential backup will contain all changes since Monday. On Wednesday, the differential backup will again contain all changes since Monday (it doesn&#39;t care about Tuesday&#39;s backup).</p></li>
+</ul>
+<p>Think of it like this:</p>
+<ul>
+<li><strong>Full</strong>: Making a complete photocopy of a book every day.</li>
+<li><strong>Incremental</strong>: Each day, only photocopying the pages that were changed since the last photocopy. To get the complete book, you need the original full copy and all the changed pages in order.</li>
+<li><strong>Differential</strong>: After the first full photocopy, each day you photocopy all the pages that have changed since that original full copy. To get the complete book, you only need the original full copy and the latest set of changed pages.</li>
+</ul>
+<p><strong>When to use which?</strong></p>
+<ul>
+<li><strong>Full backups</strong> are good for initial backups or for less frequently changing data where simplicity of restore is paramount.</li>
+<li><strong>Incremental backups</strong> are excellent for daily backups of large datasets with small daily changes, as they are fast and space-efficient. However, the more incrementals you have, the longer and more complex the restore process becomes.</li>
+<li><strong>Differential backups</strong> offer a balance. They take more space and time than incrementals (but less than fulls after the first one), and the restore process is simpler than with incrementals (you only need the last full and the latest differential).</li>
+</ul>
+<p>You can even combine these strategies. For example, you might do a full backup weekly, with daily incremental backups in between, or perhaps a full backup monthly with daily differentials.</p>
+<p>The best strategy depends on factors like the volume of your data, how frequently it changes, your storage capacity, and your desired restore time.</p>
+<h3 id="best-practices">Best Practices</h3>
+<p>Let&#39;s discuss some best practices for setting up and maintaining your local backups. These are like the rules of the road that ensure your backups are reliable and will actually save you when disaster strikes!</p>
+<p>Here are some key best practices to keep in mind:</p>
+<ul>
+<li><p><strong>Verification</strong>: Don&#39;t just assume your backups are working correctly! Regularly verify your backups to ensure the files are being copied as expected and are not corrupted. You can do this by occasionally listing the contents of your backup directories and comparing them to your source data. For more critical systems, you might even consider using <code>rsync</code>&#39;s <code>--checksum</code> option, which performs a more thorough verification by comparing the content of files, though it can be slower. Think of it as occasionally checking if the emergency blueprints are actually readable and complete.</p></li>
+<li><p><strong>Testing Restores</strong>: This is arguably the most crucial step. A backup is only as good as your ability to restore from it. Periodically practice restoring files or even a small directory from your backups to a temporary location to ensure the process works and you know what to do in a real recovery situation. This will also help you identify any potential issues with your backup process. It&#39;s like having a fire drill to make sure everyone knows how to evacuate safely.</p></li>
+<li><p><strong>Security Considerations</strong>: Even though these are local backups, security is still important. Ensure that your backup destination has appropriate file permissions so that only authorized users (like the system administrator) can access and modify the backup data. If your backup destination is an external drive, consider storing it in a secure location to protect against physical theft or damage.</p></li>
+<li><p><strong>Retention Policy</strong>: Decide how long you need to keep your backups. Do you need daily backups for a week, weekly backups for a month, and monthly backups for a year? Implementing a retention policy helps you manage storage space and ensures you have backups available for different recovery scenarios. You might need to periodically prune older backups according to your policy.</p></li>
+<li><p><strong>Monitoring</strong>: If possible, set up some form of monitoring for your backup process. This could be as simple as checking the <code>cron</code> logs for any errors or using more sophisticated tools to track backup success and storage usage. Knowing if a backup failed is crucial for addressing the issue promptly.</p></li>
+<li><p><strong>Documentation</strong>: Keep a record of your backup strategy, the scripts you use, where the backups are stored, and the restore procedure. This documentation will be invaluable if you need to recover data, especially if someone else needs to do it in your absence.</p></li>
+</ul>
+<p>By following these best practices, you can significantly increase the reliability and usefulness of your local backup strategy with <code>rsync</code>.</p>
+</body>
+</html>

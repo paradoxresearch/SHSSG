@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="using-docker-compose">Using Docker Compose</h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#using-docker-compose">Using Docker Compose</a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#understanding-docker-compose-basics">Understanding Docker Compose Basics</a></li>
+<li><a href="#installing-docker-compose">Installing Docker Compose</a></li>
+</ul></li>
+<li><a href="#creating-a-simple-docker-compose-project">Creating a Simple Docker Compose Project</a>
+<ul>
+<li><a href="#creating-a-basic-docker-composeyml-file">Creating a Basic <code>docker-compose.yml</code> File</a></li>
+<li><a href="#common-docker-compose-commands">Common Docker Compose Commands</a></li>
+</ul></li>
+<li><a href="#advanced-docker-compose-concepts">Advanced Docker Compose Concepts</a>
+<ul>
+<li><a href="#define-and-use-volumes-for-persistent-data-storage">Define and Use Volumes for Persistent Data Storage</a></li>
+<li><a href="#network-configurations-within-docker-compose">Network Configurations Within Docker Compose</a></li>
+<li><a href="#introduce-environment-variables-in-docker-compose">Introduce Environment Variables in Docker Compose</a></li>
+</ul></li>
+<li><a href="#practical-application-and-troubleshooting">Practical Application and Troubleshooting</a>
+<ul>
+<li><a href="#example-application">Example Application</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<h3 id="understanding-docker-compose-basics">Understanding Docker Compose Basics</h3>
+<p>Docker Compose is a tool developed by Docker, Inc. that facilitates the definition and running of multi-container Docker applications. Think of it as an orchestration tool for local development and testing environments.</p>
+<p><strong>Purpose and Benefits</strong>:</p>
+<ul>
+<li><strong>Simplification</strong>: Instead of managing individual Docker containers, networks, and volumes with separate <code>docker run</code> commands, Docker Compose allows you to define an entire application stack in a single file. This drastically reduces complexity.</li>
+<li><strong>Reproducibility</strong>: The <code>docker-compose.yml</code> file acts as a blueprint for your application&#39;s architecture. This ensures that anyone (or any system) can spin up the exact same environment with a single command, promoting consistency across development, testing, and even production environments.</li>
+<li><strong>Efficiency</strong>: For applications comprised of multiple services (e.g., a web server, a database, and a backend API), Docker Compose streamlines the startup, shutdown, and linking of these services.</li>
+</ul>
+<p><strong>The</strong> <code>docker-compose.yml</code> <strong>File</strong>:</p>
+<p>This is the core of Docker Compose. It&#39;s a YAML (<em>YAML Ain&#39;t Markup Language</em> or <em>Yet another markup language</em>) file where you define the services that make up your application, along with their configurations. Here are the fundamental top-level sections you&#39;ll typically find:</p>
+<ul>
+<li><p><code>services</code>: This is where you define each individual container that is part of your application. For example, you might have a service for your web server (e.g., Nginx or Apache), another for your database (e.g., PostgreSQL or MySQL), and another for your application&#39;s backend. Each service typically specifies:</p>
+<ul>
+<li>The Docker image to use (e.g., <code>nginx:latest</code>, <code>mysql:8.0</code>).</li>
+<li>Port mappings (e.g., <code>- &quot;80:80&quot;</code> to expose port 80).</li>
+<li>Volume mounts (e.g., <code>- ./data:/var/lib/mysql</code> for persistent data).</li>
+<li>Environment variables.</li>
+<li>Dependencies on other services.</li>
+</ul></li>
+<li><p><code>networks</code>: This section allows you to define custom networks for your services. By default, Docker Compose creates a default network for your project, allowing services to communicate with each other using their service names as hostnames. However, defining custom networks provides more control over network isolation and communication.</p></li>
+<li><p><code>volumes</code>: This section is used to define named volumes, which are the preferred mechanism for persisting data generated by Docker containers. Unlike bind mounts (where data is stored directly on the host filesystem), named volumes are managed by Docker and are more portable.</p></li>
+</ul>
+<p>Imagine you&#39;re building a house. Instead of buying each brick, window, and door separately and assembling them by hand every time you want to build the same house, Docker Compose is like having a detailed architectural plan (the <code>docker-compose.yml</code> file) that tells a pre-fabrication factory exactly how to assemble all the different components into a complete, functional house.</p>
+<h3 id="installing-docker-compose">Installing Docker Compose</h3>
+<p>The installation of Docker Compose primarily involves command-line operations. Docker Compose is not typically included in the standard repositories, so we often obtain it directly from the official GitHub releases.</p>
+<p>Here are the general steps for installing Docker Compose, focusing on the command-line approach:</p>
+<ol type="1">
+<li><p><strong>Check for existing Docker installation</strong>: Before installing Docker Compose, ensure that Docker Engine is already installed and running on your Ubuntu Server. Docker Compose relies on a functional Docker daemon. You can verify this with:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status docker</span></code></pre></div>
+<p>If Docker is not installed, you would typically install it via the official Docker repository, but we will assume for this lesson that Docker Engine is already in place.</p></li>
+<li><p><strong>Download the Docker Compose binary</strong>: The recommended method is to download the latest stable release of Docker Compose from its GitHub repository. You can find the latest version number on the Docker Compose GitHub releases page. For instance, to download version <code>v2.24.5</code> (please verify the latest version on the GitHub page as versions are frequently updated):</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> curl <span class="at">-L</span> <span class="st">&quot;https://github.com/docker/compose/releases/download/v2.24.5/docker-compose-</span><span class="va">$(</span><span class="fu">uname</span> <span class="at">-s</span><span class="va">)</span><span class="st">-</span><span class="va">$(</span><span class="fu">uname</span> <span class="at">-m</span><span class="va">)</span><span class="st">&quot;</span> <span class="at">-o</span> /usr/local/bin/docker-compose</span></code></pre></div>
+<ul>
+<li><code>curl -L</code>: Downloads the file and follows redirects.</li>
+<li><code>$(uname -s)</code>: Substitutes the operating system kernel name (e.g., <code>Linux</code>).</li>
+<li><code>$(uname -m)</code>: Substitutes the machine hardware name (e.g., <code>x86_64</code>).</li>
+<li><code>-o /usr/local/bin/docker-compose</code>: Specifies the output file path and name. <code>/usr/local/bin</code> is a common directory for manually installed executable programs.</li>
+</ul></li>
+<li><p><strong>Apply executable permissions</strong>: After downloading, the binary needs executable permissions to be run as a command:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chmod +x /usr/local/bin/docker-compose</span></code></pre></div>
+<p>This command adds execute permission for the owner, group, and others.</p></li>
+<li><p><strong>Verify the installation</strong>: You can confirm that Docker Compose is installed correctly and is accessible in your PATH by checking its version:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> <span class="at">--version</span></span></code></pre></div>
+<p>This command should output the installed Docker Compose version.</p></li>
+</ol>
+<p>It&#39;s important to understand that <code>docker-compose</code> is a standalone binary that interacts with the Docker daemon. It doesn&#39;t run inside a container itself; rather, it <em>orchestrates</em> containers.</p>
+<h2 id="creating-a-simple-docker-compose-project">Creating a Simple Docker Compose Project</h2>
+<h3 id="creating-a-basic-docker-composeyml-file">Creating a Basic <code>docker-compose.yml</code> File</h3>
+<p>Now, let&#39;s create our first <code>docker-compose.yml</code> file. This file will define a simple web server using Nginx, which is a popular open-source web server. The goal is to serve a basic &quot;Hello, World!&quot; web page.</p>
+<p>To begin, you will need to create a project directory and navigate into it. This is where your <code>docker-compose.yml</code> file and any related application files will reside.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> my_nginx_app</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> my_nginx_app</span></code></pre></div>
+<p>Next, we will create a simple <code>index.html</code> file that Nginx will serve.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;&lt;h1&gt;Hello from Docker Compose!&lt;/h1&gt;&quot;</span> <span class="op">&gt;</span> index.html</span></code></pre></div>
+<p>Now, let&#39;s create the <code>docker-compose.yml</code> file. You can use a command-line text editor like <code>nano</code> or <code>vim</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> docker-compose.yml</span></code></pre></div>
+<p>Inside <code>nano</code> (or <code>vim</code>), paste the following content:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode YAML"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;3.8&#39;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">services</span><span class="kw">:</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">web</span><span class="kw">:</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx:latest</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;80:80&quot;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">volumes</span><span class="kw">:</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> ./index.html:/usr/share/nginx/html/index.html</span></span></code></pre></div>
+<p>Let&#39;s break down this file line by line:</p>
+<ul>
+<li><code>version: &#39;3.8&#39;</code>: This specifies the Docker Compose file format version. Using a recent version like <code>3.8</code> (or higher, check Docker&#39;s documentation for the latest recommended version) ensures access to the latest features.</li>
+<li><code>services:</code>: As discussed previously, this is the top-level key where you define all the individual services (containers) that make up your application.</li>
+<li><code>web:</code>: This is the name we&#39;ve given to our service. You can name your services anything you like, but descriptive names are best. This name will also be used for internal DNS resolution within your Docker Compose network.</li>
+<li><code>image: nginx:latest</code>: This tells Docker Compose to use the <code>nginx</code> Docker image, specifically the <code>latest</code> tag. If the image is not found locally, Docker will automatically pull it from Docker Hub.</li>
+<li><code>ports:</code>: This section maps ports between the host machine (your server) and the container.
+<ul>
+<li><code>&quot;80:80&quot;</code>: This means &quot;map port 80 on the host to port 80 inside the container.&quot; So, when you access <code>http://your_server_ip:80</code> (or just <code>http://your_server_ip</code> if port 80 is default), the request will be forwarded to the Nginx server running inside the <code>web</code> container.</li>
+</ul></li>
+<li><code>volumes:</code>: This section is for mounting volumes. We are using a bind mount here.
+<ul>
+<li><code>- ./index.html:/usr/share/nginx/html/index.html</code>: This tells Docker Compose to take the <code>index.html</code> file from your current directory (<code>./index.html</code>) on the host machine and mount it directly into the Nginx container at <code>/usr/share/nginx/html/index.html</code>. This is the default location where Nginx looks for its <code>index.html</code> file to serve. This means any changes you make to your local <code>index.html</code> file will be reflected in the running container.</li>
+</ul></li>
+</ul>
+<p>This configuration defines a single service, <code>web</code>, which will run an Nginx container and serve our custom <code>index.html</code> file. It&#39;s a fundamental example, but it illustrates how services, images, ports, and volumes are combined.</p>
+<h3 id="common-docker-compose-commands">Common Docker Compose Commands</h3>
+<p>Now that we have our <code>docker-compose.yml</code> file, we can use it to manage our simple web application. These commands are executed from the directory where your <code>docker-compose.yml</code> file is located.</p>
+<ol type="1">
+<li><p><code>docker compose up</code>: This is the primary command to start your Docker Compose application.</p>
+<ul>
+<li><p><strong>Purpose</strong>: It builds, (re)creates, starts, and attaches to containers for all services defined in your <code>docker-compose.yml</code> file. If images are not locally available, it will pull them. If changes have been made to service definitions or Dockerfiles, it will rebuild images.</p></li>
+<li><p><strong>Usage</strong>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose up</span></code></pre></div>
+<p>When run without any flags, it will output logs from all services to your terminal. This is useful for development and debugging. To run the services in the background (detached mode), which is more common for production or continuous operation on a server, use the -d flag:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose up <span class="at">-d</span></span></code></pre></div>
+<p>After running <code>docker compose up -d</code>, you should be able to access your Nginx web server by navigating your web browser to the IP address of your server. For example, if your server&#39;s IP is <code>192.168.1.100</code>, you would visit <code>http://192.168.1.100</code>. You should see &quot;Hello from Docker Compose!&quot;</p></li>
+</ul></li>
+<li><p><code>docker compose ps</code>: This command lists the containers started by Docker Compose.</p>
+<ul>
+<li><p><strong>Purpose</strong>: It shows the status of the services defined in your <code>docker-compose.yml</code> file. This is analogous to <code>docker ps</code> but filtered specifically for your Compose project.</p></li>
+<li><p><strong>Usage</strong>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose ps</span></code></pre></div>
+<p>You will see information such as the service name, command, state (e.g., <code>Up</code>), and ports.</p></li>
+</ul></li>
+<li><p><code>docker compose logs</code>: This command displays log output from services.</p>
+<ul>
+<li><p><strong>Purpose</strong>: Useful for debugging and monitoring, it shows the standard output and standard error streams from your running containers.</p></li>
+<li><p><strong>Usage</strong>:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose logs <span class="pp">[</span><span class="ss">SERVICE_NAME</span><span class="pp">]</span></span></code></pre></div>
+<ul>
+<li>To view logs for all services: <code>docker compose logs</code></li>
+<li>To view logs for a specific service (e.g., our <code>web</code> service): <code>docker compose logs web</code></li>
+<li>To follow logs in real-time (like <code>tail -f</code>): <code>docker compose logs -f</code></li>
+</ul></li>
+</ul></li>
+<li><p><code>docker compose down</code>: This command stops and removes containers, networks, and volumes.</p>
+<ul>
+<li><p><strong>Purpose</strong>: It tears down the entire application stack defined in your <code>docker-compose.yml</code> file. This is crucial for cleaning up your environment.</p></li>
+<li><p>Usage:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose down</span></code></pre></div>
+<p>By default, it removes containers and networks. To also remove named <code>volumes</code> declared in the volumes section of the <code>docker-compose.yml</code> (though we haven&#39;t used named volumes in our simple example yet), you would add the <code>-v</code> flag:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose down <span class="at">-v</span></span></code></pre></div></li>
+</ul></li>
+</ol>
+<p>These four commands form the fundamental cycle of deploying, monitoring, and tearing down a Docker Compose application. They are essential for any administrator working with multi-container setups.</p>
+<h2 id="advanced-docker-compose-concepts">Advanced Docker Compose Concepts</h2>
+<h3 id="define-and-use-volumes-for-persistent-data-storage">Define and Use Volumes for Persistent Data Storage</h3>
+<p>In the previous example, we used a bind mount to serve our <code>index.html</code>. While bind mounts are useful for development, for persistent data that your application generates (like database files, user uploads, or logs), <strong>named volumes</strong> are generally the preferred method in production environments.</p>
+<p><strong>Why are volumes important for persistent data?</strong></p>
+<p>By default, data inside a Docker container is ephemeral. This means that if the container is removed, all the data within it is lost. For applications that need to store data (like a database), this is problematic. Volumes provide a way to store data outside the container&#39;s filesystem, ensuring that the data persists even if the container is stopped, removed, or recreated.</p>
+<p><strong>Types of Volumes</strong>:</p>
+<ol type="1">
+<li><p><strong>Bind Mounts</strong>: (As seen with <code>index.html</code>) These mount a file or directory from the host machine directly into the container. They are highly dependent on the host&#39;s directory structure and are often used for development (e.g., source code, configuration files).</p>
+<ul>
+<li><p>Example from <code>docker-compose.yml</code>:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode YAML"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">volumes</span><span class="kw">:</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> ./my_data:/app/data</span></span></code></pre></div>
+<p>This mounts the <code>my_data</code> directory from the current directory on the host to <code>/app/data</code> inside the container.</p></li>
+</ul></li>
+<li><p><strong>Named Volumes</strong>: These are managed by Docker. You create and manage them directly through Docker, and Docker stores them in a part of the host filesystem (typically <code>/var/lib/docker/volumes/</code> on Linux) that it controls. They are more abstract and portable than bind mounts because their exact location on the host doesn&#39;t need to be specified by the user.</p>
+<ul>
+<li><p><strong>Defining a named volume in</strong> <code>docker-compose.yml</code>: First, you declare the named volume at the top-level <code>volumes</code> section of your <code>docker-compose.yml</code> file:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode YAML"><code class="sourceCode yaml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;3.8&#39;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">services</span><span class="kw">:</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">db</span><span class="kw">:</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> postgres:13</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">volumes</span><span class="kw">:</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> db_data:/var/lib/postgresql/data</span><span class="co"> # Mount the named volume into the container</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">environment</span><span class="kw">:</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">POSTGRES_DB</span><span class="kw">:</span><span class="at"> mydatabase</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">POSTGRES_USER</span><span class="kw">:</span><span class="at"> user</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">POSTGRES_PASSWORD</span><span class="kw">:</span><span class="at"> password</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="fu">volumes</span><span class="kw">:</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">db_data</span><span class="kw">:</span><span class="co"> # Declare the named volume here</span></span></code></pre></div>
+<p>In this example:</p>
+<ul>
+<li>We define a service <code>db</code> using the <code>postgres:13</code> image.</li>
+<li>Inside the <code>db</code> service, we mount <code>db_data</code> (our named volume) to <code>/var/lib/postgresql/data</code> within the container. This is the default directory where PostgreSQL stores its database files.</li>
+<li>At the bottom, under the top-level <code>volumes</code>: key, we declare <code>db_data:</code>. This tells Docker Compose to create a named volume called <code>db_data</code> if it doesn&#39;t already exist.</li>
+</ul></li>
+</ul></li>
+</ol>
+<p><strong>Benefits of Named Volumes</strong>:</p>
+<ul>
+<li><strong>Data Persistence</strong>: Data outlives containers.</li>
+<li><strong>Portability</strong>: The <code>docker-compose.yml</code> file doesn&#39;t need to know the host&#39;s specific directory structure.</li>
+<li><strong>Backup and Migration</strong>: Easier to back up and migrate data.</li>
+<li><strong>Performance</strong>: For some storage drivers, named volumes can offer better performance than bind mounts.</li>
+</ul>
+<p>To illustrate, consider a database container. If you don&#39;t use a volume, every time you <code>docker compose down</code> and <code>docker compose up</code> again, your database would be empty. By using a named volume, the database files (and all your data) are stored persistently, so your data is still there when you restart the database service.</p>
+<h3 id="network-configurations-within-docker-compose">Network Configurations Within Docker Compose</h3>
+<p>Effective networking is fundamental for multi-container applications to communicate with each other. Docker Compose simplifies this by creating a default network for your project, but it also provides robust options for custom network configurations.</p>
+<p><strong>Default Network</strong>:</p>
+<p>When you run <code>docker compose up</code>, Docker Compose automatically creates a default network for your project. All services defined in your <code>docker-compose.yml</code> file are connected to this network.</p>
+<ul>
+<li><strong>Service Discovery</strong>: Within this default network, services can communicate with each other using their service names as hostnames. For example, if you have a <code>web</code> service and a <code>db</code> service, your <code>web</code> service can connect to the <code>db</code> service simply by using <code>db</code> as the hostname and the appropriate port (e.g., <code>db:5432</code> for PostgreSQL). This internal DNS resolution is a powerful feature that simplifies inter-service communication.</li>
+</ul>
+<p><strong>Custom Networks</strong>:</p>
+<p>While the default network is convenient, custom networks offer more control over network isolation and topology. You might use custom networks for:</p>
+<ul>
+<li><strong>Isolation</strong>: To segment different parts of your application or to isolate specific services from others.</li>
+<li><strong>Existing Networks</strong>: To connect your Docker Compose application to an existing Docker network that might be used by other non-Compose containers.</li>
+<li><strong>Advanced Topologies</strong>: To create more complex network setups, though this is less common for typical applications.</li>
+</ul>
+<p>To define a custom network, you add a top-level networks section to your docker-compose.yml file:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode YAML"><code class="sourceCode yaml"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;3.8&#39;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">services</span><span class="kw">:</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">web</span><span class="kw">:</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx:latest</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;80:80&quot;</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">networks</span><span class="kw">:</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> frontend_network</span><span class="co"> # Connect &#39;web&#39; to frontend_network</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">api</span><span class="kw">:</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> my_api_image:latest</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">networks</span><span class="kw">:</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> frontend_network</span><span class="co"> # Connect &#39;api&#39; to frontend_network</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> backend_network</span><span class="co">  # Connect &#39;api&#39; to backend_network</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">db</span><span class="kw">:</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> postgres:13</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">networks</span><span class="kw">:</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> backend_network</span><span class="co"> # Connect &#39;db&#39; to backend_network</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="fu">networks</span><span class="kw">:</span></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">frontend_network</span><span class="kw">:</span><span class="co"> # Declare the custom network</span></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">driver</span><span class="kw">:</span><span class="at"> bridge</span><span class="co"> # default driver, but can be specified</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">backend_network</span><span class="kw">:</span><span class="co"> # Declare another custom network</span></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">driver</span><span class="kw">:</span><span class="at"> bridge</span></span></code></pre></div>
+<p><strong>In this example</strong>:</p>
+<ul>
+<li>We define two custom networks: <code>frontend_network</code> and <code>backend_network</code>.</li>
+<li>The <code>web</code> service is connected only to <code>frontend_network</code>.</li>
+<li>The <code>api</code> service is connected to both <code>frontend_network</code> (to receive requests from <code>web</code>) and <code>backend_network</code> (to communicate with <code>db</code>).</li>
+<li>The <code>db</code> service is connected only to backend_network.</li>
+</ul>
+<p>This setup means <code>web</code> can talk to <code>api</code> (via <code>api</code> as a hostname), and <code>api</code> can talk to <code>db</code> (via <code>db</code> as a hostname). However, <code>web</code> cannot directly talk to <code>db</code> because they are not on a common network. This provides a clear separation.</p>
+<p><strong>Service Linking (Deprecated Approach - Use Networks)</strong>:</p>
+<p>Historically, Docker Compose had a <code>links</code> keyword to enable services to discover each other. However, this method is largely considered legacy and <strong>it is strongly recommended to use networks for inter-service communication and discovery</strong> as demonstrated above. Networks provide more robust and flexible service discovery and isolation.</p>
+<h3 id="introduce-environment-variables-in-docker-compose">Introduce Environment Variables in Docker Compose</h3>
+<p>Environment variables are a fundamental mechanism for configuring applications, both inside and outside of Docker containers. In the context of Docker Compose, they provide a flexible way to pass configuration settings to your services without hardcoding them into the <code>docker-compose.yml</code> file or the Docker images themselves. This is particularly useful for sensitive information (like database passwords), configurable parameters (like API keys or service URLs), or differentiating configurations between development, testing, and production environments.</p>
+<p>There are several ways to use environment variables with Docker Compose:</p>
+<ol type="1">
+<li><p><strong>Directly in</strong> <code>docker-compose.yml</code>: You can specify <code>environment</code> variables directly within the environment section of a service. This is suitable for non-sensitive or default values.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode YAML"><code class="sourceCode yaml"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">services</span><span class="kw">:</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">web</span><span class="kw">:</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> myapp:latest</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">environment</span><span class="kw">:</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> APP_MODE=production</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> API_URL=http://api.example.com</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> DEBUG_MODE=false</span></span></code></pre></div>
+<p>In this example, the container for the <code>web</code> service will have <code>APP_MODE</code>, <code>API_URL</code>, and <code>DEBUG_MODE</code> environment variables set to the specified values.</p></li>
+<li><p><strong>Using a</strong> <code>.env</code> <strong>file (recommended for sensitive data and separation)</strong>: This is the most common and recommended approach, especially for sensitive information like database credentials or API keys. Docker Compose automatically looks for a file named <code>.env</code> in the same directory as your <code>docker-compose.yml</code> file. Variables defined in this <code>.env</code> file are then accessible within your <code>docker-compose.yml</code>.</p>
+<p>First, create a .env file in your project directory:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> .env</span></code></pre></div>
+<p>Then, add your variables to it (e.g., for a database):</p>
+<pre class="shell"><code>DB_USER=admin
+DB_PASSWORD=mysecretpassword123
+DB_NAME=myapp_db</code></pre>
+<p>Now, in your <code>docker-compose.yml</code> file, you can reference these variables using the <code>${VARIABLE_NAME}</code> syntax:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode YAML"><code class="sourceCode yaml"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;3.8&#39;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">services</span><span class="kw">:</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">db</span><span class="kw">:</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> postgres:13</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">environment</span><span class="kw">:</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">POSTGRES_USER</span><span class="kw">:</span><span class="at"> ${DB_USER}</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">POSTGRES_PASSWORD</span><span class="kw">:</span><span class="at"> ${DB_PASSWORD}</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">POSTGRES_DB</span><span class="kw">:</span><span class="at"> ${DB_NAME}</span></span></code></pre></div>
+<p>When Docker Compose starts, it will substitute <code>${DB_USER}</code>, <code>${DB_PASSWORD}</code>, and <code>${DB_NAME}</code> with the values from your .env file. This is crucial for keeping sensitive information out of version control systems (like Git) and for easily changing configurations without modifying the <code>docker-compose.yml</code> file itself.</p></li>
+<li><p><strong>Using an</strong> <code>env_file</code> <strong>property</strong>: You can specify a custom environment file using the <code>env_file</code> property within a service definition. This is useful if you have multiple environment files for different scenarios or prefer a different naming convention.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode YAML"><code class="sourceCode yaml"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">services</span><span class="kw">:</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">app</span><span class="kw">:</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> myapp:latest</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">env_file</span><span class="kw">:</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> ./config/production.env</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> ./common.env</span></span></code></pre></div>
+<p>Docker Compose will load variables from these files. Variables in later files override those in earlier ones.</p></li>
+</ol>
+<p><strong>Benefits of using environment variables</strong>:</p>
+<ul>
+<li><strong>Flexibility</strong>: Easily change configurations without modifying service definitions.</li>
+<li><strong>Security</strong>: Keep sensitive data out of your main configuration files and version control by using <code>.env</code> files.</li>
+<li><strong>Portability</strong>: Different environments (development, staging, production) can use different <code>.env</code> files without changing the <code>docker-compose.yml</code>.</li>
+</ul>
+<p>Think of environment variables as a set of instructions you whisper to your application containers right before they start. These instructions tell them how to behave in their specific environment, such as which database to connect to or what mode to run in.</p>
+<h2 id="practical-application-and-troubleshooting">Practical Application and Troubleshooting</h2>
+<h3 id="example-application">Example Application</h3>
+<p>To solidify your understanding, let&#39;s build a more complete, albeit simplified, application stack using Docker Compose. This example will include:</p>
+<ul>
+<li>A <strong>web service</strong> (Nginx) acting as a reverse proxy.</li>
+<li>An <strong>application service</strong> (a simple Python Flask app) that the web server will forward requests to.</li>
+<li>A <strong>database service</strong> (PostgreSQL) that the application service will connect to.</li>
+</ul>
+<p>This setup demonstrates how different services communicate and depend on each other.</p>
+<p>First, let&#39;s prepare the necessary files:</p>
+<ol type="1">
+<li><p><strong>Create a project directory</strong>:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> complex_app</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> complex_app</span></code></pre></div></li>
+<li><p><strong>Create a simple Flask application (app.py)</strong>:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> app.py</span></code></pre></div>
+<p><strong>Paste the following Python code</strong>:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode Python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> flask <span class="im">import</span> Flask</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>app <span class="op">=</span> Flask(<span class="va">__name__</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="at">@app.route</span>(<span class="st">&#39;/&#39;</span>)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hello():</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    db_host <span class="op">=</span> os.getenv(<span class="st">&#39;DB_HOST&#39;</span>, <span class="st">&#39;localhost&#39;</span>)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    db_port <span class="op">=</span> os.getenv(<span class="st">&#39;DB_PORT&#39;</span>, <span class="st">&#39;5432&#39;</span>)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f&quot;Hello from Flask app! Connecting to database at </span><span class="sc">{</span>db_host<span class="sc">}</span><span class="ss">:</span><span class="sc">{</span>db_port<span class="sc">}</span><span class="ss">&quot;</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&#39;__main__&#39;</span>:</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    app.run(host<span class="op">=</span><span class="st">&#39;0.0.0.0&#39;</span>, port<span class="op">=</span><span class="dv">5000</span>)</span></code></pre></div>
+<p>This Flask app reads database host and port from environment variables, which we&#39;ll configure via Docker Compose.</p></li>
+<li><p><strong>Create a requirements.txt for the Flask app</strong>:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Flask&quot;</span> <span class="op">&gt;</span> requirements.txt</span></code></pre></div></li>
+<li><p><strong>Create a Dockerfile for the Flask app</strong>:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> Dockerfile</span></code></pre></div>
+<p>Paste the following content:</p>
+<pre class="Docker"><code>FROM python:3.9-slim-buster
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY app.py .
+CMD [&quot;python&quot;, &quot;app.py&quot;]</code></pre>
+<p>This Dockerfile builds an image for our Flask application.</p></li>
+<li><p><strong>Create an Nginx configuration file (nginx.conf)</strong>:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> nginx</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> nginx/nginx.conf</span></code></pre></div>
+<p><strong>Paste the following Nginx configuration</strong>:</p>
+<pre class="Nginx"><code>events {
+    worker_connections 1024;
+}
+
+http {
+    server {
+        listen 80;
+
+        location / {
+            proxy_pass http://app:5000; # &#39;app&#39; is the service name for our Flask app
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+    }
+}</code></pre>
+<p>Notice <code>proxy_pass http://app:5000;</code>. Here, app refers to the Docker Compose service name for our Flask application. Nginx will forward requests to port 5000 of the <code>app</code> container.</p></li>
+<li><p><strong>Create the</strong> <code>docker-compose.yml</code> <strong>file</strong>:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> docker-compose.yml</span></code></pre></div>
+<p><strong>Paste the following content</strong>:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode YAML"><code class="sourceCode yaml"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;3.8&#39;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">services</span><span class="kw">:</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">web</span><span class="kw">:</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx:latest</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;80:80&quot;</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">volumes</span><span class="kw">:</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro</span><span class="co"> # Mount Nginx config</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">depends_on</span><span class="kw">:</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> app</span><span class="co"> # &#39;web&#39; depends on &#39;app&#39; to be ready</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">networks</span><span class="kw">:</span></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> app_network</span></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">app</span><span class="kw">:</span></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">build</span><span class="kw">:</span><span class="at"> .</span><span class="co"> # Build Docker image from current directory (where Dockerfile is)</span></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">environment</span><span class="kw">:</span></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">DB_HOST</span><span class="kw">:</span><span class="at"> db</span><span class="co"> # Connect to &#39;db&#39; service by its name</span></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">DB_PORT</span><span class="kw">:</span><span class="at"> </span><span class="dv">5432</span></span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">networks</span><span class="kw">:</span></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> app_network</span></span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> db_network</span></span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">db</span><span class="kw">:</span></span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> postgres:13</span></span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">environment</span><span class="kw">:</span></span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">POSTGRES_DB</span><span class="kw">:</span><span class="at"> mydatabase</span></span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">POSTGRES_USER</span><span class="kw">:</span><span class="at"> user</span></span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">POSTGRES_PASSWORD</span><span class="kw">:</span><span class="at"> mysecretpassword</span></span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">volumes</span><span class="kw">:</span></span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> db_data:/var/lib/postgresql/data</span><span class="co"> # Persistent data for DB</span></span>
+<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">networks</span><span class="kw">:</span></span>
+<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> db_network</span></span>
+<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a><span class="fu">volumes</span><span class="kw">:</span></span>
+<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">db_data</span><span class="kw">:</span><span class="co"> # Declare the named volume</span></span>
+<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-38"><a href="#cb32-38" aria-hidden="true" tabindex="-1"></a><span class="fu">networks</span><span class="kw">:</span></span>
+<span id="cb32-39"><a href="#cb32-39" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">app_network</span><span class="kw">:</span></span>
+<span id="cb32-40"><a href="#cb32-40" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">db_network</span><span class="kw">:</span></span></code></pre></div></li>
+</ol>
+<p><strong>Key additions in this</strong> <code>docker-compose.yml</code>:</p>
+<ul>
+<li><code>build: .</code>: For the <code>app</code> service, instead of <code>image:</code>, we use <code>build: .</code>. This tells Docker Compose to build the Docker image for this service using the <code>Dockerfile</code> found in the current directory.</li>
+<li><code>depends_on:</code>: In the <code>web</code> service, <code>depends_on: - app</code> signifies that the <code>web</code> service will only start after the <code>app</code> service has started. While this doesn&#39;t wait for the application inside the container to be fully ready, it helps ensure the order of container startup.</li>
+<li><strong>Multiple Networks</strong>: We use <code>app_network</code> for <code>web</code> and <code>app</code>, and <code>db_network</code> for <code>app</code> and <code>db</code>, demonstrating network segmentation.</li>
+<li><strong>Environment Variables for</strong> <code>app</code>: The Flask app reads <code>DB_HOST</code> and <code>DB_PORT</code> from its environment. Docker Compose sets <code>DB_HOST</code> to <code>db</code> (the service name of our PostgreSQL container) and <code>DB_PORT</code> to <code>5432</code> (PostgreSQL&#39;s default port).</li>
+</ul>
+<p><strong>Scaling Services</strong>:</p>
+<p>One of the significant advantages of Docker Compose is the ability to easily scale services. For example, to run multiple instances of your <code>app</code> service to handle more requests, you can use the <code>scale</code> command:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose up <span class="at">-d</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose ps <span class="co"># See initial state</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose up <span class="at">-d</span> <span class="at">--scale</span> app=3 <span class="co"># Scale &#39;app&#39; service to 3 instances</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose ps <span class="co"># See the 3 &#39;app&#39; instances</span></span></code></pre></div>
+<p>This command will create two additional <code>app</code> containers, distributing the load across them (though for proper load balancing with Nginx, you&#39;d need more advanced Nginx configuration, which is beyond this lesson&#39;s scope).</p>
+<p>To bring everything down, you would still use <code>docker compose down</code>.</p>
+<p>This example demonstrates how Docker Compose integrates different components of an application stack and allows for scaling.</p>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<p>Even with carefully crafted <code>docker-compose.yml</code> files, issues can arise. Effective troubleshooting is a critical skill for any system administrator. Here are some common techniques and commands you can use when things don&#39;t go as planned:</p>
+<ol type="1">
+<li><p><strong>Check Service Status (</strong><code>docker compose ps</code><strong>)</strong>:</p>
+<ul>
+<li><strong>Purpose</strong>: This is your first stop. It quickly shows which services are running, which have exited, and their current state.</li>
+<li><strong>What to look for</strong>: A service in an <code>Exited</code> state often indicates an issue. Check the <code>Exit</code> code and <code>Status</code> column for clues. For example, <code>(1)</code> usually means a general error, while <code>(137)</code> might suggest an out-of-memory error.</li>
+</ul></li>
+<li><p><strong>Review Logs (</strong><code>docker compose logs</code><strong>)</strong>:</p>
+<ul>
+<li><strong>Purpose</strong>: The most important tool for diagnosing problems. Application and service errors are typically logged to standard output (<code>stdout</code>) and standard error (<code>stderr</code>).</li>
+<li><strong>What to look for</strong>: Error messages, stack traces, warnings, or any unexpected output.</li>
+<li><strong>Usage considerations</strong>:
+<ul>
+<li><code>docker compose logs &lt;service_name&gt;</code>: Focus on logs from a specific service.</li>
+<li><code>docker compose logs -f &lt;service_name&gt;</code>: Follow logs in real-time.</li>
+<li><code>docker compose logs --tail 50 &lt;service_name&gt;</code>: View only the last 50 lines.</li>
+<li><code>docker compose logs --since 1h &lt;service_name&gt;</code>: View logs from the last hour.</li>
+</ul></li>
+</ul></li>
+<li><p><strong>Inspect Container Details (</strong><code>docker inspect</code><strong>)</strong>:</p>
+<ul>
+<li><p><strong>Purpose</strong>: Provides a low-level view of a container&#39;s configuration, network settings, mounted volumes, and more.</p></li>
+<li><p><strong>Usage</strong>: First, get the container ID or name from <code>docker compose ps</code> or <code>docker ps</code>.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> inspect <span class="op">&lt;</span>container_id_or_name<span class="op">&gt;</span></span></code></pre></div></li>
+<li><p><strong>What to look for</strong>: Mismatched port mappings, incorrect volume mounts, wrong environment variables, or unexpected network configurations.</p></li>
+</ul></li>
+<li><p><strong>Check Network Connectivity</strong>:</p>
+<ul>
+<li><strong>Purpose</strong>: If services can&#39;t communicate, it&#39;s often a networking issue.</li>
+<li><strong>Technique</strong>:
+<ul>
+<li><p>Use ping or curl from inside one container to another. To do this, you first need to execute a shell inside a running container:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> exec <span class="at">-it</span> <span class="op">&lt;</span>container_id_or_name<span class="op">&gt;</span> bash <span class="co"># or sh, or alpine/busybox</span></span></code></pre></div>
+<p>Once inside, try to ping the hostname of the service you&#39;re trying to reach (which is its service name in docker-compose.yml). For example, from the app container, you might ping db. If ping isn&#39;t available, apt update &amp;&amp; apt install iputils-ping or apk add iputils might be needed.</p></li>
+<li><p>Verify port accessibility from the host to the container using <code>netstat</code> or <code>ss</code> on the host, or <code>simply curl localhost:&lt;port&gt;</code> if the port is exposed.</p></li>
+</ul></li>
+</ul></li>
+<li><p><strong>Rebuild Images/Clear Cache (</strong><code>docker compose build --no-cache</code><strong>,</strong> <code>docker system prune</code><strong>)</strong>:</p>
+<ul>
+<li><strong>Purpose</strong>: Sometimes, a cached layer in a Docker image can cause issues, or old exited containers might be consuming resources.</li>
+<li><strong>Usage</strong>:
+<ul>
+<li>If you&#39;ve changed a <code>Dockerfile</code> and <code>docker compose up</code> isn&#39;t picking up the changes, use: <code>docker compose build --no-cache &lt;service_name&gt;</code> (or all services)</li>
+<li>To clean up old images, containers, and volumes not used by any running containers: <code>docker system prune -a</code> (use with caution, this removes a lot)</li>
+</ul></li>
+</ul></li>
+<li><p><strong>Validate</strong> <code>docker-compose.yml</code> <strong>Syntax</strong>:</p>
+<ul>
+<li><strong>Purpose</strong>: A common source of error for beginners. YAML is sensitive to indentation.</li>
+<li><strong>Technique</strong>: Use a YAML linter online, or rely on Docker Compose&#39;s error messages which are usually quite descriptive if there&#39;s a syntax issue during <code>docker compose up</code>.</li>
+</ul></li>
+</ol>
+<p><strong>A Practical Troubleshooting Workflow</strong>:</p>
+<ol type="1">
+<li><strong>Issue Identified</strong>: Application not working, service not starting.</li>
+<li><strong>Check</strong> <code>docker compose ps</code>: See which services are healthy and which are not.</li>
+<li><strong>Check</strong> <code>docker compose logs &lt;problematic_service&gt;</code>: Look for immediate errors.</li>
+<li><strong>If no clear error</strong>: <code>docker inspect</code> the problematic container.</li>
+<li><strong>If inter-service communication suspected</strong>: <code>docker exec</code> into a container and try pinging the other service.</li>
+<li><strong>If code/image issue suspected</strong>: Rebuild with <code>--no-cache</code>.</li>
+</ol>
+<p>Troubleshooting Docker Compose applications is much like troubleshooting any other application, but with the added layer of containerization. The key is to methodically isolate the problem using the available tools.</p>
+</body>
+</html>

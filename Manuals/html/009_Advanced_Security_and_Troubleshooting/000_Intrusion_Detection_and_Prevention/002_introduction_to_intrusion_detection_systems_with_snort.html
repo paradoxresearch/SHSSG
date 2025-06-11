@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="introduction-to-intrusion-detection-systems-ids-using-snort">Introduction to Intrusion Detection Systems (IDS) Using Snort</h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#introduction-to-intrusion-detection-systems-ids-using-snort">Introduction to Intrusion Detection Systems (IDS) Using Snort</a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#understanding-intrusion-detection-systems-ids">Understanding Intrusion Detection Systems (IDS)</a></li>
+<li><a href="#differentiating-between-network-based-ids-nids-and-host-based-ids-hids">Differentiating Between Network-based IDS (NIDS) and Host-based IDS (HIDS)</a></li>
+<li><a href="#how-an-ids-works">How an IDS Works</a></li>
+</ul></li>
+<li><a href="#introduction-to-snort">Introduction to Snort</a>
+<ul>
+<li><a href="#three-primary-modes-of-operation">Three Primary Modes of Operation</a></li>
+<li><a href="#snorts-architecture">Snort&#39;s Architecture</a></li>
+</ul></li>
+<li><a href="#basic-snort-rule-structure">Basic Snort Rule Structure</a>
+<ul>
+<li><a href="#the-rule-header">The Rule Header</a>
+<ul>
+<li><a href="#action">Action</a></li>
+<li><a href="#protocol">Protocol</a></li>
+<li><a href="#source-and-destination-ip-addresses-and-port-numbers">Source and Destination IP Addresses and Port Numbers</a></li>
+</ul></li>
+<li><a href="#rule-options">Rule Options</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<h3 id="understanding-intrusion-detection-systems-ids">Understanding Intrusion Detection Systems (IDS)</h3>
+<p>Think of an Intrusion Detection System like a sophisticated home security system. Imagine you have sensors on your doors and windows (that&#39;s like the IDS monitoring network traffic), and a rulebook that says things like &quot;if a window opens at 3 AM, that&#39;s suspicious!&quot; (those are like the rules in an IDS).</p>
+<p>The main purpose of an IDS is to <strong>monitor network traffic or system activity for any malicious or suspicious behavior</strong>. It acts as a detective, observing what&#39;s happening and raising an alert if it sees something that matches its rulebook of known threats or anomalies. It doesn&#39;t usually block the activity (that&#39;s more the job of an Intrusion Prevention System - IPS), but it lets you know something potentially bad is going on so you can take action.</p>
+<h3 id="differentiating-between-network-based-ids-nids-and-host-based-ids-hids">Differentiating Between Network-based IDS (NIDS) and Host-based IDS (HIDS)</h3>
+<p>Think of it this way: our home security system analogy can be expanded.</p>
+<ul>
+<li><p><strong>Network-based IDS (NIDS)</strong> is like having security cameras monitoring all the traffic coming into and going out of your house (your network). It sits at a strategic point in your network and analyzes the data flowing across it, looking for suspicious patterns. A key advantage is that it can often detect attacks targeting multiple systems on your network. However, it might not have detailed visibility into what&#39;s happening on each individual computer.</p></li>
+<li><p><strong>Host-based IDS (HIDS)</strong>, on the other hand, is like having an alarm system installed directly on each door and window (each individual server or computer). It monitors the activity on that specific system, looking at things like system logs, file integrity, and running processes for signs of intrusion. HIDS can provide very detailed information about what&#39;s happening on a particular machine, but managing them on many servers can become complex.</p></li>
+</ul>
+<p>Imagine a simple network with a router and a couple of servers. A NIDS would typically be placed at the router, watching all the traffic passing through. A HIDS would be installed as software on each of the servers, monitoring their individual activities.</p>
+<h3 id="how-an-ids-works">How an IDS Works</h3>
+<p>Imagine our NIDS sitting at the network&#39;s doorway. It&#39;s constantly <strong>&quot;sniffing&quot;</strong> all the network traffic that passes by. Think of it like eavesdropping on every conversation happening through that door. This &quot;sniffing&quot; involves capturing network packets, which are like the individual letters or words that make up those conversations.</p>
+<p>Once the IDS captures these packets, it needs to understand what they&#39;re saying. This is where <strong>rule-based detection</strong> comes in. The IDS has a set of predefined <strong>rules</strong>, which are like specific patterns or signatures of known malicious activity. These rules look for specific sequences of bytes, particular protocols being used in unusual ways, or other characteristics that are associated with attacks.</p>
+<p>For example, a rule might say: &quot;Alert if there&#39;s a connection to a specific port that is known to be used by a particular type of malware, and if the data being sent contains this specific text string.&quot; This text string is like a <strong>signature</strong> – a unique characteristic that identifies that specific malicious activity.</p>
+<p>So, the IDS compares the captured network traffic against its library of rules or signatures. If a packet or a series of packets matches a rule, the IDS triggers an alert, letting the administrator know that something suspicious has been detected.</p>
+<p>Think of it like a spam filter for your email. It examines the content and characteristics of each email against a set of rules to identify and flag potential spam. An IDS does a similar thing for network traffic.</p>
+<h2 id="introduction-to-snort">Introduction to Snort</h2>
+<p>Snort is a very popular <strong>open-source Network Intrusion Detection System (NIDS)</strong>. Think of it as one of the most widely used and trusted security guard dogs for your network. It was initially developed by Martin Roesch in 1998 and has since grown into a powerful and highly flexible tool, thanks to a large and active community of users and developers.</p>
+<p>Being open-source means that its code is freely available, and anyone can contribute to its development, share rules, and help improve it. This massive community support is one of Snort&#39;s biggest strengths. It means there&#39;s a wealth of documentation, tutorials, and pre-written rule sets available, which is incredibly helpful for new users. Plus, because so many people use and scrutinize it, potential security flaws are often quickly identified and fixed.</p>
+<p>For a system administrator, Snort is a valuable tool because it&#39;s command-line based, highly configurable, and can be tailored to the specific security needs of your servers.</p>
+<h3 id="three-primary-modes-of-operation">Three Primary Modes of Operation</h3>
+<p><strong>Snort has three primary modes of operation</strong>: Sniffer mode, Packet Logger mode, and Network Intrusion Detection System mode. Think of these as different ways Snort can be configured to do its job.</p>
+<ol type="1">
+<li><p><strong>Sniffer Mode</strong>: In this mode, Snort acts like a network traffic viewer. It captures packets flowing through the network interface you tell it to monitor and displays them on your screen in real-time. It&#39;s like watching the raw network &quot;conversations&quot; as they happen. This mode is very useful for understanding network traffic and troubleshooting network issues. You can see the source and destination of the communication, the protocols being used, and even the data being transmitted.</p></li>
+<li><p><strong>Packet Logger Mode</strong>: This mode takes the &quot;traffic viewing&quot; a step further. Instead of just displaying the packets on the screen, Snort captures and saves them to a log file. This is like recording all the network &quot;conversations&quot; for later analysis. This mode is invaluable for investigating security incidents after they&#39;ve occurred or for long-term monitoring and analysis of network behavior.</p></li>
+<li><p><strong>Network Intrusion Detection System (NIDS) Mode</strong>: This is Snort&#39;s most active and powerful mode. In this mode, Snort not only captures and optionally logs packets but also analyzes them in real-time against a set of rules. When a packet matches a rule, Snort generates an alert, notifying you of potential malicious activity. This is like our security guard dog barking when it sees someone suspicious according to its training (the rules).</p></li>
+</ol>
+<p>So, to summarize:</p>
+<ul>
+<li><strong>Sniffer Mode</strong>: Real-time traffic viewing.</li>
+<li><strong>Packet Logger Mode</strong>: Capturing and saving traffic for later.</li>
+<li><strong>NIDS Mode</strong>: Real-time traffic analysis and alerting based on rules.</li>
+</ul>
+<p>As a system administrator, you&#39;ll likely spend most of your time using Snort in NIDS mode to actively monitor your server&#39;s network traffic for threats. However, the other modes can be very useful for debugging and analysis.</p>
+<h3 id="snorts-architecture">Snort&#39;s Architecture</h3>
+<p>Think of Snort as having several key departments working together to analyze network traffic. The main components are:</p>
+<ol type="1">
+<li><p><strong>Packet Decoder</strong>: This is like the receptionist. It&#39;s the first point of contact for incoming network packets. Its job is to take the raw network data and break it down into a format that the rest of Snort can understand. It identifies the different layers of network protocols (like Ethernet, IP, TCP, UDP) and extracts the relevant information.</p></li>
+<li><p><strong>Preprocessors</strong>: Think of these as specialized assistants who prepare the information for the main analyst. Preprocessors perform various tasks on the decoded packets before they reach the detection engine. This might involve things like reassembling fragmented packets, decoding application layer protocols (like HTTP), or detecting port scans. Preprocessors help to normalize the data and make the detection engine&#39;s job more efficient.</p></li>
+<li><p><strong>Detection Engine</strong>: This is the heart of Snort – the main analyst. It takes the preprocessed packets and compares them against the ruleset that you&#39;ve configured. If a packet matches a rule, the detection engine generates an alert.</p></li>
+<li><p><strong>Output Modules</strong>: Once an alert is generated, the output modules decide what to do with it. They are like the reporting and action department. They can log the alerts to various formats (like text files, databases, or even send them to other security tools). You can configure different output modules depending on how you want to be notified and how you want to store the alert information.</p></li>
+</ol>
+<p>Here&#39;s a simple way to visualize this flow:</p>
+<pre class="shell"><code>Network Traffic --&gt; Packet Decoder --&gt; Preprocessors --&gt; Detection Engine (Ruleset) --&gt; Output Modules (Alerts/Logs)</code></pre>
+<p>Understanding this basic architecture will help you later when you want to fine-tune Snort&#39;s behavior and configure it effectively.</p>
+<h2 id="basic-snort-rule-structure">Basic Snort Rule Structure</h2>
+<p>Think of a Snort rule as a precise instruction you give to Snort&#39;s detection engine. Each rule essentially says, &quot;If you see network traffic that matches this specific pattern, then generate an alert!&quot;</p>
+<p>A Snort rule has two main parts:</p>
+<ol type="1">
+<li><p><strong>The Rule Header</strong>: This part defines the basic characteristics of the network traffic the rule is looking for. It&#39;s like the &quot;who, what, where, and how&quot; of the traffic. It specifies things like the action to take (e.g., alert), the network protocol involved (e.g., TCP, UDP, ICMP), the source and destination IP addresses and port numbers, and the direction of the traffic.</p></li>
+<li><p><strong>The Rule Options</strong>: This part contains more detailed instructions about what to look for within the content of the network traffic. These options are enclosed in parentheses and are separated by semicolons. They allow you to specify things like specific text patterns to search for, the size of the packet, and much more.</p></li>
+</ol>
+<p>So, a basic Snort rule looks something like this:</p>
+<pre class="shell"><code>action protocol source_ip source_port -&gt; destination_ip destination_port (rule options);</code></pre>
+<p>Don&#39;t worry if this looks a bit technical right now. We&#39;ll break down each part in detail. Understanding this structure is fundamental to writing your own Snort rules and customizing Snort to your specific security needs.</p>
+<h3 id="the-rule-header">The Rule Header</h3>
+<h4 id="action">Action</h4>
+<p>The <strong>action</strong> keyword tells Snort what to do when traffic matches the rest of the rule. Here are some of the most common actions:</p>
+<ul>
+<li><p><code>alert</code>: This is the most frequently used action. It tells Snort to generate an alert when a matching packet is found. The alert will typically be logged and can also be displayed in real-time if Snort is run in console mode. Think of this as the security guard shouting, &quot;Hey, I saw something suspicious!&quot;</p></li>
+<li><p><code>log</code>: This action tells Snort to simply log the matching packet but not generate an immediate alert. This can be useful for passively monitoring specific types of traffic without being overwhelmed by alerts. It&#39;s like the security guard making a quiet note of something that might be worth reviewing later.</p></li>
+<li><p><code>pass</code>: This action tells Snort to ignore the matching traffic and stop processing it against any subsequent rules. This can be useful for explicitly excluding certain types of traffic that you know are safe and don&#39;t want Snort to analyze further, improving efficiency. It&#39;s like telling the security guard, &quot;It&#39;s okay, that person has permission to be here, you can ignore them.&quot;</p></li>
+<li><p><code>drop</code>: This action (often used when Snort is integrated as an Intrusion Prevention System - IPS) tells Snort to block the matching packet from reaching its destination. This requires Snort to be running in a specific inline mode. It&#39;s like the security guard physically stopping the suspicious person from entering. We&#39;ll likely touch more on this when we discuss IPS.</p></li>
+<li><p><code>sdrop</code>: Similar to <code>drop</code>, but it also logs the dropped packet.</p></li>
+</ul>
+<h4 id="protocol">Protocol</h4>
+<p>The <strong>protocol</strong> field specifies the network protocol that the rule should inspect. The most common protocols you&#39;ll encounter are:</p>
+<ul>
+<li><p><code>tcp</code>: Transmission Control Protocol. This is a connection-oriented protocol used for reliable data transfer, like browsing the web (HTTP/HTTPS), sending emails (SMTP), and transferring files (FTP). Think of it like a phone call where both parties establish a connection before talking and can confirm if the other person heard them correctly.</p></li>
+<li><p><code>udp</code>: User Datagram Protocol. This is a connectionless protocol that prioritizes speed over reliability. It&#39;s often used for things like streaming video, online gaming, and DNS lookups. Think of it like sending a postcard – you send it out, but you don&#39;t necessarily know if it arrived or if all the information was received correctly.</p></li>
+<li><p><code>icmp</code>: Internet Control Message Protocol. This protocol is used for sending control and error messages between network devices. Common uses include the <code>ping</code> command to check network connectivity. Think of it like network devices sending each other status updates or error reports.</p></li>
+<li><p><code>ip</code>: This is a more general keyword that matches any IP packet, regardless of the higher-level protocol. You might use this in specific cases where you want to inspect IP layer information.</p></li>
+</ul>
+<p>So, if you want to write a rule that looks for suspicious web traffic, you would likely use <code>tcp</code> as the protocol and specify port 80 (for HTTP) or 443 (for HTTPS). If you were looking for unusual <code>ping</code> activity, you would use <code>icmp</code>.</p>
+<h4 id="source-and-destination-ip-addresses-and-port-numbers">Source and Destination IP Addresses and Port Numbers</h4>
+<p>These tell Snort where the traffic is coming from and where it&#39;s going.</p>
+<ul>
+<li><p><strong>IP Addresses</strong>: These identify the specific devices involved in the network communication. You can specify a single IP address (e.g., <code>192.168.1.100</code>), a range of IP addresses (e.g., <code>192.168.1.0/24</code> for the entire 192.168.1.x network), or use the keyword <code>any</code> to match any IP address.</p></li>
+<li><p><strong>Port Numbers</strong>: These identify the specific applications or services running on those devices. For example, web servers typically listen on port 80 (HTTP) or 443 (HTTPS), and email servers often use port 25 (SMTP) or 110 (POP3). Similar to IP addresses, you can specify a single port (e.g., <code>80</code>), a range of ports (e.g., <code>1024:</code>), or use <code>any</code> to match any port.</p></li>
+<li><p><strong>Direction of Traffic (</strong><code>-&gt;</code><strong>)</strong>: The arrow in the rule header (<code>-&gt;</code>) indicates the direction of the traffic being inspected <em>relative to the source and destination IP addresses and ports specified</em>.</p>
+<ul>
+<li><code>source_ip source_port -&gt; destination_ip destination_port</code>: This looks at traffic going from the source to the destination.</li>
+<li><code>source_ip source_port &lt;&gt; destination_ip destination_port</code>: The <code>&lt;&gt;</code> (bidirectional) operator tells Snort to inspect traffic going in either direction between the specified source and destination IP addresses and ports.</li>
+</ul></li>
+</ul>
+<p>So, for example, a rule looking for web traffic coming from any IP address to your server (let&#39;s say its IP is <code>192.168.1.200</code>) on the standard HTTP port would look something like this:</p>
+<pre class="shell"><code>alert tcp any any -&gt; 192.168.1.200 80 (msg:&quot;Potential web access to server!&quot;; sid:1000001; rev:1;);</code></pre>
+<p>In this rule:</p>
+<ul>
+<li><code>alert</code>: is the action.</li>
+<li><code>tcp</code>: is the protocol.</li>
+<li><code>any any</code>: means any source IP address and any source port.</li>
+<li><code>-&gt;</code>: indicates traffic going to...</li>
+<li><code>192.168.1.200</code>: the destination IP address (your server).</li>
+<li><code>8</code>0: the destination port (HTTP).</li>
+<li>The part in parentheses are the rule options, which we&#39;ll discuss next!</li>
+</ul>
+<h3 id="rule-options">Rule Options</h3>
+<p>The <strong>Rule Options</strong> are enclosed in parentheses <code>()</code> and provide much more specific instructions to the detection engine about what to look for within the packet&#39;s content and other characteristics. These options are separated by semicolons <code>;</code>.</p>
+<p>Here are a few fundamental rule options that you&#39;ll encounter frequently:</p>
+<ul>
+<li><p><code>msg:&quot;&lt;text&gt;&quot;;</code>: This option allows you to include a custom message that will be displayed in the alert when the rule is triggered. This is very helpful for understanding what the rule is designed to detect. For example: <code>msg:&quot;Potential SQL Injection Attack!&quot;;</code></p></li>
+<li><p><code>content:&quot;&lt;pattern&gt;&quot;;</code>: This is a very powerful option that allows you to search for specific sequences of bytes or text within the packet&#39;s payload (the actual data being transmitted). For example: <code>content:&quot;SELECT * FROM&quot;;</code> would look for that specific SQL query string within the packet&#39;s data. You can have multiple <code>content</code> options in a single rule, and you can use modifiers with them to specify things like case sensitivity or the starting position of the search.</p></li>
+<li><p><code>sid:&lt;number&gt;;</code>: SID stands for Snort ID. This is a unique identifier for each Snort rule. It&#39;s important for tracking and managing rules. User-defined rules typically have SIDs starting at 1,000,000 or higher to avoid conflicts with official Snort rules. For example: <code>sid:1000001;</code></p></li>
+<li><p><code>rev:&lt;number&gt;;</code>: REV stands for revision. This is a counter that you increment each time you modify a rule. It helps with version control of your rules. For example: <code>rev:1;</code></p></li>
+</ul>
+<p>So, let&#39;s revisit our previous example and add some rule options:</p>
+<pre class="shell"><code>alert tcp any any -&gt; 192.168.1.200 80 (msg:&quot;Potential web access to server!&quot;; content:&quot;GET /index.html&quot;; sid:1000002; rev:1;);</code></pre>
+<p>In this enhanced rule:</p>
+<ul>
+<li>We&#39;ve added a <code>msg</code> that will appear in the alert.</li>
+<li>We&#39;ve used the <code>content</code> option to look for the specific text &quot;GET /index.html&quot; within the HTTP traffic. This might indicate someone is trying to access the main webpage.</li>
+<li>We&#39;ve assigned a unique <code>sid</code> to this rule.</li>
+<li>We&#39;ve set the initial <code>rev</code> to 1.</li>
+</ul>
+<p>These are just a few basic rule options. Snort has many more powerful options that allow for very sophisticated pattern matching and analysis. As you get more comfortable with the basics, you can explore these advanced options.</p>
+<p><strong>Remember</strong>:</p>
+<ul>
+<li><p><code>msg:&quot;&lt;text&gt;&quot;;</code>: This is your way of adding a descriptive label to the alert. When this rule triggers, the text within the quotes will be part of the alert output, making it easier to understand what was detected. Think of it as adding a note to yourself about why this rule exists. For example, <code>msg:&quot;Possible FTP brute-force attempt!&quot;;</code> clearly indicates the potential threat.</p></li>
+<li><p><code>content:&quot;&lt;pattern&gt;&quot;;</code>: This is where you tell Snort to look for specific bytes or text within the data portion of the network packet. This is incredibly powerful for detecting known attack patterns or specific application behavior. You can have multiple <code>content</code> options in a rule, and they are often used in combination to look for a sequence of patterns. For instance, to detect a specific type of web request, you might have:</p>
+<pre class="shell"><code>content:&quot;GET /admin.php&quot;;
+content:&quot;admin_user=&quot;;</code></pre>
+<p>Snort would only trigger the rule if both of these content patterns are found in the packet.</p></li>
+<li><p><code>sid:&lt;number&gt;;</code>: As we discussed, the Snort ID (sid) is a unique numerical identifier for each rule. This is crucial for managing and referencing rules in logs and configurations. Official Snort rules have SIDs below 1,000,000. When you write your own custom rules, it&#39;s best practice to start your SIDs at 1,000,000 or higher to avoid conflicts. For example, your first custom web server rule might have <code>sid:1000001;</code>, the next <code>sid:1000002;</code>, and so on.</p></li>
+</ul>
+<p>Let&#39;s put it all together in another example. Imagine you want to detect if anyone on your network is trying to access a specific, potentially malicious file on a remote server (let&#39;s say the file is <code>bad_script.sh</code> on IP address <code>203.0.113.45</code> on port 80). Your rule might look like this:</p>
+<pre class="shell"><code>alert tcp any any -&gt; 203.0.113.45 80 (msg:&quot;Attempt to access malicious script!&quot;; content:&quot;GET /bad_script.sh&quot;; sid:1000003; rev:1;);</code></pre>
+<p>In this rule:</p>
+<ul>
+<li>We&#39;re alerting on TCP traffic going to the specific IP and port.</li>
+<li>The <code>msg</code> tells us what the rule is looking for.</li>
+<li>The <code>content</code> option specifies the exact HTTP GET request for the malicious script.</li>
+<li>We&#39;ve given it a unique <code>sid</code>.</li>
+</ul>
+<p>You can create more specific and powerful rules by combining different criteria in both the rule header and the rule options. For example, you can specify a particular protocol and a specific port, and look for specific content within that traffic.</p>
+<p>Let&#39;s consider a scenario where you want to detect someone trying to use a specific command (<code>rm -rf /</code>) over a telnet connection to your server (assuming your server&#39;s IP is <code>192.168.1.200</code> and telnet uses port 23). A rule to detect this might look like:</p>
+<pre class="shell"><code>alert tcp any any -&gt; 192.168.1.200 23 (msg:&quot;Potential malicious telnet command!&quot;; content:&quot;rm -rf /&quot;; sid:1000004; rev:1;);</code></pre>
+<p>In this rule:</p>
+<ul>
+<li>We&#39;re looking for <code>tcp</code> traffic specifically destined for your server (<code>192.168.1.200</code>) on the <code>telnet</code> port (23).</li>
+<li>The <code>content</code> option tells Snort to look for the exact string <code>&quot;rm -rf /&quot;</code> within the data transmitted over that telnet connection.</li>
+<li>The <code>msg</code> clearly indicates the potential danger.</li>
+</ul>
+<p>Important Considerations:</p>
+<ul>
+<li><strong>Rule Order</strong>: The order of your Snort rules can sometimes be important. Snort processes rules in the order they appear in the configuration file. The <code>pass</code> action, in particular, can stop further rule processing for a matching packet.</li>
+<li><strong>Performance</strong>: The more complex and numerous your rules are, the more processing power Snort will require. It&#39;s important to write efficient rules and only monitor the traffic that is relevant to your security concerns.</li>
+<li><strong>False Positives</strong>: Sometimes, legitimate traffic can accidentally match a rule, resulting in a &quot;false positive&quot; alert. Tuning your rules to minimize false positives is an ongoing process.</li>
+</ul>
+<p>This should give you a basic understanding of how to structure and write simple Snort rules. We&#39;ve covered the rule header (action, protocol, IP addresses, ports, direction) and some fundamental rule options (<code>msg</code>, <code>content</code>, <code>sid</code>, <code>rev</code>).</p>
+</body>
+</html>

@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="understanding-dns-records">Understanding DNS Records</h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#understanding-dns-records">Understanding DNS Records</a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#introduction-to-dns-records">Introduction to DNS Records</a></li>
+</ul></li>
+<li><a href="#common-dns-record-types">Common DNS Record Types</a>
+<ul>
+<li><a href="#a-record">A Record</a></li>
+<li><a href="#aaaa-record">AAAA Record</a></li>
+<li><a href="#cname-canonical-name">CNAME (Canonical Name)</a></li>
+<li><a href="#mx-records-mail-exchanger">MX Records (Mail Exchanger)</a></li>
+<li><a href="#txt-record-text">TXT Record (Text)</a></li>
+<li><a href="#srv-record-service-record">SRV Record (Service Record)</a></li>
+</ul></li>
+<li><a href="#understanding-dns-zones-and-servers">Understanding DNS Zones and Servers</a>
+<ul>
+<li><a href="#dns-zones">DNS Zones</a></li>
+<li><a href="#dns-servers">DNS Servers</a></li>
+</ul></li>
+<li><a href="#basic-dns-lookup-tools">Basic DNS Lookup Tools</a>
+<ul>
+<li><a href="#dig-domain-information-groper"><code>dig</code> (Domain Information Groper)</a></li>
+<li><a href="#nslookup-name-server-lookup"><code>nslookup</code> (Name Server Lookup)</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<h3 id="introduction-to-dns-records">Introduction to DNS Records</h3>
+<p>Imagine you want to visit a website, say <code>yourdomain.com</code>. Your computer doesn&#39;t inherently know the physical location of that website on the internet. That&#39;s where DNS comes in.</p>
+<p>Think of DNS records as entries in a vast, distributed phonebook. When you type <code>yourdomain.com</code> into your web browser, your computer asks a DNS server: &quot;Hey, what&#39;s the IP address for <code>yourdomain.com</code>?&quot;. The DNS server looks up the corresponding &quot;A record&quot; (we&#39;ll talk more about this specific type later) for <code>yourdomain.com</code> and responds with its IP address, something like <code>192.168.1.1</code>. Your browser then uses this IP address to connect to the actual server hosting the website.</p>
+<p>So, the primary purpose of DNS records is to <strong>translate human-readable domain names into machine-readable IP addresses</strong>. This translation is crucial because computers communicate using IP addresses, not domain names.</p>
+<p>DNS is incredibly important for web services and server management because it:</p>
+<ul>
+<li><strong>Makes the internet user-friendly</strong>: You don&#39;t have to memorize a string of numbers for every website you visit.</li>
+<li><strong>Enables websites and services to move</strong>: If a website changes its hosting server and gets a new IP address, only the DNS record needs to be updated. Users can still access the website using the same domain name.</li>
+<li><strong>Supports various internet services</strong>: Beyond just websites, DNS helps route email, identify servers for other applications, and much more.</li>
+</ul>
+<h2 id="common-dns-record-types">Common DNS Record Types</h2>
+<h3 id="a-record">A Record</h3>
+<p>Think back to our phonebook analogy. The A record is like the main entry for a business, directly listing its street address.</p>
+<p>In DNS terms, an A record maps a <strong>domain name</strong> to an <strong>IPv4 address</strong>.</p>
+<ul>
+<li><strong>Domain Name</strong>: This is the human-readable name, like <code>yourdomain.com</code>.</li>
+<li><strong>IPv4 Address</strong>: This is the numerical address of the server on the internet, consisting of four sets of numbers separated by dots, for example, <code>192.168.1.1</code>.</li>
+</ul>
+<p>So, when a DNS server looks up the A record for <code>yourdomain.com</code>, it will find the corresponding IPv4 address, telling your computer where the website&#39;s server is located. Most websites on the internet have at least one A record associated with their main domain name.</p>
+<p>For example, if you have a web server hosting your website at the IPv4 address <code>203.0.113.45</code>, you would create an A record for your domain, like this (in a simplified representation):</p>
+<pre class="shell"><code>yourdomain.com.  A  203.0.113.45</code></pre>
+<p>This tells DNS servers that anyone trying to reach yourdomain.com should be directed to the server at the IP address <code>203.0.113.45</code>.</p>
+<p>Why is this important? Because without A records, you&#39;d have to type in the IP address every time you wanted to visit a website! The A record provides that crucial link between the easy-to-remember name and the computer&#39;s actual location.</p>
+<h3 id="aaaa-record">AAAA Record</h3>
+<p>Just like the A record maps a domain name to an IPv4 address, the <strong>AAAA record</strong> maps a domain name to an <strong>IPv6 address</strong>.</p>
+<p>You might be wondering, &quot;What&#39;s the difference between IPv4 and IPv6?&quot;</p>
+<ul>
+<li><strong>IPv4 addresses</strong> are the traditional 32-bit numerical addresses we just discussed (like <code>192.168.1.1</code>). However, with the rapid growth of the internet, the pool of available IPv4 addresses is running out.</li>
+<li><strong>IPv6 addresses</strong> are the newer, 128-bit addresses designed to provide a much larger address space. They look different, consisting of hexadecimal numbers separated by colons, for example, <code>2001:0db8:85a3:0000:0000:8a2e:0370:7334</code>.</li>
+</ul>
+<p>Think of IPv4 as having a limited number of phone numbers with a certain format, and IPv6 as a new system with a vastly larger number of phone numbers with a different, longer format.</p>
+<p>The AAAA record is becoming increasingly important as the world transitions to IPv6. Many modern servers and internet services now support IPv6, and having an AAAA record for your domain ensures that users connecting over IPv6 can reach your services.</p>
+<p>So, if your server has an IPv6 address, you would create an AAAA record like this (simplified):</p>
+<pre class="shell"><code>yourdomain.com.  AAAA  2001:0db8:85a3:0000:0000:8a2e:0370:7334</code></pre>
+<p>This tells DNS servers that users on IPv6 networks should be directed to your server using this longer, hexadecimal address.</p>
+<p>Why is understanding AAAA records important for you as a future system administrator?</p>
+<ul>
+<li><strong>Future-proofing</strong>: IPv6 is the future of internet addressing. Understanding AAAA records ensures your services are accessible on modern networks.</li>
+<li><strong>Dual-stack environments</strong>: Many servers and networks run both IPv4 and IPv6. Having both A and AAAA records allows clients to connect using their preferred or available protocol.</li>
+</ul>
+<h3 id="cname-canonical-name">CNAME (Canonical Name)</h3>
+<p>Think of a CNAME record as a <strong>nickname</strong> or an <strong>alias</strong> for another domain name. Instead of directly pointing to an IP address, a CNAME record points to another domain name. The DNS server then looks up the IP address for that other domain name.</p>
+<p>Here&#39;s a common use case:</p>
+<p>Imagine you have your main website at <code>yourdomain.com</code>. You also want people to be able to reach it by typing <code>www.yourdomain.com</code>. Instead of creating a separate A record for <code>www.yourdomain.com</code> with the same IP address as yourdomain.com, you can create a CNAME record that says:</p>
+<pre class="shell"><code>www.yourdomain.com.  CNAME  yourdomain.com.</code></pre>
+<p>Notice the trailing dot after <code>yourdomain.com</code>. This is important in DNS configuration and signifies the absolute domain name.</p>
+<p>When someone tries to access <code>www.yourdomain.com</code>, the DNS server sees the CNAME record. It then knows to look up the DNS records for <code>yourdomain.com</code> to find the actual IP address.</p>
+<p>Why use CNAME records?</p>
+<ul>
+<li><strong>Simplicity and Consistency</strong>: If the IP address of <code>yourdomain.com</code> changes, you only need to update the A record for <code>yourdomain.com</code>. The <code>www</code> alias will automatically point to the new IP address because of the CNAME record. This makes management much easier.</li>
+<li><strong>Using Subdomains</strong>: CNAME records are often used for subdomains (like <code>blog.yourdomain.com</code> or <code>shop.yourdomain.com</code>) to point to specific services or platforms hosted elsewhere. For example, you might have <code>blog.yourdomain.com</code> pointing to a blogging platform like <code>yourblogonwordpress.com</code> using a CNAME record.</li>
+</ul>
+<p><strong>Important Note</strong>: You typically shouldn&#39;t have other records (like an A or AAAA record) with the same name as a CNAME record. The CNAME essentially takes over the resolution for that name.</p>
+<h3 id="mx-records-mail-exchanger">MX Records (Mail Exchanger)</h3>
+<p>If A and AAAA records tell computers where to find your website, <strong>MX records tell other mail servers where to send emails addressed to your domain</strong>.</p>
+<p>Think of it this way: when someone sends an email to <code>user@yourdomain.com</code>, the sending mail server needs to know which server is responsible for receiving emails for <code>yourdomain.com</code>. This information is provided by the MX record.</p>
+<p>A domain can have multiple MX records, each with a priority value. This priority value is a number, and lower numbers indicate a higher priority. Mail servers will always try to deliver email to the MX record with the lowest priority first. If that mail server is unavailable, they will then try the next highest priority, and so on. This provides redundancy and ensures that your email has a better chance of being delivered even if one of your mail servers experiences issues.</p>
+<p>Here&#39;s an example of MX records for <code>yourdomain.com</code>:</p>
+<pre class="shell"><code>yourdomain.com.  MX  10  mail.yourdomain.com.
+yourdomain.com.  MX  20  backup.yourdomain.com.</code></pre>
+<p>In this example:</p>
+<ul>
+<li><code>mail.yourdomain.com</code> is the primary mail server, with a higher priority (lower number: 10).</li>
+<li><code>backup.yourdomain.com</code> is a secondary mail server, with a lower priority (higher number: 20). If the primary mail server is down, sending servers will try to deliver to the backup server.</li>
+</ul>
+<p>The part after the priority number (<code>mail.yourdomain.com.</code> and <code>backup.yourdomain.com.</code>) is the <strong>hostname</strong> of the mail server responsible for receiving email for your domain. These hostnames themselves must have corresponding A or AAAA records that point to the actual IP addresses of the mail servers.</p>
+<p>Why are MX records crucial for a system administrator?</p>
+<ul>
+<li><strong>Email Delivery</strong>: Without correctly configured MX records, you won&#39;t receive email for your domain.</li>
+<li><strong>Reliability</strong>: Using multiple MX records with different priorities ensures email delivery even if a mail server fails.</li>
+<li><strong>Integration with Email Services</strong>: If you use a third-party email hosting provider (like Google Workspace or Microsoft 365), you&#39;ll need to configure specific MX records provided by them to direct your email to their servers.</li>
+</ul>
+<h3 id="txt-record-text">TXT Record (Text)</h3>
+<p>Think of TXT records as general-purpose notes or information fields associated with your domain name. They allow you to store any arbitrary text data within your DNS records. While seemingly simple, TXT records are used for a variety of important purposes.</p>
+<p>Here are a couple of key uses for TXT records:</p>
+<ul>
+<li><p><strong>Domain Ownership Verification</strong>: When you sign up for certain services or platforms (like Google Search Console), they often require you to prove that you own the domain name. One common method is to have you add a specific unique text string as a TXT record in your domain&#39;s DNS settings. The service can then check for the presence of this record to verify your ownership.</p>
+<p>For example, a verification TXT record might look something like this:</p>
+<pre class="shell"><code>yourdomain.com.  TXT  &quot;google-site-verification=xxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;</code></pre>
+<p><strong>Email Authentication (SPF Records)</strong>: TXT records are also used to implement important email authentication mechanisms like <strong>Sender Policy Framework (SPF)</strong>. An SPF record lists the mail servers that are authorized to send emails on behalf of your domain. This helps prevent email spoofing and improves email deliverability.</p>
+<p>An example of an SPF record might look like this:</p>
+<pre class="shell"><code>yourdomain.com.  TXT  &quot;v=spf1 mx a ip4:192.0.2.0/24 ~all&quot;</code></pre>
+<p>This record specifies that emails from <code>yourdomain.com</code> are authorized to originate from the mail servers listed in the MX records (<code>mx</code>), the server with the same IP address as the A record (<code>a</code>), and any IP address within the <code>192.0.2.0/24</code> range. The <code>~all</code> at the end indicates a soft fail for emails not matching these rules.</p></li>
+</ul>
+<p>As you can see, while TXT records simply store text, this capability enables crucial functionalities for domain verification and email security. As a system administrator, you&#39;ll likely encounter and need to configure TXT records for these and other purposes.</p>
+<h3 id="srv-record-service-record">SRV Record (Service Record)</h3>
+<p>Think of SRV records as a way to tell computers where to find specific services running on your domain. Unlike A or AAAA records that point to a general server IP address, SRV records specify the <strong>hostname</strong> and <strong>port number</strong> for particular services. They also allow you to define priorities and weights for these services, similar to MX records for email.</p>
+<p>Here&#39;s the general format of an SRV record:</p>
+<pre class="shell"><code>_service._protocol.domain. TTL IN SRV priority weight port target</code></pre>
+<p>Let&#39;s break down each part:</p>
+<ul>
+<li><strong>_service</strong>: The symbolic name of the service (e.g., <code>_sip</code> for Session Initiation Protocol).</li>
+<li><strong>_protocol</strong>: The transport protocol used by the service (usually <code>_tcp</code> or <code>_udp</code>).</li>
+<li><strong>domain</strong>: The domain name for which this service is available (e.g., <code>yourdomain.com</code>).</li>
+<li><strong>TTL</strong>: Time To Live, indicating how long this record should be cached.</li>
+<li><strong>IN</strong>: Class of the record (usually Internet).</li>
+<li><strong>SRV</strong>: The record type.</li>
+<li><strong>priority</strong>: The priority of this target host. Lower values indicate higher priority.</li>
+<li><strong>weight</strong>: A weight for records with the same priority. Higher values have a proportionally higher chance of being selected.</li>
+<li><strong>port</strong>: The TCP or UDP port on which the service is listening.</li>
+<li><strong>target</strong>: The hostname of the machine providing the service. This hostname must have a corresponding A or AAAA record.</li>
+</ul>
+<p>A common example is for VoIP (Voice over IP) or instant messaging services using SIP:</p>
+<pre class="shell"><code>_sip._tcp.yourdomain.com. 3600 IN SRV 10 0 5060 sip.yourdomain.com.</code></pre>
+<p>In this example:</p>
+<ul>
+<li>The service is <code>_sip</code> (SIP).</li>
+<li>The protocol is <code>_tcp</code> (TCP).</li>
+<li>The domain is <code>yourdomain.com</code>.</li>
+<li>The priority is <code>10</code>.</li>
+<li>The weight is <code>0</code>.</li>
+<li>The service is running on port <code>5060</code>.</li>
+<li>The server hosting the SIP service is <code>sip.yourdomain.com.</code>.</li>
+</ul>
+<p>Why are SRV records important for system administrators?</p>
+<ul>
+<li><strong>Centralized Service Discovery</strong>: They allow clients to automatically discover the location and port of specific services.</li>
+<li><strong>Load Balancing and Redundancy</strong>: By using multiple SRV records with different priorities and weights, you can distribute traffic across multiple servers and provide failover in case a server goes down.</li>
+<li><strong>Integration of Diverse Services</strong>: SRV records are used by a wide range of services beyond just VoIP, including directory services (like LDAP) and other network applications.</li>
+</ul>
+<p>Understanding SRV records is crucial when managing complex network environments with multiple services running on different servers.</p>
+<h2 id="understanding-dns-zones-and-servers">Understanding DNS Zones and Servers</h2>
+<h3 id="dns-zones">DNS Zones</h3>
+<p>Imagine you have a large company with many different departments and responsibilities. To keep things organized, you might divide the company into different zones or administrative units. A DNS zone is a similar concept for a domain.</p>
+<p>A DNS zone is a specific portion of the DNS namespace that is managed by a particular DNS server or set of DNS servers. It&#39;s like an administrative boundary for a domain. For example, the zone for <code>yourdomain.com</code> would contain all the DNS records for <code>yourdomain.com</code> itself, as well as any subdomains like <code>blog.yourdomain.com</code> or <code>shop.yourdomain.com</code>, unless those subdomains have been delegated to their own separate zones.</p>
+<p>Think of a DNS zone as a file cabinet containing all the DNS records for a specific domain or a part of it. The administrator of that zone has the authority to add, modify, and delete the records within that cabinet.</p>
+<p>Why are DNS zones important?</p>
+<ul>
+<li><strong>Delegation of Authority</strong>: They allow the responsibility for managing a part of the DNS namespace to be delegated to different individuals or organizations. For example, the main <code>yourdomain.com</code> zone might be managed by your IT department, while a subdomain like <code>university.yourdomain.com</code> might have its own zone managed by the university&#39;s IT group.</li>
+<li><strong>Organizational Structure</strong>: Zones help organize the potentially large number of DNS records for a domain, making them easier to manage.</li>
+<li><strong>Consistency</strong>: Ensuring all records for a particular domain or subdomain are within the same zone helps maintain consistency and accuracy.</li>
+</ul>
+<p>Typically, when you register a domain name, your registrar (the company you registered the domain with) will set up a DNS zone for your domain. You&#39;ll then use their tools or point to your own DNS servers to manage the records within that zone.</p>
+<h3 id="dns-servers">DNS Servers</h3>
+<p>There are two main types of DNS servers that play different but crucial roles in the process of resolving a domain name to an IP address: <strong>Authoritative DNS Servers</strong> and <strong>Recursive DNS Servers</strong>.</p>
+<ol type="1">
+<li><p><strong>Authoritative DNS Servers</strong>:</p>
+<ul>
+<li>Think of these as the <strong>official keepers of the phonebook</strong> for a specific DNS zone. They hold the actual DNS records for a domain (like <code>yourdomain.com</code>).</li>
+<li>When a recursive DNS server asks for the IP address of <code>yourdomain.com</code>, it will eventually query the authoritative DNS servers for the <code>yourdomain.com</code> zone to get the answer.</li>
+<li>Typically, when you register a domain, you&#39;ll configure the authoritative DNS servers for your domain at your registrar. These are often provided by your hosting provider or a dedicated DNS service.</li>
+<li>An authoritative server only answers queries for the zones it is responsible for. If it receives a query for a domain outside of its zones, it will refer the requester to other DNS servers.</li>
+</ul></li>
+<li><p><strong>Recursive DNS Servers</strong>:</p>
+<ul>
+<li>These are the servers that your computer (or any device connected to the internet) typically contacts first when it needs to look up a domain name.</li>
+<li>Think of a recursive DNS server as a helpful librarian who doesn&#39;t necessarily have all the answers themselves but knows how to find them.</li>
+<li>When you type <strong>yourdomain.com</strong> in your browser, your computer sends a request to its configured recursive DNS server (often provided by your internet service provider or a public DNS service like Google&#39;s <code>8.8.8.8</code>).</li>
+<li>The recursive server then starts a process of querying other DNS servers, starting from the root servers, then moving down to the top-level domain (TLD) servers (like <code>.com</code> or <code>.net</code>), and finally to the authoritative DNS servers for <code>yourdomain.com</code> to find the A record.</li>
+<li>Once it gets the answer, the recursive server sends it back to your computer and often caches (stores) the information for a certain period (defined by the TTL of the record) to speed up future lookups for the same domain.</li>
+</ul></li>
+</ol>
+<p>In summary: <strong>Authoritative servers hold the DNS records, while recursive servers find the DNS records on behalf of the client</strong>. They work together in a hierarchical system to ensure that domain names can be translated into IP addresses efficiently.</p>
+<h2 id="basic-dns-lookup-tools">Basic DNS Lookup Tools</h2>
+<h3 id="dig-domain-information-groper"><code>dig</code> (Domain Information Groper)</h3>
+<p>As a system administrator working with Linux (often with command-line access only), you&#39;ll frequently need to query DNS records to diagnose issues, verify configurations, or simply understand how a domain is set up. Fortunately, linux provides built-in command-line tools for this purpose. We&#39;ll start with the more powerful and flexible tool: <code>dig</code>.</p>
+<p><code>dig</code> <strong>(domain information groper)</strong> is a command-line utility for querying DNS name servers. It allows you to look up various types of DNS records for a specific domain and provides detailed information about the DNS response.</p>
+<p>Here&#39;s the basic syntax of the <code>dig</code> command:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> <span class="pp">[</span><span class="ss">options</span><span class="pp">]</span> name type</span></code></pre></div>
+<p>Where:</p>
+<ul>
+<li><code>name</code>: The domain name you want to look up (e.g., <code>google.com</code>).</li>
+<li><code>type</code>: The type of DNS record you are interested in (e.g., <code>A</code>, <code>MX</code>, <code>CNAME</code>, <code>TXT</code>, <code>SRV</code>). If you omit the <code>type</code>, <code>dig</code> defaults to querying for A records.</li>
+<li><code>[options]</code>: Various flags you can use to control the output and the query process.</li>
+</ul>
+<p>Let&#39;s look at some basic examples:</p>
+<ol type="1">
+<li><p><strong>Looking up the A record for</strong> <code>google.com</code>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> google.com A</span></code></pre></div>
+<p>This command will query the configured DNS servers and return the A record(s) associated with google.com, showing you the IPv4 address(es) of Google&#39;s web servers.</p></li>
+<li><p><strong>Looking up the MX records for</strong> <code>yourdomain.com</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> yourdomain.com MX</span></code></pre></div>
+<p>This will show you the MX records for your domain, including the priority and the hostname of the mail server(s).</p></li>
+<li><p><strong>Looking up the CNAME record for</strong> <code>www.example.com</code>:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> www.example.com CNAME</span></code></pre></div>
+<p>This will display the CNAME record, showing you which domain <code>www.example.com</code> is an alias for.</p></li>
+<li><p><strong>Looking up all record types for a domain</strong>:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> yourdomain.com ANY</span></code></pre></div>
+<p>The <code>ANY</code> option will query for all DNS record types associated with the domain. Be aware that the output can be quite verbose.</p></li>
+</ol>
+<p>The output of <code>dig</code> provides a lot of information, including the question section (what you asked for), the answer section (the DNS records found), the authority section (information about the DNS server that provided the answer), and the additional section (other helpful records).</p>
+<p>As you start using dig, you&#39;ll become familiar with interpreting its output. It&#39;s an indispensable tool for any system administrator managing web services.</p>
+<h3 id="nslookup-name-server-lookup"><code>nslookup</code> (Name Server Lookup)</h3>
+<p><code>nslookup</code> <strong>(name server lookup)</strong> is another command-line utility you can use to query DNS servers. While <code>dig</code> is generally considered more feature-rich and provides more detailed output, nslookup is often simpler to use for basic queries.</p>
+<p>Here&#39;s the basic way to use nslookup:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nslookup</span> <span class="pp">[</span><span class="ss">options</span><span class="pp">]</span> name <span class="pp">[</span><span class="ss">server</span><span class="pp">]</span></span></code></pre></div>
+<p>Where:</p>
+<ul>
+<li><code>name</code>: The domain name or IP address you want to look up (e.g., <code>example.com</code>).</li>
+<li><code>[server]</code>: (Optional) The IP address or hostname of a specific DNS server you want to query. If you omit this, <code>nslookup</code> will use your system&#39;s configured DNS servers.</li>
+<li><code>[options]</code>: Various flags to control the query.</li>
+</ul>
+<p>Let&#39;s look at some basic examples:</p>
+<ol type="1">
+<li><p><strong>Looking up the A record for</strong> <code>example.com</code> <strong>using your default DNS server</strong>:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nslookup</span> example.com</span></code></pre></div>
+<p>This will return the A record(s) for example.com.</p></li>
+<li><p><strong>Looking up the MX records for</strong> <code>yourdomain.com</code>:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nslookup</span> <span class="at">-type</span><span class="op">=</span>mx yourdomain.com</span></code></pre></div>
+<p>Here, <code>-type=mx</code> specifies that you want to query for MX records.</p></li>
+<li><p><strong>Looking up the A record for</strong> <code>google.com</code> <strong>using Google&#39;s public DNS server (8.8.8.8)</strong>:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nslookup</span> google.com 8.8.8.8</span></code></pre></div>
+<p>This command sends the query directly to Google&#39;s DNS server.</p></li>
+</ol>
+<p>The output of <code>nslookup</code> is generally less verbose than <code>dig</code>. For a basic A record lookup, it will typically show the server it used to get the answer and the name and address of the domain. For other record types, it will display the relevant information (e.g., priority and mail server for MX records).</p>
+<p>While <code>dig</code> is often preferred for detailed analysis and scripting, <code>nslookup</code> can be a quick and easy tool for simple DNS lookups.</p>
+</body>
+</html>

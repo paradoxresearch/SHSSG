@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="getting-started-with-podman">Getting Started with Podman</h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#getting-started-with-podman">Getting Started with Podman</a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#understanding-containerization-and-podman">Understanding Containerization and Podman</a>
+<ul>
+<li><a href="#containerization">Containerization</a></li>
+<li><a href="#podman-and-daemonless-architecture">Podman and Daemonless Architecture</a></li>
+<li><a href="#the-concept-of-pods-in-podman">The Concept of Pods in Podman</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#installing-podman">Installing Podman</a></li>
+<li><a href="#basic-podman-commands">Basic Podman Commands</a>
+<ul>
+<li><a href="#image-management">Image Management</a>
+<ul>
+<li><a href="#searching-for-container-images-podman-search">Searching for Container Images (<code>podman search</code>)</a></li>
+<li><a href="#pulling-a-container-image-podman-pull">Pulling a Container Image (<code>podman pull</code>)</a></li>
+<li><a href="#listing-available-images-podman-images">Listing Available Images (<code>podman images</code>)</a></li>
+<li><a href="#removing-images-podman-rmi">Removing Images (<code>podman rmi</code>)</a></li>
+</ul></li>
+<li><a href="#container-lifecycle-management">Container Lifecycle Management</a>
+<ul>
+<li><a href="#running-a-basic-container-podman-run">Running a Basic Container (<code>podman run</code>)</a>
+<ul>
+<li><a href="#example-running-an-interactive-ubuntu-container">Example: Running an interactive Ubuntu container</a></li>
+</ul></li>
+<li><a href="#list-running-containers-podman-ps-and-podman-ps--a">List Running Containers (<code>podman ps</code> and <code>podman ps -a</code>)</a></li>
+<li><a href="#stopping-and-starting-containers-podman-stop-and-podman-start">Stopping and Starting Containers (<code>podman stop</code> and <code>podman start</code>)</a></li>
+<li><a href="#removing-containers-podman-rm">Removing Containers (<code>podman rm</code>)</a></li>
+<li><a href="#detached-mode--d-and-port-mapping--p">Detached Mode (<code>-d</code>) and Port Mapping (<code>-p</code>)</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#working-with-podman">Working with Podman</a>
+<ul>
+<li><a href="#pods-and-grouping-containers">Pods and Grouping Containers</a></li>
+<li><a href="#creating-a-pod-podman-pod-create">Creating a Pod (<code>podman pod create</code>)</a></li>
+<li><a href="#adding-containers-to-a-pod---pod-options-with-podman-run">Adding Containers to a Pod (<code>--pod</code> options with <code>podman run</code>)</a>
+<ul>
+<li><a href="#example-running-a-web-server-and-a-database-in-a-pod">Example: Running a Web Server and a Database in a Pod</a></li>
+</ul></li>
+<li><a href="#listing-pods-and-their-associated-containers">Listing Pods and Their Associated Containers</a></li>
+<li><a href="#stopping-and-removing-pods">Stopping and Removing Pods</a></li>
+</ul></li>
+<li><a href="#practical-use-cases">Practical Use Cases</a>
+<ul>
+<li><a href="#common-scenarios-for-podman">Common Scenarios for Podman</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<h3 id="understanding-containerization-and-podman">Understanding Containerization and Podman</h3>
+<h4 id="containerization">Containerization</h4>
+<p>At its core, <strong>containerization</strong> is a method of packaging an application and all its dependencies—such as libraries, frameworks, and configuration files—into a single, isolated unit called a container. Think of it like this: if you were to move your entire office to a new location, instead of packing individual desks, chairs, and computers separately, you&#39;d put each complete workstation into its own self-contained, portable box. This box would have everything needed for that workstation to function immediately upon arrival.</p>
+<p>The key benefits of containerization are:</p>
+<ul>
+<li><strong>Consistency</strong>: Applications run the same way regardless of the environment (your laptop, a development server, a production server). This eliminates the classic &quot;it works on my machine!&quot; problem.</li>
+<li><strong>Isolation</strong>: Containers isolate applications from each other and from the host system, preventing conflicts and improving security.</li>
+<li><strong>Portability</strong>: A container can be easily moved and run on any compatible system.</li>
+</ul>
+<p>Now, how does this differ from <strong>Virtual Machines (VMs)</strong>? A VM virtualizes an entire operating system, including its kernel, on top of your host system. It&#39;s like having a separate, complete computer running inside your computer. Containers, on the other hand, share the host system&#39;s kernel. This makes containers much lighter, faster to start, and more efficient in resource usage compared to VMs. They only package the application and its specific dependencies, not an entire OS.</p>
+<p>The <strong>OCI (Open Container Initiative)</strong> container is essentially a standardized format for these isolated application packages. It ensures that containers created with one tool (like Podman) can be run by another OCI-compliant tool. It&#39;s the &quot;standard box&quot; for our analogy.</p>
+<h4 id="podman-and-daemonless-architecture">Podman and Daemonless Architecture</h4>
+<p>Now that we&#39;ve covered containers, let&#39;s look at <strong>Podman</strong>. While Docker is perhaps the most well-known containerization tool, it traditionally relies on a long-running background service called a &quot;daemon&quot; (the <code>dockerd</code> process). This daemon manages all container operations.</p>
+<p><strong>Podman&#39;s key differentiator is its &quot;daemonless&quot; architecture</strong>. This means Podman does not require a central, continuously running background process to manage containers. When you execute a Podman command, it directly interacts with the Linux kernel and container runtimes (like runc or crun) to perform the requested action. Once the command finishes, Podman exits.</p>
+<p>This daemonless design offers several significant advantages, especially for system administrators managing servers:</p>
+<ol type="1">
+<li><strong>Enhanced Security</strong>: Without a single root daemon controlling all operations, the attack surface is reduced. Containers can be run as regular, unprivileged users, limiting potential damage if a container were to be compromised. This is a huge benefit for server security.</li>
+<li><strong>Simplified Management</strong>: There&#39;s no daemon to troubleshoot, restart, or monitor. Commands are executed directly, making the behavior more predictable and often easier to debug.</li>
+<li><strong>Resource Efficiency</strong>: No persistent daemon means fewer background processes consuming system resources when containers are not actively running.</li>
+<li><strong>Integration with Systemd</strong>: Podman integrates very well with <code>systemd</code> (the init system used by many Linux distributions). You can generate <code>systemd</code> unit files directly from Podman containers or pods, allowing for robust and standard service management.</li>
+</ol>
+<p>In essence, Podman provides all the functionality you need to build, run, and manage containers, but in a more lightweight, secure, and flexible way, perfectly suited for server environments where stability and security are paramount. It feels very much like a native Linux command-line tool.</p>
+<h4 id="the-concept-of-pods-in-podman">The Concept of Pods in Podman</h4>
+<p>While individual containers are powerful, sometimes you have applications that are composed of several tightly coupled services. For instance, a web application might consist of a front-end web server, a back-end API service, and a database. These components often need to share resources or communicate directly.</p>
+<p>This is where the concept of a <strong>&quot;pod&quot;</strong> comes in. In Podman, a pod is a group of one or more containers that share resources, such as network namespaces, storage volumes, and process IDs. This means that all containers within a pod can communicate with each other via <code>localhost</code>, share storage, and are managed as a single unit.</p>
+<p>The idea of pods originated from <strong>Kubernetes</strong>, an open-source system for automating deployment, scaling, and management of containerized applications. Podman&#39;s inclusion of pod functionality makes it an excellent tool for local development and testing of multi-container applications that will eventually be deployed to a Kubernetes cluster. It provides a consistent environment from your local machine (or server) to the production orchestrator.</p>
+<p>For a system administrator, managing services within pods offers several advantages:</p>
+<ul>
+<li><strong>Simplified Management</strong>: You can start, stop, or remove an entire application stack with a single command on the pod, rather than managing each individual container.</li>
+<li><strong>Resource Sharing</strong>: Containers within a pod can efficiently share resources, which can lead to better performance and reduced overhead for tightly integrated services.</li>
+<li><strong>Logical Grouping</strong>: It provides a clear logical grouping for related components of an application, making it easier to understand and operate complex deployments.</li>
+</ul>
+<p>So, when you think of a pod in Podman, envision a self-contained environment for a set of co-located, co-managed containers that need to work closely together.</p>
+<h2 id="installing-podman">Installing Podman</h2>
+<p>Since we&#39;re assuming an Debian-based Linux server environment with command-line tools only, the installation process for Podman is straightforward using the apt package manager.</p>
+<p>First, it&#39;s always good practice to ensure your system&#39;s package list is up-to-date and that you have any necessary dependencies. You can achieve this with the following commands:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt <span class="at">-y</span> upgrade</span></code></pre></div>
+<ul>
+<li><code>sudo apt update</code>: This command downloads the package lists from the repositories and updates them to get information on the newest versions of packages and their dependencies.</li>
+<li><code>sudo apt -y upgrade</code>: This command installs the newest versions of all packages currently installed on the system. The <code>-y</code> flag automatically answers &quot;yes&quot; to any prompts, which is useful for automation or when you&#39;re confident in the upgrade.</li>
+</ul>
+<p>Once your system is updated, you can install Podman using the <code>apt install</code> command:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> podman</span></code></pre></div>
+<p>This command will download and install the Podman package along with any required dependencies. The <code>-y</code> flag again automates the confirmation.</p>
+<p>Keep in mind that while Podman is becoming more common in repositories, you might need to add a specific repository (like a PPA) to get the latest version.</p>
+<p>After the installation completes, you can verify that Podman is correctly installed and accessible by running a simple command to display its version.</p>
+<p>Execute the following command in your terminal:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> <span class="at">--version</span></span></code></pre></div>
+<p>Upon successful installation, this command should output the installed Podman version (e.g., <code>podman version 4.3.1</code>). If you see an error message like &quot;command not found,&quot; it indicates an issue with the installation or your system&#39;s PATH configuration.</p>
+<h2 id="basic-podman-commands">Basic Podman Commands</h2>
+<h3 id="image-management">Image Management</h3>
+<h4 id="searching-for-container-images-podman-search">Searching for Container Images (<code>podman search</code>)</h4>
+<p>Before you can run a container, you need a <strong>container image</strong>. Think of an image as a read-only template that contains the application, its libraries, and configuration. It&#39;s like a blueprint for your container.</p>
+<p>Podman allows you to search for these images in various public and private <strong>registries</strong>. A registry is essentially a centralized repository for container images, much like a software repository for packages (e.g., Debians&#39;s <code>apt</code> repositories). The most well-known public registry is Docker Hub, but there are many others, including Quay.io and those run by cloud providers.</p>
+<p>To search for images, you use the <code>podman search</code> command. It&#39;s quite intuitive. For example, if you wanted to find images related to the <code>nginx</code> web server, you would type:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> search nginx</span></code></pre></div>
+<p>This command will query configured registries and return a list of images whose names or descriptions match &quot;nginx.&quot; The output typically includes columns like <code>INDEX</code>, <code>NAME</code>, <code>DESCRIPTION</code>, <code>STARS</code> (a popularity metric), <code>OFFICIAL</code> (indicating official images from software vendors), and <code>AUTOMATED</code> (indicating automated builds).</p>
+<p>The <code>INDEX</code> column will often show where the image resides (e.g., <code>docker.io</code> for Docker Hub, <code>quay.io</code> for Quay.io). Pay attention to the <code>OFFICIA</code>L and <code>STARS</code> columns when choosing images, as these can be indicators of trustworthiness and quality.</p>
+<h4 id="pulling-a-container-image-podman-pull">Pulling a Container Image (<code>podman pull</code>)</h4>
+<p>Once you&#39;ve identified an image you want to use from a registry, you need to download it to your local machine. This process is called &quot;pulling&quot; an image. It&#39;s akin to downloading a software package before installing it.</p>
+<p>You use the <code>podman pull</code> command for this purpose. The most common format is <code>podman pull &lt;registry&gt;/&lt;image_name&gt;:&lt;tag&gt;</code>.</p>
+<ul>
+<li><code>&lt;registry&gt;</code>: This specifies the registry where the image is located (e.g., <code>docker.io</code>, <code>quay.io</code>). If you omit this, Podman defaults to docker.io.</li>
+<li><code>&lt;image_name&gt;</code>: This is the name of the image (e.g., <code>nginx</code>, <code>ubuntu</code>).</li>
+<li><code>&lt;tag&gt;</code>: This refers to a specific version or variant of the image (e.g., <code>latest</code>, <code>1.25</code>, <code>focal</code>). If you omit the tag, latest is usually assumed, but it&#39;s good practice to specify a tag for reproducibility.</li>
+</ul>
+<p>Example: To pull the official Nginx web server image with the <code>stable</code> tag from Docker Hub, you would execute:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> pull docker.io/library/nginx:stable</span></code></pre></div>
+<p>Or, more commonly, if <code>docker.io/library/</code> is implied (which it often is for official images on Docker Hub):</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> pull nginx:stable</span></code></pre></div>
+<p>When you run this command, Podman will download all the necessary layers that make up the Nginx image. You&#39;ll see progress indicators in your terminal as the download proceeds. Once complete, the image will be stored locally on your system, ready to be used to create containers.</p>
+<p>It&#39;s important to pull the exact image you intend to use to ensure consistency. Specifying tags helps avoid unexpected behavior if the &quot;latest&quot; version changes over time.</p>
+<h4 id="listing-available-images-podman-images">Listing Available Images (<code>podman images</code>)</h4>
+<p>After pulling images or building your own, you&#39;ll want to see what&#39;s currently stored locally. The <code>podman images</code> command serves this purpose. It provides a concise list of all container images that Podman has downloaded or created on your system.</p>
+<p>To see your local images, simply type:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> images</span></code></pre></div>
+<p>The output will typically show several columns:</p>
+<ul>
+<li><strong>REPOSITORY</strong>: The name of the image (e.g., <code>nginx</code>, <code>ubuntu</code>).</li>
+<li><strong>TAG</strong>: The specific version or variant of the image (e.g., <code>stable</code>, <code>latest</code>, <code>22.04</code>).</li>
+<li><strong>IMAGE ID</strong>: A unique identifier for the image.</li>
+<li><strong>CREATED</strong>: When the image was built or downloaded.</li>
+<li><strong>SIZE</strong>: The size of the image on disk.</li>
+</ul>
+<p>This command is incredibly useful for keeping track of your image inventory, checking disk space usage, and ensuring you have the correct image versions available for your operations.</p>
+<h4 id="removing-images-podman-rmi">Removing Images (<code>podman rmi</code>)</h4>
+<p>Just as you pull images, you&#39;ll also need to remove them from your local system when they are no longer required. This helps free up disk space and keeps your image inventory tidy. The command for this is <code>podman rmi</code> (which stands for &quot;remove image&quot;).</p>
+<p>To remove an image, you typically specify its name and tag, or its Image ID. It&#39;s generally safer and clearer to use the name and tag.</p>
+<p><strong>Example</strong>: If you previously pulled the <code>nginx:stable</code> image and no longer need it, you would execute:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> rmi nginx:stable</span></code></pre></div>
+<p>Alternatively, if you want to remove an image by its unique <strong>Image ID</strong> (which you can get from podman images), you would use:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> rmi <span class="op">&lt;</span>Image ID<span class="op">&gt;</span></span></code></pre></div>
+<p>For instance, if <code>podman images</code> showed an Image ID of <code>a1b2c3d4e5f6</code> for the Nginx image, you could run:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> rmi a1b2c3d4e5f6</span></code></pre></div>
+<p><strong>Important Note</strong>: Podman will prevent you from removing an image if there are any containers (even stopped ones) that were created from it. You must remove those containers first before you can remove the image. This is a safety mechanism to prevent accidental data loss or disruption to existing containers.</p>
+<h3 id="container-lifecycle-management">Container Lifecycle Management</h3>
+<h4 id="running-a-basic-container-podman-run">Running a Basic Container (<code>podman run</code>)</h4>
+<p>The <code>podman run</code> command is arguably the most fundamental command you&#39;ll use. It creates a new container from a specified image and then executes a command within that container. Think of it as launching an instance of the blueprint you&#39;ve pulled.</p>
+<p>The basic syntax is <code>podman run &lt;image_name&gt;:&lt;tag&gt; &lt;command&gt;</code>.</p>
+<p>Let&#39;s look at some common and essential options you&#39;ll use with <code>podman run</code>:</p>
+<ul>
+<li><p><code>-it</code> <strong>(Interactive Terminal)</strong>: This is a combination of two flags:</p>
+<ul>
+<li><code>-i</code> <strong>(or</strong> <code>--interactive</code><strong>)</strong>: Keeps <code>STDIN</code> open even if not attached, allowing you to provide input to the container.</li>
+<li><code>-t</code> <strong>(or</strong> <code>--tty</code><strong>)</strong>: Allocates a pseudo-TTY, essentially giving you an interactive shell inside the container.</li>
+<li>When you want to interact directly with the container (e.g., run shell commands), you&#39;ll almost always use <code>-it</code>.</li>
+</ul></li>
+<li><p><code>--name &lt;container_name&gt;</code>: This option allows you to assign a human-readable name to your container. If you don&#39;t specify a name, Podman will generate a random, sometimes whimsical, name for it. Naming containers makes them much easier to identify and manage later.</p></li>
+</ul>
+<h5 id="example-running-an-interactive-ubuntu-container">Example: Running an interactive Ubuntu container</h5>
+<p>Let&#39;s say you want to quickly spin up an Ubuntu container to run some commands. You would use: Bash</p>
+<p>podman run -it --name my-ubuntu-test ubuntu:latest /bin/bash</p>
+<p>Let&#39;s break this down:</p>
+<ul>
+<li><code>podman run</code>: The command to create and run a container.</li>
+<li><code>-it</code>: We want an interactive terminal inside the container.</li>
+<li><code>--name my-ubuntu-test</code>: We&#39;re naming this specific container instance <code>my-ubuntu-test</code>.</li>
+<li><code>ubuntu:latest</code>: This specifies the image we want to use. We assume you&#39;ve already pulled <code>ubuntu:latest</code> or Podman will attempt to pull it automatically.</li>
+<li><code>/bin/bash</code>: This is the command that will be executed inside the container. In this case, it starts a Bash shell.</li>
+</ul>
+<p>When you run this command, you&#39;ll find yourself inside the container&#39;s shell prompt. From there, you can execute commands as if you were on a fresh Ubuntu system, completely isolated from your host. To exit the container, you can type <code>exit</code> at the shell prompt.</p>
+<h4 id="list-running-containers-podman-ps-and-podman-ps--a">List Running Containers (<code>podman ps</code> and <code>podman ps -a</code>)</h4>
+<p>After you run containers, you&#39;ll need a way to monitor their status. The <code>podman ps</code> command (short for &quot;process status,&quot; similar to the Linux <code>ps</code> command) is your primary tool for this.</p>
+<ul>
+<li><p><strong>Listing Running Containers</strong>:</p>
+<p>To see only the containers that are currently active and running, simply use:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a> <span class="ex">podman</span> ps</span></code></pre></div>
+<p>The output will typically display columns such as:</p>
+<ul>
+<li><code>CONTAINER ID</code>: A unique identifier for the container.</li>
+<li><code>IMAGE</code>: The image the container was created from.</li>
+<li><code>COMMAND</code>: The command executed inside the container.</li>
+<li><code>CREATED</code>: When the container was created.</li>
+<li><code>STATUS</code>: The current state of the container (e.g., <code>Up X seconds</code>, <code>Exited (0) X seconds ago</code>).</li>
+<li><code>PORTS</code>: Any port mappings (we&#39;ll cover this soon).</li>
+<li><code>NAMES</code>: The name you assigned with <code>--name</code> or a random one Podman generated.</li>
+</ul></li>
+<li><p><strong>Listing All Containers (Running and Stopped)</strong>:</p>
+<p>Often, you&#39;ll want to see containers that have exited or stopped, not just the currently running ones. To include all containers, regardless of their status, you add the <code>-a</code> (or <code>--all</code>) flag:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> ps <span class="at">-a</span></span></code></pre></div>
+<p>This command is incredibly useful for reviewing past container activity, identifying containers that might need to be restarted, or finding containers that need to be removed to free up resources.</p></li>
+</ul>
+<h4 id="stopping-and-starting-containers-podman-stop-and-podman-start">Stopping and Starting Containers (<code>podman stop</code> and <code>podman start</code>)</h4>
+<p>Containers, much like traditional services, often need to be stopped and started. This is essential for maintenance, troubleshooting, or simply temporarily pausing a service.</p>
+<ul>
+<li><p><strong>Stopping a Container (</strong><code>podman stop</code><strong>)</strong></p>
+<p>To gracefully shut down a running container, you use the <code>podman stop</code> command. It signals the main process inside the container to terminate.</p>
+<p>You&#39;ll need the <strong>Container ID</strong> or the <strong>Name</strong> of the container, which you can get from <code>podman ps</code> or <code>podman ps -a</code>.</p>
+<p><strong>Example</strong>: If you have a container named <code>my-ubuntu-test</code> (from our previous example), you would stop it with:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> stop my-ubuntu-test</span></code></pre></div>
+<p>Podman will send a <code>SIGTERM</code> signal to the container&#39;s main process, allowing it a grace period to shut down cleanly. If it doesn&#39;t stop within that period, Podman will send a <code>SIGKILL</code> to force termination.</p></li>
+<li><p><strong>Starting a Container (</strong><code>podman start</code><strong>)</strong></p>
+<p>Once a container has been stopped (or if it exited on its own), you can restart it using the <code>podman start</code> command. This will resume the container from its last state, executing its primary command again.</p>
+<p>Again, you&#39;ll use the <strong>Container ID</strong> or the <strong>Name</strong>.</p>
+<p><strong>Example</strong>: To restart our my-ubuntu-test container:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> start my-ubuntu-test</span></code></pre></div>
+<p>After starting, you can use <code>podman ps</code> to confirm that the container is now running. This allows you to pause and resume services without having to destroy and recreate the container, preserving its internal state and any changes made within it.</p></li>
+</ul>
+<h4 id="removing-containers-podman-rm">Removing Containers (<code>podman rm</code>)</h4>
+<p>While <code>podman stop</code> pauses a container, <code>podman rm</code> permanently deletes it. Removing a container means deleting its writable layer, associated storage, and its configuration. This action cannot be undone, so it&#39;s important to use it with care.</p>
+<p>You typically remove a container using its <strong>Container ID</strong> or its <strong>Name</strong>.</p>
+<p><strong>Example</strong>: If you have a stopped container named <code>my-ubuntu-test</code> (from our earlier example), you would remove it with:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> rm my-ubuntu-test</span></code></pre></div>
+<p>Alternatively, using its Container ID (e.g., <code>a1b2c3d4e5f6</code>):</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> rm a1b2c3d4e5f6</span></code></pre></div>
+<p><strong>Important Considerations</strong>:</p>
+<ul>
+<li><p><strong>Stopped Containers Only</strong>: You can only remove containers that are in a <code>Exited</code> or <code>Stopped</code> state. Podman will prevent you from removing a running container to avoid accidental disruption. If you need to remove a running container, you must first stop it using <code>podman stop</code>.</p></li>
+<li><p><strong>Force Removal (</strong><code>-f</code> <strong>or</strong> <code>--force</code><strong>)</strong>: While not recommended for general use, if you absolutely need to remove a running container immediately without stopping it first (e.g., if it&#39;s unresponsive), you can use the <code>-f</code> flag. However, this can lead to data loss and is typically used only in emergency situations.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> rm <span class="at">-f</span> my-running-container</span></code></pre></div></li>
+<li><p><strong>Removing All Stopped Containers (</strong><code>podman container prune</code><strong>)</strong>: For cleaning up multiple stopped containers, Podman offers a convenient command:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> container prune</span></code></pre></div>
+<p>This command will prompt you before removing all stopped containers, which is very useful for system maintenance.</p></li>
+</ul>
+<p>Using <code>podman rm</code> is crucial for keeping your server environment clean and managing disk space effectively.</p>
+<h4 id="detached-mode--d-and-port-mapping--p">Detached Mode (<code>-d</code>) and Port Mapping (<code>-p</code>)</h4>
+<p>When you run a container in an interactive terminal (using <code>-it</code>), it takes over your current shell. This is fine for quick tests, but for server applications like web servers or databases, you need them to run continuously in the background without tying up your terminal. This is where detached mode comes in.</p>
+<ul>
+<li><p><strong>Detached Mode (</strong><code>-d</code> <strong>or</strong> <code>--detach</code><strong>)</strong></p>
+<p>When you add the <code>-d</code> flag to <code>podman run</code>, the container starts in the background, and Podman prints the container ID and immediately returns control of your terminal to you. The container continues to run as a background process.</p>
+<p><strong>Example</strong>: To run an Nginx web server container in the background:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> run <span class="at">-d</span> <span class="at">--name</span> my-nginx nginx:latest</span></code></pre></div>
+<p>After executing this, you can use <code>podman ps</code> to confirm that <code>my-nginx</code> is running in the background.</p></li>
+<li><p><strong>Port Mapping (</strong><code>-p</code> <strong>or</strong> <code>--publish</code><strong>)</strong></p>
+<p>By default, containers are isolated from the host machine&#39;s network. If an application inside your container is listening on a specific port (e.g., a web server on port 80), you won&#39;t be able to access it from your host machine or from the internet without explicitly mapping a port from the container to a port on your host. This is called port mapping.</p>
+<p>The <code>-p</code> flag allows you to define this mapping. The syntax is typically <code>host_port:container_port</code>.</p>
+<p><strong>Example</strong>: To run an Nginx web server (which listens on port 80 inside the container) and make it accessible on port 8080 of your host machine, you would use:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> run <span class="at">-d</span> <span class="at">--name</span> my-nginx-web <span class="at">-p</span> 8080:80 nginx:latest</span></code></pre></div>
+<p>In this example:</p>
+<ul>
+<li><code>-d</code>: Runs the container in detached mode.</li>
+<li><code>--name my-nginx-web</code>: Assigns a readable name.</li>
+<li><code>-p 8080:80</code>: This is the port mapping. It means traffic coming to <code>host_ip:8080</code> will be forwarded to <code>container_ip:80</code>.</li>
+<li><code>nginx:latest</code>: The image to use.</li>
+</ul></li>
+</ul>
+<p>Now, if Nginx is running correctly inside the container, you could access it from your host&#39;s web browser or via <code>curl</code> at <code>http://localhost:8080</code> (assuming <code>localhost</code> for testing on the server itself, or the server&#39;s IP address if accessing remotely).</p>
+<h2 id="working-with-podman">Working with Podman</h2>
+<h3 id="pods-and-grouping-containers">Pods and Grouping Containers</h3>
+<p>We briefly touched upon pods earlier, but let&#39;s dive deeper into their purpose. In the world of container orchestration (like Kubernetes, which Podman aligns with), a <strong>pod</strong> is the smallest deployable unit. For Podman, it represents a logical grouping of one or more containers that are deployed and managed together.</p>
+<p>Think of a pod as a small, isolated &quot;virtual machine&quot; that hosts a tightly coupled set of containers. These containers within a pod share crucial resources:</p>
+<ol type="1">
+<li><strong>Network Namespace</strong>: All containers within a pod share the same IP address and network ports. This means they can communicate with each other using <code>localhost</code>, just as if they were different processes running on the same physical machine. This simplifies inter-container communication immensely.</li>
+<li><strong>IPC Namespace</strong>: They share Inter-Process Communication (IPC) mechanisms, allowing them to communicate using shared memory or message queues.</li>
+<li><strong>Storage Volumes (optional but common)</strong>: Containers in a pod can easily share persistent storage volumes, enabling them to read from and write to the same data locations. This is vital for applications that need to persist data or share configuration files.</li>
+</ol>
+<p><strong>Why is this useful for a system administrator?</strong></p>
+<ul>
+<li><strong>Atomic Deployments</strong>: Instead of managing individual containers that make up an application, you manage the entire application as a single unit (the pod). If one component fails, you can restart or replace the entire pod to ensure the application&#39;s integrity.</li>
+<li><strong>Co-location and Co-scheduling</strong>: Pods ensure that related containers are always run together on the same host, minimizing network latency between them.</li>
+<li><strong>Simplified Resource Sharing</strong>: Sharing resources like network and storage within a pod is much simpler than trying to link disparate individual containers.</li>
+<li><strong>Kubernetes Compatibility</strong>: As mentioned, Podman&#39;s pod concept is directly inspired by Kubernetes. This means that if you design your multi-container applications using Podman pods, they will be much easier to migrate and manage in a Kubernetes cluster later on, providing a consistent development-to-production workflow.</li>
+</ul>
+<p>Imagine a web application where the main web server needs to read configuration from a sidecar container that fetches dynamic content. Grouping them in a pod ensures they can effortlessly communicate and share files.</p>
+<h3 id="creating-a-pod-podman-pod-create">Creating a Pod (<code>podman pod create</code>)</h3>
+<p>Creating a pod in Podman is a straightforward process. You use the <code>podman pod create</code> command. This command sets up the necessary infrastructure for the pod, such as its unique network namespace, but it doesn&#39;t run any containers within it yet. Think of it as preparing the shared &quot;house&quot; before moving in the &quot;roommates&quot; (containers).</p>
+<p>The basic syntax is simple:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> pod create <span class="pp">[</span><span class="ss">options</span><span class="pp">]</span></span></code></pre></div>
+<p>You&#39;ll almost always want to give your pod a meaningful name using the <code>--name</code> option, just like with individual containers.</p>
+<p><strong>Example</strong>: To create a new pod named <code>my-web-app-pod</code>, you would execute:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> pod create <span class="at">--name</span> my-web-app-pod</span></code></pre></div>
+<p>Upon successful creation, Podman will output the unique <strong>Pod ID</strong> of the newly created pod. This ID is similar to a Container ID and can be used to reference the pod in future commands.</p>
+<p>It&#39;s important to remember that <code>podman pod create</code> only creates the pod infrastructure. At this stage, no application containers are running inside it.</p>
+<h3 id="adding-containers-to-a-pod---pod-options-with-podman-run">Adding Containers to a Pod (<code>--pod</code> options with <code>podman run</code>)</h3>
+<p>You don&#39;t &quot;add&quot; containers to a pod in a separate step after they are created. Instead, you specify which pod a container should belong to when you run the container using the <code>podman run</code> command. This is achieved with the <code>--pod</code> option.</p>
+<p>When you use <code>--pod &lt;pod_name_or_id&gt;</code> with <code>podman run</code>, Podman will create and start the new container within the network and IPC namespaces of the specified pod.</p>
+<h4 id="example-running-a-web-server-and-a-database-in-a-pod">Example: Running a Web Server and a Database in a Pod</h4>
+<p>Let&#39;s assume you&#39;ve already created a pod named <code>my-web-app-pod</code>. Now, let&#39;s add an Nginx web server and a simple <code>redis</code> database to it.</p>
+<p>First, the Nginx container:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> run <span class="at">-d</span> <span class="at">--pod</span> my-web-app-pod <span class="at">--name</span> nginx-in-pod nginx:latest</span></code></pre></div>
+<p>Let&#39;s break this down:</p>
+<ul>
+<li><code>podman run</code>: Standard command to run a container.</li>
+<li><code>-d</code>: Runs the container in detached mode (background).</li>
+<li><code>--pod my-web-app-pod</code>: This is the key! It tells Podman to attach this new container to the <code>my-web-app-pod</code> pod.</li>
+<li><code>--name nginx-in-pod</code>: A specific name for this Nginx container instance.</li>
+<li><code>nginx:latest</code>: The image for the Nginx web server.</li>
+</ul>
+<p>Now, let&#39;s add a Redis database container to the same pod:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> run <span class="at">-d</span> <span class="at">--pod</span> my-web-app-pod <span class="at">--name</span> redis-in-pod redis:latest</span></code></pre></div>
+<p>Notice the <code>--pod my-web-app-pod</code> option is identical. This ensures both <code>nginx-in-pod</code> and <code>redis-in-pod</code> are part of the same pod.</p>
+<p><strong>Key advantage</strong>: Since both containers are in the same pod, <code>nginx-in-pod</code> can access <code>redis-in-pod</code> simply by connecting to <code>localhost:&lt;redis_port&gt;</code> (default Redis port is 6379) because they share the same network namespace. You don&#39;t need to map complex networks or link them explicitly.</p>
+<h3 id="listing-pods-and-their-associated-containers">Listing Pods and Their Associated Containers</h3>
+<p>Podman provides specific commands to help you inspect your pods and the containers running within them.</p>
+<ol type="1">
+<li><p><strong>Listing all Pods (</strong><code>podman pod ps</code><strong>)</strong></p>
+<p>To get an overview of all the pods on your system, whether they are running or not, use:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> pod ps</span></code></pre></div>
+<p>This command will show you basic information about each pod, including its ID, Name, Status, and the number of containers associated with it.</p></li>
+<li><p><strong>Inspecting a Specific Pod (</strong><code>podman pod inspect</code><strong>)</strong></p>
+<p>For a more detailed view of a particular pod, including its full configuration and a list of all containers inside it, use <code>podman pod inspect</code> followed by the pod&#39;s name or ID. This command provides a JSON output with extensive information.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> pod inspect my-web-app-pod</span></code></pre></div>
+<p>You would look for the <code>&quot;Containers&quot;</code> section within the JSON output to see details about each container within that pod.</p></li>
+<li><p><strong>Listing Containers and Their Pods (</strong><code>podman ps --pod</code><strong>)</strong></p>
+<p>The podman ps command (which we used earlier for individual containers) also has an excellent option to show container-to-pod relationships. By adding the --pod flag, you can see which pod each container belongs to:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> ps <span class="at">-a</span> <span class="at">--pod</span></span></code></pre></div>
+<p>This output will add a <code>POD</code> column, clearly indicating the name of the pod each container is associated with. This is incredibly helpful for visualizing your multi-container deployments.</p></li>
+</ol>
+<p>Using these commands, you can effectively monitor the health and structure of your pod-based applications.</p>
+<h3 id="stopping-and-removing-pods">Stopping and Removing Pods</h3>
+<p>Managing pods as a single unit is one of their core benefits. Podman provides commands to stop and remove entire pods, which in turn affects all containers running within them.</p>
+<ul>
+<li><p><strong>Stopping a Pod (</strong><code>podman pod stop</code><strong>)</strong></p>
+<p>To gracefully shut down all running containers within a specific pod, you use the podman pod stop command.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> pod stop <span class="op">&lt;</span>pod_name_or_id<span class="op">&gt;</span></span></code></pre></div>
+<p><strong>Example</strong>: To stop our my-web-app-pod:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> pod stop my-web-app-pod</span></code></pre></div>
+<p>When this command is executed, Podman will send termination signals to all containers inside <code>my-web-app-pod</code>, allowing them to shut down cleanly. After the command completes, <code>podman pod ps</code> will show the pod as <code>Exited</code>, and <code>p</code>odman ps -a --pod<code>will show the individual containers as</code>Exited`.</p></li>
+<li><p><strong>Removing a Pod (</strong><code>podman pod rm</code><strong>)</strong></p>
+<p>To permanently delete a pod and all its associated containers (even if they are stopped), you use the <code>podman pod rm</code> command. Be cautious with this command, as it is destructive.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> pod rm <span class="op">&lt;</span>pod_name_or_id<span class="op">&gt;</span></span></code></pre></div>
+<p><strong>Example</strong>: To remove <code>my-web-app-pod</code> and all its containers:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> pod rm my-web-app-pod</span></code></pre></div>
+<p>Podman will first attempt to stop any running containers within the pod before removing them and the pod infrastructure itself. If you want to force the removal of a running pod without first stopping it, you can use the <code>-f</code> or <code>--force</code> flag, but this is generally not recommended as it bypasses graceful shutdowns.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> pod rm <span class="at">-f</span> my-running-pod</span></code></pre></div></li>
+<li><p><strong>Removing All Stopped Pods (</strong><code>podman pod prune</code><strong>)</strong></p>
+<p>Similar to <code>podman container prune</code>, there&#39;s a convenient command to clean up all exited (stopped) pods:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">podman</span> pod prune</span></code></pre></div>
+<p>This command will prompt you for confirmation before proceeding, which is useful for cleaning up your environment.</p></li>
+</ul>
+<p>These commands enable you to manage multi-container applications as cohesive units, simplifying deployment and teardown processes.</p>
+<h2 id="practical-use-cases">Practical Use Cases</h2>
+<h3 id="common-scenarios-for-podman">Common Scenarios for Podman</h3>
+<p>Podman offers several compelling advantages and practical use cases, especially given its daemonless nature and strong integration with Linux systems:</p>
+<ol type="1">
+<li><p><strong>Running Services Securely and Efficiently</strong>:</p>
+<ul>
+<li>You can containerize various services (e.g., web servers like Nginx or Apache, databases like PostgreSQL or MySQL, caching layers like Redis) and run them on your Ubuntu server using Podman. This provides isolation, ensures consistent environments, and simplifies dependency management.</li>
+<li>Since Podman allows running containers as unprivileged users (without root), it significantly enhances the security posture of your deployed services compared to traditional daemon-based solutions.</li>
+</ul></li>
+<li><p><strong>Isolated Development and Testing Environments</strong>:</p>
+<ul>
+<li>Need to test a new version of an application or a specific software configuration without impacting your host system? Podman lets you quickly spin up isolated environments. You can run different versions of Python, Node.js, or specific library versions without worrying about conflicts with your host&#39;s packages.</li>
+<li>This is invaluable for testing patches, new software, or reproducing issues reported by developers in a clean, disposable environment.</li>
+</ul></li>
+<li><p><strong>Building and Distributing Custom Applications</strong>:</p>
+<ul>
+<li>Podman can be used to build your own custom container images (<code>podman build</code>) for applications developed in-house. These images can then be easily deployed across multiple servers, ensuring that every deployment is identical.</li>
+<li>This streamlines the deployment pipeline and reduces configuration drift between environments.</li>
+</ul></li>
+<li><p><strong>Managing System Services with Systemd</strong>:</p>
+<ul>
+<li>A significant advantage of Podman for server administrators is its seamless integration with <code>systemd</code>. You can generate <code>systemd</code> unit files directly from running Podman containers or pods (<code>podman generate systemd</code>).</li>
+<li>This allows you to manage your containerized applications just like any other system service, enabling automatic startup on boot, dependency management, logging, and other standard <code>systemd</code> features. This is a very powerful capability for production environments.</li>
+</ul></li>
+<li><p><strong>Offline or Air-Gapped Environments</strong>:</p>
+<ul>
+<li>Because Podman doesn&#39;t require a persistent daemon, it can be particularly useful in environments with strict security policies or limited network connectivity (e.g., air-gapped networks). Once images are pulled, containers can be run without an active internet connection or a running daemon.</li>
+</ul></li>
+</ol>
+<p>In essence, Podman empowers you to manage applications and services on your servers with greater agility, security, and integration with native Linux tools.</p>
+</body>
+</html>

@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="obtaining-and-installing-lets-encrypt-certificates">Obtaining and Installing Let&#39;s Encrypt Certificates</h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#obtaining-and-installing-lets-encrypt-certificates">Obtaining and Installing Let&#39;s Encrypt Certificates</a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#understanding-lets-encrypt-and-certbot">Understanding Let&#39;s Encrypt and Certbot</a></li>
+</ul></li>
+<li><a href="#installing-certbot">Installing Certbot</a></li>
+<li><a href="#obtaining-a-lets-encrypt-certificate">Obtaining a Let&#39;s Encrypt Certificate</a>
+<ul>
+<li><a href="#certbot-challenges">Certbot Challenges</a>
+<ul>
+<li><a href="#http-01-challenge">HTTP-01 Challenge</a>
+<ul>
+<li><a href="#acme-challenge">Acme challenge</a></li>
+<li><a href="#standalone-mode">Standalone Mode</a></li>
+</ul></li>
+<li><a href="#dns-01-challenge">DNS-01 Challenge</a></li>
+</ul></li>
+<li><a href="#using-the-http-01-challenge">Using the HTTP-01 Challenge</a></li>
+<li><a href="#locating-your-obtained-certificates">Locating Your Obtained Certificates</a></li>
+</ul></li>
+<li><a href="#installing-the-certificate-on-a-web-server">Installing the Certificate on a Web Server</a>
+<ul>
+<li><a href="#apache-http-server">Apache HTTP Server</a></li>
+<li><a href="#nginx">Nginx</a></li>
+</ul></li>
+<li><a href="#auto-renewal-of-certificates">Auto-renewal of Certificates</a></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<h3 id="understanding-lets-encrypt-and-certbot">Understanding Let&#39;s Encrypt and Certbot</h3>
+<p>Transport Layer Security (TLS) and its predecessor, Secure Sockets Layer (SSL), are cryptographic protocols that provide secure communication over a network. Digital certificates serve as electronic credentials that verify the identity of a website and establish an encrypted connection. These certificates are essential for securing web server communications, ensuring data privacy and integrity.</p>
+<p><strong>Let&#39;s Encrypt</strong> is a non-profit Certificate Authority (CA) that provides TLS/SSL certificates at no cost. Its mission is to make secure, encrypted connections the default standard across the internet.</p>
+<p><strong>Certbot</strong> is a command-line tool designed to automate the process of obtaining and installing Let&#39;s Encrypt certificates on web servers. It handles the necessary steps of certificate issuance and configuration, simplifying what can otherwise be a complex task, especially for new system administrators working in command-line environments.</p>
+<h2 id="installing-certbot">Installing Certbot</h2>
+<p>Debian-based Linux distributions commonly use a package management system called <code>apt</code>. This system allows you to easily install, upgrade, and remove software. Certbot is available as a package that you can install using <code>apt</code>.</p>
+<p>Here&#39;s the command you&#39;ll need to run in your terminal:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install certbot</span></code></pre></div>
+<p>Let&#39;s break this down:</p>
+<ul>
+<li><code>sudo</code>: This command allows you to run the following command with administrative privileges, which are necessary for installing software. You&#39;ll likely be prompted to enter your password.</li>
+<li><code>apt update</code>: This command refreshes the package lists, ensuring you have the latest information about available software. It&#39;s always a good practice to run this before installing new packages.</li>
+<li><code>apt install certbot</code>: This command tells <code>apt</code> to download and install the <code>certbot</code> package and any software it depends on.</li>
+</ul>
+<p>Once you run these commands, <code>apt</code> will handle the installation process for you.</p>
+<h2 id="obtaining-a-lets-encrypt-certificate">Obtaining a Let&#39;s Encrypt Certificate</h2>
+<p>Before Let&#39;s Encrypt issues a certificate, it needs to verify that you actually own the domain for which you&#39;re requesting the certificate. This process is done through what are called &quot;challenges.&quot; There are a couple of common types of challenges: HTTP-01 and DNS-01.</p>
+<p>For this initial lesson, we&#39;ll focus on the <strong>HTTP-01 acme challenge</strong>.</p>
+<p>Here are some common challenge types:</p>
+<h3 id="certbot-challenges">Certbot Challenges</h3>
+<h4 id="http-01-challenge">HTTP-01 Challenge</h4>
+<h5 id="acme-challenge">Acme challenge</h5>
+<ol type="1">
+<li>When you request a certificate for your domain (let&#39;s say <code>yourdomain.com</code>), Let&#39;s Encrypt gives your Certbot software a unique token.</li>
+<li>Your Certbot then creates a temporary file with this token (and a special &quot;key&quot; of its own) and places it in a specific location on your web server: <code>.well-known/acme-challenge/</code> within the webroot directory of yourdomain.com.</li>
+<li>Let&#39;s Encrypt&#39;s servers then make a request to <code>http://yourdomain.com/.well-known/acme-challenge/&lt;your_token&gt;</code> to see if the file with the correct content is there.</li>
+<li>If Let&#39;s Encrypt can successfully access this file and verify its contents, it confirms that you control the domain and issues the certificate.</li>
+<li>Once the certificate is issued, Certbot cleans up this temporary challenge file from your web server.</li>
+</ol>
+<p><strong>The key prerequisite for using the HTTP-01 acme challenge is that you must have a web server (like Nginx or Apache) already running and accessible on port 80 (the standard HTTP port) for the domain you want to secure.</strong></p>
+<h5 id="standalone-mode">Standalone Mode</h5>
+<p>Certbot can handle the HTTP-01 challenge without relying on an already running web server. This is often called the <strong>standalone mode</strong>.</p>
+<p>Here&#39;s how that process works:</p>
+<ol type="1">
+<li>When you run the Certbot command with the standalone option, Certbot itself temporarily spins up a minimal web server on your server. By default, it listens on port 80.</li>
+<li>Just like the regular HTTP-01 challenge, Let&#39;s Encrypt provides Certbot with a unique token for your domain.</li>
+<li>Certbot&#39;s temporary web server serves the required challenge file (with the token and key) at the expected location: <code>http://yourdomain.com/.well-known/acme-challenge/&lt;your_token&gt;</code>.</li>
+<li>Let&#39;s Encrypt&#39;s servers then connect to this temporary web server on port 80 and request the challenge file to verify its content.</li>
+<li>If the verification is successful, Let&#39;s Encrypt issues the certificate.</li>
+<li>Once the certificate is obtained, Certbot shuts down its temporary web server.</li>
+</ol>
+<p>The key advantage here is that <strong>you don&#39;t need to have your primary web server (like Nginx or Apache) running on port 80 during the certificate issuance process</strong>. This can be useful if your web server is not yet fully configured or if you need to obtain a certificate before deploying your main web server.</p>
+<p>To use this method, you would typically include the <code>--standalone</code> flag in your Certbot command.</p>
+<p>Keep in mind that while this is convenient, <strong>it does mean that port 80 must be free and not in use by any other application</strong> on your server when you run the Certbot command in standalone mode.</p>
+<h4 id="dns-01-challenge">DNS-01 Challenge</h4>
+<p>The <strong>DNS-01</strong> challenge is another way Let&#39;s Encrypt can verify that you own the domain for which you&#39;re requesting a certificate. Instead of relying on a running web server, it uses the Domain Name System (DNS). Here&#39;s how it generally works:</p>
+<ol type="1">
+<li>When you request a certificate for your domain (again, let&#39;s say <code>yourdomain.com</code>), Let&#39;s Encrypt gives your Certbot software a unique token.</li>
+<li>Your Certbot then instructs you to create a specific DNS TXT record under the subdomain <code>_acme-challenge.yourdomain.com</code> with the value of this token.</li>
+<li>Let&#39;s Encrypt&#39;s servers then query the DNS records for <code>_acme-challenge.yourdomain.com</code>.</li>
+<li>If they find the correct TXT record with the expected value, it confirms that you control the DNS for the domain and issues the certificate.</li>
+<li>Once the certificate is issued, you can remove the DNS TXT record (though it doesn&#39;t hurt to leave it, it won&#39;t be checked again for the same issuance).</li>
+</ol>
+<p>The main advantage of the DNS-01 challenge is that <strong>it doesn&#39;t require a running web server on port 80</strong>. This can be useful in situations where you might not have a web server running yet, or if you&#39;re obtaining a certificate for a subdomain that doesn&#39;t have its own web server.</p>
+<p>However, the DNS-01 challenge typically requires you to have <strong>programmatic access to your DNS records</strong> (often through an API provided by your DNS registrar) so that Certbot can automatically create and then remove the TXT record. Manually creating and deleting DNS records for each certificate issuance and renewal can be cumbersome.</p>
+<h3 id="using-the-http-01-challenge">Using the HTTP-01 Challenge</h3>
+<p>To obtain a Let&#39;s Encrypt certificate using the HTTP-01 challenge, you&#39;ll use the <code>certbot certonly</code> command. The <code>certonly</code> part tells Certbot that you only want to obtain the certificate and not have it automatically configure your web server (we&#39;ll do that manually in the next step for better understanding).</p>
+<p>Here&#39;s the basic command structure you&#39;ll use:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> certbot certonly <span class="at">--webroot</span> <span class="at">-w</span> /var/www/yourdomain.com/html <span class="at">-d</span> yourdomain.com</span></code></pre></div>
+<p>Let&#39;s break down this command:</p>
+<ul>
+<li><code>sudo certbot</code>: This invokes the Certbot tool with administrative privileges.</li>
+<li><code>certonly</code>: As mentioned, this tells Certbot to only obtain the certificate.</li>
+<li><code>--webroot</code>: This specifies that you want to use the webroot plugin for the HTTP-01 challenge. The webroot plugin works by creating the temporary challenge file in a directory served by your web server.</li>
+<li><code>-w /var/www/yourdomain.com/html</code>: This is the webroot path. You need to replace <code>/var/www/yourdomain.com/html</code> with the actual path to the root directory of your website on your server. This is where Certbot will create the <code>.well-known/acme-challenge/</code> directory and the challenge file.</li>
+<li><code>-d yourdomain.com</code>: This specifies the domain name for which you want to obtain the certificate. If you have multiple domains or subdomains (e.g., <code>yourdomain.com</code> and <code>www.yourdomain.com</code>), you can include them with additional <code>-d</code> flags:</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> certbot certonly <span class="at">--webroot</span> <span class="at">-w</span> /var/www/yourdomain.com/html <span class="at">-d</span> yourdomain.com <span class="at">-d</span> www.yourdomain.com</span></code></pre></div>
+<p><strong>Important Considerations</strong>:</p>
+<ul>
+<li><strong>Replace the webroot path and domain name(s) with your actual values</strong>. Incorrect paths will lead to the challenge failing.</li>
+<li>Ensure that your web server is configured to serve files from the specified webroot path for the domain(s) you are requesting the certificate for.</li>
+<li>Certbot will guide you through the process and might ask for an email address for renewal reminders and agreement to the Let&#39;s Encrypt terms of service.</li>
+</ul>
+<h3 id="locating-your-obtained-certificates">Locating Your Obtained Certificates</h3>
+<p>Once you successfully run the certbot certonly command, Let&#39;s Encrypt will issue the certificate for your domain. Certbot will then save these important certificate files on your server.</p>
+<p>It&#39;s crucial to know where these files are located. By default, Certbot stores all the certificates and related keys within the <code>/etc/letsencrypt/</code> directory.</p>
+<p>Here&#39;s a breakdown of the key files you&#39;ll find for your domain (e.g., <code>yourdomain.com</code>):</p>
+<ul>
+<li><code>/etc/letsencrypt/live/yourdomain.com/privkey.pem</code>: This is the <strong>private key</strong> for your certificate. <strong>Keep this file secure and do not share it with anyone</strong>. If someone gains access to your private key, they can potentially impersonate your website.</li>
+<li><code>/etc/letsencrypt/live/yourdomain.com/cert.pem</code>: This is the <strong>actual TLS/SSL certificate</strong> for your domain. This is the file your web server will use to identify itself.</li>
+<li><code>/etc/letsencrypt/live/yourdomain.com/chain.pem</code>: This file contains the <strong>Let&#39;s Encrypt certificate authority (CA) certificate(s)</strong>, which help clients (like web browsers) verify the authenticity of your certificate.</li>
+<li><code>/etc/letsencrypt/live/yourdomain.com/fullchain.pem</code>: This is a convenience file that combines <code>cert.pem</code> and <code>chain.pem</code>. Most web server configurations will ask you to point to this file for the certificate.</li>
+</ul>
+<p>The <code>live</code> directory contains symbolic links to the actual certificate files in the <code>archive</code> directory. This allows Certbot to update certificates without changing the paths your web server configuration uses.</p>
+<h2 id="installing-the-certificate-on-a-web-server">Installing the Certificate on a Web Server</h2>
+<p>Now that you know where the certificate files are located, let&#39;s see how to configure your web server to use them and enable HTTPS for your website. Here are examples for <strong>Apache HTTP Server</strong> and <strong>Nginx</strong>:</p>
+<h3 id="apache-http-server">Apache HTTP Server</h3>
+<p>You&#39;ll typically need to edit the virtual host configuration file for your domain. These files are usually located in directories like <code>/etc/apache2/sites-available/</code> (and enabled in <code>/etc/apache2/sites-enabled/</code>). The filename might be something like <code>yourdomain.com.conf</code> or <code>000-default.conf</code>.</p>
+<p>Here&#39;s a basic example of how you might configure your Apache virtual host for HTTPS:</p>
+<p>First, ensure that the <code>ssl</code> module is enabled in Apache. You can usually do this with the following command:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> a2enmod ssl</span></code></pre></div>
+<p>Then, edit your virtual host configuration file. You might have a separate virtual host block for port 443 (HTTPS), or you might need to add the SSL configuration within your existing port 80 block. Here&#39;s an example of a dedicated HTTPS virtual host:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode Apache"><code class="sourceCode apache"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;VirtualHost</span><span class="at"> *:443</span><span class="fu">&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    ServerName<span class="st"> yourdomain.com</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    ServerAlias<span class="st"> www.yourdomain.com</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    DocumentRoot<span class="st"> /var/www/yourdomain.com/html</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">SSLEngine</span><span class="ch"> </span><span class="kw">on</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    SSLCertificateFile<span class="st"> /etc/letsencrypt/live/yourdomain.com/fullchain.pem</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    SSLCertificateKeyFile<span class="st"> /etc/letsencrypt/live/yourdomain.com/privkey.pem</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Optional: Intermediate Certificate Authority (CA) bundle</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    SSLCACertificateFile<span class="st"> /etc/letsencrypt/live/yourdomain.com/chain.pem</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">&lt;Directory</span><span class="at"> /var/www/yourdomain.com/html</span><span class="fu">&gt;</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        <span class="ex">Options</span><span class="ch"> </span><span class="kw">Indexes</span><span class="ch"> </span><span class="kw">FollowSymLinks</span><span class="ch"> </span><span class="kw">MultiViews</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        <span class="ex">AllowOverride</span><span class="ch"> </span><span class="kw">All</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        Require<span class="st"> all granted</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">&lt;/Directory&gt;</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    ErrorLog<span class="st"> ${APACHE_LOG_DIR}/error.log</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    CustomLog<span class="st"> ${APACHE_LOG_DIR}/access.log combined</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;/VirtualHost&gt;</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional: Redirect HTTP to HTTPS</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;VirtualHost</span><span class="at"> *:80</span><span class="fu">&gt;</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    ServerName<span class="st"> yourdomain.com</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    ServerAlias<span class="st"> www.yourdomain.com</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    Redirect<span class="st"> permanent / https://yourdomain.com/</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;/VirtualHost&gt;</span></span></code></pre></div>
+<p>Let&#39;s break down the key parts related to the certificate for Apache:</p>
+<ul>
+<li><code>&lt;VirtualHost *:443&gt;</code>: This directive defines a virtual host that listens on port 443 for HTTPS connections.</li>
+<li><code>SSLEngine on</code>: This enables the SSL/TLS engine for this virtual host.</li>
+<li><code>SSLCertificateFile /etc/letsencrypt/live/yourdomain.com/fullchain.pem</code>: This line specifies the path to the <code>fullchain.pem</code> file (your certificate plus the intermediate certificates).</li>
+<li><code>SSLCertificateKeyFile /etc/letsencrypt/live/yourdomain.com/privkey.pem</code>: This line specifies the path to your private key file.</li>
+<li><code>SSLCACertificateFile /etc/letsencrypt/live/yourdomain.com/chain.pem</code> <strong>(Optional but recommended)</strong>: This line points to the chain certificate file, which can help older browsers properly verify your certificate.</li>
+</ul>
+<p>After making these changes to your Apache virtual host configuration file, you&#39;ll need to <strong>save the file</strong> and then <strong>restart or reload the Apache service</strong> for the changes to take effect. You can usually do this with the following commands:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apachectl configtest  <span class="co"># Test the configuration for any syntax errors</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart apache2</span></code></pre></div>
+<p>Now your website should also be accessible via <code>https://yourdomain.com</code> if you are using Apache.</p>
+<h3 id="nginx">Nginx</h3>
+<p>To enable HTTPS in your Nginx configuration, you&#39;ll need to edit the server block for your domain. This is typically found in a configuration file within the <code>/etc/nginx/sites-available/</code> directory (and often linked to <code>/etc/nginx/sites-enabled/</code>). The filename usually corresponds to your domain name (e.g., <code>yourdomain.com</code>).</p>
+<p>Here&#39;s a basic example of how you might configure your Nginx server block for HTTPS:</p>
+<pre class="Code"><code>server {
+    listen 80;
+    server_name yourdomain.com www.yourdomain.com;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name yourdomain.com www.yourdomain.com;
+
+    ssl_certificate /etc/letsencrypt/live/yourdomain.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/yourdomain.com/privkey.pem;
+
+    # Additional SSL settings (recommended)
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_prefer_server_ciphers on;
+    ssl_ciphers &#39;ECDHE+AESGCM:CHACHA20&#39;;
+    ssl_ecdh_curve secp384r1;
+    ssl_session_timeout 10m;
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_tickets off;
+    ssl_stapling on;
+    ssl_stapling_verify on;
+    resolver 8.8.8.8 8.8.4.4 valid=300s;
+    resolver_timeout 5s;
+
+    root /var/www/yourdomain.com/html;
+    index index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}</code></pre>
+<p>Let&#39;s break down the important parts related to the certificate:</p>
+<ul>
+<li><code>listen 443 ssl;</code>: This line tells Nginx to listen for HTTPS connections on port 443 (the standard HTTPS port) and that SSL/TLS should be enabled for this server block.</li>
+<li><code>ssl_certificate /etc/letsencrypt/live/yourdomain.com/fullchain.pem;</code>: This line specifies the path to the <code>fullchain.pem</code> file, which contains both your certificate and the necessary intermediate certificates.</li>
+<li><code>ssl_certificate_key /etc/letsencrypt/live/yourdomain.com/privkey.pem;</code>: This line specifies the path to your private key file.</li>
+</ul>
+<p>After making these changes to your Nginx configuration file, you&#39;ll need to <strong>save the file</strong> and then <strong>reload or restart the Nginx service</strong> for the changes to take effect. You can usually do this with the following commands:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nginx <span class="at">-t</span>  <span class="co"># Test the configuration for any syntax errors</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl reload nginx</span></code></pre></div>
+<p>Once Nginx reloads successfully, your website should be accessible via <code>https://yourdomain.com</code>.</p>
+<h2 id="auto-renewal-of-certificates">Auto-renewal of Certificates</h2>
+<p>Let&#39;s Encrypt certificates are only valid for <strong>90 days</strong>. This relatively short lifespan encourages good security practices by prompting you to regularly update your certificates. Thankfully, Certbot makes this renewal process very easy and can even automate it for you.</p>
+<p>When you installed Certbot, it likely set up a systemd timer (on modern Ubuntu systems) or a cron job (on older systems) that automatically runs a renewal check twice a day. This process will attempt to renew any certificates that are within their expiry window (typically 30 days).</p>
+<p>To check if the automatic renewal is configured, you can run the following command:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl list-timers <span class="kw">|</span> <span class="fu">grep</span> certbot</span></code></pre></div>
+<p>If you see an active timer related to <code>certbot.timer</code>, then automatic renewal is likely set up correctly.</p>
+<p>Alternatively, you can check for a cron job by running:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">crontab</span> <span class="at">-l</span></span></code></pre></div>
+<p>and look for a line that includes certbot renew.</p>
+<p><strong>To test the renewal process without actually renewing your certificates (since they are likely still valid), you can use the following command</strong>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> certbot renew <span class="at">--dry-run</span></span></code></pre></div>
+<p>This command simulates the renewal process and will show you if any errors occur. It&#39;s a good practice to run this periodically to ensure everything is working as expected.</p>
+<p>If the dry run is successful, you can be confident that your certificates will be automatically renewed before they expire, keeping your website secure without any manual intervention.</p>
+</body>
+</html>

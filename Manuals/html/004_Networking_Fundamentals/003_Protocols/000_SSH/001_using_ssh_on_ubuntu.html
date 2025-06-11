@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="using-ssh-on-ubuntu">Using SSH On Ubuntu</h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#using-ssh-on-ubuntu">Using SSH On Ubuntu</a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#checking-if-ssh-is-installed">Checking if SSH is Installed</a></li>
+<li><a href="#installing-openssh-server">Installing openssh-server</a></li>
+<li><a href="#obtain-your-servers-ip-address">Obtain Your Servers IP Address</a></li>
+<li><a href="#setting-up-a-ssh-client-to-connect-to-your-server">Setting Up a SSH Client to Connect to Your Server</a>
+<ul>
+<li><a href="#running-a-ssh-client-on-windows">Running a SSH Client on Windows</a>
+<ul>
+<li><a href="#for-windows-10-or-later">For Windows 10 or Later</a></li>
+<li><a href="#for-earlier-versions-of-windows">For Earlier Versions of Windows</a></li>
+</ul></li>
+<li><a href="#running-a-ssh-client-on-mac">Running a SSH Client on Mac</a></li>
+<li><a href="#running-a-ssh-client-on-linux">Running a SSH Client on Linux</a></li>
+</ul></li>
+<li><a href="#transfer-files-securely-with-the-ssh-protocol">Transfer Files Securely With the SSH Protocol</a>
+<ul>
+<li><a href="#downloading-a-file-from-your-server">Downloading a File from Your Server</a></li>
+<li><a href="#uploading-a-file-to-your-server">Uploading a File to Your Server</a></li>
+<li><a href="#scp-command-options">SCP Command Options</a>
+<ul>
+<li><a href="#copy-a-directory-with-the-recursive-option">Copy a directory with the recursive option</a></li>
+<li><a href="#using-scp-when-the-server-has-password-authentication-disabled">Using scp when the server has password authentication disabled</a></li>
+<li><a href="#using-scp-on-a-remote-server-not-using-port-22">Using scp on a remote server NOT using port 22</a></li>
+<li><a href="#using-scp-with-multiple-options">Using scp with multiple options</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#creating-and-using-ssh-keys">Creating and Using SSH Keys</a>
+<ul>
+<li><a href="#generating-a-ssh-key-pair">Generating a SSH Key Pair</a></li>
+<li><a href="#copying-your-ssh-key-to-your-server">Copying Your SSH Key To Your Server</a>
+<ul>
+<li><a href="#method-1---using-ssh-copy-id-recommended">Method 1 - Using ssh-copy-id (Recommended)</a></li>
+<li><a href="#method-2---manually-copying-your-public-key-to-your-server">Method 2 - Manually copying your public key to your server</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ssh-client-configuration">SSH Client Configuration</a>
+<ul>
+<li><a href="#advanced-ssh-configuration-options">Advanced SSH Configuration Options</a>
+<ul>
+<li><a href="#host-patterns">Host Patterns</a></li>
+<li><a href="#proxyjump">ProxyJump</a></li>
+<li><a href="#forwardagent">ForwardAgent</a></li>
+<li><a href="#localforward">LocalForward</a></li>
+<li><a href="#remoteforward">RemoteForward</a></li>
+<li><a href="#serveraliveinternal">ServerAliveInternal</a></li>
+<li><a href="#example-advanced-configurations">Example Advanced Configurations</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ssh-server-configurations">SSH Server Configurations</a>
+<ul>
+<li><a href="#disabling-password-based-authentication">Disabling Password Based Authentication</a></li>
+<li><a href="#enable-or-disable-access-to-your-server-by-user">Enable or Disable Access To Your Server by User</a>
+<ul>
+<li><a href="#enable-access-to-certain-users">Enable Access to Certain Users</a></li>
+<li><a href="#disable-access-to-certain-users">Disable Access to Certain Users</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ssh-tunnels">SSH Tunnels</a>
+<ul>
+<li><a href="#tunneling-locally">Tunneling Locally</a>
+<ul>
+<li><a href="#local-tunneling-syntax">Local Tunneling Syntax</a></li>
+<li><a href="#local-tunneling-uses">Local Tunneling Uses</a></li>
+</ul></li>
+<li><a href="#tunneling-remotely">Tunneling Remotely</a>
+<ul>
+<li><a href="#remote-tunneling-syntax">Remote Tunneling Syntax</a></li>
+<li><a href="#remote-tunneling-uses">Remote Tunneling Uses</a></li>
+</ul></li>
+<li><a href="#tunneling-dynamically">Tunneling Dynamically</a>
+<ul>
+<li><a href="#dynamic-tunneling-syntax">Dynamic Tunneling Syntax</a></li>
+<li><a href="#dynamic-tunneling-uses">Dynamic Tunneling Uses</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#sending-shell-commands-to-your-server-via-ssh">Sending Shell Commands to Your Server via SSH</a>
+<ul>
+<li><a href="#example-ssh-remote-shell-command">Example SSH Remote Shell Command</a></li>
+<li><a href="#command-chaining-and-control">Command Chaining and Control</a>
+<ul>
+<li><a href="#sequencing">Sequencing</a></li>
+<li><a href="#conditional-and">Conditional AND</a></li>
+<li><a href="#conditional-or">Conditional OR</a></li>
+<li><a href="#combining-conditional-operators">Combining Conditional Operators</a></li>
+<li><a href="#grouping-chained-commands">Grouping Chained Commands</a></li>
+<li><a href="#execute-commands-in-a-subshell">Execute Commands in a Subshell</a></li>
+</ul></li>
+<li><a href="#example-command-chaining-scenarios">Example Command Chaining Scenarios</a>
+<ul>
+<li><a href="#ssh-command-chaining-example">SSH Command Chaining Example</a></li>
+<li><a href="#ssh-command-chaining-example-with-error-redirection">SSH Command Chaining Example With Error Redirection</a></li>
+<li><a href="#example-of-checking-apache2-http-webserver-log-for-errors">Example of Checking Apache2 HTTP Webserver Log for Errors</a></li>
+<li><a href="#example-of-backing-up-a-mysql-database-and-logging-results">Example of Backing Up a MySQL Database and Logging Results</a></li>
+<li><a href="#example-of-remotely-updating-your-server-with-ssh">Example of Remotely Updating Your Server with SSH</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<p>Often, you will encounter servers that do not have a display monitor attached to them (this is referred to as a headless server), or you may need to access your server when you are not physically in the same location as your server. This is were a very powerful and handy tool called SSH comes into play. SSH, or Secure Shell is a network protocol that provides a secure way for you to access your server remotely over a your Local Area Network, or even through the open internet (Wide Area Network) with some additional port forwarding rules added to your internet router and/or firewall. SSH allows you terminal access to your server to execute commands remotely, and transfer files. Once you are familiar and comfortable using SSH, you might find it a much more convenient way to set up your servers without needing to have monitor always attached to them. The other advantage to this, is managing your normal tasks more often through the terminal only makes you less reliant on a GUI (graphical user interface). Running your servers with no GUI also frees up more RAM, and hard drive space with no need for a display server and desktop environment.</p>
+<p>Aside from just being able to access your server for maintenance, if you are familiar with setting up users and permissions with individuals you trust, along with router and/or firewall port forwarding rules: you can also grant other people access to your server for shared file storage, or collaborating on projects. Being able to access your machine remotely is quite liberating, and also leaves you your tools at your own disposal where ever you have a ssh client. In the case of having one on your phone, you now have you servers with you EVERYWHERE!</p>
+<p>So let&#39;s dive in and learn the basics of using SSH to access your server. For now, these instructions are more geared towards access your server over LAN (your Local Area Network) and not over the open internet. For accessing your servers over WAN (Wide Area Network / &quot;The Internet&quot;) please read more about Router and Firewall Port Forwarding rules.</p>
+<h2 id="checking-if-ssh-is-installed">Checking if SSH is Installed</h2>
+<p>First, login to your server, or open a new terminal if working from the desktop. Check if your server has a SSH server already running with either command(s):</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sshd</span> <span class="at">-V</span></span></code></pre></div>
+<p>If installed, you should see a similar output:</p>
+<pre class="shell"><code>OpenSSH_9.6p1 Ubuntu-3ubuntu13.8, OpenSSL 3.0.13 30 Jan 2024</code></pre>
+<p><strong>OR alternately you can also check if SSH is installed with:</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status ssh</span></code></pre></div>
+<p>If you have SSH installed, you should see a output similar to:</p>
+<pre class="shell"><code>○ ssh.service - OpenBSD Secure Shell server  
+    Loaded: loaded (/usr/lib/systemd/system/ssh.service; disabled; preset: enabled)  
+  Active: inactive (dead)  
+  TriggeredBy: ● ssh.socket  
+    Docs: man:sshd(8)  
+      man:sshd_config(5)  </code></pre>
+<p><strong>Otherwise if you receive a error message like:</strong></p>
+<pre class="shell"><code>Unit ssh.service could not be found.</code></pre>
+<p>If you received this error, this means you either do not have it installed, OR there is a configuration preventing it from running. At this point you can also rule out ssh not being installed by typing the command into your terminal:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dpkg <span class="at">-l</span> <span class="kw">|</span> <span class="fu">grep</span> openssh-server</span></code></pre></div>
+<p>If you have it installed, you should see a output similar to:</p>
+<pre class="shell"><code>ii  openssh-server   1:9.6p1-3ubuntu13.8    amd64 secure shell (SSH) server, for secure access from remote machines</code></pre>
+<p>Otherwise, if you once again receive an error, you need to install openssh-server on your machine.</p>
+<h2 id="installing-openssh-server">Installing openssh-server</h2>
+<p>This is very straight forward when using Ubuntu Server. Just type the commands into your terminal to install the openssh-server and all of its dependencies:</p>
+<pre class="shell"><code>sudo apt-get update &amp;&amp; sudo apt-get install openssh-server</code></pre>
+<p>Your computer should check for the latest list of packages to install, and make sure all the dependencies are met to install openssh-server. It should show you a list of all the packages to be installed, and the total amount of hard drive space required. If you are good to move forward installing openssh-server, press Y and Enter in your terminal, or N to abort the process.</p>
+<p>If you pressed N, and aborted the process: Cool, there&#39;s no reason for you to keep reading this portion of the manual. Otherwise, let&#39;s move forward with first connecting to your server over SSH without changing any configurations. Normally, after install your server should be running the openssh-server program. We will need to figure out what your server&#39;s IP address (IPv4) is, and we will also need to make sure you have another computer or device with an SSH Client to connect to your SSH Server. If you don&#39;t have an SSH client already, they are widely available for pretty much every operating system, and even your smart phone.</p>
+<h2 id="obtain-your-servers-ip-address">Obtain Your Servers IP Address</h2>
+<p>While your still in front of your server terminal, let&#39;s discover what your IP address is over your Local Area Network. We will use this information for connecting to your server with a ssh client.</p>
+<p>Type the following command into your terminal:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ip</span> route</span></code></pre></div>
+<p>You should see a output similar to:</p>
+<pre class="shell"><code>default via 192.168.1.254 dev wlp1s0 proto dhcp src 192.168.1.239 metric 600
+192.168.1.0/24 dev wlp1s0 proto kernel scope link src 192.168.1.239 metric 600 </code></pre>
+<p>If you received an output similar to this, we can make the following observations:</p>
+<ol type="1">
+<li><p>&quot;default via 192.168.1.254&quot; (or any combination of 192.168.x.x commonly): This is your routers gateway address in which your device connects to the Local Area Network. Your routers address may not even have an IP address like 192.168.x.x, just remember that the address given after &quot;default via&quot; is your routers gateway address.</p></li>
+<li><p>&quot;src 192.168.1.239&quot; (or any combination of 192.168.x.x commonly): This is the address assigned to your machine either as a static fixed IP address, or a dynamic address through DHCP. In this case from the following output, we will note that 192.168.1.239 is the IP address that we will use to connect to the server over the network. Your IP address may not look like 192.168.x.x, just remember that the address given after &quot;src&quot; is your machine&#39;s IP address.</p></li>
+</ol>
+<p>Great, you should have now discovered what your machines IP address is. If you want to confirm this, you can quickly ping your IP address from your server with the following command, let it run for seconds and then press <code>Ctrl-C</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ping</span> 192.168.1.239</span></code></pre></div>
+<p>You should see an output like:</p>
+<pre class="shell"><code>PING 192.168.1.239 (192.168.1.239) 56(84) bytes of data.
+64 bytes from 192.168.1.239: icmp_seq=1 ttl=64 time=0.099 ms
+64 bytes from 192.168.1.239: icmp_seq=2 ttl=64 time=0.085 ms
+64 bytes from 192.168.1.239: icmp_seq=3 ttl=64 time=0.067 ms
+64 bytes from 192.168.1.239: icmp_seq=4 ttl=64 time=0.068 ms
+...</code></pre>
+<p>Now ping your routers IP address that you observed:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ping</span> 192.168.1.254</span></code></pre></div>
+<p>You should see an output like:</p>
+<pre class="shell"><code>PING 192.168.1.254 (192.168.1.254) 56(84) bytes of data.
+64 bytes from 192.168.1.254: icmp_seq=1 ttl=64 time=14.8 ms
+64 bytes from 192.168.1.254: icmp_seq=2 ttl=64 time=5.13 ms
+64 bytes from 192.168.1.254: icmp_seq=3 ttl=64 time=6.40 ms
+64 bytes from 192.168.1.254: icmp_seq=4 ttl=64 time=6.13 ms
+...</code></pre>
+<p>Notice the difference in ping time between pinging the address for your server from your machine, and pinging your router. Pinging your own machine results in a ping back at less than 1 millisecond. Pinging your router gives a result greater than 1 millisecond each time. You can easily confirm this is your Local Area Network address from such a quick ping result. If you have not yet set up a static IP address on your network, you may need to run this command from time to time to rediscover what your machine&#39;s IP address is if your router is serving you a IP address dynamically through DHCP (Dynamic Host Configuration Protocol), your address is not guaranteed to stay the same on the network every time you connect.</p>
+<h2 id="setting-up-a-ssh-client-to-connect-to-your-server">Setting Up a SSH Client to Connect to Your Server</h2>
+<p>Now we need to connect to our SSH server on our local area network. We have all the information we need from the last section to make a connection. But before we can remotely connect to our server from another computer in our network, we need to make sure that we can use a SSH Client on that computer. Here are some simple steps for running a ssh client on your Windows/Mac/Linux computer and connecting to your server:</p>
+<p>Recap of the information needed to connect to your remote server:</p>
+<ul>
+<li><strong>IP Address:</strong> 192.168.1.239</li>
+<li><strong>User:</strong> username</li>
+</ul>
+<h3 id="running-a-ssh-client-on-windows">Running a SSH Client on Windows</h3>
+<h4 id="for-windows-10-or-later">For Windows 10 or Later</h4>
+<ol type="1">
+<li><p>Open Command Prompt or PowerShell:</p>
+<ul>
+<li>Search for &quot;<strong>cmd</strong>&quot; or &quot;<strong>PowerShell</strong>&quot; in the Windows search bar and open it.</li>
+</ul></li>
+<li><p>Connect to the server:</p>
+<p>In the command prompt or PowerShell window type:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@192.168.1.239</span></code></pre></div></li>
+<li><p>You may receive a prompt, Accept the new connection or press &#39;Y&#39;</p></li>
+<li><p>Now you will be prompted for the password you set for the user on the remote server</p></li>
+<li><p>You should then see your remote servers terminal appear in your Command Prompt or PowerShell window</p></li>
+</ol>
+<h4 id="for-earlier-versions-of-windows">For Earlier Versions of Windows</h4>
+<ol type="1">
+<li>Download and install PuTTY from [<a href="https://www.putty.org](https://www.putty.org)">https://www.putty.org](https://www.putty.org)</a></li>
+<li>Open PuTTY after installation</li>
+<li>In the &quot;Host Name (or IP address)&quot; field, enter the IP address of the remote server</li>
+<li>Click &quot;Open&quot;</li>
+<li>Accept the security alert if it pops up for creating a new connection</li>
+<li>Enter your username and password</li>
+<li>You should then be connected to your remote server</li>
+</ol>
+<h3 id="running-a-ssh-client-on-mac">Running a SSH Client on Mac</h3>
+<ol type="1">
+<li><p>Open the Terminal</p>
+<ul>
+<li>Go to <strong>Applications &gt; Utilities &gt; Terminal</strong></li>
+</ul></li>
+<li><p>Connect to the remote server:</p>
+<p>In the terminal type:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@192.168.1.239</span></code></pre></div></li>
+<li><p>You may be prompted to accept a new connection, Press &#39;yes&#39; and Enter</p></li>
+<li><p>Enter your password</p></li>
+<li><p>You should now be connected to your remote server</p></li>
+</ol>
+<h3 id="running-a-ssh-client-on-linux">Running a SSH Client on Linux</h3>
+<ol type="1">
+<li><p>Open a terminal</p></li>
+<li><p>Most Linux distributions have SSH by default, but if you need to enable it, type in your terminal:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable ssh <span class="at">--now</span></span></code></pre></div></li>
+<li><p>Now connect to your remote server:</p>
+<p>In your terminal type:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@192.168.1.239</span></code></pre></div></li>
+<li><p>Accept the new connection by pressing &#39;yes&#39; and Enter</p></li>
+<li><p>Enter your password</p></li>
+<li><p>You should now be connected to your remote server</p></li>
+</ol>
+<p>If these steps worked for you, and you connected to your remote server, congrats! Let&#39;s move on to some useful applications of SSH.</p>
+<h2 id="transfer-files-securely-with-the-ssh-protocol">Transfer Files Securely With the SSH Protocol</h2>
+<p>To securely download or upload files to or from your server, we will use &#39;<strong>scp</strong>&#39; or secure copy which uses the SSH protocol. <strong>scp</strong> itself is a pretty straight forward program. We will cover a few ways to utilize <strong>scp</strong> for file transfer.</p>
+<p><strong>scp</strong> uses the following command structure in your terminal:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="pp">[</span><span class="ss">options</span><span class="pp">]</span> <span class="pp">[</span><span class="ss">source</span><span class="pp">]</span> <span class="pp">[</span><span class="ss">destination</span><span class="pp">]</span></span></code></pre></div>
+<ul>
+<li><strong>options:</strong> Various options to modify the command&#39;s behavior (we&#39;ll get to some important ones later).</li>
+<li><strong>source:</strong> The file or directory you want to copy.</li>
+<li><strong>destination:</strong> Where you want to copy the file or directory.</li>
+</ul>
+<h3 id="downloading-a-file-from-your-server">Downloading a File from Your Server</h3>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> username@192.168.1.239:/home/username/textfile.txt .</span></code></pre></div>
+<ul>
+<li><p>This tells <em><strong>scp</strong></em> to connect as <em><strong>username</strong></em> to <em><strong>192.168.1.239</strong></em> and download <em><strong>/home/username/textfile.txt</strong></em> and the &#39;<strong>.</strong>&#39; tells the program to copy the file to your current working directory. You can specify a directory such as <em><strong>/home/remote_user/</strong></em> like:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> username@192.168.1.239:/home/username/textfile.txt /home/remote_user/</span></code></pre></div></li>
+</ul>
+<h3 id="uploading-a-file-to-your-server">Uploading a File to Your Server</h3>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> /home/remote_user/textfile.txt username@192.168.1.239:/home/username/</span></code></pre></div>
+<ul>
+<li>This tells <em><strong>scp</strong></em> to upload <em><strong>/home/remote_user/textfile.txt</strong></em> to <em><strong>/home/username/</strong></em> on your server with the username <em><strong>username</strong></em> at the address <em><strong>192.168.1.239</strong></em></li>
+</ul>
+<h3 id="scp-command-options">SCP Command Options</h3>
+<h4 id="copy-a-directory-with-the-recursive-option">Copy a directory with the recursive option</h4>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> /home/remote_user/text_files/ username@192.168.1.239:/home/username/</span></code></pre></div>
+<ul>
+<li><p>This tells <em><strong>scp</strong></em> to connect as <em><strong>username</strong></em> to <em><strong>192.168.1.239</strong></em> and transfer the directory <em><strong>/home/remote_user/text_files/</strong></em> and <strong>all</strong> its contents to <strong>/home/username/</strong> on <em><strong>192.168.1.239</strong></em>.</p></li>
+<li><p>This can also be used in reverse to download a whole directory from your server:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> username@192.168.1.239:/home/username/text_files/ /home/username/</span></code></pre></div></li>
+</ul>
+<h4 id="using-scp-when-the-server-has-password-authentication-disabled">Using scp when the server has password authentication disabled</h4>
+<p>For security measures, a lot of servers have password authentication disabled by default. In order to use this step, your public key needs to exist in your servers <strong>authorized_keys</strong> file. Refer to the SSH Keys section for more information on obtaining and setting keys.</p>
+<p>We can include an Identity key in the scp options with the <code>-i [path to key]</code> option:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-i</span> /home/remote_user/.ssh/id_rsa /home/remote_user/textfile.txt username@192.168.1.239:/home/username/</span></code></pre></div>
+<ul>
+<li>This tells <em><strong>scp</strong></em> to include the <strong>identity key</strong> file <em><strong>/home/remote_user/.ssh/id_rsa</strong></em> with the <em><strong>-i</strong></em> option when connecting as <em><strong>username</strong></em> at <em><strong>192.168.1.239</strong></em> and transferring <em><strong>textfile.txt</strong></em> to the server.</li>
+</ul>
+<h4 id="using-scp-on-a-remote-server-not-using-port-22">Using scp on a remote server NOT using port 22</h4>
+<p>Sometimes administrators may set services up on different port numbers. By default, SSH runs on port 22, but it can be set to a wide range of port numbers if need be. To tell scp to connect with SSH over a different port, we use the <code>-P [port number]</code> option.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-P</span> 1022 username@192.168.1.239:/home/username/textfile.txt .</span></code></pre></div>
+<ul>
+<li>This tells <em><strong>scp</strong></em> to connect as <em><strong>username</strong></em> at <em><strong>192.168.1.239</strong></em> using <em><strong>port 1022</strong></em> instead of the default 22, and download <em><strong>textfile.txt</strong></em> to our current working directory</li>
+</ul>
+<h4 id="using-scp-with-multiple-options">Using scp with multiple options</h4>
+<p>Now let&#39;s wrap up this section by demonstrating using the <strong>scp</strong> command with multiple options by sending a folder of files to our server that only accepts connections from port 1022 and ONLY accepts ssh keys for connection instead of a password. We could type this command into the terminal:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-i</span> /home/remote_user/.ssh/id_rsa <span class="at">-P</span> 1022 <span class="at">-r</span> /home/remote_user/text-files/ username@192.168.1.239:/home/username/</span></code></pre></div>
+<h2 id="creating-and-using-ssh-keys">Creating and Using SSH Keys</h2>
+<p><strong>What are SSH Keys?</strong></p>
+<p>SSH Keys are like a digital lock and key for your servers SSH connection. When you generate a new SSH key, you create a &quot;key pair&quot; consisting of two parts:</p>
+<ul>
+<li><p><strong>Public Key:</strong> This is the key you initially share with servers to gain access, you only send this key to a remote server once. Remote servers will store your public key.</p></li>
+<li><p><strong>Private Key:</strong> This is the key you use to connect and log in to a remote SSH server. Your private key is used to prove that you have a matching public key on the remote server. This key file should be treated as sensitive and not shared with others.</p></li>
+</ul>
+<p>You are not required to use a SSH key pair to connect to your server. You can still use a username and password to connect to your server. Although, using a SSH key to access your server, as long as you keep your private key secure, is a much more secure option for remotely accessing your server. With the proper configurations set up, which we will discuss later, you can log into your remote server much more quick and easy.</p>
+<p>These next steps are assuming your using another terminal separate from your server, but you are able to generate keys on your server as well. Just make sure after you generate your key, and copy your public key to your sshd configuration, that you copy your private key to another private drive, and remove it from your server.</p>
+<h3 id="generating-a-ssh-key-pair">Generating a SSH Key Pair</h3>
+<p>In this step, open a new terminal session(It would be best to use a remote computer than your server).</p>
+<p>We will use the <strong>ssh-keygen</strong> program for this next step. Let&#39;s go over a few options that you can use when generating a new SSH <em>Key/Pair</em>.</p>
+<p>When using the <strong>ssh-keygen</strong> command, one of the first options you will want to set is &quot;-t&quot; to set the type of encryption for your key. You can use the following encryption types:</p>
+<ul>
+<li><strong>RSA</strong> (Rivest–Shamir–Adleman) Encryption Algorithm:
+<ul>
+<li>It&#39;s based on the difficulty of factoring large numbers (multiplying primes is easy, reversing it is hard).</li>
+<li>Common in secure communication, like SSH and website encryption.</li>
+<li>RSA is slower than other encryption types, so it&#39;s often used for small amounts of data, like encrypting other encryption keys.</li>
+<li>When using large key sizes, like 4096 bits, RSA remains a very strong form of encryption.</li>
+</ul></li>
+<li><strong>Ed25519</strong> (Edwards-curve digital):
+<ul>
+<li>Very secure and efficient.</li>
+<li>Often considered the most secure and recommended option.</li>
+</ul></li>
+<li><strong>ECDSA</strong> (Elliptic Curve Digital Signature Algorithm):
+<ul>
+<li>Uses elliptic curve cryptography.</li>
+<li>Offers good security with shorter key lengths.</li>
+<li>Becoming increasingly popular.</li>
+</ul></li>
+<li><strong>DSA</strong> (Digital Signature Algorithm):
+<ul>
+<li>Older algorithm.</li>
+<li>Generally considered less secure than RSA or Ed25519.</li>
+<li>Should be avoided.</li>
+</ul></li>
+</ul>
+<p>After defining you encryption type, you&#39;ll want to specify the key length with the &quot;-b&quot; option. In most cases 4096 bits is a secure key length. Let&#39;s generate a new RSA key with a length of 4096 bits. We will need to input the following command into the terminal:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-t</span> rsa <span class="at">-b</span> 4096</span></code></pre></div>
+<p>Next you will be prompted for a location and name of your private key. Normally, by default <strong>ssh-keygen</strong> will prompt you to store your key pair in the directory &#39;/home/username/.ssh/id_rsa&#39;. You can use this option, or use the directory and filename of your choice. In this example, we will use the default path of &#39;/home/username/.ssh/id_rsa&#39;.</p>
+<p>After that, will be given the option of setting a passphrase for your key. This is an optional feature, but it is generally considered more secure to have a passphrase attached to your key. In the instance of your private key being compromised, whomever possesses your private key will still have a difficult time connecting to your server if you have a strong passphrase attached to your key. If no passphrase is added to the key, the user is not prompted for a password when connecting to your ssh server, and is granted immediate remote access. While this may be convenient, and quicker not to enter a password, just be aware of the security implications if your key is compromised somehow. Enter a passphrase, or just hit enter on this step to skip using a password.</p>
+<p>If done correctly, you should see that the program reports back to you the locations of both the private, and public key. You should also see a key fingerprint, and your key&#39;s random art image generated. You can copy this text and save it all in a text file to keep with your private key.</p>
+<p>Once done, you should have seen an output similar to this in your terminal for generating your new key/pair:</p>
+<pre class="shell"><code>Generating public/private rsa key pair.
+Enter file in which to save the key (/home/username/.ssh/id_rsa): /home/username/.ssh/id_rsa
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/username/.ssh/id_rsa
+Your public key has been saved in /home/username/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:CyV4K9dXGaCyJBRlLjTjpYkN4qULF2QCixUMMMkmgw username@testmachine
+The key&#39;s randomart image is:
++---[RSA 4096]----+
+|E*++  .+o.       |
+|B++ ...o.        |
+|== o. =o.        |
+|o = ..**.. .     |
+| o ..=o*S . . +  |
+|  . .o+... . =   |
+|     .. .   o    |
+|       . . .     |
+|        . .      |
++----[SHA256]-----+</code></pre>
+<p>Now that we have successfully generated a SSH key/pair, we can copy it to our server.</p>
+<h3 id="copying-your-ssh-key-to-your-server">Copying Your SSH Key To Your Server</h3>
+<h4 id="method-1---using-ssh-copy-id-recommended">Method 1 - Using ssh-copy-id (Recommended)</h4>
+<p>Earlier we covered finding the local ip address of your server. This is where it will come it. For our purposes the ip address of the server is 192.168.1.239, and there is a user on that server with the user name: username (Really creative, I know). We also know that right now, on our computer that we are using to gain access to our server, our public and private key are stored in: &#39;/home/username/.ssh/&#39;. This is the important information we need to transfer our public key to the server.</p>
+<p>We will do this with the following command:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ssh-copy-id</span> <span class="at">-i</span> /home/username/.ssh/id_rsa.pub username@192.168.1.239</span></code></pre></div>
+<p>This will tell ssh-copy-id to copy the identity file &#39;/home/username/id_rsa.pub&#39; to be used for the user username on your server located at the address of 192.168.1.239. Now you should be prompted to enter the password for the user name you are connecting as on your remote server. In this example, our remote SSH server has a user named username that we are connecting as.</p>
+<p>If done successfully, you should be prompted to enter a the passphrase for username on your remote SSH server. You should see an output similar to this if you entered the correct key path, and passphrase:</p>
+<pre class="shell"><code>/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: &quot;/home/username/.ssh/id_rsa_.pub&quot;
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+username@192.168.1.239&#39;s password: 
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   &quot;ssh &#39;username@192.168.1.239&#39;&quot; and check to make sure that only the key(s) you wanted were added.</code></pre>
+<p>Your key should have been copied to the authorized_keys file in /home/&lt;Server Username&gt;/.ssh/authorized_keys</p>
+<p>We can now log into the server using the newly generated key:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-i</span> /home/username/.ssh/id_rsa username@192.168.1.239</span></code></pre></div>
+<p>Note that if you set a password for your key (which is recommended, you should still be prompted for a passkey)</p>
+<h4 id="method-2---manually-copying-your-public-key-to-your-server">Method 2 - Manually copying your public key to your server</h4>
+<p>If you are unable to use ssh-copy-id or just want to manually copy your public key file to your server, we must first copy the content of our /home/username/.ssh/id_rsa.pub file.</p>
+<p>You can display the contents to the terminal with:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> /home/username/.ssh/id_rsa.pub</span></code></pre></div>
+<p>Or open the file with a text editor:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> /home/username/.ssh/id_rsa.pub</span></code></pre></div>
+<p>Copy the contents of the entire text file, either in the editor, or what was displayed in the terminal.</p>
+<p>Now log into your SSH server like you normally would first:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@192.168.1.239</span></code></pre></div>
+<p>Next open your servers authorized_keys file.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> /home/<span class="op">&lt;</span>Server Username<span class="op">&gt;</span>/.ssh/authorized_keys</span></code></pre></div>
+<p>Simply paste the text content you copied from your id_rsa.pub file into a new line in your <em>auhtorized_keys</em> file. The key is very long, and should have pasted as 1 single line to work correctly.</p>
+<p>Save the contents of the file, and exit. (<strong>Ctrl-o</strong> and then <strong>Ctrl-x</strong> with nano). Now log out of your server,and try logging in with your key now:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-i</span> /home/username/.ssh/id_rsa username@192.168.1.239</span></code></pre></div>
+<p>If you set a passphrase for your key, you should be prompted to enter the passphrase next:</p>
+<pre class="shell"><code>Enter passphrase for key &#39;id_rsa&#39;:</code></pre>
+<p>Or, if you did not set a passphrase for your key, you should be automatically logged in.</p>
+<p>If you still see the following prompt when trying to log in with your key, something went wrong:</p>
+<pre class="shell"><code>username@192.168.1.239&#39;s password: </code></pre>
+<p>If this is happening, make sure you are copying the contents of your id_rsa.pub file to your server&#39;s <em>authorized_keys</em> file. Make sure the key is one continuous line in the file. When you log in with ssh and the <strong>&#39;-i&#39;</strong> option, make sure you are providing the <em>id_rsa</em> file, not the <em>id_rsa.pub</em> file.</p>
+<p>This wraps up generating SSH Keys, and copying them to your server.</p>
+<h2 id="ssh-client-configuration">SSH Client Configuration</h2>
+<p>Now that we&#39;ve covered logging into your remote server, and generating an SSH key for added security, let&#39;s put those both together for an easier experience logging in or sending commands to your remote server.</p>
+<p>First let&#39;s check on your client computer (the one you&#39;ll be logging into your remote server from) and see if your SSH directory has a config file. Open up a new terminal and type:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> .ssh/ <span class="kw">&amp;&amp;</span> <span class="fu">ls</span></span></code></pre></div>
+<p>If &#39;ls&#39; lists a file named &#39;config&#39; in the directory, ignore this next step. If the config file is not present, we can simply create the new config file in your /home/username/.ssh/ directory:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> config</span></code></pre></div>
+<p>Now that there is a config file present, lets go ahead and cover what we&#39;ll be adding to the configuration file. First we can create a name for our connection to the server, we will need the <em>ip address</em>, <em>username</em>, <em>port number</em> (optional), and <em>identity key file</em> (optional). With these, we can easily connect to our server or perform any operations with SSH by just referring to the name that we give the configuration. So instead of connecting to our remote server with the command:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@192.168.1.239</span></code></pre></div>
+<p><strong>...Or...</strong></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-p</span> 22 <span class="at">-i</span> /home/username/.ssh/id_rsa username@192.168.1.239</span></code></pre></div>
+<p>We can edit the config file we created in the .ssh directory:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> config</span></code></pre></div>
+<p>Inside that file we can now either create a new entry below and existing entries, or add a new one in the blank config file. This will give all the relevant information needed for connection to our remote server:</p>
+<pre class="shell"><code>Host remote_server
+  HostName 192.168.1.239
+  Port 22
+  User username
+  IdentityFile /home/username/.ssh/id_rsa</code></pre>
+<p>Now save and close the file with <strong>Ctrl-o</strong> and <strong>Ctrl-x</strong>. You should now be able to connect to your SSH server with the command:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> remote_server</span></code></pre></div>
+<p>That simplifies logging into your SSH server, and you can add multiple configuration profiles to your SSH configuration for logging into different servers that may contain different ports, usernames, or key files. Let&#39;s cover the properties we set for the configuration file:</p>
+<ul>
+<li><strong>Host</strong>: The alias or name you would like to give that SSH connection</li>
+<li><strong>Port</strong>: By default you do not need to include this if the server runs on port 22. If the remote server ran on another port such as 1022, you could set the port to that number.</li>
+<li><strong>User</strong>: The username for that SSH connection</li>
+<li><strong>IdentityFile</strong>: This is optional, but you can set the path for your identity key file here</li>
+</ul>
+<h3 id="advanced-ssh-configuration-options">Advanced SSH Configuration Options</h3>
+<h4 id="host-patterns">Host Patterns</h4>
+<p>You can user wildcards (*, ?) to apply settings to multiple hosts:</p>
+<pre class="shell"><code>Host *.my-server.net
+  HostName 192.168.1.239
+  User username
+  Port 22</code></pre>
+<p>Now if you had two different servers like <strong>s1.my-server.net</strong> and <strong>s2.my-server.net</strong>, this configuration would apply to both of those servers. You could connect to both servers:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> s1.my-server.net</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> s2.my-server.net</span></code></pre></div>
+<h4 id="proxyjump">ProxyJump</h4>
+<p>Allows you to jump through an intermediate &quot;jump&quot; host</p>
+<pre class="shell"><code>ProxyJump jump-server</code></pre>
+<h4 id="forwardagent">ForwardAgent</h4>
+<p>Forwards your agent, allowing you to use your local keys on a remote SSH server</p>
+<pre class="shell"><code>ForwardAgent yes</code></pre>
+<h4 id="localforward">LocalForward</h4>
+<p>Allows you to forward a local port to a remote port. Refer to SSH Tunneling and Local forwarding.</p>
+<pre class="shell"><code>LocalForward 9000 localhost:8080</code></pre>
+<h4 id="remoteforward">RemoteForward</h4>
+<p>Allows you to forward a remote port to a local port. Refer to SSH Tunneling and Remote forwarding.</p>
+<pre class="shell"><code>RemoteForward 8080 localhost:9000</code></pre>
+<h4 id="serveraliveinternal">ServerAliveInternal</h4>
+<p>Keeps the SSH connection alive by sending keepalive messages.</p>
+<pre class="shell"><code>ServerAliveInternal 60</code></pre>
+<h4 id="example-advanced-configurations">Example Advanced Configurations</h4>
+<pre class="shell"><code>Host *.internal
+  User devops
+  ProxyJump jump-host
+  ForwardAgent yes
+  ServerAliveInterval 60
+
+Host web-server
+  Hostname 192.168.1.50
+  LocalForward 8080 localhost:3000</code></pre>
+<p>This concludes the SSH Client configurations.</p>
+<h2 id="ssh-server-configurations">SSH Server Configurations</h2>
+<h3 id="disabling-password-based-authentication">Disabling Password Based Authentication</h3>
+<p>If you have generated keys for accessing your SSH server, you can further secure it by disabling the password authentication feature on your SSH server&#39;s configuration file, and force your SSH server to rely solely on key based authentication. This can stop individuals from trying to gain access to your SSH server by brute forcing as many passwords as they can to try and log in to your server. One scenario where this would not be recommended is if you do not have physical access to your server. If you disable password login on your server, and lose your key, you will no longer be able to login over SSH until you revert settings back, or manually copy another public key into your server&#39;s authorized_keys file. Even if you&#39;re locked out from being able to log in through SSH, you should still be able to physically log into your server just fine.</p>
+<p>To disable password authentication on your server, first log in to your server.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-i</span> /home/username/.ssh/id_rsa username@192.168.1.239</span></code></pre></div>
+<p>Now, we need to access your ssh servers configuration file. This file is located at <code>/etc/ssh/sshd_config</code>. Modifying this file requires root access. Let&#39;s open the file in a text editor:</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nano /etc/ssh/sshd_config</span></code></pre></div>
+<p>First, inside the sshd_config file, find the line that has the text:</p>
+<pre class="shell"><code>PasswordAuthentication yes</code></pre>
+<p>Change that line to:</p>
+<pre class="shell"><code>PasswordAuthentication no</code></pre>
+<p>Next, find a setting for PubkeyAuthentication. It may be already commented out with a &#39;#&#39; symbol in your configuration file, like:</p>
+<pre class="shell"><code>#PubkeyAuthentication yes</code></pre>
+<p><strong>...Or...</strong></p>
+<pre class="shell"><code>PubkeyAuthentication no</code></pre>
+<p>Add or change this line in your sshd_config file:</p>
+<pre class="shell"><code>PubkeyAuthentication yes</code></pre>
+<p>Now save the changes, and exit the text editor. (<strong>Ctrl-o</strong>, and <strong>Ctrl-x</strong>)</p>
+<p>Next we need to restart the SSH server for the new configuration changes to take effect.</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart sshd</span></code></pre></div>
+<p><strong>...Or..</strong></p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart ssh</span></code></pre></div>
+<p><strong>Note</strong>: Check the <code>/etc/ssh/sshd_config.d</code> directory for other configuration files. If they contain the line <code>PasswordAuthentication yes</code> you need to comment it out as <code>#PasswordAuthentication yes</code> to make sure this feature stays disabled. Otherwise, this will <strong>override</strong> the line from your original sshd_config file, and still allow password based authentication. If you are using Ubuntu Server, check if you have the file <code>/etc/ssh/sshd_config.d/50-cloud-init.conf</code>. By default, password authentication is enabled there also.</p>
+<p>Now log out of your server, and try logging in without supplying your key:</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@192.168.1.239</span></code></pre></div>
+<p>If your new settings are correct, you should be immediately rejected from your server with the following message:</p>
+<pre class="shell"><code>username@192.168.1.239: Permission denied (publickey).</code></pre>
+<p>Now try logging in supplying the ssh key you generated:</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-i</span> /home/username/.ssh/id_rsa username@192.168.1.239</span></code></pre></div>
+<p>If you were rejected from your server for connected without a key, but were able to connect with your SSH key, congratulations! Your SSH server is now much more secure with password authentication disabled.</p>
+<h3 id="enable-or-disable-access-to-your-server-by-user">Enable or Disable Access To Your Server by User</h3>
+<h4 id="enable-access-to-certain-users">Enable Access to Certain Users</h4>
+<p>First, connect to your SSH server:</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-i</span> /home/username/.ssh/id_rsa</span></code></pre></div>
+<p>Then open your sshd_config file to edit:</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nano /etc/ssh/sshd_config</span></code></pre></div>
+<p>To only allow certain users log into your server over SSH, add the following line:</p>
+<pre class="shell"><code>AllowUsers user1 user2 user3</code></pre>
+<p>Make sure to separate usernames with a space only, no commas</p>
+<p>If you want to restrict which computers your users on the network can connect to your SSH server, you can specify the user and IP address strictly, and that user will only be able to connect from the IP address that you add in your <strong>sshd_configuration</strong> file such as:</p>
+<pre class="shell"><code>AllowUsers user1@192.168.1.237 user2@192.168.1.236 user3@192.168.1.235</code></pre>
+<p>Now these users are restricted to only connecting to your SSH server from the addresses you supplied:</p>
+<ul>
+<li><strong>user1</strong> can only connect from the computer with the IP address <strong>192.168.1.137</strong></li>
+<li><strong>user2</strong> can only connect from the computer with the IP address <strong>192.168.1.136</strong></li>
+<li><strong>user3</strong> can only connect from the computer with the IP address <strong>192.168.1.135</strong></li>
+</ul>
+<p>Attempts to log in from any other computer, and as any other user will be denied access.</p>
+<h4 id="disable-access-to-certain-users">Disable Access to Certain Users</h4>
+<p>To disable certain users from being able to log in over SSH, add the following line:</p>
+<pre class="shell"><code>DenyUsers user4 user5</code></pre>
+<p>Now save and exit the text editor with <strong>Ctrl-o</strong> and <strong>Ctrl-x</strong>.</p>
+<p>Restart your SSH server to apply the new configuration changes.</p>
+<pre class="shell"><code>sudo systemctl restart ssh</code></pre>
+<p>If you have multiple users set up on your server, try allowing some, and denying some access. Try to log in to your server and make sure the changes took effect properly.</p>
+<p>Any other rules that apply to trying to allow or deny access by IP address only should be handled by changing your firewall settings, such as <strong>ufw</strong> which should be running on your Ubuntu Server by default.</p>
+<h2 id="ssh-tunnels">SSH Tunnels</h2>
+<p>What is &quot;tunneling&quot; with SSH, and how could this be a useful feature for your server?</p>
+<p>SSH tunneling works 3 ways: locally, remotely, or dynamically. By using a SSH tunnel, you can access services one a secure network that is normally not accessible by the internet. You can also securely use the internet over public Wi-Fi through a SSH tunnel, by forcing all of your internet traffic through a SSH connection to your remote server at home, protecting your information. You may be inside of a network that restricts access to certain websites that you would still like to gain access to; you can establish a secure SSH connection to your remote server and still gain access to those sites while still connected to the restrictive network. Or vice versa, let&#39;s say you have a server or machine inside of a restrictive network, and you would like to tunnel a connection to a service running your computer outside of that network, you can share services from a port on your local machine to a defined port on your server behind the restrictive network. Let&#39;s cover how we can achieve this with these <strong>three methods</strong>:</p>
+<h3 id="tunneling-locally">Tunneling Locally</h3>
+<h4 id="local-tunneling-syntax">Local Tunneling Syntax</h4>
+<pre class="shell"><code>ssh -L local_port:remote_host:remote_port user@remote_server</code></pre>
+<ul>
+<li><strong>-L</strong> : defines local port forwarding</li>
+<li><strong>local_port</strong>: The port on your local machine that you want to forward</li>
+<li><strong>remote_host</strong>: The hostname or IP address of the destination server (accessible from the remote server)</li>
+<li><strong>remote_port</strong> : The port on the destination server that you want to access</li>
+<li><strong>user@remote_server</strong>: Your username and the address of your Ubuntu Server</li>
+</ul>
+<h4 id="local-tunneling-uses">Local Tunneling Uses</h4>
+<p>Let&#39;s say your remote server has web service that it only serves <em><strong>locally</strong></em> on <em><strong>port 8080</strong></em>, and you would like to be able to access that service on your machine on port <em><strong>8888</strong></em>. You could set up a <strong>tunnel</strong> to <em><strong><a href="mailto:username@192.168.1.239">username@192.168.1.239</a></strong></em> to forward its <em><strong>port 8080</strong></em> on <em><strong>localhost</strong></em>, since it is accessing a service on that machine itself, and you could access that service on your machine through port <em><strong>8888</strong></em>.</p>
+<p>You can set up a local tunnel to your server with the following command:</p>
+<pre class="shell"><code>ssh -L 8888:localhost:8080 username@192.168.1.239</code></pre>
+<p>Now if you pointed your web browser to <strong><a href="http://localhost:8888/">http://localhost:8888/</a></strong> you would be accessing <strong><a href="http://192.168.1.239:8080/">http://192.168.1.239:8080/</a></strong></p>
+<h3 id="tunneling-remotely">Tunneling Remotely</h3>
+<h4 id="remote-tunneling-syntax">Remote Tunneling Syntax</h4>
+<pre class="shell"><code>ssh -R remote_port:local_host:local_port user@remote_server</code></pre>
+<ul>
+<li><strong>-R</strong> : defines remote port forwarding</li>
+<li><strong>remote_port</strong>: The port on the remote server that you want to forward</li>
+<li><strong>local_host</strong>: The hostname or IP address of the destination server (accessible from your local machine)</li>
+<li><strong>local_port</strong>: The port on the destination server that you want to access</li>
+<li><strong>username@remote_server</strong>: Your username and the address of the remote server</li>
+</ul>
+<h4 id="remote-tunneling-uses">Remote Tunneling Uses</h4>
+<p>In this scenario, lets say you have web service running on your <em>local machine</em> (<strong>localhost</strong>) that runs on port <em><strong>8080</strong></em>, and you want your <em><strong>remote server</strong></em> <em>to be able to access it</em> <em><strong>locally</strong></em> <em>on its own port</em> <em><strong>4444</strong></em>.</p>
+<p>You can set up a remote tunnel on your server with the following command:</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-R</span> 4444:localhost:8080 username@192.168.1.239</span></code></pre></div>
+<p>Your remote server (<strong><a href="mailto:username@192.168.1.239">username@192.168.1.239</a></strong>) can connect <strong>locally</strong> to port <strong>4444</strong>, and its traffic is forwarded to <strong>your local machine&#39;s</strong> web service running on port <strong>8080</strong>.</p>
+<h3 id="tunneling-dynamically">Tunneling Dynamically</h3>
+<h4 id="dynamic-tunneling-syntax">Dynamic Tunneling Syntax</h4>
+<pre class="shell"><code>ssh -D local_port user@remote_server</code></pre>
+<ul>
+<li><strong>-D</strong> : defines dynamic port forwarding</li>
+<li><strong>local_port</strong>: The port on your local machine that will be used for the SOCKS proxy</li>
+<li><strong>user@remote_server</strong>: Your username and the address of the remote server</li>
+</ul>
+<h4 id="dynamic-tunneling-uses">Dynamic Tunneling Uses</h4>
+<p>In this scenario, we are outside of our home network. We know that the external IP address of our local network at home is 77.22.142.66, and we configured our router to forward SSH traffic (port 22) to our server in the network whose address is 192.168.1.239 in case we needed to access it remotely outside of the local area network. In this situation, we only have internet access through Wi-Fi that we are not certain is secure. We can force all of our internet traffic through an encrypted connection to our remote server, and keep all of our traffic encrypted and hidden away from the Wi-Fi network we are having to use for internet access. We will establish this proxy server on port 8888 on our machine. Then in our browser or network settings, we will set our SOCK5 proxy server to localhost at port 8888. Now we can safely access the internet on an unsecure connection.</p>
+<p>You can setup a dynamic tunnel on your local machine with the following command:</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-D</span> 8888 username@77.22.142.66</span></code></pre></div>
+<p>We establish a connection to our router at 77.22.142.66 that forwards SSH traffic to 192.168.1.239, and define the connection as dynamic port forwarding. This connection is stored on our local machine at port 8888. We can then set browser or network proxy settings to force all traffic on multiple ports through port 8888 as a encrypted connection.</p>
+<h2 id="sending-shell-commands-to-your-server-via-ssh">Sending Shell Commands to Your Server via SSH</h2>
+<p>SSH has the ability to connect, and dispatch shell commands to your remote server to help save time. You can write bash scripts to automate tasks such as running updates or checking the status of certain services running on your server.</p>
+<p>This is simply done by using the SSH command, followed by any options, and then user and host address, and finally a set of parenthesis or quotes with your desired shell command. Your computer will connect to the server, send the commands, and then terminate the connection:</p>
+<pre class="shell"><code>ssh [options] [host] &quot;[shell scripts]&quot;</code></pre>
+<h3 id="example-ssh-remote-shell-command">Example SSH Remote Shell Command</h3>
+<div class="sourceCode" id="cb81"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-p</span> 1022 <span class="at">-i</span> ~/.ssh/id_rsa username@192.168.1.239 <span class="st">&quot;echo &#39;Created from my client device&#39; &gt; ~/remote_file.txt&quot;</span></span></code></pre></div>
+<p>These commands can quickly become long winded. It would be best to store as much information about your host server in your SSH configuration file to help shorten the command to something like:</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> remote_server <span class="st">&quot;echo &#39;Created from my client device&#39; &gt; ~/remote_file.txt&quot;</span></span></code></pre></div>
+<p>This command would have created a file called remote_file.txt in your users home directory on the server, containing the text &quot;Created from my client device&quot;. That would cover the basics of sending commands to your server, but let&#39;s step it up a notch and learn how to add some logic to the way that your commands are handled, and the ability to write logs based on the commands you send to the server, and record them locally on your client computer.</p>
+<h3 id="command-chaining-and-control">Command Chaining and Control</h3>
+<p>We can control what happens with different shell commands with 3 operators:</p>
+<h4 id="sequencing">Sequencing</h4>
+<p><strong>Sequencing (&#39; ; &#39;)</strong>: Executes commands in sequence, regardless of success or failure. Each individual command is separated with a semicolon &#39;;&#39;</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="kw">`</span><span class="fu">ssh</span> username@remote_host <span class="st">&quot;command_1; command_2; command_3&quot;</span><span class="kw">`</span></span></code></pre></div>
+<ol type="1">
+<li><strong>command_1</strong> will execute.</li>
+<li><strong>command_2</strong> will execute <strong>REGARDLESS if command_1 failed or succeeded</strong></li>
+<li><strong>command_3</strong> will execute <strong>REGARDLESS if command_2 failed or succeeded</strong></li>
+</ol>
+<h4 id="conditional-and">Conditional AND</h4>
+<p><strong>Conditional AND (&#39; &amp;&amp; &#39; )</strong>: Executes the next command only if the previous command succeeds (Returns a 0 exit code)</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@remote_host <span class="st">&quot;command_1 &amp;&amp; command_2 &amp;&amp; command_3&quot;</span></span></code></pre></div>
+<ol type="1">
+<li><strong>command_1</strong> will execute</li>
+<li><strong>command_2 will ONLY</strong> execute if <strong>command_1 succeeds</strong></li>
+<li><strong>command_3 will ONLY</strong> execute if <strong>command_2 succeeds</strong></li>
+</ol>
+<h4 id="conditional-or">Conditional OR</h4>
+<p><strong>Conditional OR (&#39; || &#39;)</strong>: Executes the next command only if the previous command fails (Returns a non-zero exit code)</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@remote_host <span class="st">&quot;command_1 || command_2&quot;</span></span></code></pre></div>
+<ol type="1">
+<li>command_1 will execute</li>
+<li>command_2 will <strong>ONLY</strong> execute if command_1 <strong>FAILS</strong></li>
+</ol>
+<h4 id="combining-conditional-operators">Combining Conditional Operators</h4>
+<p>Operators can be combined to create more sophisticated workflows:</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@remote_host <span class="st">&quot;command_1 &amp;&amp; command_2 || command_3&quot;</span></span></code></pre></div>
+<ol type="1">
+<li><strong>command_1</strong> will execute</li>
+<li><strong>command_2</strong> will <strong>ONLY</strong> execute if <strong>command_1 SUCCEEDS</strong></li>
+<li>if <strong>command_1 FAILS</strong>, <strong>command_3 will execute</strong></li>
+</ol>
+<h4 id="grouping-chained-commands">Grouping Chained Commands</h4>
+<p>You can use parentheses to group commands and control the order of execution:</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@remote_host <span class="st">&quot;(command_1 &amp;&amp; command_2) || command_3&quot;</span></span></code></pre></div>
+<ol type="1">
+<li><strong>command_1</strong> will execute</li>
+<li><strong>command_2</strong> will execute <strong>ONLY if command_1 succeeds</strong>. <strong>command_2</strong> can still <strong>fail or succeed</strong></li>
+<li><strong>command_3</strong> will execute <strong>ONLY if both command_1 and command_2 fail</strong></li>
+</ol>
+<h4 id="execute-commands-in-a-subshell">Execute Commands in a Subshell</h4>
+<p>You can also execute commands in a subshell using parenthesis or backticks. This creates a separate environment for the commands:</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@remote_host <span class="st">&#39;$(command_1; command_2)&#39;</span></span></code></pre></div>
+<ol type="1">
+<li>Once connected to your server, <strong>another shell environment opens</strong></li>
+<li><strong>command_1</strong> is executed</li>
+<li><strong>command_2</strong> is executed <strong>REGARDLESS if command_1 fails or succeeds</strong></li>
+</ol>
+<h3 id="example-command-chaining-scenarios">Example Command Chaining Scenarios</h3>
+<h4 id="ssh-command-chaining-example">SSH Command Chaining Example</h4>
+<p>Now lets imagine a scenario where we want to check if a application you wrote is running, and if not, restart the service. Finally, we will log the status of that service on the server.</p>
+<p>We can write that command into our terminal as:</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@remote_host <span class="st">&#39;(sudo systemctl is-active my-app.service || sudo systemctl restart my-app.service) &amp;&amp; sudo systemctl status my-app.service &gt;&gt; app-status.log&#39;</span></span></code></pre></div>
+<ol type="1">
+<li>This connects to remote host and first checks if my-app.service is active</li>
+<li>If my-app.service is not active, the system restarts the application</li>
+<li>After the application restart, the system checks the status of the application</li>
+<li>The results from that status check are logged to a file called app-status.log in the users&#39; home directory</li>
+</ol>
+<p><strong>You can alternatively use an If statement in your shell command to repeat the same logic:</strong></p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@remote_host <span class="st">&#39;(if ! sudo systemctl is-active my-app.service; then sudo systemctl restart my-app.service; sudo systemctl status my-app.service &gt;&gt; app-status.log)&#39;</span></span></code></pre></div>
+<ul>
+<li>&#39;!&#39; can be read as NOT</li>
+<li>if my-app.service is NOT active</li>
+<li>then restart my-app.service</li>
+<li>Check the status of my-app.service</li>
+<li>Log the results to app-status.log in the home directory</li>
+</ul>
+<h4 id="ssh-command-chaining-example-with-error-redirection">SSH Command Chaining Example With Error Redirection</h4>
+<div class="sourceCode" id="cb91"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@remote_host <span class="st">&#39;sudo systemctl is-active my-app.service || (sudo systemctl restart my-app.service &amp;&amp; sudo systemctl status my-app.service &gt;&gt; app-status.log || echo &quot;Restart failed.&quot; &gt;&gt; app-status.log)&#39;</span></span></code></pre></div>
+<ul>
+<li>If my-app.service is active, nothing happens.</li>
+<li>If it is not active, restart the service</li>
+<li>If the service restarts, record the status to app-status.log</li>
+<li>If the restart fails, write &quot;Restart failed.&quot; to the app-status.log</li>
+</ul>
+<h4 id="example-of-checking-apache2-http-webserver-log-for-errors">Example of Checking Apache2 HTTP Webserver Log for Errors</h4>
+<p>Here is an example of checking the Apache2 HTTP Webserver journal for errors, and recording them to a log and displaying them at the same time using &#39;tee&#39; for you to investigate:</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@remote_host <span class="st">&#39;sudo journalctl -u apache2.service | grep -i error | tee apache_errors.log&#39;</span></span></code></pre></div>
+<h4 id="example-of-backing-up-a-mysql-database-and-logging-results">Example of Backing Up a MySQL Database and Logging Results</h4>
+<p>Here is a example of creating a Bash script to backup a mysql database, and write the results to a log. We will write this script using a SSH key with no password so it can automatically connect to the server and execute the database backup script.</p>
+<p><strong>First we will write a new script:</strong></p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> db_backup.sh</span></code></pre></div>
+<p><strong>And add these instructions to our script:</strong></p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/bash</span></span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create timestamp for backup</span></span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="va">timestamp</span><span class="op">=</span><span class="va">$(</span><span class="fu">date</span> +%Y%m%d_%H%M%S<span class="va">)</span></span>
+<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a backup of the database</span></span>
+<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a><span class="ex">mysqldump</span> <span class="at">-u</span> <span class="op">&lt;</span>username<span class="op">&gt;</span> -p <span class="op">&lt;</span>password<span class="op">&gt;</span> <span class="op">&lt;</span>database_name<span class="op">&gt;</span> <span class="op">&gt;</span> /path/to/backup/db_backup_<span class="va">$timestamp</span>.sql</span>
+<span id="cb94-6"><a href="#cb94-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Compress the backup file</span></span>
+<span id="cb94-7"><a href="#cb94-7" aria-hidden="true" tabindex="-1"></a><span class="fu">gzip</span> /path/to/backup/db_backup_<span class="va">$timestamp</span>.sql</span></code></pre></div>
+<p>Save and close this shell script with <strong>Ctrl-o</strong>, <strong>Ctrl-x</strong>. Now we will copy it over to the remote_server:</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> db_backup.sh username@remote_server:~/</span></code></pre></div>
+<p><strong>Now we can execute the backup script remotely on the server and log the results on your local machine:</strong></p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@remote_host <span class="st">&quot;/home/username/db_backup.sh&quot;</span> <span class="op">&amp;&gt;</span> db_backup.log</span></code></pre></div>
+<p><strong>If you wanted the results to only be logged on the server:</strong></p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@remote_host <span class="st">&quot;/home/username/db_backup.sh &amp;&gt; db_backup.log&quot;</span></span></code></pre></div>
+<h4 id="example-of-remotely-updating-your-server-with-ssh">Example of Remotely Updating Your Server with SSH</h4>
+<p>Now let&#39;s create one more scenario where we want to remotely update our server. This can be risky if your update hangs, or there is a prompt to continue or make a decision during the update. If you have no way to reclaim this terminal session, and it hangs, and you restart your server not knowing what to do, you can potentially cause yourself some issues. There is a great little program you can install called &#39;screen&#39;. Screen starts a new terminal session that you can detach from, or re-attach to later. If you are running an update on your remote server from another location, and something with your network connection or server network connection goes wrong; you can still reclaim that screen session, and get things back working again if no one decided to restart the server.</p>
+<p>Screen is a powerful tool, so we will only cover a few basics for this SSH session.</p>
+<p><strong>First let&#39;s install screen on our remote server:</strong></p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt-get install screen <span class="at">-y</span></span></code></pre></div>
+<p>After the install completes, lets give screen a try. In your terminal type:</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span></span></code></pre></div>
+<p>Alright, nothing too exciting happened. The screen blanked out, and you are either in another empty terminal session, or you have a display message from the software asking you to press space to keep reading, or return to go to your new terminal session.</p>
+<p>We can tell we are running a screen session by typing:</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-ls</span></span></code></pre></div>
+<p>You should see a output in your terminal like:</p>
+<pre class="shell"><code>There is a screen on:
+  28674.pts-0.my_server       (03/19/25 05:34:13)     (Attached)
+1 Socket in /run/screen/S-ubuntu.</code></pre>
+<p>Your screen session has an ID of 28674, and at the end of the line (Attached) let&#39;s you know that that is the current session you are working in. You can have multiple screen sessions. Now, if we wanted to disconnect from this session, but still keep it open to continue working in; we can simply press <strong>Ctrl-A</strong> and then press <strong>&#39; d &#39;</strong>. This will detach you from that screen session, and return you to your original terminal session. Check your screen sessions again:</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-ls</span></span></code></pre></div>
+<p>You should see a terminal output like:</p>
+<pre class="shell"><code>There is a screen on:
+  28674.pts-0.rpi02 (03/19/25 05:34:13) (Detached)
+1 Socket in /run/screen/S-ubuntu.</code></pre>
+<p>We can now see that the session with the ID 28674 is (Detached). When we are ready to get back to work in that terminal session, we can easily reattach to that session by using its ID.</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-r</span> 28674</span></code></pre></div>
+<p>Once you are done working in that session, and no longer need it; just type:</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span></span></code></pre></div>
+<p>You should see a result like:</p>
+<pre class="shell"><code>[screen is terminating]</code></pre>
+<p>And you can also verify there are no more sessions by checking again:</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-ls</span></span></code></pre></div>
+<p>Terminal Output:</p>
+<pre class="shell"><code>No Sockets found in /run/screen/S-ubuntu.</code></pre>
+<p>When working with multiple screen sessions on a server, you can easily distinguish each screen session from each other, by naming each session when you start in, instead of trying to remember each session&#39;s ID (which you can do if you really want). Starting a new screen session with a name is as easy as:</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-S</span> update</span></code></pre></div>
+<p>Now check the results:</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-ls</span></span></code></pre></div>
+<p>Terminal Output:</p>
+<pre class="shell"><code>There is a screen on:
+  28800.update    (03/19/25 05:52:06)     (Attached)
+1 Socket in /run/screen/S-ubuntu.</code></pre>
+<p>Now if you needed to detach from that screen with Ctrl-A, and then press &#39;d&#39;; you can always reattach with that session with:</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-r</span> update</span></code></pre></div>
+<p>Great! This is a great way for creating a remote session that can be recovered locally if something goes wrong. I recommend you use software or something similar to screen if you are going to conduct updates on your server remotely. Let&#39;s tie all of this together, and create a little script to perform a remote update on our server in a screen session, and then terminate the session when the update is finished:</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@remote_server <span class="st">&quot;screen -S update -dm bash -c &#39;sudo apt-get update &amp;&amp; sudo apt-get upgrade -y &amp;&amp; exit&#39;&quot;</span></span></code></pre></div>
+<ul>
+<li>This remotely starts a screen session named &quot;update&quot; first</li>
+<li>The &#39;-d&#39; option starts the session detached.</li>
+<li>The &#39;-m&#39; option forces the screen creation.</li>
+<li>The bash -c &#39;...commands...&#39; executes the commands in the single quotes in the new screen session created.</li>
+</ul>
+<p>Be sure to check in on your server periodically and make sure a update is not waiting for you to make a decision to continue.</p>
+</body>
+</html>

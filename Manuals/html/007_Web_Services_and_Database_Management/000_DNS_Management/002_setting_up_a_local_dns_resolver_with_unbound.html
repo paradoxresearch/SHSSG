@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="setting-up-a-local-dns-resolver-with-unbound">Setting Up a Local DNS Resolver with <code>unbound</code></h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#setting-up-a-local-dns-resolver-with-unbound">Setting Up a Local DNS Resolver with <code>unbound</code></a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#understanding-dns-resolution">Understanding DNS Resolution</a></li>
+<li><a href="#introducing-unbound">Introducing Unbound</a></li>
+</ul></li>
+<li><a href="#installing-unbound">Installing Unbound</a></li>
+<li><a href="#basic-configuration-of-unbound">Basic Configuration of Unbound</a></li>
+<li><a href="#testing-your-local-dns-resolver">Testing Your Local DNS Resolver</a></li>
+<li><a href="#forwarding-queries-optional">Forwarding Queries (Optional)</a>
+<ul>
+<li><a href="#configuring-forwarders-in-the-unboundconf-file">Configuring Forwarders in the <code>unbound.conf</code> File</a></li>
+</ul></li>
+<li><a href="#dnssec-validation-with-unbound">DNSSEC Validation with Unbound</a>
+<ul>
+<li><a href="#check-if-dnssec-validation-is-working-using-dig">Check if DNSSEC Validation is Working using <code>dig</code></a></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<h3 id="understanding-dns-resolution">Understanding DNS Resolution</h3>
+<p>magine you want to call a friend. You probably don&#39;t remember their phone number by heart, but you do remember their name. So, you open your phonebook, find their name, and then get their number to make the call.</p>
+<p>DNS resolution works in a similar way for the internet. When you type a website address (like <code>example.com</code>) into your browser, your computer needs to find the actual address of the server that hosts that website. This actual address is a series of numbers called an <strong>IP address</strong> (like <code>93.184.216.34</code>).</p>
+<p>The process of finding the IP address for a given website name is called <strong>DNS resolution</strong>. Here&#39;s a simplified view of the steps involved:</p>
+<ol type="1">
+<li><strong>Your Computer Asks a Resolver</strong>: Your computer (the client) sends a request to a <strong>DNS resolver</strong>. Think of the resolver as your personal phonebook operator.</li>
+<li><strong>The Resolver Looks Up the Address</strong>: The resolver then goes through a process to find the IP address associated with the website name. It might have this information stored already (like remembering a frequently called number), or it might need to ask other DNS servers for help.</li>
+<li><strong>Root Servers (The Master Phonebooks)</strong>: If the resolver doesn&#39;t know the answer, it starts by asking special servers called <strong>root servers</strong>. These are like the main directories that know where to find other more specific phonebooks.</li>
+<li><strong>TLD Servers (Top-Level Domain Phonebooks)</strong>: The root servers direct the resolver to Top-Level Domain (TLD) servers. For <code>.com</code> addresses, it would go to a <code>.com</code> TLD server. This is like going to the section of the phonebook for businesses.</li>
+<li><strong>Authoritative Name Servers (The Specific Listing)</strong>: Finally, the TLD server directs the resolver to the authoritative name server for the specific domain (<code>example.com</code>). This server holds the definitive IP address for that website, like the specific listing for your friend in the phonebook.</li>
+<li><strong>The Resolver Responds</strong>: Once the resolver gets the IP address, it sends it back to your computer.</li>
+<li><strong>Connection Established</strong>: Your computer can now use the IP address to connect to the web server and display the website.</li>
+</ol>
+<p>Here&#39;s a simple diagram to visualize this:</p>
+<pre class="shell"><code>[Your Computer] --&gt; Asks: &quot;What&#39;s the IP for example.com?&quot; --&gt; [DNS Resolver]
+    |
+    v
+[DNS Resolver] --&gt; Asks Root Server --&gt; [Root Server]
+    |
+    v
+[Root Server] --&gt; Tells Resolver to ask .com TLD Server --&gt; [.com TLD Server]
+    |
+    v
+[.com TLD Server] --&gt; Tells Resolver to ask example.com&#39;s Name Server --&gt; [example.com Name Server]
+    |
+    v
+[example.com Name Server] --&gt; Responds with IP Address --&gt; [DNS Resolver]
+    |
+    v
+[DNS Resolver] --&gt; Sends IP Address back --&gt; [Your Computer]</code></pre>
+<h3 id="introducing-unbound">Introducing Unbound</h3>
+<p>Unbound is a specific piece of software that acts as a <strong>validating, recursive DNS resolver</strong>. Let&#39;s break down what those terms mean:</p>
+<ul>
+<li><strong>Recursive</strong>: When your computer asks Unbound for the IP address of a website, and Unbound doesn&#39;t have the answer stored, it will go through the entire process of asking the root servers, TLD servers, and authoritative name servers on its own, until it finds the answer. It does all the legwork for you, just like our diligent phonebook operator.</li>
+<li><strong>Validating</strong>: Unbound can perform <strong>DNSSEC (Domain Name System Security Extensions)</strong> validation. Think of DNSSEC as a way to add security and authenticity to the DNS lookup process. It&#39;s like having a digital signature on the phonebook entry, so you can be sure the IP address you received is the correct and untampered one. Unbound checks these signatures to ensure the integrity of the DNS data.</li>
+</ul>
+<p>Here are some key features and advantages of using Unbound as your local DNS resolver:</p>
+<ul>
+<li><strong>Security</strong>: Its built-in DNSSEC validation helps protect you from certain types of cyberattacks that try to redirect you to malicious websites.</li>
+<li><strong>Speed and Efficiency</strong>: By caching (storing) the IP addresses it has looked up recently, Unbound can answer subsequent requests for the same websites much faster. This can lead to a snappier browsing experience.</li>
+<li><strong>Lightweight</strong>: Compared to some other DNS resolver software like BIND (Berkeley Internet Name Domain, often referred to as <code>named</code>), Unbound is designed to be more lightweight and easier to configure for simple resolving tasks. BIND is very powerful but can be more complex to set up for a basic local resolver.</li>
+<li><strong>Focus on Resolving</strong>: Unbound&#39;s primary focus is on being a good resolver. While BIND can also act as an authoritative name server (hosting the DNS records for a domain), Unbound typically just handles the task of looking up addresses.</li>
+</ul>
+<p>Think of it this way: If BIND is like a large telecommunications company that can handle everything from looking up numbers to managing entire phonebook directories, Unbound is like a specialized, fast, and secure personal assistant whose main job is to quickly and reliably find the phone numbers you need.</p>
+<h2 id="installing-unbound">Installing Unbound</h2>
+<p>To install Unbound, you&#39;ll need to use the apt-get command. This command interacts with the apt system. Here&#39;s the command you&#39;ll need to run:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt-get install unbound</span></code></pre></div>
+<p>Let&#39;s break down this command:</p>
+<ul>
+<li><code>sudo</code>: This command allows you to run the following command with administrative privileges (as the &quot;superuser&quot;). Installing software requires these privileges because it makes changes to the core system. You&#39;ll likely be prompted to enter your password after running this.</li>
+<li><code>apt-get</code>: This is the command-line tool for handling packages provided by the <code>apt</code> system.</li>
+<li><code>update</code>: This part of the command tells <code>apt-get</code> to refresh the list of available packages from the repositories (online software sources). It&#39;s always a good idea to run this before installing new software to make sure you have the latest information. The &amp;&amp; means &quot;if the previous command was successful, then run the next command.&quot;</li>
+<li><code>install</code>: This part of the command tells <code>apt-get</code> that you want to install a specific package.</li>
+<li><code>unbound</code>: This is the name of the package we want to install – the Unbound DNS resolver software.</li>
+</ul>
+<p>So, when you run this entire command, your server will first update its list of available software, and then it will download and install the Unbound package and any other software it needs to run.</p>
+<p>Once the installation is complete, Unbound will typically start running automatically as a service on your server.</p>
+<h2 id="basic-configuration-of-unbound">Basic Configuration of Unbound</h2>
+<p>When software like Unbound is installed, it usually comes with a default set of instructions on how it should operate. These instructions are stored in one or more <strong>configuration files</strong>. Think of these files as the detailed manual for your Unbound operator, telling it how to behave.</p>
+<p>For Unbound, the main <strong>configuration</strong> file is typically located at:</p>
+<pre class="shell"><code>/etc/unbound/unbound.conf</code></pre>
+<p>You can use a text editor like <code>nano</code> or <code>vim</code> (which are common command-line editors on Ubuntu Server) to view and modify this file. For example, to open it with nano, you would use the command:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nano /etc/unbound/unbound.conf</span></code></pre></div>
+<p><strong>Important Note</strong>: Be very careful when editing configuration files. Incorrect changes can prevent Unbound from working correctly or even cause other network issues. It&#39;s always a good idea to make a backup of the original file before making any changes. You can do this with the <code>cp</code> command:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /etc/unbound/unbound.conf /etc/unbound/unbound.conf.backup</span></code></pre></div>
+<p>Inside the <code>unbound.conf file</code>, you&#39;ll find various sections and options that control how Unbound works. For a basic local resolver setup, there are a few key options we&#39;ll want to pay attention to.</p>
+<p>One of the most important is the <code>interface:</code> option. This tells Unbound which network address(es) it should listen on for DNS queries. For a local resolver that&#39;s only meant to be used by the server it&#39;s running on, it&#39;s common practice to set this to the loopback address:</p>
+<pre class="shell"><code>interface: 127.0.0.1</code></pre>
+<p>The loopback address (<code>127.0.0.1</code>) is a special IP address that your computer uses to refer to itself. By setting the interface to this address, you&#39;re telling Unbound to only accept DNS queries that originate from the same server. This enhances security by preventing external machines from using your Unbound instance as a public resolver.</p>
+<p>Another important option is the <code>port:</code> directive, which specifies the network port Unbound will listen on for DNS queries. The standard port for DNS is port <code>53</code>, so you&#39;ll usually see this set as:</p>
+<pre class="shell"><code>port: 53</code></pre>
+<p>Unless you have a specific reason to change it, it&#39;s best to leave this at the default port 53.</p>
+<p>So, a very basic <code>server:</code> section in your <code>unbound.conf</code> file might look something like this:</p>
+<pre class="shell"><code>server:
+    interface: 127.0.0.1
+    port: 53</code></pre>
+<p>After making any changes to the configuration file, you&#39;ll need to restart the Unbound service for the changes to take effect. You can do this using the systemctl command:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart unbound</span></code></pre></div>
+<h2 id="testing-your-local-dns-resolver">Testing Your Local DNS Resolver</h2>
+<p>We&#39;ll use command-line tools to send DNS queries and see how Unbound responds. Two common tools for this purpose are <code>dig</code> and <code>nslookup</code>. Both are usually available on Ubuntu Server, but dig tends to provide more detailed information.</p>
+<p>Let&#39;s start with <code>dig</code>. You can use it to query a specific domain name and see which DNS server answers the query. To test if your local Unbound resolver is working, you can run the following command:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> @127.0.0.1 www.example.com</span></code></pre></div>
+<p>Let&#39;s break down this command:</p>
+<ul>
+<li><code>dig</code>: This is the command-line tool itself.</li>
+<li><code>@127.0.0.1</code>: This tells dig to send the DNS query to the DNS server running at the IP address 127.0.0.1 (which is your local Unbound resolver, as we configured).</li>
+<li><code>www.example.com</code>: This is the domain name we want to look up.</li>
+</ul>
+<p>When you run this command, you should see a section in the output called <strong>ANSWER SECTION</strong>. If your local Unbound resolver is working correctly, this section should contain the IP address for <code>www.example.com</code>. It will look something like this:</p>
+<pre class="shell"><code>;; ANSWER SECTION:
+www.example.com.    83333   IN      A       93.184.216.34</code></pre>
+<p>Here, <code>93.184.216.34</code> is the IP address for <code>www.example.com</code>. The <code>IN</code> stands for &quot;Internet&quot;, and <code>A</code> indicates that this is an IPv4 address record. The number <code>83333</code> is the time-to-live (TTL) in seconds, indicating how long this record can be cached.</p>
+<p>Another useful piece of information in the <code>dig</code> output is the <strong>SERVER</strong> line in the <strong>HEADER</strong> section. This should confirm that the query was answered by your local resolver:</p>
+<pre class="shell"><code>;; SERVER: 127.0.0.1#53(127.0.0.1)</code></pre>
+<p>This line tells you that the DNS server at 127.0.0.1 on port 53 (our Unbound server) provided the answer.</p>
+<p>You can also use <code>nslookup</code> to perform a similar test:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nslookup</span> www.example.com 127.0.0.1</span></code></pre></div>
+<p>Here, <code>www.example.com</code> is the domain you&#39;re querying, and <code>127.0.0.1</code> specifies the DNS server to use. The output from <code>nslookup</code> will be less detailed than dig, but it should still show you the IP address for <code>www.example.com</code> and indicate that the query was handled by <code>127.0.0.1</code>.</p>
+<h2 id="forwarding-queries-optional">Forwarding Queries (Optional)</h2>
+<p>So far, your Unbound resolver has been set up to be <strong>recursive</strong>. This means it does all the work of finding the IP address itself, by querying the root servers and so on. However, you can also configure Unbound to forward DNS queries to other DNS resolvers, often called <strong>upstream resolvers</strong>.</p>
+<p>Think of it like this: Instead of your personal phonebook operator making all the calls themselves, you can tell them to first try asking a more experienced operator (the upstream resolver) who might already know the number. If the experienced operator doesn&#39;t know, then your personal operator will go through the whole process.</p>
+<p>There are several reasons why you might want to configure forwarding:</p>
+<ul>
+<li><strong>Simplicity</strong>: It can sometimes simplify the initial setup, as you don&#39;t have to rely entirely on your own server to handle all recursive lookups.</li>
+<li><strong>Leveraging Existing Infrastructure</strong>: You might want to use the DNS resolvers provided by your Internet Service Provider (ISP), which might be optimized for speed within their network.</li>
+<li><strong>Using Public DNS Servers</strong>: You might prefer to use well-known public DNS resolvers like Google&#39;s (8.8.8.8 and 8.8.4.4) or Cloudflare&#39;s (1.1.1.1), which are often fast and have good security features.</li>
+</ul>
+<p>To configure forwarding in Unbound, you need to edit the <code>unbound.conf</code> file again. Within the <code>server:</code> section, you would add one or more <code>forward-addr:</code> lines, specifying the IP addresses of the DNS servers you want to forward queries to.</p>
+<p>For example, to forward queries to Google&#39;s public DNS servers, you would add these lines to your server: section:</p>
+<pre class="shell"><code>server:
+    interface: 127.0.0.1
+    port: 53
+    forward-addr: 8.8.8.8
+    forward-addr: 8.8.4.4</code></pre>
+<p>Similarly, to use Cloudflare&#39;s public DNS servers, you would use:</p>
+<pre class="shell"><code>server:
+    interface: 127.0.0.1
+    port: 53
+    forward-addr: 1.1.1.1
+    forward-addr: 1.0.0.1</code></pre>
+<p>You can have multiple <code>forward-addr:</code> lines, and Unbound will typically try them in the order they are listed.</p>
+<p><strong>Important</strong>: If you configure forwarding, your Unbound server will no longer be performing fully recursive lookups itself for queries it doesn&#39;t have in its cache. Instead, it will rely on the upstream resolvers to do that work. However, Unbound can still perform DNSSEC validation on the responses it receives from the forwarders, if they support it.</p>
+<p>After making these changes, remember to save the <code>unbound.conf</code> file and restart the Unbound service:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart unbound</span></code></pre></div>
+<p>To test if forwarding is working, you can use <code>dig</code> again, querying a domain that your Unbound server likely doesn&#39;t have cached yet. You should still get the correct IP address in the ANSWER SECTION. You can also try to monitor network traffic on your server (using tools like <code>tcpdump</code> if you&#39;re comfortable with them) to see if queries are being sent to the forwarder addresses you configured.</p>
+<h3 id="configuring-forwarders-in-the-unboundconf-file">Configuring Forwarders in the <code>unbound.conf</code> File</h3>
+<p>As we discussed, you&#39;ll need to open the Unbound configuration file. Let&#39;s use <code>nano</code> again:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nano /etc/unbound/unbound.conf</span></code></pre></div>
+<p>Once the file is open, you&#39;ll typically find a <code>server:</code> section. If it doesn&#39;t exist, you can create one at the beginning of the file (after any comment lines, which start with <code>#</code>).</p>
+<p>Within this <code>server:</code> section, you&#39;ll add the <code>forward-addr:</code> lines, one for each forwarder you want to use. For example, if you want to forward to Cloudflare&#39;s primary and secondary DNS servers, you would add:</p>
+<pre class="shell"><code>server:
+    interface: 127.0.0.1
+    port: 53
+    forward-addr: 1.1.1.1
+    forward-addr: 1.0.0.1</code></pre>
+<p>If you wanted to use Google&#39;s public DNS servers instead, you would use:</p>
+<pre class="shell"><code>server:
+    interface: 127.0.0.1
+    port: 53
+    forward-addr: 8.8.8.8
+    forward-addr: 8.8.4.4</code></pre>
+<p>You can mix and match, or add more forwarders if you like. Unbound will generally try to use the first one in the list and move to the next if the first one doesn&#39;t respond.</p>
+<p><strong>Important Considerations</strong>:</p>
+<ul>
+<li><strong>Order matters (somewhat)</strong>: While Unbound will try different forwarders if one fails, the order in which you list them can influence which server is used most often. You might want to put the fastest or most reliable forwarders first.</li>
+<li><strong>Security and Privacy</strong>: Be mindful of the privacy policies of the DNS resolvers you choose to forward to. Some public resolvers offer enhanced privacy features.</li>
+<li><strong>Loop Prevention</strong>: Ensure that the forwarders you choose are not configured to forward back to your own Unbound server, as this could create a loop. Public DNS servers are generally safe in this regard.</li>
+</ul>
+<p>After you&#39;ve added the <code>forward-addr:</code> lines to your <code>server:</code> section, save the file and close the editor. Then, you must restart the Unbound service for the changes to take effect:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart unbound</span></code></pre></div>
+<p>To verify that forwarding is working, you can use dig to query a domain as we did before:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> @127.0.0.1 www.example.com</span></code></pre></div>
+<p>The output will still show that your local Unbound server (<code>127.0.0.1</code>) answered the query. However, behind the scenes, Unbound will have forwarded the query to one of the upstream resolvers you configured (if it didn&#39;t have the answer cached). You can sometimes get a hint of this by looking at the query time in the <code>dig</code> output. If it&#39;s the first time you&#39;re querying a particular domain after restarting Unbound, and you&#39;re forwarding, the query time might be slightly longer as your server waits for the upstream resolver to respond. Subsequent queries for the same domain should be faster due to caching.</p>
+<h2 id="dnssec-validation-with-unbound">DNSSEC Validation with Unbound</h2>
+<p>Think back to our phonebook analogy. What if someone malicious changed the phone number listed for your friend to a different number, one that connects you to a scammer? You&#39;d unknowingly be calling the wrong person.</p>
+<p>DNSSEC is like adding a system of digital signatures to the DNS records. These signatures allow your DNS resolver (like Unbound) to verify that the DNS information it receives is authentic and hasn&#39;t been tampered with during its journey across the internet. It&#39;s a way to ensure the &quot;phonebook entry&quot; you get is the real one, signed by the rightful owner of the domain.</p>
+<p><strong>Why is DNSSEC important?</strong></p>
+<p>Without DNSSEC, there&#39;s a possibility of &quot;DNS spoofing&quot; or &quot;DNS cache poisoning&quot; attacks. In these attacks, malicious actors can inject false DNS records into DNS resolvers, redirecting users to fake websites (e.g., a phishing site that looks like your bank). DNSSEC helps prevent these attacks by providing a way to cryptographically verify the authenticity of DNS data.</p>
+<p><strong>Unbound as a Validating Resolver</strong>:</p>
+<p>One of the key strengths of Unbound is that it is a <strong>validating</strong> resolver. This means that when it receives DNS records, it can automatically check the DNSSEC signatures associated with those records. If the signatures are valid, Unbound knows the information is legitimate. If the signatures are missing or invalid, Unbound knows something is wrong and can refuse to provide that potentially tampered data to your computer.</p>
+<p><strong>How does this relate to our setup?</strong></p>
+<p>Since we&#39;re setting up Unbound as our local resolver, and it&#39;s a validating resolver by default, it will automatically try to perform DNSSEC validation on the DNS responses it receives. This adds an extra layer of security to your internet communication.</p>
+<p>In most default configurations of Unbound, DNSSEC validation is enabled. You typically don&#39;t need to do any extra configuration to turn it on. Unbound will handle the validation process automatically.</p>
+<h3 id="check-if-dnssec-validation-is-working-using-dig">Check if DNSSEC Validation is Working using <code>dig</code></h3>
+<p>We&#39;ll use the <code>dig</code> command again, but this time we&#39;ll specifically ask for DNSSEC-related information. A common way to do this is by using the <code>+dnssec</code> option. Let&#39;s query a domain that is known to be DNSSEC-signed, like <code>dnssec.works</code>.</p>
+<p>Run the following command:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> @127.0.0.1 dnssec.works +dnssec</span></code></pre></div>
+<p>The <code>+dnssec</code> option tells <code>dig</code> to include DNSSEC records in the query and the response. If DNSSEC validation is working correctly, you should see a few key things in the output:</p>
+<ol type="1">
+<li><p><strong>The</strong> <code>AD</code> <strong>flag in the HEADER SECTION</strong>: This flag stands for &quot;Authenticated Data&quot;. If you see <code>ad</code> in the flags section of the header, it means that the resolver (your local Unbound) has successfully validated the DNSSEC signatures for the response. The header might look something like this:</p>
+<pre class="shell"><code>;; flags: qr rd ra ad; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1</code></pre>
+<p>Notice the ad in the flags.</p></li>
+<li><p><strong>DNSSEC Records in the ANSWER SECTION</strong>: You might see additional record types in the ANSWER SECTION, such as <code>RRSIG</code> (Resource Record Signature). These are the digital signatures that Unbound has verified. For example:</p>
+<pre class="shell"><code>dnssec.works.       3600    IN  A       192.0.2.1
+dnssec.works.       3600    IN  RRSIG   A 5 2 3600 20250617000000 20250517000000 35387 dnssec.works. [signature data...]</code></pre>
+<p>The presence of the RRSIG record indicates that the A record (the IP address) is signed.</p></li>
+</ol>
+<p>If you run this <code>dig</code> command and see the <code>ad</code> flag in the header, it&#39;s a strong indication that your local Unbound resolver is successfully performing DNSSEC validation.</p>
+<p>Now, let&#39;s try querying a domain that is known to be not DNSSEC-signed, like a very new or simple domain. You can try something like <code>example.com</code>.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> @127.0.0.1 example.com +dnssec</span></code></pre></div>
+<p>In this case, you should still get an answer (the IP address for <code>example.com</code>), but you likely won&#39;t see the <code>ad</code> flag in the header, and there won&#39;t be any <code>RRSIG</code> records in the ANSWER SECTION. This is because <code>example.com</code> itself doesn&#39;t have DNSSEC records to be validated.</p>
+</body>
+</html>

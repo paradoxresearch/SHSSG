@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="setting-up-a-network-bridge">Setting Up a Network Bridge</h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#setting-up-a-network-bridge">Setting Up a Network Bridge</a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#understanding-network-bridging">Understanding Network Bridging</a></li>
+</ul></li>
+<li><a href="#prerequisites">Prerequisites</a>
+<ul>
+<li><a href="#identifying-network-interfaces-in-more-depth">Identifying Network Interfaces in More Depth</a></li>
+</ul></li>
+<li><a href="#setting-up-your-network-bridge">Setting Up Your Network Bridge</a>
+<ul>
+<li><a href="#setting-up-a-ethernet-network-bridge">Setting Up a Ethernet Network Bridge</a>
+<ul>
+<li><a href="#setting-up-a-ethernet-network-bridge-with-networkmanager">Setting Up a Ethernet Network Bridge With NetworkManager</a></li>
+<li><a href="#setting-up-a-ethernet-network-bridge-with-netplan">Setting Up a Ethernet Network Bridge With Netplan</a></li>
+</ul></li>
+<li><a href="#setting-up-a-wi-fi-network-bridge">Setting Up a Wi-Fi Network Bridge</a>
+<ul>
+<li><a href="#setting-up-a-wi-fi-network-bridge-with-networkmanager">Setting Up a Wi-Fi Network Bridge with NetworkManager</a></li>
+<li><a href="#setting-up-a-wi-fi-network-bridge-with-netplan">Setting Up a Wi-Fi Network Bridge with netplan</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#testing-the-network-bridge-with-a-virtual-machine">Testing the Network Bridge with a Virtual Machine</a>
+<ul>
+<li><a href="#configuring-your-virtual-machines-network-settings">Configuring your Virtual Machine&#39;s Network Settings</a>
+<ul>
+<li><a href="#configuring-a-network-bridge-with-virtualbox">Configuring a Network Bridge with VirtualBox</a></li>
+<li><a href="#configuring-a-network-bridge-with-kvmqemu">Configuring a Network Bridge with KVM/QEMU</a>
+<ul>
+<li><a href="#for-kvmqemu-using-virt-manager">For KVM/QEMU Using virt-manager</a></li>
+<li><a href="#for-kvmqemu-using-the-command-line">For KVM/QEMU Using the Command Line</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#test-to-verify-the-bridge-is-working-correctly">Test to Verify the Bridge is Working Correctly</a>
+<ul>
+<li><a href="#pinging-a-device-on-your-local-network-from-within-the-virtual-machine">Pinging a Device on your Local Network from within the Virtual Machine</a>
+<ul>
+<li><a href="#troubleshooting-the-ping-test-further">Troubleshooting the ping test further</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="#removing-a-network-bridge">Removing a Network Bridge</a>
+<ul>
+<li><a href="#reverting-networkmanager-configuration-changes">Reverting NetworkManager Configuration Changes</a></li>
+<li><a href="#reverting-netplan-configuration-changes">Reverting netplan Configuration Changes</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<p>Network bridging is very useful, especially if you&#39;re planning to work with virtual machines. In simple terms, a network bridge allows you to connect different network segments together as if they were a single network. This lets your virtual machines communicate directly with your local network.</p>
+<h3 id="understanding-network-bridging">Understanding Network Bridging</h3>
+<p>Network bridging is a way to connect different parts of a network so they can work together as one. Imagine a bridge connecting two islands—without it, people on either side would have trouble traveling between them. Similarly, a network bridge allows devices on separate network segments to communicate as if they were on the same network, making data transfer seamless.</p>
+<p>When you set up a network bridge, it essentially listens to data moving through the network and determines where it needs to go. Instead of sending all data everywhere, the bridge keeps track of which devices are on each side and forwards information only when necessary. This prevents unnecessary congestion and improves network efficiency. In a virtual machine setup, bridging is particularly useful because it lets the virtual machines behave like regular devices on your local network. They receive IP addresses from the same router as your physical computers, making integration and communication effortless.</p>
+<p>By using network bridging, you ensure that your virtual machines function as full members of your network, rather than being isolated from other devices. This is helpful for tasks like running server applications, testing network configurations, or simply accessing shared resources without extra setup. Whether in home networks or enterprise environments, bridging simplifies connectivity and improves performance.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Before we can set up a network bridge on your Linux system, there are a few prerequisites:</p>
+<ol type="1">
+<li><p><strong><code>bridge-utils</code> Package</strong>: This is a collection of command-line tools for managing bridge interfaces. You&#39;ll need to make sure this packages is installed on your system.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install bridge-utils</span></code></pre></div>
+<p>These commands will update the package list and then installs the <code>bridge-utils</code> package if it&#39;s not already there.</p></li>
+<li><p><strong>Identifying Network Interfaces</strong>: You need to know the names of your network interfaces. For Ethernet, it&#39;s often something like <code>eth0</code> or <code>w1pXsY</code>. You can find these names using the command <code>ip addr</code> in your terminal. Look for the interfaces that are currently connected to your network and have an UP address (for example, under <code>eth0</code> or <code>wlan0</code>).</p></li>
+</ol>
+<h3 id="identifying-network-interfaces-in-more-depth">Identifying Network Interfaces in More Depth</h3>
+<p>The most common way to identify your network interface and names is by using the <code>ip addr</code> command in your terminal. You should see a output similar to:</p>
+<pre class="shell"><code>1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether xx:xx:xx:xx:xx:xx brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.100/24 brd 192.168.1.255 scope global eth0
+       valid_lft forever preferred_lft forever
+3: wlan0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether yy:yy:yy:yy:yy:yy brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.105/24 brd 192.168.1.255 scope global wlan0
+       valid_lft forever preferred_lft forever</code></pre>
+<p>You should see a list of network interfaces. Look for the ones that are currently active and have an IP address assigned to them.</p>
+<ul>
+<li><strong>Ethernet</strong>: Ethernet interfaces often start with <code>eth</code> (like <code>eth0</code>) or <code>enp</code> followed by some numbers (like <code>enp3s0</code>). You&#39;ll likely see a line under it that starts with <code>inet</code> followed by an IP address. This is your active Ethernet connection if you have one plugged in.</li>
+<li><strong>Wi-Fi</strong>: Wi-Fi interfaces usually start with <code>wlan</code> (like <code>wlan0</code>) or <code>wlp</code> followed by numbers (like <code>wlp2s0</code>). Similarly, if you&#39;re connected to Wi-Fi, you should see an <code>inet</code> line with an IP address under the Wi-Fi interface.</li>
+<li><strong>Loopback</strong>: You&#39;ll also see an interface called <code>lo</code> or &quot;loopback&quot;. This is your system&#39;s internal network interface and is not what we&#39;re looking for for bridging to your physical network.</li>
+</ul>
+<p>In the example output above, <code>eth0</code> is the Ethernet interface and <code>wlan0</code> is the Wi-Fi interface, both with IP addresses, indicating they are active.</p>
+<p>Think of <code>bridge-utils</code> as your toolkit for building the network bridge, and knowing your interface names is like knowing which cables you need to connect.</p>
+<h2 id="setting-up-your-network-bridge">Setting Up Your Network Bridge</h2>
+<h3 id="setting-up-a-ethernet-network-bridge">Setting Up a Ethernet Network Bridge</h3>
+<h4 id="setting-up-a-ethernet-network-bridge-with-networkmanager">Setting Up a Ethernet Network Bridge With NetworkManager</h4>
+<p>To see if your system is managing its network configuration with NetworkManager, run the following command in your terminal:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status NetworkManager.service</span></code></pre></div>
+<p>If you see a status that says &quot;active (running)&quot;, then NetworkManager is likely handling your network.</p>
+<p>You can further confirm that NetworkManager is in control of interfaces with the command:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nmcli</span> networking</span></code></pre></div>
+<p>If the output in your terminal says <code>enabled</code>, we&#39;ve confirmed NetworkManager is handling your network.</p>
+<p>Creating a network bridge using NetworkManager involves using the <code>nmcli</code> command-line tool.</p>
+<p>Here&#39;s how we can create a network bridge for your Ethernet connection using <code>nmcli</code>:</p>
+<ol type="1">
+<li><p><strong>Create the bridge interface</strong>: Create a new bridge connection named <code>br0</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nmcli connection add type bridge con-name br0 ifname br0</span></code></pre></div>
+<p>This command tells NetworkManager to create a new connection of type <code>bridge</code> with the connection <code>br0</code> and the interface name <code>br0</code>.</p></li>
+<li><p><strong>Add your Ethernet interface to the bridge</strong>: Now, we need to tell NetworkManager to make your Ethernet interface (<code>eth0</code>) a &quot;slave&quot; to the <code>br0</code> bridge. First, we need to find the connection name associated with your Ethernet interface. You can do this with:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nmcli</span> connection show</span></code></pre></div>
+<p>Look for the entry corresponding to your Ethernet interface (<code>eth0</code>). It will have a &quot;NAME&quot; associated with it. Let&#39;s assume the connection name is <code>Wired connection 1</code> (it might be different on your system).</p>
+<p>Then, use this command, replacing <code>Wired connection 1</code> with the actual connection name:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nmcli connection add type ethernet slave master br0 con-name bridge-slave-eth0 ifname eth0</span></code></pre></div>
+<p>This command creates a new Ethernet connection that is a slave to the <code>br0</code> bridge.</p></li>
+<li><p><strong>Disable the original Ethernet connection</strong>: We need to disable the original connection for your Ethernet interface so that the bridge can take over. Again, using the connection name we found (e.g., <code>Wired connection 1</code>):</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nmcli connection down <span class="st">&#39;Wired connection 1&#39;</span></span></code></pre></div></li>
+<li><p><strong>Enable the bridge connection</strong>: Now, bring up the bridge connection:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nmcli connection up br0</span></code></pre></div></li>
+</ol>
+<p>After running these commands, a new network bridge interface named <code>br0</code> should be active, and your Ethernet interface should be part of it. You can verify this by using the <code>ip addr</code> command again. You should see the <code>br0</code> interface with an IP address (if your network uses DHCP) and your <code>eth0</code> interface should no longer have an IP address directly assigned to it.</p>
+<h4 id="setting-up-a-ethernet-network-bridge-with-netplan">Setting Up a Ethernet Network Bridge With Netplan</h4>
+<p>You can check if your system is currently using <code>netplan</code> to manage your network configuration with the command:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> status systemd-networkd</span></code></pre></div>
+<p>If you see an output in your terminal with a heading like:</p>
+<pre class="shell"><code>● systemd-networkd.service - Network Configuration
+     Loaded: loaded (/lib/systemd/system/systemd-networkd.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2025-04-28 21:17:23 PDT; 8min ago</code></pre>
+<p>This output would suggest your network is being managed with <code>netplan</code>. Otherwise if you see an output like:</p>
+<pre class="shell"><code>● systemd-networkd.service - Network Configuration
+     Loaded: loaded (/lib/systemd/system/systemd-networkd.service; disabled; vendor preset: enabled)
+     Active: active (running) since Mon 2025-04-28 21:17:23 PDT; 8min ago</code></pre>
+<p>The &quot;disabled;&quot; part of the &quot;<code>Loaded:</code>&quot; line suggests your network is being managed with a different service.</p>
+<p>If you have confirmed that <code>netplan</code> is handling your network configuration, we can move forward with configuring the bridge.</p>
+<p>If your system uses <code>netplan</code>, you would typically have a configuration file in <code>/etc/netplan/</code>. Let&#39;s assume you have a file named <code>01-netcfg.yaml</code> (the name might vary). You would edit this file (after backing it up!) to define the bridge.</p>
+<ol type="1">
+<li><p><strong>Create a backup</strong>: Let&#39;s save our old configuration in case something goes wrong, and we need to revert back to the original configuration:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /etc/netplan/01-netcfg.yaml /etc/netplan/01-netcfg.yaml.backup</span></code></pre></div></li>
+<li><p><strong>Edit your <code>netplan</code> configuration</strong>: After creating a backup of the original, edit your <code>netplan</code> configuration to reflect this configuration:</p>
+<pre class="shell"><code>sudo nano /etc/netplan/01-netcfg.yaml</code></pre>
+<p><strong>Original</strong> (Before edit):</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode YAML"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">network</span><span class="kw">:</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">renderer</span><span class="kw">:</span><span class="at"> networkd</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">ethernets</span><span class="kw">:</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">eth0</span><span class="kw">:</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">dhcp4</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">      # dhcp6: yes</span></span></code></pre></div>
+<p><strong>Create a bridge named <code>br0</code> with your Ethernet interface <code>eth0</code> using DHCP</strong> (After edit):</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode YAML"><code class="sourceCode yaml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">network</span><span class="kw">:</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">renderer</span><span class="kw">:</span><span class="at"> networkd</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">ethernets</span><span class="kw">:</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">eth0</span><span class="kw">:</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">dhcp</span><span class="kw">:</span><span class="at"> </span><span class="ch">no</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">bridges</span><span class="kw">:</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">br0</span><span class="kw">:</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">interfaces</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">eth0</span><span class="kw">]</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">dhcp4</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">dhcp6</span><span class="kw">:</span><span class="at"> </span><span class="ch">no</span></span></code></pre></div>
+<p>Here&#39;s a breakdown of your configuration file:</p>
+<ul>
+<li><code>network:</code>: This is the top-level section that encapsulates all network configurations. Think of it as the main container for all your network settings.</li>
+<li><code>version: 2</code>: This line specifies the version of the <code>netplan</code> configuration syntax being used. Currently, version 2 is common. It helps <code>netplan</code> correctly interpret the instructions.</li>
+<li><code>renderer: networkd</code>: This is a crucial line. It tells <code>netplan</code> which network management backend to use. In this case, we&#39;re specifying <code>networkd</code>, which is the network service provided by <code>systemd</code>. Another common renderer is <code>NetworkManager</code> itself. If <code>renderer</code> were set to <code>NetworkManager</code>, then NetworkManager would interpret the <code>netplan</code> configuration.</li>
+<li><code>ethernets:</code>: This section is used to configure your physical Ethernet interfaces.
+<ul>
+<li><code>eth0:</code>: This identifies your specific Ethernet interface by its name.</li>
+<li><code>dhcp: no</code>: This line is important. It tells the <code>eth0</code> interface not to obtain an IP address automatically. This is because the bridge interface (<code>br0</code>) will be responsible for getting the IP address. If you didn&#39;t include this, you might have IP address conflicts.</li>
+</ul></li>
+<li><code>bridges:</code>: This section is where you define your bridge interfaces.
+<ul>
+<li><code>br0:</code>: This is the name we&#39;ve chosen for our bridge interface. You can name it something else if you prefer, but <code>br0</code> is a common convention.</li>
+<li><code>interfaces: [eth0]</code>: This line specifies which physical network interfaces should be part of this bridge. You can include multiple interfaces in this list (e.g., [eth0, eth1]) if you want to bridge them together. In our case, we&#39;re only including the Ethernet interface.</li>
+<li><code>dhcp4: yes</code>: This tells the bridge interface (<code>br0</code>) to obtain an IPv4 address automatically using DHCP (Dynamic Host Configuration Protocol) from your router. This is usually what you want for your VMs to easily connect to your network.</li>
+<li><code>dhcp6: no</code>: This line disables IPv6 DHCP on the bridge. You can set it to <code>yes</code> if you need IPv6 connectivity for your VMs and your network supports it.</li>
+</ul></li>
+</ul>
+<p>So, in essence, this <code>netplan</code> configuration tells the system to:</p>
+<ol type="1">
+<li>Not assign an IP address directly to the <code>eth0</code> Ethernet interface.</li>
+<li>Create a bridge interface named <code>br0</code>.</li>
+<li>Make <code>eth0</code> a part of the bridge.</li>
+<li>Have the <code>br0</code> bridge obtain an IP address using DHCP.</li>
+</ol></li>
+<li><p><strong>Apply the <code>netplan</code> configuration and verify the bridge</strong>.</p>
+<p>After saving the changes to the <code>/etc/netplan/01-netcfg.yaml</code> configuration file, we can apply the changes with the following command in the terminal:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> netplan apply</span></code></pre></div>
+<p>This command reads your configuration files, generates the necessary configuration for the network backend (like <code>networkd</code>), and then applies those settings to your network interfaces.</p>
+<p>After running this command, it&#39;s essential to verify that the bridge interface (<code>br0</code>) has been created correctly and has obtained an IP address if you configured it to use DHCP. You can do this using the <code>ip addr</code> command again:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ip</span> addr</span></code></pre></div>
+<p>In the output you should look for a few things:</p>
+<ol type="1">
+<li><strong>A new interface named <code>br0</code></strong>: You should see a section for the <code>br0</code> interface.</li>
+<li><strong>An IP address for <code>br0</code> (if using DHCP)</strong>: If you configured <code>dhcp4: yes</code> under the <code>br0</code> section in your <code>netplan</code> file, the <code>br0</code> interface should have an IP address listed under it (usually starting with <code>inet</code>).</li>
+<li><strong>No IP address on the bridged Ethernet interface</strong>: Your original Ethernet interface (<code>eth0</code>, or whatever it might be in the <code>netplan</code> system) should no longer have an IP address directly assigned to it. This is because it&#39;s now part of the bridge, and the bridge interface handles the IP configuration.</li>
+</ol>
+<p>If you see these things, it means your Ethernet bridge has likely been created and configured successfully using <code>netplan</code>.</p></li>
+</ol>
+<h3 id="setting-up-a-wi-fi-network-bridge">Setting Up a Wi-Fi Network Bridge</h3>
+<h4 id="setting-up-a-wi-fi-network-bridge-with-networkmanager">Setting Up a Wi-Fi Network Bridge with NetworkManager</h4>
+<p>Just like with Ethernet, here is the general approach to create a Wi-Fi network bridge with <strong>NetworkManager</strong> and the <code>nmcli</code> tool:</p>
+<ol type="1">
+<li><p><strong>Create the bridge interface</strong>: Just like with Ethernet, we&#39;ll create a new bridge connection named <code>br0</code>:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nmcli connection add type bridge con-name br0 ifname br0</span></code></pre></div></li>
+<li><p><strong>Add your Wi-Fi interface to the bridge</strong>: Now, we need to add your Wi-Fi interface (let&#39;s assume it&#39;s <code>wlan0</code>, though it might be different if your actively using a different Wi-Fi adapter) as a slave to the <code>br0</code> bridge. First, find the connection name associated with your Wi-Fi interface:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nmcli</span> connection show</span></code></pre></div>
+<p>Look for the entry corresponding to your Wi-Fi interface (<code>wlan0</code> or similar). Let&#39;s assume the connection name is <code>wireless-connection-1</code>. Then use this command, replacing <code>wireless-connection-1</code> with your actual Wi-Fi connection name:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nmcli connection add type wifi slave master br0 con-name bridge-slave-wlan0 ifname wlan0</span></code></pre></div>
+<p><strong>Imortant Note for Wi-Fi</strong>: When adding the Wi-Fi interface as a slave, you might need to specify the SSID and password of your Wi-Fi network within this command. It would look something like this:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nmcli connection add type wifi slave master br0 con-name bridge-slave-wlan0 ifname wlan0 ssid <span class="st">&quot;YourWiFiNetworkName&quot;</span> password <span class="st">&quot;YourWiFiPassword&quot;</span></span></code></pre></div>
+<p>Replace <code>&quot;YourWifiNetworkName&quot;</code> and <code>&quot;YourWifiPassword&quot;</code> with your actual Wi-Fi credentials.</p></li>
+<li><p><strong>Disable the original Wi-Fi connection</strong>: Disable the original connection for your Wi-Fi interface:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nmcli connection down wireless-connection-1</span></code></pre></div>
+<p>Again, replace <code>wireless-connection-1</code> with the correct connection name.</p></li>
+<li><p><strong>Enable the bridge connection</strong>: Bring up the bridge connection:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nmcli connection up br0</span></code></pre></div>
+<p>After these commands, NetworkManager will attempt to connect your Wi-Fi interface to the bridge. You can then verify using <code>ip addr</code> to see if <code>br0</code> has an IP address.</p></li>
+</ol>
+<p><strong>Potential Issues with Wi-Fi Bridging using NetworkManager</strong>:</p>
+<ul>
+<li><strong>Connection Stability</strong>: Wi-Fi bridging can be less stable than Ethernet Bridging. You might experience disconnects or performance issues.</li>
+<li><strong>Driver Compatibility</strong>: As mentioned before, your Wi-Fi driver might not fully support this configuration.</li>
+<li><strong>NetworkManager Behavior</strong>: NetworkManager&#39;s behavior with Wi-Fi bridges can sometimes be unpredictable.</li>
+</ul>
+<p>It&#39;s important to be aware of these potential challenges. If you encounter issues with a Wi-Fi bridge, you might need to research specific bridge configurations for your Wi-Fi adapter and drivers, or consider using an Ethernet connection for bridging if possible.</p>
+<h4 id="setting-up-a-wi-fi-network-bridge-with-netplan">Setting Up a Wi-Fi Network Bridge with netplan</h4>
+<p>Similar to Ethernet bridging, you need to edit your <code>netplan</code> configuration file. For this example we&#39;ll say it&#39;s <code>/etc/netplan/01-netcfg.yaml</code>, but the name of your <code>netplan</code> configuration file may vary. Let&#39;s also assume your Wi-Fi interface is named <code>wlan0</code> and you want to create a bridge named <code>br0</code> that includes this interface and obtains an IP address via DHCP. Here&#39;s and example of how your <code>netplan</code> configuration might look:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode YAML"><code class="sourceCode yaml"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">network</span><span class="kw">:</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">renderer</span><span class="kw">:</span><span class="at"> networkd</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">wifis</span><span class="kw">:</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">wlan0</span><span class="kw">:</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">dhcp</span><span class="kw">:</span><span class="at"> </span><span class="ch">no</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">bridges</span><span class="kw">:</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">br0</span><span class="kw">:</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">interfaces</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">wlan0</span><span class="kw">]</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">dhcp4</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">dhcp6</span><span class="kw">:</span><span class="at"> </span><span class="ch">no</span></span></code></pre></div>
+<p>Here are the key differences and points to note compared to the Ethernet bridge configuration:</p>
+<ul>
+<li><strong><code>wifis:</code> section</strong>: Instead of <code>ethernets:</code>, we now have a <code>wifis:</code> section to configure the Wi-Fi interface.</li>
+<li><code>wlan0:</code>: This identifies your Wi-Fi interface.</li>
+<li><strong><code>dhcp: no</code> under <code>wlan0:</code></strong>: Just like with the Ethernet interface, we disable DHCP directly on the Wi-Fi interface because the bridge will handle the IP configuration.</li>
+<li><strong><code>interfaces: [wlan0]</code> under <code>bridges: br0:</code></strong>: We specify the Wi-Fi interface <code>wlan0</code> as the interface to be included in the bridge.</li>
+</ul>
+<p>After saving this <code>netplan</code> configuration, you would apply it using:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> netplan apply</span></code></pre></div>
+<p>And then you would verify the bridge (<code>br0</code>) and the status of your Wi-Fi interface using <code>ip addr</code>, just as we did with the Ethernet bridge. You&#39;d look for the <code>br0</code> interface with an IP address and the <code>wlan0</code> interface without a direct IP address.</p>
+<h2 id="testing-the-network-bridge-with-a-virtual-machine">Testing the Network Bridge with a Virtual Machine</h2>
+<p>Creating a network bridge is a great way to allow your virtual machines to communicate directly with your local network.</p>
+<h3 id="configuring-your-virtual-machines-network-settings">Configuring your Virtual Machine&#39;s Network Settings</h3>
+<p>The exact steps for configuring your virtual machine&#39;s network will depend on the virtualization software you are using. Some popular options on Linux include:</p>
+<ul>
+<li><strong>VirtualBox</strong>: In VirtualBox, when you configure the network settings for a virtual machine, you typically have a few options for the &quot;Attached to&quot; field. To use the network bridge you created, you would usually select &quot;Bridged Adapter.&quot; After selecting this, a dropdown menu will appear where you can choose which physical network interface the VM should bridge to. In our case, you would select the bridge interface you created, which is likely named <code>br0</code>.</li>
+<li><strong>KVM/QEMU</strong>: When using KVM (Kernel-based Virtual Machine) with QEMU, you would configure the network interface for your VM in its virtual machine definition. This often involves created a virtual network interface and then &quot;attaching&quot; it to the bridge interface (<code>br0</code>) on your host system. This can be done through command-line options when starting the VM or by editing the VM&#39;s XML configuration if you&#39;re using a management tool like <code>virt-manager</code>. You would typically specify the type of network device to be &quot;bridge&quot; and then provide the name of your bridge interface (<code>br0</code>).</li>
+</ul>
+<p>No matter which virtualization software you&#39;re using, the key idea is to tell the VM&#39;s network settings to connect to the bridge interface (<code>br0</code>) that you&#39;ve created on your host machine. This makes the VM appear as another device directly connected to your local network. It will then typically obtain its own IP address from your router via DHCP, just like your physical laptop or other devices on your network.</p>
+<p>Here&#39;s how you would typically configure the network settings in these two popular virtualization platforms to use the <code>br0</code> network bridge:</p>
+<h4 id="configuring-a-network-bridge-with-virtualbox">Configuring a Network Bridge with VirtualBox</h4>
+<ol type="1">
+<li><strong>Select your Virtual Machine</strong>: In the VirtualBox Manager, select the virtual machine you want to configure.</li>
+<li><strong>Go to Settings</strong>: Click on the &quot;Settings&quot; button for the selected VM.</li>
+<li><strong>Navigate to Network</strong>: In the VM settings window, go to the &quot;Network&quot; tab.</li>
+<li><strong>Attached to</strong>: In the &quot;Attached to&quot; dropdown menu, select &quot;Bridged Adapter.&quot;</li>
+<li><strong>Name</strong>: A new dropdown menu labeled &quot;Name&quot; will appear. Here, you need to select the network bridge interface you created on your host system. This will likely be named <code>br0</code>. If you have multiple network interfaces, make sure you choose the one corresponding to your bridge.</li>
+<li><strong>Adapter Type and other settings (optional)</strong>: You can usually leave the &quot;Adapter Type&quot; at its default setting. You might have other advanced options, but for basic bridging, the &quot;Attached to&quot; and &quot;Name&quot; settings are the most crucial.</li>
+<li><strong>Click &quot;OK&quot;</strong>: Save the changes to your VM&#39;s network settings.</li>
+</ol>
+<p>When you start this virtual machine, its network interface will now be bridged to your <code>br0</code> interface, allowing it to communicate directly with your local network.</p>
+<h4 id="configuring-a-network-bridge-with-kvmqemu">Configuring a Network Bridge with KVM/QEMU</h4>
+<h5 id="for-kvmqemu-using-virt-manager">For KVM/QEMU Using virt-manager</h5>
+<ol type="1">
+<li><strong>Open virt-manager</strong>: If you&#39;re using the graphical management tool virt-manager, open it.</li>
+<li><strong>Select your Virtual Machine</strong>: Double-click on the virtual machine you want to configure.</li>
+<li><strong>Open Virtual Machine Details</strong>: In the VM&#39;s overview window, click on &quot;Show virtual hardware details&quot; (it looks like a lightbulb or an &quot;i&quot; icon).</li>
+<li><strong>Select Network Interface</strong>: In the hardware list, select your virtual network interface (it might be labeled &quot;Network&quot; or something similar).</li>
+<li><strong>Connection type</strong>: In the right-hand pane, look for the &quot;Connection type&quot; setting. Change this to &quot;Bridge device.&quot;</li>
+<li><strong>Bridge name</strong>: A field labeled &quot;Bridge name&quot; will appear. Enter the name of your bridge interface, which is <code>br0</code>.</li>
+<li><strong>Network source</strong>: Ensure the &quot;Network source&quot; is set to the bridge you just specified (<code>br0</code>).</li>
+<li><strong>Click &quot;Apply&quot;</strong>: Save the changes to your VM&#39;s network configuration.</li>
+</ol>
+<p>When you start this virtual machine, its virtual network interface will be connected to the <code>br0</code> bridge on your host.</p>
+<h5 id="for-kvmqemu-using-the-command-line">For KVM/QEMU Using the Command Line</h5>
+<p>If you are starting your VMs from the command line using <code>qemu-system-x86_64</code> (or similar), you would typically use the <code>-netdev</code> and <code>-device</code> options to configure networking. To connect to a bridge, you would define a network device of type <code>bridge</code> and specify the bridge name:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qemu-system-x86_64</span> <span class="at">-enable-kvm</span> <span class="at">-m</span> 2G <span class="at">-cdrom</span> your_image.iso <span class="at">-drive</span> file=your_disk.img,format=qcow2 <span class="at">-netdev</span> type=bridge,br=br0,id=net0 <span class="at">-device</span> virtio-net-pci,netdev=net0</span></code></pre></div>
+<p>In this example:</p>
+<ul>
+<li><code>-netdev type=bridge,br=br0,id=net0</code> creates a network backend connected to the <code>br0</code> bridge and gives it the ID <code>net0</code>.</li>
+<li><code>-device virtio-net-pci,netdev=net0</code> creates a virtual network card in the VM and connects it to the <code>net0</code> network backend.</li>
+</ul>
+<p>Once your VM is configured to use the <code>br0</code> bridge, it should, upon starting, attempt to obtain an IP address from your local network&#39;s DHCP server.</p>
+<h3 id="test-to-verify-the-bridge-is-working-correctly">Test to Verify the Bridge is Working Correctly</h3>
+<p>Once your virtual machine is running and configured to use the <code>br0</code> bridge, it should behave like any other device on your local network. It should ideally obtain an IP address from your router (if you&#39;re using DHCP on the bridge, which is the common setup).</p>
+<p>Here&#39;s a simple and effective way to test if the network bridge is working correctly:</p>
+<h4 id="pinging-a-device-on-your-local-network-from-within-the-virtual-machine">Pinging a Device on your Local Network from within the Virtual Machine</h4>
+<ol type="1">
+<li><p><strong>Identify another device on your local network</strong>: This could be your host laptop, another computer, a printer, or anything else connected to the same router. You&#39;ll need to know its IP address. You can usually find this information in your router&#39;s administration interface or by using network scanning tools. For your host laptop, you can use <code>ip addr</code> (or <code>ipconfig</code> on Windows if you happen to be running a Windows VM).</p></li>
+<li><p><strong>Open a terminal or command prompt in your virtual machine</strong>: Once your VM has started up and has (hopefully) obtained an IP address, open a terminal or command prompt within the guest operating system.</p></li>
+<li><p><strong>Use the <code>ping</code> command</strong>: Use the ping command followed by the IP address of the other device you identified in step 1. For example, if another device on your network has the IP address <code>192.168.1.5</code>, you would run:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ping</span> 192.168.1.5</span></code></pre></div></li>
+<li><p><strong>Observe the output</strong>: If the bridge is working correctly and your VM has network connectivity, you should see replies from the IP address you are pinging. The output will typically show the time it took for each &quot;echo request&quot; to be sent and a &quot;reply&quot; to be received.</p></li>
+<li><p><strong>Troubleshooting</strong>: If you don&#39;t get any replies, it could indicate a problem with your bridge configuration, the VM&#39;s network settings, or general network connectivity. You&#39;ll need to double-check each step we&#39;ve taken. Make sure the <code>br0</code> interface is up on your host, your VM is configured to use it, and your VM has obtained an IP address (you can check this within the VM using tools like <code>ip addr</code> on Linux or <code>ipconfig</code> on Windows).</p></li>
+</ol>
+<h5 id="troubleshooting-the-ping-test-further">Troubleshooting the ping test further</h5>
+<p>You&#39;ve configured your VM to use the <code>br0</code> network bridge, and you&#39;ve started the VM. You open a terminal in the VM and try to ping your host laptop&#39;s IP address, but you&#39;re not getting any replies. Here are some steps to help diagnose and fix the issue:</p>
+<ol type="1">
+<li><p><strong>VM Network Configuration</strong>:</p>
+<ul>
+<li><p><strong>Check the &quot;Attached to&quot; setting</strong>: Ensure that your VM&#39;s network adapter is indeed set to &quot;Bridged Adapter&quot; and that the &quot;Name&quot; field correctly points to <code>br0</code> in VirtualBox. For KVM, double-check that the network interface is set to &quot;Bridge device&quot; and the bridge name is <code>br0</code>.</p></li>
+<li><p><strong>Verify IP Address in VM</strong>: Make sure your VM has actually obtained an IP address. Use <code>ip addr</code> (Linux) or <code>ipconfig</code> (Windows) within the VM. If it hasn&#39;t gotten an IP address, there might be an issue with the bridge not forwarding DHCP requests or a problem with your router&#39;s DHCP server. You might need to restart the VM or the networking service within the VM.</p></li>
+</ul></li>
+<li><p><strong>Bridge Interface Status on Host</strong>:</p>
+<ul>
+<li><p><strong>Check if <code>br0</code> is up</strong>: On your host machine, run <code>ip addr</code> show <code>br0</code>. Ensure the state is &quot;UP&quot; and that it has an IP address (if you configured it for DHCP).</p></li>
+<li><p><strong>Check if the physical interface is enslaved</strong>: Also on your host, run <code>brctl show</code>. This command (from <code>bridge-utils</code>) will show you the bridge interfaces and the ports (physical interfaces) they contain. Make sure your Ethernet (<code>eth0</code> or similar) or Wi-Fi (<code>wlan0</code> or similar) interface is listed as a port on <code>br0</code>.</p></li>
+</ul></li>
+<li><p><strong>Firewall Issues</strong>:</p>
+<ul>
+<li><p><strong>Host Firewall</strong>: Your host system might have a firewall (like <code>ufw</code>) enabled that is blocking traffic to or from the bridge interface. You might need to configure it to allow traffic on <code>br0</code>.</p></li>
+<li><p><strong>Guest Firewall</strong>: Similarly, the operating system inside your VM might have a firewall that&#39;s preventing it from responding to ping requests. You&#39;ll need to check the firewall settings within the VM.</p></li>
+</ul></li>
+<li><p><strong>Network Connectivity</strong>:</p>
+<ul>
+<li><p><strong>Host Connectivity</strong>: Ensure your host machine itself has a working network connection. If your host can&#39;t access the network, the bridge won&#39;t be able to pass traffic.</p></li>
+<li><p><strong>Router Issues</strong>: In rare cases, there might be an issue with your router not properly handling DHCP requests or ARP (Address Resolution Protocol) for bridged interfaces. A router restart might sometimes help.</p></li>
+</ul></li>
+</ol>
+<h2 id="removing-a-network-bridge">Removing a Network Bridge</h2>
+<p>It&#39;s crucial to know how to undo the changes you&#39;ve made, whether you no longer need the bridge or if you encountered any issues.</p>
+<p>The process for removing a network bridge depends on how you created it in the first place (using <code>netplan</code> or NetworkManager).</p>
+<h3 id="reverting-networkmanager-configuration-changes">Reverting NetworkManager Configuration Changes</h3>
+<p>This is the method you would use if you created the bridge using NetworkManager&#39;s <code>nmcli</code> tool, as we did for your system.</p>
+<p>Here&#39;s how to remove the br0 bridge interface using command-line tools:</p>
+<ol type="1">
+<li><p><strong>Disable the bridge interface</strong>: First, you need to bring the <code>br0</code> interface down. This stops all network traffic going through it. Use the command:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ip link down br0</span></code></pre></div></li>
+<li><p><strong>Delete the bridge interface</strong>: Once the interface is down, you can delete it entirely using the command:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ip link del br0</span></code></pre></div></li>
+</ol>
+<p>However, if you created the bridge using NetworkManager (with <code>nmcli</code>), simply deleting the <code>br0</code> interface might not be enough. NetworkManager has its own configuration for the bridge and its member interfaces. To properly remove the bridge managed by NetworkManager, you should use <code>nmcli</code> to delete the connections you created:</p>
+<ol type="1">
+<li><p><strong>Identify the bridge and slave connections</strong>: First, list your NetworkManager connections to find the ones we created for the bridge.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nmcli</span> connection show</span></code></pre></div>
+<p>You&#39;ll be looking for connections named something like <code>br0</code> and <code>bridge-slave-eth0</code> (or <code>bridge-slave-wlan0</code> if you bridged Wi-Fi).</p></li>
+<li><p><strong>Delete the slave connection</strong>: Delete the connection for the physical interface that was part of the bridge. For example:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nmcli connection delete bridge-slave-eth0</span></code></pre></div>
+<p>If you bridged Wi-Fi, you would delete the Wi-Fi slave connection instead.</p></li>
+<li><p><strong>Delete the bridge connection</strong>: Finally, delete the bridge connection itself:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nmcli connection delete br0</span></code></pre></div></li>
+<li><p><strong>Re-enable the original interface connection</strong>: After deleting the bridge connections, you&#39;ll likely want to re-enable the original connection for your Ethernet or Wi-Fi interface so it can get an IP address again:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nmcli connection up ethernet-eth0</span></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nmcli connection up wifi-wlan0</span></code></pre></div>
+<p>(Use the correct connection name for your interface).</p></li>
+</ol>
+<h3 id="reverting-netplan-configuration-changes">Reverting netplan Configuration Changes</h3>
+<p>If you created the network bridge by editing your netplan configuration file, the primary way to remove it is to <strong>revert those changes</strong>.</p>
+<p>Here&#39;s what you would typically need to do:</p>
+<ol type="1">
+<li><p><strong>Identify the changes you made</strong>: Remember the modifications you made to your <code>.yaml</code> file in <code>/etc/netplan/</code>. This likely involved:</p>
+<ul>
+<li>Adding a <code>bridges:</code> section.</li>
+<li>Modifying the configuration of your Ethernet (<code>ethernets:</code>) or Wi-Fi (<code>wifis:</code>) interface to disable DHCP.</li>
+<li>Listing the physical interface under the <code>interfaces:</code> of the bridge.</li>
+</ul></li>
+<li><p><strong>Restore the original configuration (if you backed it up)</strong>: If you followed our earlier advice and backed up your original <code>netplan</code> configuration file, the easiest way to remove the bridge is to restore that backup. For example, if you backed up <code>01-netcfg.yaml</code> to <code>01-netcfg.yaml.backup</code>, you would use a command like:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /etc/netplan/01-netcfg.yaml.backup /etc/netplan/01-netcfg.yaml</span></code></pre></div>
+<p>Then, you would need to apply this restored configuration:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> netplan apply</span></code></pre></div></li>
+<li><p><strong>Manually edit the configuration (if you didn&#39;t back up)</strong>: If you didn&#39;t create a backup, you&#39;ll need to manually edit the <code>netplan</code> configuration file again to remove the bridge-related entries and re-enable the original settings for your Ethernet or Wi-Fi interface. This would involve:</p>
+<ul>
+<li>Deleting the entire <code>bridges:</code> section.</li>
+<li>Going back to the <code>ethernets:</code> or <code>wifis:</code> section for your physical interface and setting <code>dhcp4: yes</code> (and <code>dhcp6: yes</code> if you need IPv6) to re-enable DHCP on the physical interface directly.</li>
+</ul>
+<p>For example, if you had this before creating the bridge:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode YAML"><code class="sourceCode yaml"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">network</span><span class="kw">:</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">renderer</span><span class="kw">:</span><span class="at"> networkd</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">ethernets</span><span class="kw">:</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">eth0</span><span class="kw">:</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">dhcp4</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co">      # dhcp6: yes</span></span></code></pre></div>
+<p>And you changed it to create a bridge, you would need to revert it back to this (or a similar state depending on your original configuration). After editing, remember to apply the changes:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> netplan apply</span></code></pre></div></li>
+</ol>
+<p>After applying the reverted configuration, your system should no longer have the <code>br0</code> bridge interface, and your Ethernet or Wi-Fi interface should be back to obtaining an IP address directly. You can verify this using <code>ip addr</code>. You should not see the <code>br0</code> interface anymore, and your physical interface (<code>eth0</code>, <code>wlan0</code>, etc.) should have an IP address.</p>
+</body>
+</html>

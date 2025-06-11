@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="identifying-active-connections-on-specific-ports">Identifying Active Connections On Specific Ports</h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#identifying-active-connections-on-specific-ports">Identifying Active Connections On Specific Ports</a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#using-netstat">Using netstat</a></li>
+<li><a href="#using-ss-socket-statistics">Using ss (Socket Statistics)</a></li>
+<li><a href="#using-lsof">Using lsof</a></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<p>You can use command-line tools to inspect the network connections and filter for those related to the port you want to monitor. This gives you a real-time snapshot.</p>
+<h2 id="using-netstat">Using netstat</h2>
+<p>This command displays network connections, routing tables, interface statistics, masquerade connections, and multicast memberships.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">netstat</span> <span class="at">-an</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&#39;:80&#39;</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&#39;ESTABLISHED&#39;</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div>
+<ul>
+<li><code>netstat -an</code>: Shows all active network connections and listening ports.</li>
+<li><code>grep &#39;:80&#39;</code>: Filters the output to show connections on port 80 (the default HTTP port).</li>
+<li><code>grep &#39;ESTABLISHED&#39;</code>: Further filters to show only currently active (established) connections.</li>
+<li><code>wc -l</code>: Counts the number of lines in the output, which corresponds to the number of active connections.</li>
+</ul>
+<p>For <code>HTTPS</code> connections, you would use port <strong>443</strong>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">netstat</span> <span class="at">-an</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&#39;:443&#39;</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&#39;ESTABLISHED&#39;</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div>
+<p>Here is an example output without the line count:</p>
+<pre class="shell"><code>tcp        0      0 192.168.192.226:49394   34.107.243.93:443       ESTABLISHED
+tcp        0      0 192.168.192.226:32842   142.250.72.174:443      ESTABLISHED</code></pre>
+<h2 id="using-ss-socket-statistics">Using ss (Socket Statistics)</h2>
+<p><code>ss</code> is another utility to investigate sockets. It can provide more detailed information than <code>netstat</code> and is often preferred on newer Linux systems.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ss</span> <span class="at">-o</span> state established <span class="st">&#39;( dport = :80 or sport = :80 )&#39;</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div>
+<ul>
+<li><code>ss -o state established</code>: Shows only established TCP connections and includes timer information.</li>
+<li><code>&#39;( dport = :80 or sport = :80 )&#39;</code>: Filters for connections where either the <strong>destination port</strong> (<code>dport</code>) or the <strong>source port</strong> (<code>sport</code>) is 80. This accounts for both incoming and outgoing connections on that port.</li>
+<li><code>wc -l</code>: Counts the lines, giving the number of established connections on port 80.</li>
+</ul>
+<p>Similarly, for <code>HTTPS</code> on port 443:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ss</span> <span class="at">-o</span> state established <span class="st">&#39;( dport = :443 or sport = :443 )&#39;</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div>
+<p>If your output is including the count of the row of header labels, you can subtract from that number, and output an accurate number:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$((</span> <span class="va">$(</span><span class="ex">ss</span> <span class="at">-o</span> state established <span class="st">&#39;( dport = :443 or sport = :443 )&#39;</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="va">)</span> <span class="op">-</span> <span class="dv">1</span> <span class="va">))</span></span></code></pre></div>
+<blockquote>
+<p>This bash command just subtracts 1 from the original output of the line count (<code>wc -l</code>) of the <code>ss</code> command, and outputs that number.</p>
+</blockquote>
+<p>Without doing a line count, the <code>ss</code> utility can also give you some great information about the connections on a certain port:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ss</span> <span class="at">-o</span> state established <span class="st">&#39;( dport = :443 or sport = :443 )&#39;</span></span></code></pre></div>
+<p>Output:</p>
+<pre class="shell"><code>Netid  Recv-Q  Send-Q      Local Address:Port        Peer Address:Port   Process                         
+tcp    0       0         192.168.192.226:49394      34.107.243.93:https   timer:(keepalive,8min26sec,0)  
+tcp    0       0         192.168.192.226:54590     34.149.100.209:https                                  
+tcp    0       0         192.168.192.226:32842     142.250.72.174:https </code></pre>
+<h2 id="using-lsof">Using lsof</h2>
+<p><code>lsof</code> <strong>(List Open Files)</strong> is a powerful command that lists all open files and the processes that opened them. In Linux, <em>everything is treated as a file</em>, including network sockets.</p>
+<p>You can use <code>lsof</code> to filter for network connections related to a specific port:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> lsof <span class="at">-i</span> :443 <span class="at">-n</span> <span class="kw">|</span> <span class="fu">grep</span> ESTABLISHED <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div>
+<ul>
+<li><code>sudo lsof -i :443</code>: Lists all network files using port 443.</li>
+<li><code>-n</code>: Prevents DNS resolution, which can speed up the output.</li>
+<li><code>grep ESTABLISHED</code>: Filters for TCP connections in the ESTABLISHED state. lsof might show different states for TCP (like LISTEN, SYN_SENT, etc.).</li>
+<li><code>wc -l</code>: Counts the lines. Again, check for a header line.</li>
+</ul>
+<p>For both TCP and UDP on a port:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> lsof <span class="at">-i</span> UDP:443 <span class="at">-i</span> TCP:443 <span class="at">-n</span> <span class="kw">|</span> <span class="fu">grep</span> ESTABLISHED <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div>
+<p>You might need to adjust the filtering based on the output to get only active connections.</p>
+<p>Output without line count:</p>
+<pre class="shell"><code>firefox-b 285525 username  146u  IPv4 644828      0t0  TCP 192.168.192.226:49394-&gt;34.107.243.93:https (ESTABLISHED)
+firefox-b 285525 username  157u  IPv4 668884      0t0  TCP 192.168.192.226:49882-&gt;142.250.141.84:https (ESTABLISHED)</code></pre>
+</body>
+</html>

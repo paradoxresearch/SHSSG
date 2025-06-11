@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="introduction-to-docker-concepts">Introduction to Docker Concepts</h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#introduction-to-docker-concepts">Introduction to Docker Concepts</a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#understanding-containerization">Understanding Containerization</a></li>
+<li><a href="#what-is-docker">What is Docker?</a></li>
+</ul></li>
+<li><a href="#docker-images">Docker Images</a></li>
+<li><a href="#docker-containers">Docker Containers</a>
+<ul>
+<li><a href="#basic-container-lifecycle-run-stop-start-rm">Basic Container Lifecycle (run, stop, start, rm)</a></li>
+</ul></li>
+<li><a href="#docker-hub-and-registries">Docker Hub and Registries</a></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<h3 id="understanding-containerization">Understanding Containerization</h3>
+<p>Containerization represents a paradigm shift in how applications are developed, deployed, and managed. At its core, containerization is a technology that encapsulates an application and its entire runtime environment—including all necessary code, libraries, dependencies, and configuration files—into a single, standardized, executable unit called a <strong>container</strong>.</p>
+<p>To draw a parallel, consider the concept of a standardized shipping container in logistics. Before these containers, cargo was loaded individually onto ships, leading to inefficiencies, damage, and compatibility issues across different ports and transport methods. The invention of the universal shipping container revolutionized the industry by providing a consistent, isolated unit that could be easily loaded, transported, and unloaded by any compliant infrastructure, regardless of the cargo within.</p>
+<p>Similarly, in computing, a software container provides a self-contained, isolated environment for an application. This contrasts with traditional server environments or even virtual machines in several key ways:</p>
+<ul>
+<li><strong>Traditional Server Environments</strong>: Applications are installed directly onto the host operating system. This often leads to &quot;dependency conflicts,&quot; where one application requires a specific version of a library that clashes with another application&#39;s requirement on the same server.</li>
+<li><strong>Virtual Machines (VMs)</strong>: VMs abstract the underlying hardware, allowing multiple guest operating systems to run concurrently on a single physical machine. Each VM includes its own full operating system kernel and binaries, making them relatively large and resource-intensive.</li>
+</ul>
+<p><strong>Advantages of Containerization for System Administration</strong>:</p>
+<ol type="1">
+<li><strong>Portability and Consistency</strong>: A container ensures that an application operates identically across different computing environments—from a developer&#39;s laptop to a testing server, and finally to a production server. This eliminates the common &quot;it works on my machine&quot; problem, streamlining the software delivery pipeline.</li>
+<li><strong>Resource Efficiency</strong>: Unlike VMs, containers share the host operating system&#39;s kernel. This architectural difference makes containers significantly lighter, faster to start (often in milliseconds), and more efficient in terms of CPU, memory, and storage consumption. Consequently, more applications can be densely packed onto fewer servers.</li>
+<li><strong>Isolation</strong>: Although containers share the host kernel, they provide strong process and file system isolation. This means that applications running in separate containers do not interfere with each other, enhancing security and stability.</li>
+<li><strong>Agility and Scalability</strong>: The lightweight and standardized nature of containers enables rapid deployment, scaling, and updates of applications. This agility is crucial in dynamic, cloud-native environments.</li>
+</ol>
+<h3 id="what-is-docker">What is Docker?</h3>
+<p>Docker is not containerization itself, but rather the most widely adopted and influential open-source platform that enables you to build, ship, and run applications within containers. It has democratized container technology, making it accessible and practical for a vast array of use cases, from individual developer workstations to large-scale enterprise deployments.</p>
+<p>Think of Docker as a comprehensive ecosystem designed to manage the entire lifecycle of containers. It provides a set of tools and services that allow system administrators and developers to:</p>
+<ol type="1">
+<li><strong>Package applications into standardized units (images)</strong>.</li>
+<li><strong>Run these images as isolated processes (containers)</strong>.</li>
+<li><strong>Manage and orchestrate these containers efficiently</strong>.</li>
+</ol>
+<p>The core of the Docker platform is the Docker Engine. When you install Docker on your Ubuntu Server, you are primarily installing the Docker Engine. It operates as a client-server application and consists of three main components:</p>
+<ul>
+<li><strong>Docker Daemon (dockerd)</strong>: This is the persistent background process that runs on your host machine (your Ubuntu Server in this case). It listens for Docker API requests and manages Docker objects such as images, containers, networks, and volumes. It&#39;s the &quot;brain&quot; that handles all the heavy lifting of building, running, and distributing containers.</li>
+<li><strong>Docker Client</strong>: This is the command-line interface (CLI) tool (e.g., <code>docker run</code>, <code>docker build</code>, <code>docker ps</code>) that users interact with. When you type a <code>docker</code> command in your terminal, the Docker client communicates with the Docker Daemon via REST APIs. This communication can occur locally or remotely, allowing you to manage Docker daemons on other servers.</li>
+<li><strong>REST API</strong>: This is the interface that the Docker Client or other tools use to communicate with the Docker Daemon.</li>
+</ul>
+<p>In essence, Docker Engine provides the runtime and management capabilities that make containerization a reality on your server. It abstracts away the complexities of Linux kernel features like namespaces and control groups, which are the underlying technologies that enable container isolation.</p>
+<h2 id="docker-images">Docker Images</h2>
+<p>A Docker Image can be conceptualized as a lightweight, standalone, executable package that contains everything needed to run a piece of software, including the code, a runtime, libraries, environment variables, and configuration files. It is, in essence, a blueprint or a template for creating Docker containers.</p>
+<p>Consider a professional architectural blueprint for a building. This blueprint is a static, read-only set of instructions and specifications. You can use this single blueprint to construct multiple identical buildings. Similarly, a Docker Image is static and read-only. When you &quot;run&quot; an image, you create a dynamic, writable instance of it, which is the container.</p>
+<p>Key characteristics of Docker Images:</p>
+<ol type="1">
+<li><p><strong>Immutability</strong>: Once a Docker Image is built, it cannot be changed. If you need to update an application or its dependencies, you create a new image. This immutability is crucial for consistency and reliability; you are guaranteed that an image will behave the same way every time it is run as a container, regardless of the environment. This helps eliminate configuration drift and unexpected runtime issues.</p></li>
+<li><p><strong>Layered Architecture</strong>: Docker Images are constructed from a series of read-only layers. Each layer represents a specific instruction in the image&#39;s build process, such as adding a file, installing a package, or setting an environment variable.</p>
+<ul>
+<li>When you build an image, each command in its definition (often a <code>Dockerfile</code>) creates a new layer on top of the previous one.</li>
+<li>These layers are stacked, and each new layer only stores the changes from the layer below it. This makes images very efficient in terms of storage, as common base layers can be shared across multiple images. For example, many images might share a common &quot;Ubuntu base operating system&quot; layer, but only store the unique application files on top.</li>
+<li>When an image is run as a container, an additional, thin, writable layer (the &quot;container layer&quot;) is added on top. All changes made by the running container (e.g., writing logs, creating new files) are stored in this writable layer, leaving the underlying image layers untouched and immutable.</li>
+</ul></li>
+</ol>
+<p>This layered approach is a powerful feature. It allows for efficient image distribution (only new layers need to be downloaded), enables caching during image builds, and contributes to the overall speed and efficiency of Docker.</p>
+<h2 id="docker-containers">Docker Containers</h2>
+<p>If a Docker Image is the static blueprint, then a <strong>Docker Container</strong> is the dynamic, running instance created from that blueprint. It is the live, executable form of an image, complete with its own isolated environment, processes, and file system.</p>
+<p>Here&#39;s the fundamental relationship:</p>
+<ul>
+<li><strong>Image as a Template</strong>: A Docker Image serves as a read-only template from which one or more containers can be launched. Just as you can build multiple identical buildings from a single blueprint, you can create multiple identical containers from a single Docker Image.</li>
+<li><strong>Container as a Running Instance</strong>: When you execute a <code>docker run</code> command, Docker takes an image and adds a thin, writable layer on top. This writable layer is where all changes, new files, or modifications made by the running application within the container are stored. This ensures that the underlying image remains unchanged and pristine.</li>
+<li><strong>Isolation</strong>: Each container runs in isolation from other containers and from the host system. This isolation is achieved using underlying Linux kernel features (like namespaces and control groups) that Docker leverages, providing a secure and consistent runtime environment for each application.</li>
+</ul>
+<p>In summary:</p>
+<ul>
+<li><strong>Docker Image</strong>: Static, immutable, read-only blueprint. It exists on disk.</li>
+<li><strong>Docker Container</strong>: Dynamic, ephemeral (can be easily removed and recreated), writable instance of an image. It is the running process.</li>
+</ul>
+<h3 id="basic-container-lifecycle-run-stop-start-rm">Basic Container Lifecycle (run, stop, start, rm)</h3>
+<p>Interacting with Docker containers primarily occurs via the <code>docker</code> command-line interface. For a new system administrator, mastering these fundamental commands is essential for managing your applications. We will assume you have the Docker Engine already installed on your Ubuntu Server.</p>
+<p>Let&#39;s explore the basic commands for managing the lifecycle of a Docker container:</p>
+<ol type="1">
+<li><p><code>docker run</code> - <strong>Create and Start a Container</strong></p>
+<p>This is often the first command you&#39;ll use. It pulls an image (if not already present locally), creates a new container from it, and starts it.</p>
+<p><strong>Syntax</strong>: <code>docker run [OPTIONS] IMAGE [COMMAND] [ARG...]</code></p>
+<p><strong>Example</strong>: Let&#39;s run a simple <code>hello-world</code> container. This image is very small and is designed to simply print a message and then exit.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run hello-world</span></code></pre></div>
+<ul>
+<li>When you execute this, if the <code>hello-world</code> image isn&#39;t on your server, Docker will first download it.</li>
+<li>Then, it will create a new container instance from that image.</li>
+<li>Finally, it will run the default command specified within the <code>hello-world</code> image, which prints a message to your terminal.</li>
+</ul>
+<p><strong>Key Options</strong>:</p>
+<ul>
+<li><code>-d</code> (detached mode): Runs the container in the background, freeing up your terminal. For long-running applications (like web servers), you&#39;ll almost always use <code>-d</code>.</li>
+<li><code>-p</code> (publish port): Maps a port on your host machine to a port inside the container. Essential for accessing network services running in a container.</li>
+<li><code>--name</code>: Assigns a human-readable name to your container, making it easier to refer to later.</li>
+</ul>
+<p><strong>Example with options (running a simple Nginx web server)</strong>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> <span class="at">-p</span> 80:80 <span class="at">--name</span> my-web-server nginx</span></code></pre></div>
+<p>This command will:</p>
+<ul>
+<li>Download the <code>nginx</code> image (if not local).</li>
+<li>Run it in detached mode (<code>-d</code>).</li>
+<li>Map port 80 on your Ubuntu Server to port 80 inside the <code>nginx</code> container (<code>-p 80:80</code>).</li>
+<li>Name the container <code>my-web-server</code> (<code>--name my-web-server</code>).</li>
+</ul></li>
+<li><p><code>docker ps</code> - <strong>List Containers</strong></p>
+<p>This command allows you to view running containers.</p>
+<p><strong>Syntax</strong>: <code>docker ps [OPTIONS]</code></p>
+<p><strong>Example</strong>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> ps</span></code></pre></div>
+<p>This will show you a list of currently active (running) containers, along with information like their Container ID, Image, Command, Creation Time, Status, Ports, and Names.</p>
+<p><strong>To view all containers (including stopped ones)</strong>: <code>docker ps -a</code></p></li>
+<li><p><code>docker stop</code> - <strong>Stop a Running Container</strong></p>
+<p>This command sends a signal to a running container to gracefully shut down.</p>
+<p><strong>Syntax</strong>: <code>docker stop [CONTAINER_ID | CONTAINER_NAME]</code></p>
+<p><strong>Example (assuming my-web-server is running)</strong>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> stop my-web-server</span></code></pre></div></li>
+<li><p><code>docker start</code> - <strong>Start a Stopped Container</strong></p>
+<p>This command restarts a container that was previously stopped.</p>
+<p><strong>Syntax</strong>: <code>docker start [CONTAINER_ID | CONTAINER_NAME]</code></p>
+<p><strong>Example</strong>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> start my-web-server</span></code></pre></div></li>
+<li><p><code>docker rm</code> - <strong>Remove a Container</strong></p>
+<p>This command permanently deletes a stopped container. You cannot remove a running container unless you use the <code>-f</code> (force) option, which is generally discouraged unless necessary, as it doesn&#39;t allow for graceful shutdown.</p>
+<p><strong>Syntax</strong>: <code>docker rm [CONTAINER_ID | CONTAINER_NAME]</code></p>
+<p><strong>Example (after stopping my-web-server)</strong>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> rm my-web-server</span></code></pre></div></li>
+</ol>
+<h2 id="docker-hub-and-registries">Docker Hub and Registries</h2>
+<p>In the world of Docker, just as code is stored in repositories (like Git or GitHub), Docker Images are stored in specialized repositories called <strong>container registries</strong>. These registries act as centralized or distributed storage locations where Docker Images can be pushed (uploaded) and pulled (downloaded) by users and automated systems.</p>
+<p>The most prominent and widely used public container registry is Docker Hub.</p>
+<p><strong>Docker Hub</strong>:</p>
+<ul>
+<li><strong>Public Repository</strong>: Docker Hub serves as a vast, public repository for Docker Images. It hosts millions of images, including official images from major software vendors (e.g., Ubuntu, Nginx, MySQL, Node.js), community-contributed images, and private images from individual users or organizations.</li>
+<li><strong>Image Discovery</strong>: When you execute a command like <code>docker run nginx</code> or <code>docker pull ubuntu</code>, Docker Engine, by default, looks for these images on Docker Hub. If the image is not found locally on your server, it will attempt to download it from Docker Hub.</li>
+<li><strong>Collaboration and Distribution</strong>: Docker Hub facilitates collaboration among developers and provides a straightforward mechanism for distributing Dockerized applications. Developers can build their images and push them to Docker Hub, making them easily accessible to others.</li>
+<li><strong>Official Images</strong>: A significant benefit of Docker Hub is the availability of &quot;Official Images.&quot; These images are curated and maintained by Docker and the upstream software vendors, ensuring quality, security, and adherence to best practices. They serve as reliable base images for building your own applications.</li>
+</ul>
+<p><strong>Other Container Registries</strong>:</p>
+<p>While Docker Hub is the most popular, it&#39;s important to know that it&#39;s not the only option. Many organizations utilize private container registries for various reasons, such as:</p>
+<ul>
+<li><strong>Security and Compliance</strong>: To keep proprietary application images within their internal network, adhering to specific security policies and regulatory requirements.</li>
+<li><strong>Performance</strong>: To have images closer to their deployment environments, reducing download times and improving deployment speed.</li>
+<li><strong>Integration with Cloud Providers</strong>: Major cloud providers (e.g., AWS Elastic Container Registry (ECR), Google Container Registry (GCR), Azure Container Registry (ACR)) offer their own managed container registries that integrate seamlessly with their respective cloud ecosystems.</li>
+</ul>
+<p><strong>How Registries Work (Simplified)</strong>:</p>
+<ol type="1">
+<li><code>docker pull &lt;image_name&gt;:&lt;tag&gt;</code>: Downloads a specified image from a registry to your local Docker host. If no tag is specified, it defaults to <code>latest</code>.</li>
+<li><code>docker push &lt;image_name&gt;:&lt;tag&gt;</code>: Uploads a local image to a specified registry. This typically requires you to be authenticated with the registry.</li>
+</ol>
+<p>Understanding registries is crucial for system administrators as it governs how you acquire pre-built application images and how you might distribute your own custom-built images within your organization or to the public.</p>
+</body>
+</html>

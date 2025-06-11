@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="using-top-htop-vmstat-to-monitor-system-resources">Using <code>top</code>, <code>htop</code>, <code>vmstat</code> to Monitor System Resources</h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#using-top-htop-vmstat-to-monitor-system-resources">Using <code>top</code>, <code>htop</code>, <code>vmstat</code> to Monitor System Resources</a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#introduction-to-system-monitoring">Introduction to System Monitoring</a></li>
+</ul></li>
+<li><a href="#understanding-top">Understanding <code>top</code></a>
+<ul>
+<li><a href="#summary-area">Summary Area</a></li>
+<li><a href="#taskprocess-list">Task/Process List</a></li>
+</ul></li>
+<li><a href="#exploring-htop">Exploring <code>htop</code></a>
+<ul>
+<li><a href="#htop-overview"><code>htop</code> Overview</a></li>
+<li><a href="#using-htop">Using <code>htop</code></a></li>
+</ul></li>
+<li><a href="#analyzing-system-activity-with-vmstat">Analyzing System Activity with <code>vmstat</code></a></li>
+<li><a href="#practical-application-and-integration">Practical Application and Integration</a>
+<ul>
+<li><a href="#recommending-strategies-for-regularly-checking-these-tools-and-setting-baselines-for-normal-system-activity">Recommending strategies for regularly checking these tools and setting baselines for normal system activity</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<p>System monitoring is a fundamental aspect of server administration. It involves the real-time observation of critical system resources such as CPU utilization, memory consumption, disk I/O, and network throughput. Consistent monitoring allows administrators to proactively identify performance bottlenecks, detect resource saturation, and address potential issues before they escalate into service disruptions or system failures. Think of it as gaining operational visibility into your server&#39;s performance.</p>
+<h3 id="introduction-to-system-monitoring">Introduction to System Monitoring</h3>
+<h2 id="understanding-top">Understanding <code>top</code></h2>
+<p><code>top</code> provides a real-time, dynamic view of the processes running on your server and summarizes key system metrics. When you execute the command <code>top</code> in your terminal, it presents an interactive display that updates every few seconds (you can adjust this interval).</p>
+<h3 id="summary-area">Summary Area</h3>
+<p>Think of the output of <code>top</code> as a table with several columns and a summary section at the top.</p>
+<p>The <strong>summary area</strong> provides a high-level overview of the system&#39;s health:</p>
+<ul>
+<li><p><strong>Uptime</strong>: This tells you how long your server has been running since its last boot. For example, &quot;up 2 days, 10:30&quot; means the server has been running for 2 days and 10 hours and 30 minutes.</p></li>
+<li><p><strong>Load Average</strong>: This shows the average number of processes that were either runnable or in an uninterruptible sleep state over the last 1, 5, and 15 minutes. It&#39;s a crucial indicator of system load. Higher numbers generally indicate a more loaded system. For instance, a load average of &quot;0.50, 0.60, 0.70&quot; suggests a relatively light load, while &quot;5.00, 4.50, 4.00&quot; indicates a significant load.</p></li>
+<li><p><strong>CPU Usage</strong>: This section breaks down how your server&#39;s CPU(s) are being utilized. You&#39;ll typically see percentages for:</p>
+<ul>
+<li><p><code>us</code> <strong>(user)</strong>: CPU time used by user-level processes.</p></li>
+<li><p><code>sy</code> <strong>(system)</strong>: CPU time used by the kernel (the core of the operating system).</p></li>
+<li><p><code>id</code> <strong>(idle)</strong>: CPU time that is not being used. A high %id is generally good.</p></li>
+<li><p><code>wa</code> <strong>(wait)</strong>: CPU time spent waiting for I/O operations (like disk access). High %wa can indicate disk bottlenecks.</p></li>
+<li><p>Other less common categories like <code>hi</code> (hardware interrupts), <code>si</code> (software interrupts), <code>st</code> (steal time in virtualized environments), etc.</p></li>
+</ul></li>
+<li><p><strong>Memory Usage</strong>: This section details how your server&#39;s memory (RAM) is being used:</p>
+<ul>
+<li><code>total</code>: The total amount of physical RAM.</li>
+<li><code>free</code>: The amount of RAM that is currently unused.</li>
+<li><code>used</code>: The amount of RAM that is currently being used by processes.</li>
+<li><code>buff/cache</code>: Memory used for buffering and caching disk I/O to improve performance. This memory can be quickly reclaimed by processes if needed.</li>
+</ul></li>
+<li><p><strong>Swap Usage</strong>: This shows the usage of swap space, which is disk space used as virtual RAM when physical RAM is full:</p>
+<ul>
+<li><code>total</code>: The total amount of swap space.</li>
+<li><code>free</code>: The amount of free swap space.</li>
+<li><code>used</code>: The amount of swap space currently in use. Ideally, this should be close to zero, as using swap is significantly slower than using RAM.</li>
+</ul></li>
+</ul>
+<h3 id="taskprocess-list">Task/Process List</h3>
+<p>Let&#39;s now cover the <strong>Task/Process List</strong>, which is the lower section of the <code>top</code> output. Each row in this list represents a running process on your server. Here are some of the key columns you&#39;ll encounter:</p>
+<ul>
+<li><p><strong>PID (Process ID)</strong>: This is a unique numerical identifier assigned to each running process. Think of it as an employee&#39;s ID badge in our office analogy.</p></li>
+<li><p><strong>USER</strong>: This indicates the owner of the process, i.e., which user on the system started this particular task.</p></li>
+<li><p><strong>PR (Priority) and NI (Nice Value)</strong>: These columns relate to the scheduling priority of the process. Lower PR values (higher priority) mean the process gets more CPU time. The NI value can be adjusted by users to influence the process&#39;s priority (a negative NI value increases priority, while a positive value decreases it). Think of this as a way to give certain tasks more &quot;urgency&quot; in the office workflow.</p></li>
+<li><p><strong>VIRT (Virtual Memory)</strong>: This is the total amount of virtual address space used by the process. It includes all code, data, and shared libraries, even if not all of it is currently in RAM. It&#39;s like the total potential &quot;desk space&quot; the employee could use, including blueprints and archived documents.</p></li>
+<li><p><strong>RES (Resident Memory)</strong>: This is the actual amount of physical RAM the process is currently using. This is the real &quot;desk space&quot; the employee is actively occupying.</p></li>
+<li><p><strong>SHR (Shared Memory)</strong>: This is the amount of memory shared with other processes. Think of shared documents or meeting rooms used by multiple employees.</p></li>
+<li><p><strong>S (State)</strong>: This indicates the current state of the process. Common states include:</p>
+<ul>
+<li><code>S</code> <strong>(Sleeping)</strong>: The process is waiting for an event to occur. Like an employee waiting for a meeting to start.</li>
+<li><code>R</code> <strong>(Running)</strong>: The process is currently using the CPU. Like an employee actively working at their desk.</li>
+<li><code>Z</code> <strong>(Zombie)</strong>: A terminated process that is still present in the process table. This usually indicates an issue and should be investigated. Like an employee who has left but their nameplate is still on the door.</li>
+<li><code>D</code> <strong>(Disk Sleep)</strong>: The process is waiting for disk I/O to complete. Like an employee waiting for a file to load.</li>
+<li><code>T</code> <strong>(Stopped)</strong>: The process has been stopped, usually by a signal. Like an employee put on hold.</li>
+</ul></li>
+<li><p><strong>%CPU</strong>: This is the percentage of the CPU time that the process is currently consuming. This tells you how much of the &quot;workers&#39;&quot; time this specific task is using.</p></li>
+<li><p><strong>%MEM</strong>: This is the percentage of the total physical memory that the process is using. This shows how much of the total &quot;desk space&quot; this task is occupying.</p></li>
+<li><p><strong>TIME+</strong>: This is the total CPU time (in minutes and seconds) that the process has used since it started. This is like the total hours an employee has worked on a task.</p></li>
+<li><p><strong>COMMAND</strong>: This is the command that was used to start the process.</p></li>
+</ul>
+<p>Understanding these columns allows you to pinpoint which processes are consuming the most resources on your server.</p>
+<p>By default, <code>top</code> displays the processes sorted by their CPU usage (<code>%CPU</code>), with the most CPU-intensive processes at the top. This is incredibly useful for quickly identifying which tasks are putting the most load on your server&#39;s processors.</p>
+<p>However, you can also sort the process list based on other criteria. Here are a couple of useful sorting commands you can use while <code>top</code> is running:</p>
+<ul>
+<li><code>M</code>: Pressing the uppercase letter <code>M</code> will sort the processes by memory usage (<code>%MEM</code>), with the processes using the most RAM appearing at the top. This is helpful when you suspect a process might be consuming excessive memory.</li>
+<li><code>P</code>: Pressing the uppercase letter <code>P</code> will sort the processes by CPU usage (<code>%CPU</code>), which is the default.</li>
+</ul>
+<h2 id="exploring-htop">Exploring <code>htop</code></h2>
+<p><code>htop</code> is another real-time process monitoring tool for Linux, but it offers several enhancements over the standard <code>top</code> command. Think of htop as a more organized and detailed version of the <code>top</code> report, making it easier to read and interact with.</p>
+<h3 id="htop-overview"><code>htop</code> Overview</h3>
+<p>Here are some key advantages of htop:</p>
+<ul>
+<li><p><strong>Color-coded output</strong>: <code>htop</code> uses colors to visually distinguish different types of information (e.g., CPU usage, memory usage), making it quicker to identify critical values at a glance. Imagine different sections of the office report highlighted for easier understanding.</p></li>
+<li><p><strong>Improved interactivity</strong>: <code>htop</code> allows you to scroll through the list of processes both vertically and horizontally, which is especially useful on systems with a large number of processes or many CPU cores. This is like having a scrollable and wider office report to see everything clearly.</p></li>
+<li><p><strong>Process trees</strong>: <code>htop</code> can display processes in a hierarchical tree structure, showing the parent-child relationships between processes. This can be very helpful for understanding which process spawned others. Think of it as an organizational chart for the tasks in the office.</p></li>
+<li><p><strong>Easier process management</strong>: <code>htop</code> provides built-in features for performing actions on processes, such as killing (terminating) them or changing their priority (renicing), directly from the interface using simple key presses. This is like having direct controls in the office report to manage tasks.</p></li>
+<li><p><strong>More detailed information</strong>: <code>htop</code> often displays more detailed information about CPU cores, memory, and swap usage compared to the default <code>top</code> output.</p></li>
+</ul>
+<p>To use <code>htop</code>, you&#39;ll likely need to install it first on your Ubuntu Server using the command <code>sudo apt update &amp;&amp; sudo apt install htop</code>. Once installed, you can simply run it by typing htop in your terminal.</p>
+<p>When you run <code>htop</code>, you&#39;ll notice the color-coding immediately. CPU usage is often displayed in different colors to represent user, system, and idle time for each core. Memory and swap usage are also visually represented. The process list is similar to <code>top</code> but often includes a more readable display of the priority and nice values.</p>
+<h3 id="using-htop">Using <code>htop</code></h3>
+<p>One of the significant advantages of <code>htop</code> is its interactive nature, allowing you to directly manage processes from the displayed list. Here are a couple of fundamental actions you can perform:</p>
+<ul>
+<li><p><strong>Killing a Process</strong>: Sometimes, a process might become unresponsive or start consuming excessive resources, and you might need to terminate it. In <code>htop</code>, you can select a process using the arrow keys and then press the <code>F9</code> key (often labeled as &quot;Kill&quot;). This will bring up a menu where you can choose the signal to send to the process. The default and often safest option is <code>SIGTERM</code> (signal 15), which politely asks the process to terminate. If a process doesn&#39;t respond to <code>SIGTERM</code>, you might need to use <code>SIGKILL</code> (signal 9), which forcefully terminates the process. <strong>Use</strong> <code>SIGKILL</code> <strong>with caution as it doesn&#39;t allow the process to clean up properly and can potentially lead to data loss</strong>.</p>
+<p>Think of this in our office analogy: if a worker is completely stuck and not responding (using way too much &quot;desk space&quot; or making too much &quot;noise&quot;), you might need to ask them to stop (<code>SIGTERM</code>). If they still don&#39;t stop, you might have to forcefully remove them from their desk (<code>SIGKILL</code>).</p></li>
+<li><p><strong>Renicing a Process (Changing Priority)</strong>: As we briefly touched on with <code>top</code>&#39;s <code>NI</code> value, you can adjust the priority of a process using <code>htop</code>. This allows you to give more or less CPU time to specific tasks. Select a process and press the <code>F7</code> key to increase its priority (lower the &quot;Nice&quot; value, making it more urgent) or the <code>F8</code> key to decrease its priority (raise the &quot;Nice&quot; value, making it less urgent). You&#39;ll typically need <code>sudo</code> privileges to increase the priority of a process.</p>
+<p>In our office, this would be like telling a worker that their current task is now more (or less) important than others, influencing how quickly they get their work done.</p></li>
+</ul>
+<p>To summarize the basic process management in <code>htop</code>:</p>
+<ol type="1">
+<li>Run <code>htop</code> in your terminal.</li>
+<li>Use the arrow keys to navigate and select the process you want to manage.</li>
+<li>Press <code>F9</code> to kill the process (and choose the signal).</li>
+<li>Press <code>F7</code> to increase the process priority (lower Nice value).</li>
+<li>Press <code>F8</code> to decrease the process priority (raise Nice value).</li>
+</ol>
+<h2 id="analyzing-system-activity-with-vmstat">Analyzing System Activity with <code>vmstat</code></h2>
+<p><code>vmstat</code> (Virtual Memory Statistics) is a command-line utility that provides a snapshot of various system statistics related to virtual memory, but it also reports on disk I/O, CPU activity, and system context switches. Unlike <code>top</code> and <code>htop</code>, which give you a continuous, real-time view, <code>vmstat</code> typically provides a report at specific intervals that you define. Think of <code>vmstat</code> as getting periodic reports on different aspects of the &quot;office&quot; activity over time, rather than a constant live feed.</p>
+<p>When you run <code>vmstat</code>, you&#39;ll see a header row followed by rows of data representing the system&#39;s state at each interval. You can specify the interval (in seconds) and the number of reports you want. For example, <code>vmstat 2 5</code> will give you 5 reports, with a 2-second delay between each. If you just run vmstat without any arguments, you&#39;ll get one initial report and then continuous updates.</p>
+<p>Here&#39;s a breakdown of some key columns in the <code>vmstat</code> output:</p>
+<ul>
+<li><p><strong>Memory (mem)</strong>:</p>
+<ul>
+<li><code>swpd</code>: Amount of virtual memory used as swap space (in kilobytes). High values here indicate the system is relying heavily on slower disk storage. Think of this as how much &quot;overflow&quot; from the desks has been moved to the slower &quot;storage room.&quot;</li>
+<li><code>free</code>: Amount of idle memory (in kilobytes). This is the available &quot;desk space.&quot;</li>
+<li><code>buff</code>: Memory used as buffers (for disk block devices). Think of this as temporary holding areas for items moving to or from the filing cabinets.</li>
+<li><code>cache</code>: Memory used as cache (for files read from disk). This is like keeping frequently accessed documents on nearby shelves for quicker access.</li>
+<li><code>inact</code>: Amount of inactive memory (can be reclaimed if needed).</li>
+<li><code>active</code>: Amount of active memory (recently used and less likely to be reclaimed).</li>
+</ul></li>
+<li><p><strong>Swap (swap)</strong>:</p>
+<ul>
+<li><code>si</code>: Amount of data swapped in from disk (/s). This is like items being brought back from the &quot;storage room&quot; to the desks. High values can indicate memory pressure.</li>
+<li><code>so</code>: Amount of data swapped out to disk (/s). This is like items being moved from the desks to the &quot;storage room.&quot; High values indicate the system is running out of RAM.</li>
+</ul></li>
+<li><p><strong>I/O (io)</strong>:</p>
+<ul>
+<li><code>bi</code>: Blocks received from a block device (/s). Think of this as the rate at which items are being brought into the office from external sources.</li>
+<li><code>bo</code>: Blocks sent to a block device (/s). This is the rate at which items are being sent out of the office. High values in either bi or bo can indicate disk-intensive activity.</li>
+</ul></li>
+<li><p><strong>System (system)</strong>:</p>
+<ul>
+<li><code>in</code>: Number of interrupts per second, including context switches. Context switches are like the &quot;office manager&quot; switching attention between different tasks. High values can indicate system overhead.</li>
+<li><code>cs</code>: Number of context switches per second.</li>
+</ul></li>
+<li><p><strong>CPU (cpu)</strong>: These percentages show the breakdown of CPU usage:</p>
+<ul>
+<li><code>us</code>: Time spent running non-kernel code (user processes). This is like the &quot;workers&quot; actively doing their tasks.</li>
+<li><code>sy</code>: Time spent running kernel code (system processes). This is like the &quot;office manager&quot; handling administrative tasks.</li>
+<li><code>id</code>: Time spent idle. This is when the &quot;workers&quot; are taking a break. High values are generally good.</li>
+<li><code>wa</code>: Time spent waiting for I/O. This is like &quot;workers&quot; waiting for files or resources to be loaded. High values can indicate I/O bottlenecks.</li>
+<li><code>st</code>: Time stolen from a virtual machine by the hypervisor.</li>
+</ul></li>
+</ul>
+<p>Think back to our &quot;office&quot; analogy, but now we&#39;re getting specific metrics about different aspects of its operation over time.</p>
+<ul>
+<li><p><strong>Memory Usage (</strong><code>swpd</code>, <code>free</code>, <code>buff</code>, <code>cache</code><strong>)</strong>:</p>
+<ul>
+<li>A consistently low <code>free</code> value might seem alarming, but remember the <code>buff</code> and <code>cache</code> are there to help speed things up. The operating system will release this memory if applications need it. However, if <code>free</code> is consistently very close to zero and you see performance issues, it could indicate memory pressure.</li>
+<li>A high <code>swpd</code> value is a strong indicator that your server is using swap space extensively. This is like the &quot;overflow&quot; from the desks being constantly moved to the slow &quot;storage room&quot; and back, which can significantly impact performance. Ideally, <code>swpd</code> should be close to zero.</li>
+</ul></li>
+<li><p><strong>Swap Activity (</strong><code>si</code>, <code>so</code><strong>)</strong>:</p>
+<ul>
+<li>Non-zero values in <code>si</code> (swap in) and <code>so</code> (swap out) indicate that data is being moved between RAM and the swap space on disk. While occasional small values might be normal, consistently high values here are a red flag. It means your server is likely running out of physical RAM and is resorting to much slower disk access, causing performance degradation. This is like seeing a constant back-and-forth of items between the desks and the storage room, slowing down the entire workflow.</li>
+</ul></li>
+<li><p><strong>I/O Wait (</strong><code>wa</code> <strong>in CPU section)</strong>:</p>
+<ul>
+<li>A high <code>%wa</code> value in the CPU section of <code>vmstat</code> indicates that the CPU is spending a significant amount of time waiting for I/O operations to complete, such as reading from or writing to the disk. This suggests a potential disk bottleneck. Imagine the &quot;workers&quot; frequently having to wait for files to be retrieved from slow filing cabinets.</li>
+</ul></li>
+<li><p><strong>System and User CPU Time (</strong><code>sy</code>, <code>us</code> <strong>in CPU section)</strong>:</p>
+<ul>
+<li>A high <code>%sy</code> (system time) might indicate that the kernel is busy handling a lot of system-level tasks. While some system activity is normal, consistently high values could point to inefficiencies or issues within the operating system itself. This is like the &quot;office manager&quot; being overwhelmed with administrative tasks.</li>
+<li>A high <code>%us</code> (user time) indicates that user-level processes are consuming a significant portion of the CPU. This is expected when applications are actively working, but unusually high values might point to a specific application that&#39;s overloading the CPU. This is like the &quot;workers&quot; being extremely busy with their individual tasks.</li>
+</ul></li>
+</ul>
+<p>To effectively use <code>vmstat</code>, you&#39;ll often run it with an interval to observe trends over time. For example, <code>vmstat 5</code> will show you system statistics every 5 seconds, allowing you to see if swap activity or I/O wait increases during peak load times.</p>
+<h2 id="practical-application-and-integration">Practical Application and Integration</h2>
+<p>Think of <code>top</code> and <code>htop</code> as your real-time surveillance cameras in the &quot;office,&quot; giving you an immediate view of who&#39;s doing what and how busy they are at any given moment. They are excellent for identifying immediate issues like a runaway process consuming excessive CPU or memory. If the &quot;office&quot; suddenly feels sluggish, you&#39;d check these first to see if any single &quot;worker&quot; is causing the problem.</p>
+<p>On the other hand, <code>vmstat</code> is more like reviewing the security footage over time and analyzing the logs of resource usage. It helps you identify trends and understand the overall health and efficiency of the &quot;office&quot; over minutes, hours, or even longer periods. You might not see a problem in a single snapshot with <code>top</code>/<code>htop</code>, but <code>vmstat</code> could reveal a gradual increase in swap usage or consistently high I/O wait times, indicating a more chronic underlying issue.</p>
+<p>Here&#39;s how they can complement each other:</p>
+<ol type="1">
+<li><p><strong>Initial Real-time Check with</strong> <code>top</code> <strong>or</strong> <code>htop</code>: When you notice a performance problem or just want a quick overview, you&#39;d typically start with <code>top</code> or <code>htop</code>. This allows you to see the current CPU and memory usage of individual processes and the overall system load. You can quickly identify any unusually high resource consumers.</p></li>
+<li><p><strong>Deeper Dive and Process Management with</strong> <code>htop</code>: If you need more interactivity, a clearer view of process relationships, or want to manage processes (kill or renice), <code>htop</code> is your go-to tool. Its color-coding and process trees can provide valuable context.</p></li>
+<li><p><strong>Trend Analysis and System Bottleneck Identification with</strong> <code>vmstat</code>: If <code>top</code>/<code>htop</code> doesn&#39;t immediately reveal the culprit, or if you want to understand the system&#39;s behavior over time, <code>vmstat</code> is invaluable. By running it with intervals (e.g., <code>vmstat 5</code>), you can observe trends in memory usage, swap activity, disk I/O, and overall CPU utilization. High swap activity over time, even if no single process in <code>top</code> is using excessive memory, suggests a need for more RAM. Similarly, consistently high I/O wait times in <code>vmstat</code> point to a disk bottleneck.</p></li>
+</ol>
+<p><strong>Scenario</strong>: Imagine your web server seems to be experiencing intermittent slowdowns. When you quickly check <code>top</code>, you don&#39;t see any single process consistently maxing out the CPU. However, you decide to run <code>vmstat 10</code> for a few minutes. You observe that during the slowdown periods, the <code>si</code> and <code>so</code> values (swap in/out) are significantly higher than usual, and the <code>%wa</code> (I/O wait) also spikes. This suggests that the server might be running out of RAM under peak load, causing it to use swap heavily and wait for disk I/O, even if no single process is constantly using all the CPU. In this case, the solution might be to add more RAM to the server.</p>
+<h3 id="recommending-strategies-for-regularly-checking-these-tools-and-setting-baselines-for-normal-system-activity">Recommending strategies for regularly checking these tools and setting baselines for normal system activity</h3>
+<p>Effective system monitoring isn&#39;t just about knowing how to use the tools; it&#39;s also about establishing good habits and understanding what &quot;normal&quot; looks like for your server. Here are a few key strategies:</p>
+<ul>
+<li><p><strong>Regular Checks</strong>: Make it a routine to periodically check <code>top</code> or <code>htop</code>, especially after making configuration changes, deploying new applications, or during periods of high expected traffic. Think of it as a regular walk-through of the &quot;office&quot; to ensure everything seems in order. The frequency might depend on the criticality and load of your server. For a high-traffic production server, you might check every few minutes, while for a less critical server, a daily or even weekly check might suffice.</p></li>
+<li><p><strong>Establishing Baselines</strong>: Over time, get to know the typical resource usage patterns of your server under normal operating conditions. Note the usual CPU idle percentage, average memory usage, and load averages during different times of the day or week. This creates a &quot;baseline&quot; of normal activity. Deviations from this baseline can be early indicators of potential problems. For example, if your CPU idle time is usually around 70% but suddenly drops to 10% consistently, that warrants investigation. This is like knowing the typical noise level and activity in the &quot;office&quot; – a sudden increase or decrease could signal an issue.</p></li>
+<li><p><strong>Using</strong> <code>vmstat</code> <strong>for Trend Analysis</strong>: Run <code>vmstat</code> periodically (e.g., using <code>cron</code> to log its output) to track resource usage over longer periods. This can help you identify gradual trends, such as a slow memory leak in an application or a steady increase in disk I/O as your data grows. Analyzing these trends can help you plan for capacity upgrades or identify recurring issues. This is like keeping long-term records of the &quot;office&#39;s&quot; resource consumption to spot patterns.</p></li>
+<li><p><strong>Integrating with Monitoring Systems</strong>: For more complex environments, consider integrating <code>top</code>, <code>htop</code> (often via scripting or other tools that parse its output), and <code>vmstat</code> with dedicated monitoring systems. These systems can automate the process of collecting and analyzing metrics, setting alerts for unusual activity, and providing historical data and visualizations. This is like having an automated security system that constantly watches the &quot;office&quot; and alerts you to any anomalies.</p></li>
+</ul>
+<p>By adopting these strategies, you can move from reactive troubleshooting to proactive system health management, ensuring the stability and performance of your server.</p>
+</body>
+</html>

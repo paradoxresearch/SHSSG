@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="installing-setting-up-and-securing-postgresql">Installing, Setting Up and Securing PostgreSQL</h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#installing-setting-up-and-securing-postgresql">Installing, Setting Up and Securing PostgreSQL</a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#what-is-postgresql">What is PostgreSQL?</a></li>
+<li><a href="#prerequisites">Prerequisites</a></li>
+</ul></li>
+<li><a href="#installation">Installation</a>
+<ul>
+<li><a href="#verify-the-installation">Verify the Installation</a></li>
+</ul></li>
+<li><a href="#initial-security-configuration">Initial Security Configuration</a>
+<ul>
+<li><a href="#changing-the-postgresql-postgres-user-password">Changing the PostgreSQL &#39;postgres&#39; User Password</a></li>
+<li><a href="#configuring-authentication-methods-pg_hbaconf">Configuring Authentication Methods (pg_hba.conf)</a></li>
+</ul></li>
+<li><a href="#basic-security-practices">Basic Security Practices</a>
+<ul>
+<li><a href="#creating-dedicated-user-roles">Creating Dedicated User Roles</a></li>
+<li><a href="#limiting-user-privileges">Limiting User Privileges</a></li>
+<li><a href="#keeping-postgresql-updated">Keeping PostgreSQL Updated</a></li>
+</ul></li>
+<li><a href="#firewall-configuration-ufw">Firewall Configuration (UFW)</a>
+<ul>
+<li><a href="#installing-ufw">Installing UFW</a></li>
+<li><a href="#enabling-ufw">Enabling UFW</a></li>
+<li><a href="#allowing-ssh-traffic">Allowing SSH Traffic</a></li>
+<li><a href="#enabling-and-checking-firewall-status">Enabling and Checking Firewall Status</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<h3 id="what-is-postgresql">What is PostgreSQL?</h3>
+<p>Imagine you have a vast library of information – maybe all the books in your favorite bookstore. PostgreSQL is like the librarian and the organizational system for that library, but instead of books, it manages data.</p>
+<p>More technically, PostgreSQL is a powerful, open-source relational database management system (RDBMS). That&#39;s a bit of a mouthful, so let&#39;s break it down:</p>
+<ul>
+<li><strong>Database Management System (DBMS)</strong>: This is software that allows you to create, manage, and access databases. Think of it as the software that runs our digital library.</li>
+<li><strong>Relational</strong>: This means the data is organized into tables, and these tables can be related to each other. It&#39;s like having different sections in our library (fiction, non-fiction, etc.) and being able to find connections between them (e.g., books by the same author might appear in multiple sections).</li>
+<li><strong>Open-source</strong>: This means the software is free to use, distribute, and modify. It&#39;s like our library having open membership and allowing anyone to contribute to its organization.</li>
+</ul>
+<p>PostgreSQL is known for its reliability, robustness, and adherence to standards. It&#39;s used by everyone from small startups to large enterprises to store and manage all sorts of data. It&#39;s like a super-librarian that can handle millions of books and keep everything organized and accessible!</p>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>Before we jump into installing PostgreSQL on your Ubuntu server, there are a few things you should have in place:</p>
+<ol type="1">
+<li><strong>A Debian-based Linux distribution</strong>: This manual is specifically tailored for Debian-based Linux distributions.</li>
+<li><strong>SSH Access</strong>: You&#39;ll need to be able to connect to your Ubuntu server remotely using SSH (Secure Shell). This allows you to execute commands on the server from your local machine. You should have your server&#39;s IP address and your SSH credentials (username and password or an SSH key).</li>
+<li><strong>Basic Command-Line Knowledge</strong>: We&#39;ll be working with the Linux command line, so a basic understanding of commands like <code>sudo</code>, <code>apt update</code>, <code>apt install</code>, etc., will be helpful. Think of it as knowing how to navigate the basic functions of your computer.</li>
+<li><code>sudo</code> <strong>Privileges</strong>: The commands we&#39;ll be using to install and configure software will often require administrative rights. Make sure the user you&#39;re logged in as has <code>sudo</code> privileges. This allows you to run commands as the superuser (root).</li>
+</ol>
+<h2 id="installation">Installation</h2>
+<p>Before we install any new software, it&#39;s always a good practice to update the package lists. This ensures that your system has the most up-to-date information about available software packages.</p>
+<p>To do this, you&#39;ll use the following command in your terminal, after SSHing into your server (if required):</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span></code></pre></div>
+<p>To install PostgreSQL and its associated packages, we&#39;ll use the <code>apt install</code> command. Specifically, we&#39;ll install the <code>postgresql</code> package, which includes the PostgreSQL server, client utilities, and development libraries.</p>
+<p>Run the following command in your terminal:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install postgresql postgresql-contrib</span></code></pre></div>
+<p>Here&#39;s what this command does:</p>
+<ul>
+<li><code>sudo</code>: As we discussed, this gives us the necessary administrative privileges to install software.</li>
+<li><code>apt install</code>: This is the command used to install new packages on Ubuntu.</li>
+<li><code>postgresql</code>: This is the main package for the PostgreSQL server.</li>
+<li><code>postgresql-contrib</code>: This package includes additional utilities and extensions that can be very helpful, so it&#39;s a good idea to install it as well. Think of it as getting a helpful companion guide along with our main PostgreSQL book.</li>
+</ul>
+<p>Your server will then download the necessary files and install PostgreSQL on your server. You might be prompted to confirm the installation – just type <code>y</code> and press Enter to continue.</p>
+<p>Once the installation is complete, PostgreSQL should be running on your server. We&#39;ll verify this in the next step.</p>
+<h3 id="verify-the-installation">Verify the Installation</h3>
+<p>Now that we&#39;ve (hopefully!) installed PostgreSQL, we need to make sure it&#39;s actually running correctly.</p>
+<p>There are a few ways to verify the installation:</p>
+<ol type="1">
+<li><p><strong>Check the Service Status</strong>: We can use the <code>systemctl</code> command to check the status of the PostgreSQL service. Run the following command:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status postgresql</span></code></pre></div>
+<p>This command will show you information about the PostgreSQL service, including whether it&#39;s active (running), when it started, and any recent logs. Look for a line that says something like <code>Active: active (running)</code> – this indicates that PostgreSQL is up and running.</p></li>
+<li><p><strong>Connect to the PostgreSQL Server</strong>: Another way to verify is to try and connect to the PostgreSQL server using one of its command-line tools. The <code>psql</code> command is a terminal-based front-end to PostgreSQL. After installation, a default PostgreSQL user named <code>postgres</code> is created. You can try to switch to this user and then connect to the PostgreSQL prompt.</p>
+<p>First, switch to the <code>postgres</code> user:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span> postgres</span></code></pre></div>
+<p>You&#39;ll notice your terminal prompt change to postgres@your_hostname:~$. Now, try to connect to the PostgreSQL prompt by running:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">psql</span></span></code></pre></div>
+<p>If the connection is successful, you&#39;ll see a prompt that looks like <code>postgres=#</code>. You can then exit this prompt by typing <code>\q</code> and pressing Enter, and then exit the <code>postgres</code> user session by typing <code>exit</code> and pressing Enter to return to your regular user.</p></li>
+</ol>
+<p>If you can successfully check the service status and connect to the <code>psql</code> prompt, it means PostgreSQL has been installed and is running on your server.</p>
+<h2 id="initial-security-configuration">Initial Security Configuration</h2>
+<h3 id="changing-the-postgresql-postgres-user-password">Changing the PostgreSQL &#39;postgres&#39; User Password</h3>
+<p>When PostgreSQL is installed, it creates a default administrative user named <code>postgres</code>. This user has superuser privileges within the database, meaning it can do just about anything. For security reasons, it&#39;s crucial to set a strong password for this user as soon as possible. Leaving it with the default settings is like leaving the master key to our library out in the open!</p>
+<p>Here&#39;s how you can change the password for the postgres user:</p>
+<ol type="1">
+<li><p><strong>Switch to the</strong> <code>postgres</code> <strong>user</strong>: Just like we did when verifying the installation, first switch to the postgres Linux user:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span> postgres</span></code></pre></div></li>
+<li><p><strong>Access the PostgreSQL prompt</strong>: Once you&#39;re logged in as the <code>postgres</code> user, access the PostgreSQL command-line interface:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">psql</span></span></code></pre></div></li>
+<li><p>Change the password: At the <code>postgres=#</code> prompt, you can change the password for the <code>postgres</code> database user using the <code>ALTER ROLE</code> command: SQL</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">ROLE</span> postgres <span class="kw">WITH</span> <span class="kw">PASSWORD</span> <span class="st">&#39;your_new_strong_password&#39;</span>;</span></code></pre></div>
+<p><strong>Important</strong>: Replace &#39;your_new_strong_password&#39; with a strong, unique password. A strong password typically includes a mix of uppercase and lowercase letters, numbers, and special characters.</p></li>
+<li><p><strong>Exit PostgreSQL and the</strong> <code>postgres</code> <strong>user</strong>: After successfully changing the password, exit the PostgreSQL prompt by typing <code>\q</code> and pressing Enter, and then exit the <code>postgres</code> user session by typing <code>exit</code> and pressing Enter.</p></li>
+</ol>
+<p>Changing the default password is a fundamental security practice. It&#39;s like the first lock you put on the library door!</p>
+<h3 id="configuring-authentication-methods-pg_hbaconf">Configuring Authentication Methods (pg_hba.conf)</h3>
+<p>Now that we&#39;ve secured the <code>postgres</code> user with a strong password, the next crucial step in our initial security configuration is to manage how users are allowed to connect to the PostgreSQL database. This is like deciding who gets a key to our library and what kind of key they get.</p>
+<p>This is configured in a file called <code>pg_hba.conf</code>. The hba stands for &quot;host-based authentication.&quot; This file tells PostgreSQL which hosts are allowed to connect, which users they can connect as, and what authentication methods to use.</p>
+<p>The <code>pg_hba.conf</code> file is typically located in the PostgreSQL data directory. You can usually find its location by running the following command as the <code>postgres</code> user:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">psql</span> <span class="at">-c</span> <span class="st">&#39;SHOW hba_file;&#39;</span></span></code></pre></div>
+<p>This command will output the full path to the <code>pg_hba.conf</code> file. You&#39;ll need to edit this file using a text editor with <code>sudo</code> privileges (since it&#39;s usually owned by the <code>postgres</code> user). For example, you might use <code>nano</code>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nano /etc/postgresql/your_version/main/pg_hba.conf</span></code></pre></div>
+<p><strong>(Replace</strong> <code>your_version</code> <strong>with the actual version number of PostgreSQL you installed, e.g.,</strong> <code>14</code><strong>,</strong> <code>15</code><strong>, etc.)</strong></p>
+<p>The <code>pg_hba.conf</code> file consists of a series of records, each specifying an authentication rule. Each line typically has the following format:</p>
+<pre class="shell"><code>type  database  user  address  method</code></pre>
+<p><strong>Let&#39;s break down these fields</strong>:</p>
+<ul>
+<li><code>type</code>: Specifies the connection type. Common values include <code>local</code> (for connections from the same host via Unix domain sockets) and <code>host</code> (for TCP/IP connections).</li>
+<li><code>database</code>: Specifies the database(s) the rule applies to. <code>all</code> means all databases. You can also specify individual database names.</li>
+<li><code>user</code>: Specifies the PostgreSQL user(s) the rule applies to. <code>all</code> means all users. You can also specify individual usernames.</li>
+<li><code>address</code>: Specifies the client IP address or range of addresses the rule applies to. <code>all</code> means any IP address. You can also specify specific IP addresses (e.g., <code>192.168.1.10</code>) or network ranges (e.g., <code>192.168.1.0/24</code>). For local connections, this field is usually <code>all</code> or left empty.</li>
+<li><code>method</code>: Specifies the authentication method to be used. Some common methods include:
+<ul>
+<li><code>trust</code>: Allows connections without a password (generally not recommended for production environments!).</li>
+<li><code>password</code>: Requires a password for authentication (passwords are sent in clear text, so it&#39;s less secure for remote connections).</li>
+<li><code>md5</code>: Requires an MD5-hashed password for authentication (more secure than <code>password</code>).</li>
+<li><code>scram-sha-256</code>: A more modern and secure password hashing method (recommended).</li>
+<li><code>peer</code>: Uses the operating system&#39;s user identity for local connections.</li>
+</ul></li>
+</ul>
+<p><strong>Important Security Considerations in</strong> <code>pg_hba.conf</code>:</p>
+<ul>
+<li><strong>Local Connections</strong>: For local connections (from the same server), the default <code>peer</code> authentication is usually fine. This relies on the operating system&#39;s user credentials.</li>
+<li><strong>Remote Connections</strong>: For connections from other machines, you&#39;ll likely want to use a strong authentication method like <code>md5</code> or, preferably, <code>scram-sha-256</code>. You&#39;ll also want to restrict the <code>address</code> to only the IP addresses or networks that should be allowed to connect remotely.</li>
+<li><strong>Order Matters</strong>: The rules in <code>pg_hba.conf</code> are processed in order from top to bottom. The first rule that matches the connection attempt is used.</li>
+</ul>
+<p>After making any changes to <code>pg_hba.conf</code>, you must reload the PostgreSQL configuration for the changes to take effect. You can do this using the following command:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl reload postgresql</span></code></pre></div>
+<p>Configuring <code>pg_hba.conf</code> correctly is essential for controlling who can access your database and how they authenticate. It&#39;s like carefully managing who gets a key to which sections of our library and what kind of identification they need to show.</p>
+<h2 id="basic-security-practices">Basic Security Practices</h2>
+<h3 id="creating-dedicated-user-roles">Creating Dedicated User Roles</h3>
+<p>Think back to our library analogy. Instead of everyone using the master key (like the <code>postgres</code> user), it&#39;s much safer to give different staff members specific keys that only allow them access to the sections they need to manage. In PostgreSQL, we achieve this by creating dedicated user roles with specific permissions.</p>
+<p>The <code>postgres</code> user is like the &#39;root&#39; or &#39;administrator&#39; user – it has ultimate power. For day-to-day operations and for different applications that need to access the database, it&#39;s much better to create separate user roles with only the necessary privileges. This principle is known as the <strong>principle of least privilege</strong>.</p>
+<p>Here&#39;s how you can create new user roles in PostgreSQL:</p>
+<ol type="1">
+<li><p><strong>Access the PostgreSQL prompt</strong>: First, you&#39;ll need to connect to the PostgreSQL server. You can do this by switching to the <code>postgres</code> user and then using <code>psql</code>:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span> postgres</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">psql</span></span></code></pre></div></li>
+<li><p><strong>Create a new role</strong>: At the <code>postgres=#</code> prompt, you can create a new user role using the <code>CREATE ROLE</code> or <code>CREATE USER</code> command. <code>CREATE USER</code> is essentially a shortcut for <code>CREATE ROLE</code> with the <code>LOGIN</code> attribute.</p>
+<p>For example, let&#39;s say you have an application called &quot;my_app&quot; that needs to read and write data to a database named &quot;my_database&quot;. You could create a dedicated user for this application like this:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="fu">USER</span> my_app_user <span class="kw">WITH</span> <span class="kw">PASSWORD</span> <span class="st">&#39;a_strong_app_password&#39;</span>;</span></code></pre></div>
+<p>This command creates a new user named <code>my_app_user</code> and sets a password for it. Make sure to replace <code>&#39;a_strong_app_password&#39;</code> with a strong, unique password for this user.</p>
+<p>You can also create roles that don&#39;t have login privileges (these are useful for grouping permissions). For example:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">ROLE</span> my_app_read_only;</span></code></pre></div></li>
+<li><p><strong>Grant privileges</strong>: Once you&#39;ve created a user or role, you need to grant it the necessary privileges to interact with the database. For our <code>my_app_user</code>, we&#39;d need to grant it privileges on the <code>my_database</code> database. For example, to allow it to connect to the database and select, insert, update, and delete data, you would use the <code>GRANT</code> command:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="kw">CONNECT</span> <span class="kw">ON</span> <span class="kw">DATABASE</span> my_database <span class="kw">TO</span> my_app_user;</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="kw">SELECT</span>, <span class="kw">INSERT</span>, <span class="kw">UPDATE</span>, <span class="kw">DELETE</span> <span class="kw">ON</span> <span class="kw">ALL</span> <span class="kw">TABLES</span> <span class="kw">IN</span> <span class="kw">SCHEMA</span> <span class="kw">public</span> <span class="kw">TO</span> my_app_user;</span></code></pre></div>
+<p>This grants the <code>CONNECT</code> privilege on the <code>my_database</code> and the <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, and <code>DELETE</code> privileges on all tables within the <code>public</code> schema of that database. You can adjust these privileges based on the specific needs of the user or application.</p></li>
+<li><p><strong>Exit PostgreSQL</strong>: After creating the user and granting privileges, exit the PostgreSQL prompt using <code>\q</code>.</p></li>
+</ol>
+<p>By creating dedicated user roles with specific privileges, you limit the potential damage if one of these accounts is compromised. It&#39;s like giving each library staff member a key that only opens the sections they need, so if a key is lost, the entire library isn&#39;t vulnerable.</p>
+<h3 id="limiting-user-privileges">Limiting User Privileges</h3>
+<p>Creating separate users is only half the battle. The other crucial part is to ensure that these users only have the <strong>minimum privileges</strong> necessary to perform their tasks. This reinforces the principle of least privilege we touched on earlier. It&#39;s like giving our library staff keys that only open the specific rooms they need to access, and nothing more.</p>
+<p>In PostgreSQL, you control user privileges using the <code>GRANT</code> and <code>REVOKE</code> commands. We saw an example of <code>GRANT</code> when we gave <code>my_app_user</code> permission to connect to the database and interact with tables.</p>
+<p>Here are some important concepts related to limiting privileges:</p>
+<ul>
+<li><strong>Object-Level Privileges</strong>: You can grant or revoke privileges on specific database objects, such as databases, tables, views, sequences, and functions. This allows for very fine-grained control. For example, you might grant <code>SELECT</code> privilege on a specific table but not <code>INSERT</code> or <code>DELETE</code>.</li>
+<li><strong>Schema Privileges</strong>: Schemas are like namespaces within a database that help organize objects. You can grant privileges on schemas, such as the ability to create objects within a schema or to access objects in it. The <code>public</code> schema is the default one.</li>
+<li><strong>Role Membership</strong>: You can create roles that represent a set of privileges and then grant membership in these roles to other users or roles. This makes it easier to manage permissions for groups of users.</li>
+</ul>
+<p><strong>Examples</strong>:</p>
+<ul>
+<li><p>To grant <code>SELECT</code> privilege on a table named <code>users</code> in the <code>public</code> schema to <code>my_app_user</code>:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="kw">SELECT</span> <span class="kw">ON</span> <span class="kw">TABLE</span> <span class="kw">public</span>.users <span class="kw">TO</span> my_app_user;</span></code></pre></div></li>
+<li><p>To revoke <code>INSERT</code> privilege on the same table from <code>my_app_user</code>:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">REVOKE</span> <span class="kw">INSERT</span> <span class="kw">ON</span> <span class="kw">TABLE</span> <span class="kw">public</span>.users <span class="kw">FROM</span> my_app_user;</span></code></pre></div></li>
+<li><p>To create a read-only role and grant <code>SELECT</code> privilege on all tables in the <code>public</code> schema to it:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">ROLE</span> read_only_access;</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="kw">SELECT</span> <span class="kw">ON</span> <span class="kw">ALL</span> <span class="kw">TABLES</span> <span class="kw">IN</span> <span class="kw">SCHEMA</span> <span class="kw">public</span> <span class="kw">TO</span> read_only_access;</span></code></pre></div></li>
+<li><p>To then grant membership in the <code>read_only_access</code> role to the <code>my_app_user</code>:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> read_only_access <span class="kw">TO</span> my_app_user;</span></code></pre></div></li>
+</ul>
+<p>By carefully managing privileges, you can significantly reduce the risk of accidental or malicious data modification or access. It&#39;s all about giving each user the right key for their specific job and no more.</p>
+<h3 id="keeping-postgresql-updated">Keeping PostgreSQL Updated</h3>
+<p>Think of PostgreSQL as any other important piece of software on your server, like your operating system itself. Just as you regularly update your OS to get the latest security patches and bug fixes, it&#39;s equally important to keep your PostgreSQL installation up to date.</p>
+<p>Software updates often include:</p>
+<ul>
+<li><strong>Security Patches</strong>: These fix vulnerabilities that could be exploited by attackers. Applying these patches promptly is crucial to protect your database from known threats. It&#39;s like fixing weak spots in the walls of our library.</li>
+<li><strong>Bug Fixes</strong>: Updates also address bugs that could cause instability or unexpected behavior in the database.</li>
+<li><strong>Performance Improvements</strong>: Sometimes, updates include optimizations that can make your database run faster and more efficiently.</li>
+<li><strong>New Features</strong>: While security and stability are the primary reasons for updates, they can also introduce new and useful features.</li>
+</ul>
+<p>On Debian-based distributions, you can typically update your PostgreSQL installation using the standard system update commands. First, you&#39;d update the package lists:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span></code></pre></div>
+<p>Then, you can upgrade all outdated packages on your system, including PostgreSQL:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt upgrade</span></code></pre></div>
+<p>Alternatively, if you want to upgrade only the PostgreSQL packages, you can specify them:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt upgrade postgresql postgresql-contrib</span></code></pre></div>
+<p>It&#39;s a good practice to regularly run these update commands to ensure your system, including PostgreSQL, is running the latest stable and secure versions. Many administrators even automate this process.</p>
+<p>Keeping your software updated might seem like a routine task, but it&#39;s a fundamental aspect of maintaining a secure environment. It&#39;s like regularly checking our library for any signs of damage and making necessary repairs to keep it safe and sound.</p>
+<h2 id="firewall-configuration-ufw">Firewall Configuration (UFW)</h2>
+<h3 id="installing-ufw">Installing UFW</h3>
+<p>Think of a firewall as a security guard for your server, controlling who can enter and who can&#39;t. Uncomplicated Firewall (UFW) is a user-friendly front-end for managing iptables, which is the underlying firewall system in Linux. It makes it much easier to configure your firewall rules.</p>
+<p>By default, UFW might not be installed on your Ubuntu server. You can check its status by running:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
+<p>If it&#39;s not installed, you&#39;ll likely see a message indicating that the command isn&#39;t found. In that case, you can install UFW using the following command:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install ufw</span></code></pre></div>
+<p>You&#39;ll be asked to confirm the installation. Just type <code>y</code> and press Enter.</p>
+<p>Once the installation is complete, you can again check the status using <code>sudo ufw status</code>. It will likely show that the firewall is inactive.</p>
+<p>Installing UFW is the first step in setting up this security guard for our PostgreSQL server. In the next steps, we&#39;ll configure it to allow only the necessary traffic.</p>
+<h3 id="enabling-ufw">Enabling UFW</h3>
+<p>By default, even after installation, UFW is usually disabled. To enable it, you use the following command:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw enable</span></code></pre></div>
+<p>You might see a warning about potential disruption of existing SSH connections. This is because if you&#39;re connected to your server via SSH, and you haven&#39;t explicitly allowed SSH traffic through the firewall, enabling UFW might block your own connection!</p>
+<p>Therefore, <strong>before enabling UFW</strong>, it&#39;s crucial to ensure that SSH traffic is allowed. We&#39;ll do that in the next step. However, if you&#39;re absolutely sure that SSH is allowed (perhaps you&#39;ve configured it previously or are working directly on the server console), you can proceed with enabling UFW.</p>
+<p>Once enabled, UFW will start enforcing the rules you configure. If you want to disable it at any point (for example, for troubleshooting), you can use the command:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw disable</span></code></pre></div>
+<p>For now, let&#39;s hold off on enabling UFW until we&#39;ve explicitly allowed SSH access. This is like telling our security guard to make sure they don&#39;t lock themselves out of the building!</p>
+<h3 id="allowing-ssh-traffic">Allowing SSH Traffic</h3>
+<p>By default, SSH typically uses port 22. To allow incoming SSH connections, you can use the following UFW command:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow ssh</span></code></pre></div>
+<p>This command tells UFW to allow traffic on the SSH port. UFW is smart enough to usually know the standard port for services like SSH by name. Alternatively, you can specify the port number directly:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow 22/tcp</span></code></pre></div>
+<p>This command explicitly allows TCP traffic on port 22. Both commands achieve the same result in most standard SSH configurations.</p>
+<p>After running this command, UFW will be configured to allow incoming SSH connections. Now it&#39;s safe to enable the firewall.</p>
+<p>Once you&#39;ve allowed SSH, we need to allow traffic for PostgreSQL itself. By default, PostgreSQL listens for connections on port 5432. To allow connections to the PostgreSQL server, you can use the following UFW command:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow 5432/tcp</span></code></pre></div>
+<p>This command tells UFW to allow TCP traffic on port 5432, which is the standard port for PostgreSQL. This is like telling our security guard, &quot;And it&#39;s okay to let people in who are trying to access the library&#39;s services on this specific door!&quot;</p>
+<p>It&#39;s important to allow both SSH (so you can manage your server) and PostgreSQL (so applications can connect to the database).</p>
+<h3 id="enabling-and-checking-firewall-status">Enabling and Checking Firewall Status</h3>
+<p>First, let&#39;s enable UFW. As we discussed earlier, you can do this with the command:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw enable</span></code></pre></div>
+<p>You might get a warning about disrupting existing SSH connections if you haven&#39;t allowed it yet. Since we just did that, it should be safe to proceed. Type <code>y</code> to confirm.</p>
+<p>Once UFW is enabled, it&#39;s crucial to check its status to ensure that the rules we&#39;ve added (allowing SSH and PostgreSQL) are active. You can do this with the command:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
+<p>This command will display a list of the firewall rules. You should see entries similar to these:</p>
+<pre class="shell"><code>Status: active
+
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW       Anywhere
+5432/tcp                   ALLOW       Anywhere
+22/tcp (v6)                ALLOW       Anywhere (v6)
+5432/tcp (v6)              ALLOW       Anywhere (v6)</code></pre>
+<p>This output indicates that the firewall is active and is allowing TCP traffic on port 22 (for SSH) and port 5432 (for PostgreSQL) from any IP address (<code>Anywhere</code>).</p>
+<p>For enhanced security, especially for PostgreSQL, you might want to restrict the allowed IP addresses to only those that actually need to connect to your database. For example, if your application server has a specific IP address, you could modify the rule to only allow connections from that IP. However, for this basic setup, allowing from anywhere is a starting point.</p>
+<p>After confirming that the firewall is active and the necessary rules are in place, your server will have a basic firewall configured to protect it. This is like having our security guard actively monitoring who comes in and out of the library through the designated doors!</p>
+</body>
+</html>

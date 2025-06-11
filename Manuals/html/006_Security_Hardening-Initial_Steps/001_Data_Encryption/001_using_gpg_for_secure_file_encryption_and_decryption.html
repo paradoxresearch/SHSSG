@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="using-gpg-for-secure-encryption-and-decryption">Using GPG for Secure Encryption and Decryption</h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#using-gpg-for-secure-encryption-and-decryption">Using GPG for Secure Encryption and Decryption</a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#understanding-gpg-and-public-key-cryptography">Understanding GPG and Public-Key Cryptography</a></li>
+</ul></li>
+<li><a href="#gpg-key-pair-generation">GPG Key Pair Generation</a></li>
+<li><a href="#encrypting-data-with-gpg">Encrypting Data with GPG</a>
+<ul>
+<li><a href="#encrypting-a-file-using-a-recipients-public-key">Encrypting a File Using a Recipient&#39;s Public Key</a></li>
+<li><a href="#encrypting-a-file-for-multiple-recipients">Encrypting a File for Multiple Recipients</a></li>
+</ul></li>
+<li><a href="#decrypting-data-with-gpg">Decrypting Data with GPG</a>
+<ul>
+<li><a href="#decrypting-a-file-using-the-corresponding-private-key">Decrypting a File Using the Corresponding Private Key</a></li>
+</ul></li>
+<li><a href="#managing-gpg-keys">Managing GPG Keys</a>
+<ul>
+<li><a href="#exporting-and-importing-public-keys-for-sharing">Exporting and Importing Public Keys for Sharing</a>
+<ul>
+<li><a href="#exporting-your-public-key">Exporting Your Public Key</a></li>
+<li><a href="#importing-public-keys">Importing Public Keys</a></li>
+</ul></li>
+<li><a href="#revoking-and-exipring-keys">Revoking and Exipring Keys</a>
+<ul>
+<li><a href="#key-expiration">Key Expiration</a></li>
+<li><a href="#key-revocation">Key Revocation</a></li>
+</ul></li>
+<li><a href="#backing-up-your-private-key">Backing Up your Private Key</a></li>
+<li><a href="#restoring-a-backed-up-private-key">Restoring a Backed Up Private Key</a></li>
+<li><a href="#trusting-public-keys">Trusting Public Keys</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<h3 id="understanding-gpg-and-public-key-cryptography">Understanding GPG and Public-Key Cryptography</h3>
+<p>GPG, or <strong>GNU Privacy Guard</strong>, is a free and open-source implementation of the OpenPGP standard. Think of it as a digital padlock and key system for your data. Its primary purpose is to allow you to securely encrypt and decrypt data, ensuring that only the intended recipient can read it. It also enables you to digitally sign data, verifying its authenticity and integrity.</p>
+<p>Now, the core concept behind GPG&#39;s power is <strong>public-key cryptography</strong>, also known as <strong>asymmetric encryption</strong>. To understand this, let&#39;s use a simple analogy: imagine you have a special mailbox with two slots and two unique keys.</p>
+<ul>
+<li>One slot is for <strong>sending messages</strong>, and it&#39;s unlocked by your private key. This key is something you keep absolutely secret and never share.</li>
+<li>The other slot is for <strong>receiving messages</strong>, and it&#39;s locked with your public key. You can give copies of this public key to anyone.</li>
+</ul>
+<p>Here&#39;s how it works: If someone wants to send you a secret message, they use your publicly available &quot;receiving&quot; key to lock the message. Once locked, only <em>your</em> private key can open it. Even the person who locked the message can&#39;t unlock it without your private key.</p>
+<p>This is a stark contrast to <strong>symmetric encryption</strong>, where you use the same key for both encrypting and decrypting data. While symmetric encryption is faster, sharing that single key securely can be a challenge. Public-key cryptography elegantly solves this &quot;key exchange problem&quot; by allowing you to share your public key freely without compromising security.</p>
+<p>Why is this essential for secure communication and data storage? Because it allows you to:</p>
+<ul>
+<li><strong>Confidentiality</strong>: Send sensitive data to someone knowing only they can read it.</li>
+<li><strong>Authentication</strong>: Verify that a message truly came from the person it claims to be from.</li>
+<li><strong>Integrity</strong>: Ensure that a message hasn&#39;t been tampered with since it was signed.</li>
+</ul>
+<h2 id="gpg-key-pair-generation">GPG Key Pair Generation</h2>
+<p>To use GPG, you first need to create your own unique key pair: a public key and a private key. This pair acts as your digital identity for encryption and decryption.</p>
+<p>Here&#39;s how you generate a GPG <strong>key pair</strong> in the Linux terminal:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gpg</span> <span class="at">--full-generate-key</span></span></code></pre></div>
+<p>When you run this command, GPG will prompt you for several pieces of information:</p>
+<ol type="1">
+<li><strong>Kind of key</strong>: For general use, the default <code>(1) RSA and RSA</code> is usually a good choice. This means both the encryption and signing capabilities will use the RSA algorithm.</li>
+<li><strong>Key size</strong>: This determines the strength of your key. A larger key size provides more security but takes longer to generate and use. For modern security, a key size of at least <code>4096</code> bits is highly recommended.</li>
+<li><strong>Key expiration</strong>: You can set an expiration date for your key. This is a good security practice, as it means even if your key were compromised, it would eventually become invalid. Many choose <code>0</code> for no expiration, but it&#39;s often better to set one (e.g., 1 year) and renew it later.</li>
+<li><strong>User ID information</strong>: You&#39;ll be asked for your real name, email address, and an optional comment. This information is used to identify your public key to others.</li>
+<li><strong>Passphrase</strong>: This is critically important. Your passphrase protects your private key. Think of it as the strong lock on your secret key. If someone gets hold of your private key file, they still can&#39;t use it without this passphrase. <strong>Choose a strong, unique passphrase that you won&#39;t forget but is hard for others to guess</strong>. The longer and more complex, the better!</li>
+</ol>
+<p>As GPG generates your key, it will ask you to perform some random actions (like typing or moving your mouse). This is to gather sufficient entropy (randomness) to create a truly unique and secure key.</p>
+<p>Once generated, your public key can be shared with anyone who wants to send you encrypted messages or verify your digital signatures. Your private key, however, must be kept absolutely secure and never shared.</p>
+<h2 id="encrypting-data-with-gpg">Encrypting Data with GPG</h2>
+<h3 id="encrypting-a-file-using-a-recipients-public-key">Encrypting a File Using a Recipient&#39;s Public Key</h3>
+<p>This is where the power of public-key cryptography really shines. To encrypt a file for someone else, you need their public key. You don&#39;t need their private key, and they don&#39;t need yours. This means you can send sensitive information securely without ever sharing a secret key directly.</p>
+<p>Imagine you have a file named <code>secret_report.txt</code> that you need to send to a colleague, let&#39;s call her Alice, and you want to ensure only Alice can read it. You would use her public key to encrypt the file.</p>
+<p>The general command structure for encrypting a file with GPG for a specific recipient is:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gpg</span> <span class="at">--encrypt</span> <span class="at">--recipient</span> <span class="st">&quot;Alice&#39;s Name or Email&quot;</span> secret_report.txt</span></code></pre></div>
+<p>Let&#39;s break down this command:</p>
+<ul>
+<li><code>gpg --encrypt</code>: This tells GPG that you want to encrypt a file.</li>
+<li><code>--recipient &quot;Alice&#39;s Name or Email&quot;</code>: This is crucial. You specify the identity of the person for whom you are encrypting the file. GPG will then look for Alice&#39;s public key in your keyring (a collection of GPG keys you have). The identity can be her full name or email address, as entered when her key was generated.</li>
+<li><code>secret_report.txt</code>: This is the input file you want to encrypt.</li>
+</ul>
+<p>After running this command, GPG will typically create an encrypted output file with a <code>.gpg</code> or <code>.asc</code> extension (if you add <code>--armor</code> for ASCII armored output, which makes it suitable for email). For example, <code>secret_report.txt</code> would become <code>secret_report.txt.gpg</code>. This new file is now unintelligible to anyone without Alice&#39;s corresponding private key and passphrase.</p>
+<p><strong>Important Note</strong>: Before you can encrypt for Alice, you first need to have her public key on your system. We&#39;ll cover how to import keys in a later step, but for now, assume you have it.</p>
+<h3 id="encrypting-a-file-for-multiple-recipients">Encrypting a File for Multiple Recipients</h3>
+<p>Sometimes, you might need to send a secure message or file to more than one person. GPG handles this gracefully! You don&#39;t have to encrypt the file separately for each recipient. Instead, you can specify multiple recipients in a single command.</p>
+<p>The process is very similar to encrypting for a single recipient, you just list all the individuals for whom you want to encrypt the file.</p>
+<p>Let&#39;s say you have a file <code>project_update.txt</code> that needs to be securely shared with both Alice and Bob. Assuming you have both their public keys, the command would look like this:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gpg</span> <span class="at">--encrypt</span> <span class="at">--recipient</span> <span class="st">&quot;Alice&#39;s Name or Email&quot;</span> <span class="at">--recipient</span> <span class="st">&quot;Bob&#39;s Name or Email&quot;</span> project_update.txt</span></code></pre></div>
+<p>As you can see, you simply add an additional <code>--recipient</code> flag for each person you want to be able to decrypt the file. When you run this command, GPG encrypts the file in such a way that both Alice&#39;s private key and Bob&#39;s private key can decrypt it. Each recipient will only need their own private key to access the content.</p>
+<p>This is incredibly efficient for team collaboration or distributing sensitive information to a select group.</p>
+<h2 id="decrypting-data-with-gpg">Decrypting Data with GPG</h2>
+<h3 id="decrypting-a-file-using-the-corresponding-private-key">Decrypting a File Using the Corresponding Private Key</h3>
+<p>You&#39;ve received an encrypted file – perhaps <code>secret_message.txt.gpg</code> – and now you need to read its contents. This is where your private key and your trusty passphrase come into play. Only the private key corresponding to one of the public keys used for encryption can decrypt the file.</p>
+<p>The process is remarkably straightforward:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gpg</span> <span class="at">--decrypt</span> secret_message.txt.gpg</span></code></pre></div>
+<p>Let&#39;s break this down:</p>
+<ul>
+<li><code>gpg --decrypt</code>: This tells GPG that you want to decrypt a file.</li>
+<li><code>secret_message.txt.gpg</code>: This is the encrypted file you want to decrypt.</li>
+</ul>
+<p>When you run this command, GPG will:</p>
+<ol type="1">
+<li>Identify which of your private keys can decrypt the file.</li>
+<li>Prompt you for the passphrase associated with that private key. This is why a strong passphrase is so important – it&#39;s the final lock protecting your data even if someone gets your private key file.</li>
+</ol>
+<p>Once you enter the correct passphrase, GPG will decrypt the file. By default, it will output the decrypted content directly to your terminal. If you want to save the decrypted content to a new file, you can redirect the output:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gpg</span> <span class="at">--decrypt</span> secret_message.txt.gpg <span class="op">&gt;</span> decrypted_message.txt</span></code></pre></div>
+<p>This command will take the decrypted output and save it into a new file called <code>decrypted_message.txt</code>.</p>
+<p><strong>Key Point</strong>: Your private key is like the unique key to your digital safe. Without it, and its protective passphrase, encrypted data meant for you remains inaccessible.</p>
+<h2 id="managing-gpg-keys">Managing GPG Keys</h2>
+<p>As a system administrator, you&#39;ll likely accumulate several GPG keys over time – your own, keys of colleagues, keys for specific servers or services. Knowing how to view and manage these keys is crucial.</p>
+<p>GPG keeps all the keys it knows about in what&#39;s called a keyring. You can think of it as a digital address book for all your GPG contacts and your own identity.</p>
+<p>To list the public keys you have in your keyring, you use the following command:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gpg</span> <span class="at">--list-keys</span></span></code></pre></div>
+<p>This command will display information about all the public keys GPG knows about, including:</p>
+<ul>
+<li><strong>pub</strong>: The public key itself, along with its ID and creation date.</li>
+<li><strong>uid</strong>: The User ID associated with the key (e.g., &quot;John Doe <a href="mailto:john.doe@example.com">john.doe@example.com</a>&quot;).</li>
+<li><strong>sub</strong>: Subkeys, which are often used for specific purposes like encryption or signing, separate from the primary key.</li>
+</ul>
+<p>To list your private keys (the secret ones you generated), you can use:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gpg</span> <span class="at">--list-secret-keys</span></span></code></pre></div>
+<p>This command will show similar information, but specifically for the private keys you hold. It&#39;s important to remember that these are the keys you should guard closely!</p>
+<p>Knowing how to list your keys is the first step in managing them effectively. It allows you to verify that keys have been imported correctly, check their expiration dates, and confirm the identities associated with them.</p>
+<h3 id="exporting-and-importing-public-keys-for-sharing">Exporting and Importing Public Keys for Sharing</h3>
+<p>The whole point of public-key cryptography is to share your public key so others can encrypt data for you, and you can import their public keys to encrypt data for them.</p>
+<h4 id="exporting-your-public-key">Exporting Your Public Key</h4>
+<p>When you generate a GPG key pair, your <strong>public key</strong> is what you give to others. It&#39;s perfectly safe to share, as it can only encrypt data for you, not decrypt data from you.</p>
+<p>To export your public key, you typically use your User ID (name or email) that you associated with the key:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gpg</span> <span class="at">--output</span> my_public_key.asc <span class="at">--armor</span> <span class="at">--export</span> <span class="st">&quot;Your Name or Email&quot;</span></span></code></pre></div>
+<p>Let&#39;s break that down:</p>
+<ul>
+<li><code>--output my_public_key.asc</code>: This specifies the name of the file where your public key will be saved. The <code>.asc</code> extension is common for &quot;ASCII armored&quot; files, which means the key data is converted into readable text.</li>
+<li><code>--armor</code>: This flag tells GPG to output the key in ASCII armored format. This is important because it makes the key suitable for pasting into emails, web pages, or other text-based communication. Without <code>--armor</code>, the output would be binary, which isn&#39;t easily shareable.</li>
+<li><code>--export &quot;Your Name or Email&quot;</code>: This tells GPG to export the public key associated with that specific User ID.</li>
+</ul>
+<p>After running this, you&#39;ll have a file like my_public_key.asc that you can send to anyone who needs to encrypt data for you.</p>
+<h4 id="importing-public-keys">Importing Public Keys</h4>
+<p>Conversely, when someone wants to send you an encrypted file, they&#39;ll send you their public key. You need to <strong>import</strong> this key into your GPG keyring so that GPG knows about it and can use it for encryption.</p>
+<p>Let&#39;s say Alice sent you her public key file, <code>alice_public_key.asc</code>. You would import it like this:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gpg</span> <span class="at">--import</span> alice_public_key.asc</span></code></pre></div>
+<p>GPG will then add Alice&#39;s public key to your keyring. Once imported, you can now use her User ID (e.g., &quot;Alice <a href="mailto:alice@example.com">alice@example.com</a>&quot;) as a recipient when encrypting files, just as we discussed in Step 3.</p>
+<p>This ability to easily exchange public keys is what makes GPG so powerful for secure communication. It&#39;s like exchanging digital padlocks without ever needing to share the secret key that opens them!</p>
+<h3 id="revoking-and-exipring-keys">Revoking and Exipring Keys</h3>
+<h4 id="key-expiration">Key Expiration</h4>
+<p>As we discussed, setting an expiration date for your GPG key is a good security practice. If your key has an expiration date, it will automatically become invalid after that date, reducing risk if it&#39;s ever compromised.</p>
+<p>To <strong>change the expiration date</strong> of your key (or set one if it didn&#39;t have one initially), you can edit your key:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gpg</span> <span class="at">--edit-key</span> <span class="st">&quot;Your Name or Email&quot;</span></span></code></pre></div>
+<p>Once in the GPG edit prompt:</p>
+<ol type="1">
+<li>Type expire</li>
+<li>Enter the desired expiration time (e.g., <code>1y</code> for 1 year, <code>6m</code> for 6 months, <code>0</code> for no expiration).</li>
+<li>Type <code>save</code> to apply the changes.</li>
+</ol>
+<h4 id="key-revocation">Key Revocation</h4>
+<p>Key revocation is the crucial step you take if your private key is ever compromised. This immediately signals to the world that your key should no longer be trusted.</p>
+<p><strong>The most important step is to generate a revocation certificate in advance</strong>, right after you create your key pair, and keep it in a safe, offline location (like a USB drive in a secure vault). If your key is compromised, you can no longer generate this certificate safely on the compromised system.</p>
+<ol type="1">
+<li><p><strong>Generating a Revocation Certificate (PROACTIVE STEP!)</strong>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">```</span><span class="ex">gpg</span> <span class="at">--output</span> revoke.asc <span class="at">--gen-revoke</span> <span class="st">&quot;Your Name or Email&quot;</span></span></code></pre></div>
+<ul>
+<li><code>--output revoke.asc</code>: This specifies the file name for your revocation certificate.</li>
+<li><code>--gen-revoke</code>: This command tells GPG to generate a revocation certificate for the specified key.</li>
+</ul>
+<p>GPG will then guide you through a few prompts, asking for a reason for revocation and a comment. It will then ask for your passphrase to sign the revocation certificate. Once generated, store this <code>revoke.asc</code> file very securely, separate from your main system.</p></li>
+<li><p><strong>Importing/Publishing a Revocation Certificate (REACTIVE STEP!)</strong>:</p>
+<p>If your key is compromised and you need to revoke it, you would use this pre-generated <code>revoke.asc</code> file.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gpg</span> <span class="at">--import</span> revoke.asc</span></code></pre></div>
+<p>Importing the revocation certificate marks your key as revoked in your local keyring. To effectively revoke the key for others, you would then need to publish this <code>revoke.asc</code> file to public key servers (similar to how public keys are distributed). This ensures that anyone who looks up your public key will see that it has been revoked.</p>
+<p><strong>Why is this important?</strong></p>
+<ul>
+<li><strong>Immediate Action</strong>: Allows you to swiftly invalidate a compromised key.</li>
+<li><strong>Global Notification</strong>: Publishing the certificate informs others not to trust your key, preventing misuse of a compromised key for encryption or signing.</li>
+</ul></li>
+</ol>
+<p>Revocation is a powerful safety net. While we hope you never need to use it, knowing how to generate and apply a revocation certificate is a cornerstone of responsible GPG key management.</p>
+<h3 id="backing-up-your-private-key">Backing Up your Private Key</h3>
+<p>Your private key is stored securely on your system, usually in your <code>~/.gnupg</code> directory. However, if your system fails or is lost, you&#39;d lose access to your key and any data encrypted with it. Therefore, backing up your private key is arguably one of the most important security practices for GPG users.</p>
+<p>To export your <strong>private (secret) key</strong> for backup, you use a command similar to exporting a public key, but with the <code>--export-secret-keys</code> flag:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gpg</span> <span class="at">--output</span> my_private_key_backup.asc <span class="at">--armor</span> <span class="at">--export-secret-keys</span> <span class="st">&quot;Your Name or Email&quot;</span></span></code></pre></div>
+<p>Let&#39;s dissect this command:</p>
+<ul>
+<li><code>--output my_private_key_backup.asc</code>: This specifies the name of the file where your private key will be saved. Again, <code>.asc</code> is used for ASCII armored output.</li>
+<li><code>--armor</code>: Ensures the output is in readable text format, suitable for copying and storing.</li>
+<li><code>--export-secret-keys</code>: This is the crucial flag that tells GPG you want to export your private key.</li>
+<li><code>&quot;Your Name or Email&quot;</code>: The User ID associated with the private key you wish to back up.</li>
+</ul>
+<p>When you run this command, GPG will ask for your <strong>passphrase</strong>. This is because your private key is encrypted with this passphrase, and GPG needs it to correctly export the key.</p>
+<p><strong>Where to store the backup?</strong></p>
+<p>This backup file (<code>my_private_key_backup.asc</code>) contains your secret key! It is paramount that you store this file in an extremely secure, offline location. Think of:</p>
+<ul>
+<li>An encrypted USB drive.</li>
+<li>A secure cloud storage service with strong encryption.</li>
+<li>A physical safe if stored on media like a CD/DVD.</li>
+</ul>
+<p><strong>Never store this file on a system connected to the internet unless it&#39;s on an encrypted partition, and always remember the passphrase that protects it.</strong></p>
+<h3 id="restoring-a-backed-up-private-key">Restoring a Backed Up Private Key</h3>
+<p>Just as crucial as backing up is knowing how to get your key back if you ever need to. This process is essentially the reverse of exporting. If you&#39;ve had a system crash, moved to a new machine, or simply need to access your GPG functions on a different Linux box, you&#39;ll use this method.</p>
+<p>To restore your private key from your secure backup file (e.g., <code>my_private_key_backup.asc</code>), you will use the <code>gpg --import</code> command, just like importing a public key:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gpg</span> <span class="at">--import</span> my_private_key_backup.asc</span></code></pre></div>
+<p>When you run this command:</p>
+<ol type="1">
+<li>GPG will read the contents of <code>my_private_key_backup.asc</code>.</li>
+<li>Since it contains a private key, GPG will prompt you for the passphrase that protects the key within the backup file. You must provide the correct passphrase to successfully import the key.</li>
+<li>Once imported, your private key will be added to your GPG keyring on the new system, and you&#39;ll be able to use it for decryption and signing, just as you would have on your old system.</li>
+</ol>
+<p>It&#39;s a good practice to then list your secret keys (<code>gpg --list-secret-keys</code>) to verify that the key has been successfully imported.</p>
+<p>This process ensures that even if your primary system suffers a catastrophic failure, your ability to decrypt sensitive data and sign communications is not lost, as long as you have your secure backup and remember your passphrase.</p>
+<h3 id="trusting-public-keys">Trusting Public Keys</h3>
+<p>When you import someone else&#39;s public key, GPG adds it to your keyring. However, simply having a public key doesn&#39;t automatically mean you <strong>trust</strong> that it truly belongs to the person it claims to be. This is where the concept of the &quot;web of trust&quot; comes in.</p>
+<p>In GPG, trust is decentralized. Instead of relying on a central authority (like a certificate authority on the web), GPG allows individuals to vouch for the authenticity of public keys. When you &quot;sign&quot; someone&#39;s public key, you are essentially saying, &quot;I have verified that this public key truly belongs to this person, and I trust it.&quot;</p>
+<p>There are different levels of trust you can assign to a key. For a system administrator, it&#39;s particularly important to correctly verify and trust the keys of colleagues or services you interact with securely.</p>
+<p>To edit the trust level of a public key in your keyring, you first enter the key editing mode for that key:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gpg</span> <span class="at">--edit-key</span> <span class="st">&quot;Recipient&#39;s Name or Email&quot;</span></span></code></pre></div>
+<p>Once in the GPG edit prompt (where you see a gpg&gt; prompt):</p>
+<ol type="1">
+<li>Type <code>trust</code></li>
+<li>GPG will then present you with several options for the level of trust you wish to assign:
+<ul>
+<li><code>1 = I don&#39;t know or won&#39;t say</code></li>
+<li><code>2 = I do NOT trust</code></li>
+<li><code>3 = I trust ultimately</code></li>
+<li><code>4 = I trust fully</code></li>
+<li><code>5 = I trust marginally</code></li>
+<li><code>s = Show me the key&#39;s validity</code></li>
+<li><code>m = Show me the ownertrust validity</code></li>
+</ul></li>
+<li>For keys you have personally verified and are certain of their authenticity (e.g., you met the person face-to-face and exchanged key fingerprints), you might choose <code>4</code> (I trust fully). If it&#39;s your own key, you&#39;d mark it as <code>3</code> (I trust ultimately).</li>
+<li>Type <code>save</code> to apply the changes and exit.</li>
+</ol>
+<p><strong>Why is this important?</strong></p>
+<ul>
+<li><strong>Security</strong>: GPG uses these trust levels to decide whether to implicitly trust other keys signed by a key you trust. This helps prevent &quot;man-in-the-middle&quot; attacks where an attacker might try to substitute their public key for someone else&#39;s.</li>
+<li><strong>Decentralized Verification</strong>: It puts the power of verification in the hands of the users, creating a network of trust.</li>
+</ul>
+<p>This process helps build a chain of trust. If you trust Alice&#39;s key, and Alice has signed Bob&#39;s key, then GPG might consider Bob&#39;s key more trustworthy through its connection to Alice&#39;s.</p>
+</body>
+</html>

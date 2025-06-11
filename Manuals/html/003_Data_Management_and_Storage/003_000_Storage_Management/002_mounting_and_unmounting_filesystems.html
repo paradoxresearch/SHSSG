@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="mounting-and-unmounting-filesystems">Mounting and Unmounting Filesystems</h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#mounting-and-unmounting-filesystems">Mounting and Unmounting Filesystems</a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#understanding-filesystems-and-mount-points">Understanding Filesystems and Mount Points</a></li>
+</ul></li>
+<li><a href="#manual-mounting-of-filesystems">Manual Mounting of Filesystems</a>
+<ul>
+<li><a href="#mount-options">Mount Options</a></li>
+</ul></li>
+<li><a href="#unmounting-filesystems">Unmounting Filesystems</a></li>
+<li><a href="#working-with-etcfstab">Working with <code>/etc/fstab</code></a>
+<ul>
+<li><a href="#common-fstab-entries">Common <code>fstab</code> Entries</a>
+<ul>
+<li><a href="#mounting-the-root-filesystem">Mounting the Root Filesystem</a></li>
+<li><a href="#mounting-a-separate-home-partition">Mounting a Separate <code>/home</code> Partition</a></li>
+<li><a href="#mounting-a-swap-partition">Mounting a Swap Partition</a></li>
+<li><a href="#mounting-a-usb-drive-or-external-hard-drive-permantently">Mounting a USB Drive or External Hard Drive (Permantently)</a></li>
+<li><a href="#mounting-a-network-filesystem-nfs">Mounting a Network Filesystem (NFS)</a></li>
+</ul></li>
+<li><a href="#mount-all-filesystems-in-etcfstab">Mount All Filesystems in <code>/etc/fstab</code></a></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<h3 id="understanding-filesystems-and-mount-points">Understanding Filesystems and Mount Points</h3>
+<p>Think of a <strong>filesystem</strong> like the organizational system inside a filing cabinet. Different types of filing systems exist (like alphabetical, by date, by subject), and in the Linux world, we have different types of filesystems like ext4 (common for Linux), XFS (often used for large files), and others. The filesystem&#39;s job is to manage how data is stored, accessed, and organized on a storage device (like a hard drive or a USB stick). It keeps track of where each file starts and ends, its permissions, and other important details.</p>
+<p>Now, where do we actually access these filing cabinets (filesystems) on our server? That&#39;s where <strong>mount points</strong> come in. A mount point is simply a directory within your existing Linux directory structure where a filesystem is attached, making its contents accessible.</p>
+<p>Imagine you have that filing cabinet full of important documents (your filesystem on a storage device). To actually use those documents, you need to place the entire cabinet (or perhaps just a drawer from it) in a specific location in your office so you can open it and get to the files. That location in your office is like the mount point on your server.</p>
+<p>For example, you might have a separate hard drive containing user data. You could &quot;mount&quot; this filesystem to a directory named <code>/home/users</code>. Once mounted, all the files and folders on that separate hard drive will appear as if they are directly inside the <code>/home/users</code> directory.</p>
+<p>We&#39;ll touch briefly on a special file called <code>/etc/fstab</code> later, which is like a configuration file that tells your server which filesystems to automatically &quot;plug in&quot; (mount) to which locations every time it starts up. But for now, we&#39;ll focus on how to do this manually.</p>
+<hr />
+<p>Now, let&#39;s briefly touch upon the <code>/etc/fstab</code> file. You can think of this file as a configuration roadmap for your server&#39;s filesystems. It lives in the <code>/etc</code> directory and contains a list of filesystems that the system should automatically mount during the boot process.</p>
+<p>Each line in this file typically describes a filesystem, where it should be mounted, the type of filesystem, and some options on how it should be mounted. We&#39;ll delve deeper into the specifics of <code>/etc/fstab</code> in the last step of our learning plan.</p>
+<p>For now, just remember that <code>/etc/fstab</code> is there to automate the mounting of filesystems so you don&#39;t have to manually mount them every time you start your server. However, understanding how to manually mount and unmount filesystems is crucial for troubleshooting, mounting temporary storage, or working with devices that aren&#39;t permanently listed in <code>/etc/fstab</code>.</p>
+<h2 id="manual-mounting-of-filesystems">Manual Mounting of Filesystems</h2>
+<p>The primary command for manually mounting filesystems in Linux is, unsurprisingly, <code>mount</code>. The basic structure of this command looks like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mount device mount_point</span></code></pre></div>
+<p>Let&#39;s break down these two crucial parts:</p>
+<ul>
+<li><p><code>device</code>: This refers to the storage device or the filesystem you want to mount. Linux identifies these devices using special file paths, usually located in the <code>/dev</code> directory. For example:</p>
+<ul>
+<li>A primary hard drive might have partitions like <code>/dev/sda1</code> (first partition on the first SATA drive), <code>/dev/sdb2</code> (second partition on the second SATA drive), and so on.</li>
+<li>A USB drive or external hard drive might be recognized as <code>/dev/sdb1</code>, <code>/dev/sdc1</code>, etc., depending on what&#39;s already connected to the system.</li>
+<li>Even network filesystems (like NFS shares) have their own way of being identified here.</li>
+</ul></li>
+<li><p><code>mount_point</code>: This is the directory on your existing Linux system where you want to attach the filesystem. This directory needs to exist before you can mount something to it. Common places to create mount points for additional storage are within the <code>/mnt</code> directory (a general-purpose mount point location) or you might create specific directories like <code>/data</code>, <code>/backup</code>, etc., depending on the purpose of the mounted storage.</p></li>
+</ul>
+<p>So, if you had a USB drive that Linux recognized as <code>/dev/sdb1</code> and you wanted to access its contents, you would first create a directory to serve as the mount point (let&#39;s say <code>/mnt/usb</code>). Then, you would use the mount command like this:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mount /dev/sdb1 /mnt/usb</span></code></pre></div>
+<p>After running this command (and assuming everything goes well), you would be able to navigate into the <code>/mnt/usb</code> directory and see all the files and folders that are on your USB drive.</p>
+<p>Remember that you typically need <code>sudo</code> to run the <code>mount</code> command because it involves making changes to the system&#39;s filesystem structure, which requires administrative privileges.</p>
+<hr />
+<p>Let&#39;s walk through a practical example of manually mounting a filesystem.</p>
+<p>Imagine you&#39;ve just connected a new external hard drive to your Linux server. The system has recognized it as <code>/dev/sdb1</code>. Now, you want to be able to access the files on this drive.</p>
+<p><strong>Step 1: Create a Mount Point Directory</strong></p>
+<p>First, you need a directory where you&#39;ll &quot;attach&quot; the filesystem. A common place for this is within the <code>/mnt</code> directory. Let&#39;s create a directory named <code>external_drive</code> inside <code>/mnt</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir /mnt/external_drive</span></code></pre></div>
+<p>This command uses <code>sudo</code> for administrative privileges and <code>mkdir</code> to create a new directory. Now, <code>/mnt/external_drive</code> exists on your system.</p>
+<p><strong>Step 2: Mount the Filesystem</strong></p>
+<p>Next, you&#39;ll use the <code>mount</code> command to connect the filesystem on <code>/dev/sdb1</code> to the mount point you just created:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mount /dev/sdb1 /mnt/external_drive</span></code></pre></div>
+<p>After running this command (if the device and filesystem are healthy), the contents of the filesystem on <code>/dev/sdb1</code> will now be accessible within the <code>/mnt/external_drive</code> directory. You can navigate into this directory using the <code>cd</code> command and explore the files.</p>
+<p>To see what filesystems are currently mounted on your system, you can use the command:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mount</span> <span class="kw">|</span> <span class="fu">less</span></span></code></pre></div>
+<p>This will display a list of all mounted filesystems and their corresponding mount points. You should see an entry for <code>/dev/sdb1</code> mounted on <code>/mnt/external_drive</code>. You can press <code>q</code> to exit the less pager.</p>
+<p>Now, let&#39;s say you wanted to mount the same <code>/dev/sdb1</code> filesystem with read-only permissions. This can be useful if you only need to view the data and want to prevent any accidental modifications. You can achieve this by using the <code>-o</code> option with the <code>mount</code> command, followed by the mount option <code>ro</code> (for read-only):</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mount <span class="at">-o</span> ro /dev/sdb1 /mnt/external_drive</span></code></pre></div>
+<p>If the filesystem was already mounted, you might need to unmount it first (which we&#39;ll cover in the next step) before remounting it with different options.</p>
+<h3 id="mount-options">Mount Options</h3>
+<p>Now that you know how to mount a filesystem, let&#39;s talk about <strong>mount options</strong>. These are like extra instructions you can give to the <code>mount</code> command to control how the filesystem is accessed and behaves. You specify these using the <code>-o</code> option followed by a comma-separated list of options.</p>
+<p>Here are a few common and important mount options you&#39;ll likely encounter as a system administrator:</p>
+<ul>
+<li><p><code>ro</code> <strong>(read-only)</strong>: As we saw earlier, this mounts the filesystem so that you can only read files and directories; you cannot make any changes. This is useful for accessing data that shouldn&#39;t be modified, like mounting an installation CD or a backup.</p></li>
+<li><p><code>rw</code> <strong>(read-write)</strong>: This is the default option and allows you to both read and write to the filesystem.</p></li>
+<li><p><code>exec</code> <strong>(execute)</strong>: This allows you to execute binary files that reside on the mounted filesystem.</p></li>
+<li><p><code>noexec</code> <strong>(no execute)</strong>: This prevents the execution of any binary files on the mounted filesystem. This can be a security measure to prevent running potentially harmful executables from untrusted sources, like a USB drive.</p></li>
+<li><p><code>suid</code> <strong>(set user ID)</strong>/<code>guid</code> <strong>(set group ID)</strong>: These options allow special permissions associated with a file&#39;s owner or group to take effect when the file is executed.</p></li>
+<li><p><code>nosuid</code> <strong>(no set user ID)/</strong><code>noguid</code> <strong>(no set group ID)</strong>: These options disable the <code>suid</code> and <code>guid</code> permissions on the mounted filesystem. This is another security measure to prevent privilege escalation.</p></li>
+<li><p><code>dev</code> <strong>(allow device files)</strong>: This allows the interpretation of character or block special devices on the filesystem.</p></li>
+<li><p><code>nodev</code> <strong>(no device files)</strong>: This prevents the interpretation of device files on the filesystem. This is often used for network filesystems for security reasons.</p></li>
+</ul>
+<p>For example, if you wanted to mount <code>/dev/sdb1</code> to <code>/mnt/readonly_data</code> in read-only mode and disallow the execution of any files on it, you would use the following command:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mount <span class="at">-o</span> ro,noexec /dev/sdb1 /mnt/readonly_data</span></code></pre></div>
+<p>Understanding these options is crucial for controlling access and security on your server. You&#39;ll often need to choose the appropriate options based on how the mounted storage will be used.</p>
+<h2 id="unmounting-filesystems">Unmounting Filesystems</h2>
+<p>Now that we&#39;ve covered how to mount filesystems and control their behavior with options, it&#39;s equally important to understand how to safely <strong>unmount</strong> them.</p>
+<p>The command for unmounting a filesystem is <code>umount</code>. It&#39;s quite straightforward and has two common ways to use it:</p>
+<ol type="1">
+<li><p><strong>Unmounting by mount point</strong>: You can specify the directory where the filesystem is mounted. For example, to unmount the filesystem we mounted at <code>/mnt/external_drive</code>, you would use:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> umount /mnt/external_drive</span></code></pre></div></li>
+<li><p><strong>Unmounting by device</strong>: You can also specify the device file of the filesystem you want to unmount. For example, to unmount the filesystem that was on <code>/dev/sdb1</code>, you could use:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> umount /dev/sdb1</span></code></pre></div></li>
+</ol>
+<p>Both methods achieve the same result. However, it&#39;s generally safer and more common to unmount by the mount point, as it&#39;s often easier to remember where you mounted something rather than the specific device name, especially if you have multiple storage devices connected.</p>
+<p><strong>Why is unmounting important?</strong></p>
+<p>When a filesystem is mounted, the operating system keeps track of which files are open and which processes are using the files on that filesystem. If you were to simply unplug a USB drive or detach a hard drive without properly unmounting it first, you could potentially lead to:</p>
+<ul>
+<li><strong>Data corruption</strong>: Any data that was being written to the device might not be fully saved, leading to incomplete or corrupted files.</li>
+<li><strong>Lost data</strong>: In some cases, abruptly removing a mounted device can even result in the loss of entire files or directories.</li>
+<li><strong>System instability</strong>: Although less common with modern systems, improper unmounting could sometimes lead to system errors or instability.</li>
+</ul>
+<p>Therefore, it&#39;s crucial to always unmount a filesystem before physically disconnecting the storage device.</p>
+<hr />
+<p>Now, let&#39;s discuss what can happen if you try to unmount a filesystem while it&#39;s being used. Think of it like trying to pull out a drawer from our filing cabinet while someone is actively looking through files inside!</p>
+<p>If files are open or a process is currently working within a mounted filesystem, the <code>umount</code> command will likely fail and you&#39;ll see an error message, often saying something like <strong>&quot;device is busy&quot;</strong>. This is the operating system&#39;s way of protecting the integrity of the data and preventing those active processes from crashing or corrupting data.</p>
+<p><strong>How to identify if a filesystem is busy</strong>:</p>
+<p>When you encounter a &quot;device is busy&quot; error, you need to figure out which process or user is currently using the mounted filesystem. There are a couple of handy command-line tools for this:</p>
+<ol type="1">
+<li><p><code>lsof</code> <strong>(List Open Files)</strong>: This powerful command can show you all the open files and the processes that have them open. To find out which processes are using a specific mount point (e.g., <code>/mnt/external_drive</code>), you can use:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> lsof /mnt/external_drive</span></code></pre></div>
+<p>This will list the process ID (PID), user, and the type of access for each file or directory within /mnt/external_drive that is currently open.</p></li>
+<li><p><code>fuser</code> <strong>(Identify Processes Using Files or Sockets)</strong>: The <code>fuser</code> command is specifically designed to identify processes that are using specified files or filesystems. To find out which processes are using our example mount point:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> fuser <span class="at">-m</span> /mnt/external_drive</span></code></pre></div>
+<p>The <code>-m</code> option tells <code>fuser</code> to look for processes using the mount point. The output will typically show the PIDs of the processes that are using the filesystem. You might also see letters after the PIDs indicating the type of access (e.g., <code>c</code> for current directory, <code>r</code> for root directory, <code>f</code> for open file).</p></li>
+</ol>
+<p><strong>What to do if a filesystem is busy</strong>:</p>
+<p>Once you&#39;ve identified the processes that are using the filesystem, you have a couple of options:</p>
+<ol type="1">
+<li><p><strong>Terminate the processes</strong>: If you know what the processes are and it&#39;s safe to do so, you can terminate them using the <code>kill</code> command followed by the process ID (PID) you found with <code>lsof</code> or <code>fuser</code>. For example, if <code>fuser</code> showed a PID of <code>1234</code> is using the filesystem, you could try:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> kill 1234</span></code></pre></div>
+<p>Sometimes, a process might not respond to a regular <code>kill</code> signal, in which case you might need to use <code>kill -9</code> (force kill), but be very cautious with this as it can lead to data loss if the process was in the middle of writing something.</p></li>
+<li><p><strong>Change the current directory</strong>: If your own terminal or another user&#39;s terminal is currently inside the mounted directory, simply navigating out of it using <code>cd ..</code> can often resolve the &quot;device is busy&quot; error.</p></li>
+</ol>
+<p>After ensuring that no processes are actively using the filesystem, you should be able to unmount it successfully using the <code>umount</code> command.</p>
+<h2 id="working-with-etcfstab">Working with <code>/etc/fstab</code></h2>
+<p>The <code>/etc/fstab</code> file (short for &quot;file system table&quot;) is a crucial configuration file that the system reads during startup to determine which filesystems should be automatically mounted and where. Each line in this file describes a single filesystem and how it should be handled.</p>
+<p>A typical entry in <code>/etc/fstab</code> has the following six fields, separated by spaces or tabs:</p>
+<ol type="1">
+<li><p><code>&lt;file system&gt;</code>: This specifies the device to be mounted. It can be the device file (like <code>/dev/sdb1</code>), the UUID (Universally Unique Identifier) of the filesystem (which is more robust as device names can sometimes change), or a network filesystem specification.</p></li>
+<li><p><code>&lt;mount point&gt;</code>: This is the directory where the filesystem should be mounted (e.g., <code>/mnt/data</code>, <code>/home/users</code>). This directory must exist.</p></li>
+<li><p><code>&lt;type&gt;</code>: This specifies the type of the filesystem (e.g., <code>ext4</code>, <code>xfs</code>, <code>nfs</code>, <code>vfat</code>). The system needs to know the filesystem type to handle it correctly.</p></li>
+<li><p><code>&lt;options&gt;</code>: This is a comma-separated list of mount options, similar to what we used with the <code>mount -o</code> command (e.g., <code>ro</code>, <code>rw</code>, <code>noexec</code>, <code>defaults</code>). The defaults option typically implies <code>rw</code>, <code>suid</code>, <code>dev</code>, <code>exec</code>, <code>auto</code>, <code>nouser</code>, and <code>async</code>.</p></li>
+<li><p><code>&lt;dump&gt;</code>: This field is used by the <code>dump</code> utility for backups. Usually, it&#39;s set to <code>0</code>, which means the filesystem is not dumped. Setting it to <code>1</code> would enable dumping.</p></li>
+<li><p><code>&lt;pass&gt;</code>: This field is used by the <code>fsck</code> (file system consistency check) utility to determine the order in which filesystem checks are performed at boot time. The root filesystem (<code>/</code>) should have a value of <code>1</code>. Other filesystems typically have a value of <code>2</code> (checked after root) or <code>0</code> (not checked).</p></li>
+</ol>
+<p>Here&#39;s an example of a line in <code>/etc/fstab</code>:</p>
+<pre class="shell"><code>UUID=a1b2c3d4-e5f6-7890-1234-567890abcdef  /data  ext4  defaults  0  2</code></pre>
+<p><strong>In this example</strong>:</p>
+<ul>
+<li><code>UUID=a1b2c3d4-e5f6-7890-1234-567890abcdef</code> is the unique identifier of the device.</li>
+<li><code>/data</code> is the mount point.</li>
+<li><code>ext4</code> is the filesystem type.</li>
+<li><code>defaults</code> are the mount options.</li>
+<li><code>0</code> means it&#39;s not dumped.</li>
+<li><code>2</code> means it will be checked after the root filesystem.</li>
+</ul>
+<h3 id="common-fstab-entries">Common <code>fstab</code> Entries</h3>
+<p>Let&#39;s look at some common entries you might find in an <code>/etc/fstab</code> file on your Linux server. Understanding these examples will help you when you need to add or modify entries yourself.</p>
+<p>Here are a few typical scenarios:</p>
+<h4 id="mounting-the-root-filesystem">Mounting the Root Filesystem</h4>
+<ul>
+<li><p><strong>Mounting the Root Filesystem</strong>:</p>
+<p>You&#39;ll always see an entry for the root filesystem (/). It&#39;s essential for the system to boot and function. It might look something like this:</p>
+<pre class="shell"><code>UUID=your-root-partition-uuid  /  ext4  errors=remount-ro  0  1</code></pre>
+<ul>
+<li><code>UUID=your-root-partition-uuid</code>: This identifies the root partition using its unique UUID. We&#39;ll learn how to find this shortly.</li>
+<li><code>/</code>: This is the mount point – the root directory.</li>
+<li><code>ext4</code>: This is the filesystem type, in this case, the common ext4.</li>
+<li><code>errors=remount-ro</code>: This is a mount option that tells the system to remount the filesystem in read-only mode if errors are detected.</li>
+<li><code>0</code>: The filesystem is not dumped.</li>
+<li><code>1</code>: This indicates that the root filesystem should be checked for errors first during boot.</li>
+</ul></li>
+</ul>
+<h4 id="mounting-a-separate-home-partition">Mounting a Separate <code>/home</code> Partition</h4>
+<ul>
+<li><p><strong>Mounting a Separate</strong> <code>/home</code> <strong>Partition</strong>:</p>
+<p>If you have a dedicated partition for user home directories, you might see an entry like this:</p>
+<pre class="shell"><code>UUID=your-home-partition-uuid  /home  ext4  defaults  0  2</code></pre>
+<ul>
+<li><code>UUID=your-home-partition-uuid</code>: The UUID of the partition containing <code>/home</code>.</li>
+<li><code>/home</code>: The mount point for the home directories.</li>
+<li><code>ext4</code>: The filesystem type.</li>
+<li><code>defaults</code>: Using the default mount options (rw, suid, dev, exec, auto, nouser, async).</li>
+<li><code>0</code>: Not dumped.</li>
+<li><code>2</code>: Checked after the root filesystem.</li>
+</ul></li>
+</ul>
+<h4 id="mounting-a-swap-partition">Mounting a Swap Partition</h4>
+<ul>
+<li><p><strong>Mounting a Swap Partition</strong>:</p>
+<p>Swap space is used as virtual RAM. Its entry in /etc/fstab will look different as it&#39;s not mounted to a regular directory:</p>
+<pre class="shell"><code>UUID=your-swap-partition-uuid  none  swap  sw  0  0</code></pre>
+<ul>
+<li><code>UUID=your-swap-partition-uuid</code>: The UUID of the swap partition.</li>
+<li><code>none</code>: Swap partitions don&#39;t have a traditional mount point.</li>
+<li><code>swap</code>: Specifies the filesystem type as swap.</li>
+<li><code>sw</code>: The options for swap (usually just <code>sw</code>).</li>
+<li><code>0</code>: Not dumped.</li>
+<li><code>0</code>: Not checked by fsck.</li>
+</ul></li>
+</ul>
+<h4 id="mounting-a-usb-drive-or-external-hard-drive-permantently">Mounting a USB Drive or External Hard Drive (Permantently)</h4>
+<ul>
+<li><p><strong>Mounting a USB Drive or External Hard Drive (Permanently)</strong>:</p>
+<p>If you want a USB drive or external hard drive to be automatically mounted to a specific location every time it&#39;s connected (and if its entry is in <code>/etc/fstab</code>), it might look like this:</p>
+<pre class="shell"><code>UUID=your-external-drive-uuid  /mnt/backup  ext4  defaults,user  0  0</code></pre>
+<ul>
+<li><code>UUID=your-external-drive-uuid</code>: The UUID of the external drive&#39;s partition.</li>
+<li>`/mnt/backup : The mount point.</li>
+<li><code>ext4</code>: The filesystem type.</li>
+<li><code>defaults,user</code>: Includes default options and allows a regular user to mount and unmount this filesystem (which can be useful for removable media).</li>
+<li><code>0</code>: Not dumped.</li>
+<li><code>0</code>: Not checked.</li>
+</ul></li>
+</ul>
+<h4 id="mounting-a-network-filesystem-nfs">Mounting a Network Filesystem (NFS)</h4>
+<ul>
+<li><p><strong>Mounting a Network Filesystem (NFS)</strong>:</p>
+<p>Mounting an NFS share from another server would look something like this:</p>
+<pre class="shell"><code>server_ip:/path/to/share  /mnt/network_share  nfs  defaults  0  0</code></pre>
+<ul>
+<li><code>server_ip:/path/to/share</code>: Specifies the server&#39;s IP address or hostname and the exported path.</li>
+<li><code>/mnt/network_share</code>: The local mount point.</li>
+<li><code>nfs</code>: The filesystem type is NFS. defaults: Mount options specific to NFS.</li>
+<li><code>0</code>: Not dumped.</li>
+<li><code>0</code>: Not checked.</li>
+</ul></li>
+</ul>
+<p>Notice the use of UUIDs in many of these examples. Using UUIDs is generally preferred over device names like 1/dev/sdb1` because device names can sometimes change depending on the order in which devices are detected during boot. UUIDs are unique and persistent identifiers for each filesystem.</p>
+<h3 id="mount-all-filesystems-in-etcfstab">Mount All Filesystems in <code>/etc/fstab</code></h3>
+<p>The command to do this is quite simple:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mount <span class="at">-a</span></span></code></pre></div>
+<p>The <code>-a</code> option tells the <code>mount</code> command to try and mount all filesystems that are listed in <code>/etc/fstab</code> (except those marked as <code>noauto</code>).</p>
+<p><strong>When is</strong> <code>mount -a</code> <strong>useful?</strong></p>
+<ul>
+<li><strong>During system boot</strong>: The system automatically runs <code>mount -a</code> (or a similar process) as part of its startup sequence to mount all the filesystems defined in <code>/etc/fstab</code>. This is how your regular partitions like <code>/</code>, <code>/home</code>, and <code>swap</code> get mounted without you having to do anything manually.</li>
+<li><strong>After editing</strong> <code>/etc/fstab</code>: If you make changes to the <code>/etc/fstab</code> file (e.g., add a new entry for an external drive you want to mount automatically), you can run <code>sudo mount -a</code> to apply these changes without needing to reboot your entire server. This is a convenient way to test if your new entry is correctly configured. If there are any errors in your <code>/etc/fstab</code> file, the <code>mount -a</code> command will usually report them, helping you to identify and fix any issues.</li>
+</ul>
+<p><strong>Important Considerations</strong>:</p>
+<ul>
+<li><strong>Permissions</strong>: Just like with manual mounting, you&#39;ll typically need <code>sudo</code> to run <code>mount -a</code> as it involves system-level changes.</li>
+<li><strong>Existing Mounts</strong>: <code>mount -a</code> will try to mount all filesystems in <code>/etc/fstab</code> that are not already mounted. If a filesystem is already mounted and its entry is in <code>/etc/fstab</code>, running <code>mount -a</code> again won&#39;t cause any problems; it will simply skip that entry.</li>
+<li><strong>Errors</strong>: If there&#39;s an error in an <code>/etc/fstab</code> entry (e.g., incorrect device name, wrong filesystem type, invalid options), <code>mount -a</code> will likely fail to mount that specific filesystem and will display an error message. It might also continue to try and mount the other valid entries.</li>
+</ul>
+<p>So, if you&#39;ve just added a line to <code>/etc/fstab</code> for a new backup drive mounted at <code>/mnt/backup</code>, after saving the file, you could run <code>sudo mount -a</code>. If the entry is correct and the device is available, you should then see your backup drive mounted at <code>/mnt/backup</code>. You can verify this using the <code>mount | less</code> command we used earlier.</p>
+</body>
+</html>

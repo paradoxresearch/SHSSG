@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="understanding-the-linux-filesystem-hierarchy">Understanding the Linux Filesystem Hierarchy</h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#understanding-the-linux-filesystem-hierarchy">Understanding the Linux Filesystem Hierarchy</a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#the-root-directory-">The Root Directory (<code>/</code>)</a></li>
+<li><a href="#essential-top-level-directories">Essential Top-Level Directories</a></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<p>In Linux, a core philosophy is that &quot;everything is a file.&quot; This might sound a bit odd at first, especially if you&#39;re used to operating systems like Windows where files are typically documents, images, or programs. But in Linux, this concept extends to almost everything!</p>
+<p>Think of it this way:</p>
+<ul>
+<li><strong>Regular files</strong>: These are what you&#39;re familiar with – text documents, images, executable programs, and so on.</li>
+<li><strong>Directories (folders)</strong>: These are also considered files, just a special type of file that contains other files and directories.</li>
+<li><strong>Hardware devices</strong>: This is where it gets really interesting! Your hard drives, USB drives, keyboard, mouse, and even network interfaces are represented as files in a special directory called /dev. This allows you to interact with hardware using the same commands you use for regular files.</li>
+<li><strong>Running processes</strong>: Even processes that are running on your system are represented as files in the /proc directory, allowing you to monitor and manage them.</li>
+</ul>
+<p>This &quot;everything is a file&quot; philosophy brings a lot of consistency and simplicity to Linux. It means you can often use the same commands and tools to manage different types of resources, making it very powerful for system administrators.</p>
+<h2 id="the-root-directory-">The Root Directory (<code>/</code>)</h2>
+<p>Imagine the Linux filesystem as a giant tree. At the very top, the absolute beginning of everything, is the root directory. It&#39;s symbolized by a single forward slash: <code>/</code>.</p>
+<p>Just like the root of a tree supports all its branches, the root directory in Linux is the ultimate parent of all other directories and files on your system. Every single file, every single directory, no matter how deeply nested, can be traced back to the root directory.</p>
+<p>You can never go &quot;above&quot; the root directory. It&#39;s the highest point in the filesystem hierarchy. When you&#39;re navigating the filesystem, you&#39;ll always be moving within this tree, starting from the root.</p>
+<p>Understanding the root directory&#39;s central role is crucial because it&#39;s the foundation upon which the entire Linux filesystem is built. It&#39;s the starting point for all absolute paths, which we&#39;ll discuss later.</p>
+<h2 id="essential-top-level-directories">Essential Top-Level Directories</h2>
+<p>The root directory, <code>/</code>, has several important subdirectories directly under it. These are like the main &quot;neighborhoods&quot; or &quot;departments&quot; of our Linux city, each with a specific purpose. Knowing what&#39;s typically stored in these directories is key for a system administrator.</p>
+<p>Let&#39;s look at some of the most common and important ones:</p>
+<ul>
+<li><p><code>/bin</code> <strong>(binaries)</strong>: Think of this as the &quot;toolshed&quot; for all users. It contains essential command-line utilities (binary executable programs) that all users, including non-root users, might need. Commands like <code>ls</code> (list files), <code>cp</code> (copy), <code>mv</code> (move), and <code>cat</code> are usually found here.</p></li>
+<li><p><code>/sbin</code> <strong>(system binaries)</strong>: This is the &quot;administrator&#39;s toolshed.&quot; It contains essential system administration binaries that are typically only run by the root user or by a privileged user. Commands like <code>fdisk</code> (disk partitioning) or <code>reboot</code> are examples. It&#39;s often separated from <code>/bin</code> to keep critical system utilities distinct.</p></li>
+<li><p><code>/etc</code> <strong>(editable text configuration)</strong>: This is the &quot;configuration central.&quot; It holds system-wide configuration files. For example, network configuration, user password files, and service configuration files are all found here. If you&#39;re looking to change how your Linux system behaves, <code>/etc</code> is often the first place to look.</p></li>
+<li><p><code>/home</code> <strong>(user home directories)</strong>: This is the &quot;personal apartments&quot; building. Every regular user on the system gets their own personal directory here (e.g., <code>/home/yourusername</code>). This is where users store their personal files, documents, downloads, and user-specific configuration files. As an administrator, you&#39;ll often manage user accounts and their <code>/home</code> directories.</p></li>
+<li><p><code>/usr</code> <strong>(Unix System Resources)</strong>: This is a larger, more organized &quot;software library.&quot; It contains the majority of user-facing programs and utilities, documentation, and libraries. It&#39;s structured to be shareable between multiple systems. Many applications you install will place their files here.</p></li>
+<li><p><code>/var</code> <strong>(variable data)</strong>: This is the &quot;logging and temporary data storage&quot; area. It holds data that changes frequently, such as log files (<code>/var/log</code>), temporary files created by applications (<code>/var/tmp</code>), and mail queues. As an administrator, you&#39;ll frequently check logs in <code>/var/log</code> for troubleshooting.</p></li>
+<li><p><code>/tmp</code> <strong>(temporary files)</strong>: This is a &quot;temporary scratchpad.&quot; It&#39;s a directory for temporary files created by users and applications. Data in /tmp is typically deleted when the system reboots, or after a certain period. Never store anything important here!</p></li>
+<li><p><code>/dev</code> <strong>(devices)</strong>: As we discussed with &quot;everything is a file,&quot; this is where &quot;device files&quot; reside. These aren&#39;t actual files in the traditional sense, but rather interfaces to hardware devices like hard drives (<code>/dev/sda</code>), USB drives (<code>/dev/sdb1</code>), and terminals (<code>/dev/tty</code>).</p></li>
+<li><p><code>/proc</code> <strong>(processes/process information)</strong>: This is a unique and virtual filesystem. Think of it as a &quot;live dashboard&quot; or &quot;control panel&quot; for the kernel and running processes. It doesn&#39;t store actual files on your hard drive. Instead, it generates information on the fly about currently running processes, system memory, kernel parameters, and other system statistics. For example, you can find a directory for each running process, named after its Process ID (PID), containing information about that process.</p></li>
+</ul>
+<p>To help visualize this, imagine the root directory <code>/</code> as the main entrance to a large building.</p>
+<ul>
+<li><code>/bin</code> and <code>/sbin</code> are like the main toolsheds.</li>
+<li><code>/etc</code> is the control room with all the settings.</li>
+<li><code>/home</code> is where everyone has their own private office.</li>
+<li><code>/usr</code> is the main library with all the shared resources.</li>
+<li><code>/var</code> is the record-keeping and temporary storage room.</li>
+<li><code>/tmp</code> is the recycling bin.</li>
+<li><code>/dev</code> is the equipment room where all the machines are connected.</li>
+<li><code>/proc</code> is like the real-time display in the control room, showing you exactly what machines are currently running, how much power they&#39;re using, and their current status.</li>
+</ul>
+<p><strong>Example top-level directories structure</strong>:</p>
+<pre class="code"><code>/
+├── bin/
+├── dev/
+├── etc/
+├── home/
+│   └── (yourusername)/
+├── proc/
+│   ├── (PID)/
+│   ├── cpuinfo
+│   └── meminfo
+├── sbin/
+├── tmp/
+├── usr/
+│   ├── bin/
+│   ├── lib/
+│   └── share/
+└── var/
+    ├── log/
+    └── tmp/</code></pre>
+<p>It&#39;s a lot of information, but understanding these core directories will greatly improve your ability to navigate and manage a Linux system.</p>
+</body>
+</html>
