@@ -407,7 +407,7 @@ Once done, you should have seen an output similar to this in your terminal for g
 
 ```shell
 Generating public/private rsa key pair.
-Enter file in which to save the key (/home/paradox/.ssh/id_rsa): /home/username/.ssh/id_rsa
+Enter file in which to save the key (/home/username/.ssh/id_rsa): /home/username/.ssh/id_rsa
 Enter passphrase (empty for no passphrase): 
 Enter same passphrase again: 
 Your identification has been saved in /home/username/.ssh/id_rsa
