@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="basic-vim-commands-for-sysadmins">Basic <code>vim</code> Commands for Sysadmins</h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#basic-vim-commands-for-sysadmins">Basic <code>vim</code> Commands for Sysadmins</a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#understanding-vim-modes">Understanding Vim Modes</a></li>
+</ul></li>
+<li><a href="#navigating-files">Navigating Files</a>
+<ul>
+<li><a href="#normal-mode">Normal Mode</a></li>
+<li><a href="#searching-within-a-file">Searching Within a File</a></li>
+<li><a href="#jumping-to-specific-lines">Jumping to Specific Lines</a></li>
+</ul></li>
+<li><a href="#basic-editing-operations">Basic Editing Operations</a>
+<ul>
+<li><a href="#insert-mode">Insert Mode</a></li>
+<li><a href="#deleting-text">Deleting Text</a></li>
+<li><a href="#copy-and-paste">Copy and Paste</a></li>
+<li><a href="#undo-and-redo">Undo and Redo</a></li>
+</ul></li>
+<li><a href="#saving-and-exiting-vim">Saving and Exiting Vim</a></li>
+<li><a href="#practical-tips">Practical Tips</a>
+<ul>
+<li><a href="#command-line-mode">Command-line Mode</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<h3 id="understanding-vim-modes">Understanding Vim Modes</h3>
+<p>Unlike many modern text editors you might be familiar with, Vim operates in different &quot;modes.&quot; Think of it like a specialized tool with various settings, where each setting allows you to perform a specific type of action. You can&#39;t just start typing right away when you open Vim; you need to be in the correct mode for what you want to do.</p>
+<p>Here are the main modes we&#39;ll focus on:</p>
+<ol type="1">
+<li><p><strong>Normal Mode (or Command Mode)</strong>: This is the default mode when you open Vim. In Normal Mode, your keyboard inputs are interpreted as commands to move the cursor, delete text, copy text, paste text, or switch to other modes. This is where Vim&#39;s power for quick, efficient text manipulation truly shines. It&#39;s like the &quot;control panel&quot; of Vim.</p></li>
+<li><p><strong>Insert Mode</strong>: This is the mode you need to be in to actually type and insert text into your file, similar to how most other text editors work. You typically enter Insert Mode from Normal Mode using commands like <code>i</code> (insert at cursor) or <code>a</code> (append after cursor).</p></li>
+<li><p><strong>Visual Mode</strong>: This mode allows you to select blocks of text, similar to highlighting text with a mouse in other editors. Once selected, you can perform operations like copying, deleting, or changing the selected text.</p></li>
+<li><p><strong>Command-line Mode (or Last-line Mode)</strong>: You enter this mode by typing : (colon) from Normal Mode. This mode is used for entering special commands, such as saving files, quitting Vim, searching for text, or running external shell commands. The commands you type appear at the bottom of the Vim window.</p></li>
+</ol>
+<p><strong>Why are modes crucial for sysadmins?</strong></p>
+<p>Imagine you&#39;re quickly editing a server configuration file. Instead of constantly reaching for your mouse to select text or navigating with arrow keys, Vim&#39;s Normal Mode commands allow you to perform these actions with just a few keystrokes, keeping your hands on the keyboard and your workflow efficient. This speed and efficiency are invaluable when managing remote servers, especially over SSH where graphical interfaces might not be available or are slower.</p>
+<h2 id="navigating-files">Navigating Files</h2>
+<h3 id="normal-mode">Normal Mode</h3>
+<p>In <strong>Normal Mode</strong>, Vim offers incredibly efficient ways to move your cursor without using arrow keys (though arrow keys usually work too!). The traditional Vim movement keys are right there on the home row, which is a fantastic advantage for speed:</p>
+<ul>
+<li><code>h</code>: Move left (like your left hand on the keyboard)</li>
+<li><code>j</code>: Move down (the &#39;j&#39; key often has a small bump, helping you find it without looking, and it points downwards)</li>
+<li><code>k</code>: Move up (just above &#39;j&#39;)</li>
+<li><code>l</code>: Move right (like your right hand on the keyboard)</li>
+</ul>
+<p>Beyond single character movements, you can also move by words:</p>
+<ul>
+<li><code>w</code>: Move to the beginning of the next word</li>
+<li><code>b</code>: Move to the beginning of the previous word</li>
+<li><code>e</code>: Move to the end of the current word</li>
+</ul>
+<p>And for line-specific navigation:</p>
+<ul>
+<li><code>0</code> (zero) or <code>^</code>: Move to the beginning of the current line (the very first character). <code>^</code> specifically moves to the first non-blank character.</li>
+<li><code>$</code>: Move to the end of the current line.</li>
+</ul>
+<p>Finally, for larger jumps:</p>
+<ul>
+<li><code>gg</code>: Move to the beginning of the file (the very first line).</li>
+<li><code>G</code>: Move to the end of the file (the very last line).</li>
+</ul>
+<p>Imagine you&#39;re reviewing a <code>/etc/ssh/sshd_config</code> file. Instead of hitting the down arrow a hundred times, <code>G</code> gets you to the end instantly. If you realize you need to check the first few lines, <code>gg</code> takes you right back to the top.</p>
+<p>To help visualize this, imagine a simple text file:</p>
+<pre class="text"><code>This is a sample configuration file.
+It has multiple lines of settings.
+We will practice moving around in this text.</code></pre>
+<p>If your cursor is currently on the &#39;s&#39; in &quot;sample&quot; on the first line:</p>
+<ul>
+<li>Typing <code>w</code> would move your cursor to the &#39;c&#39; in &quot;configuration&quot;.</li>
+<li>Typing <code>j</code> would move your cursor down to the &#39;I&#39; in &quot;It&quot; on the second line.</li>
+<li>Typing <code>$</code> would move your cursor to the &#39;.&#39; at the end of the first line.</li>
+</ul>
+<h3 id="searching-within-a-file">Searching Within a File</h3>
+<p>Imagine you&#39;re troubleshooting an issue on a server and need to find all instances of a specific error message in a log file. Vim provides powerful search capabilities right from <strong>Normal Mode</strong>:</p>
+<ul>
+<li><code>/search_term</code>: To search forward through the file for <code>search_term</code>. After typing <code>/</code>, you&#39;ll see the cursor jump to the bottom of the screen where you can type your search pattern. Press <code>Enter</code> to initiate the search.</li>
+<li><code>?search_term</code>: To search backward through the file for <code>search_term</code>.</li>
+</ul>
+<p>Once you&#39;ve found an instance of your search term, you can quickly jump to the next or previous occurrences:</p>
+<ul>
+<li><code>n</code>: Move to the <strong>next</strong> occurrence of the search term (in the same direction as your initial search).</li>
+<li><code>N</code>: Move to the <strong>previous</strong> occurrence of the search term (in the opposite direction of your initial search).</li>
+</ul>
+<h3 id="jumping-to-specific-lines">Jumping to Specific Lines</h3>
+<p>Sometimes you&#39;ll know exactly which line number you need to go to, perhaps from an error message that specifies a line.</p>
+<ul>
+<li><code>:[line_number]</code>: From Command-line Mode (remember, you enter this by typing <code>:</code> in Normal Mode), you can type a line number and press Enter to jump directly to that line. For example, <code>:50</code> will take you to line <code>50</code>.</li>
+<li><code>:set nu</code> (or <code>:set number</code>): This command will display line numbers along the left side of your Vim window. This is temporary for your current Vim session, but it&#39;s invaluable for orientation and when dealing with error messages that reference line numbers. To turn them off, you can use <code>:set nonu</code>.</li>
+</ul>
+<p>These commands will help you quickly locate the exact content or line you need to modify or review.</p>
+<h2 id="basic-editing-operations">Basic Editing Operations</h2>
+<h3 id="insert-mode">Insert Mode</h3>
+<p>This section is all about modifying text. We&#39;ll start with how to <strong>insert text</strong>, which means getting into <strong>Insert Mode</strong> from <strong>Normal Mode</strong>. Remember, you can&#39;t just type in Normal Mode – your keystrokes are commands!</p>
+<p>Here are the key commands to enter Insert Mode, each placing your cursor slightly differently, which can be a huge time-saver:</p>
+<ul>
+<li><code>i</code>: <strong>Insert</strong> text <strong>at</strong> the current cursor position. This is the most common way to switch to Insert Mode.</li>
+<li><code>I</code>: Insert text at the <strong>beginning of the current line</strong>. No matter where your cursor is on the line, <code>I</code> will jump it to the first non-blank character and put you in Insert Mode.</li>
+<li><code>a</code>: <strong>Append</strong> text <strong>after</strong> the current cursor position. If your cursor is on a character, typing <code>a</code> will move it one space to the right and then let you type.</li>
+<li><code>A</code>: Append text at the <strong>end of the current line</strong>. This is very useful when you want to quickly add something to the end of a line without having to navigate there first.</li>
+<li><code>o</code>: Open a <strong>new line below</strong> the current line and enter Insert Mode. Perfect for adding a new configuration directive on its own line.</li>
+<li><code>O</code>: Open a <strong>new line above</strong> the current line and enter Insert Mode. Also great for adding a new line, but above your current position.</li>
+</ul>
+<p><strong>Important</strong>: Once you&#39;re in Insert Mode and finished typing, always press the <code>Esc</code> key to return to <strong>Normal Mode</strong>. This is a fundamental habit you&#39;ll quickly develop.</p>
+<p>Think of it like this: if you&#39;re writing a new entry in a log file, <code>o</code> would give you a fresh line to start typing. If you just need to add a small detail to the end of an existing configuration parameter, <code>A</code> is your friend.</p>
+<h3 id="deleting-text">Deleting Text</h3>
+<p>All of these commands are executed from <strong>Normal Mode</strong>. If you&#39;re in <strong>Insert Mode</strong>, remember to press <code>Esc</code> to switch back to <strong>Normal Mode</strong> before attempting to delete.</p>
+<p>Here are the essential deletion commands:</p>
+<ul>
+<li><code>x</code>: Delete the single character under the cursor. Think of it like hitting the <code>Delete</code> key on a standard keyboard.</li>
+<li><code>X</code>: Delete the single character before the cursor. Similar to hitting <code>Backspace</code>.</li>
+<li><code>dw</code>: Delete from the current cursor position to the <strong>beginning of the next word</strong> (including the space after the word).</li>
+<li><code>de</code>: Delete from the current cursor position to the <strong>end of the current word</strong>.</li>
+<li><code>d$</code>: Delete from the current cursor position to the <strong>end of the current line</strong>.</li>
+<li><code>dd</code>: Delete the <strong>entire current line</strong>. This is one of the most frequently used deletion commands in Vim for sysadmins!</li>
+</ul>
+<p><strong>Combining commands with numbers</strong>: You can also prefix many commands with a number to repeat the action. For example:</p>
+<ul>
+<li><code>5x</code>: Delete 5 characters from the cursor.</li>
+<li><code>3dd</code>: Delete 3 entire lines starting from the current line.</li>
+</ul>
+<p>Let&#39;s look at an example. Suppose you have this line in a configuration file:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is an old configuration entry.</span></span></code></pre></div>
+<ul>
+<li>If your cursor is on the <code>#</code> and you type <code>dw</code>, it will delete <code># This</code>.</li>
+<li>If your cursor is on the &#39;o&#39; in &quot;old&quot; and you type <code>de</code>, it will delete &quot;old&quot;.</li>
+<li>If your cursor is anywhere on that line and you type <code>dd</code>, the entire line will be removed.</li>
+</ul>
+<p>These deletion commands are very powerful for quickly tidying up or modifying configuration files.</p>
+<h3 id="copy-and-paste">Copy and Paste</h3>
+<p>Just like deletion, these commands are executed from <strong>Normal Mode</strong>.</p>
+<ul>
+<li><code>yy</code>: <strong>Yank</strong> (copy) the <strong>entire current line</strong>. This is one of the most common copy commands.</li>
+<li><code>p</code>: <strong>Put</strong> (paste) the yanked (copied) text <strong>after</strong> the cursor or <strong>on the line below</strong> the current line if you copied full lines.</li>
+<li><code>P</code>: <strong>Put</strong> (paste) the yanked (copied) text <strong>before</strong> the cursor or <strong>on the line above</strong> the current line if you copied full lines.</li>
+</ul>
+<p>You can also combine <code>y</code> with movement commands, similar to <code>d</code> for delete:</p>
+<ul>
+<li><code>yw</code>: <strong>Yank</strong> from the current cursor position to the <strong>beginning of the next word</strong>.</li>
+<li><code>y$</code>: <strong>Yank</strong> from the current cursor position to the <strong>end of the current line</strong>.</li>
+</ul>
+<p>And, of course, you can prefix with a number to yank multiple lines:</p>
+<ul>
+<li><code>5yy</code>: Yank (copy) 5 lines, starting from the current line.</li>
+</ul>
+<p>Let&#39;s imagine you have a block of configuration settings that you want to duplicate or move to another part of your file.</p>
+<p>Original text:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Server settings</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Port</span> 22</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">ListenAddress</span> 0.0.0.0</span></code></pre></div>
+<p>If your cursor is on <code>Port 22</code> and you type <code>yy</code>, that line is copied. Then, if you move your cursor to a new location and type <code>p</code>, the line <code>Port 22</code> will be pasted below the line where your cursor currently is. If you type <code>P</code>, it will be pasted above.</p>
+<p>For sysadmins, this is invaluable when you&#39;re setting up similar configurations for multiple services or user accounts, or when you need to quickly comment out a line by duplicating it and then modifying one of the copies.</p>
+<h3 id="undo-and-redo">Undo and Redo</h3>
+<p>Mistakes happen, especially when you&#39;re learning a new editor! Fortunately, Vim has robust undo and redo capabilities, allowing you to easily revert changes or reapply them. These commands are executed from <strong>Normal Mode</strong>.</p>
+<ul>
+<li><p><code>u</code>: <strong>Undo</strong> the last change. This is your &quot;oops&quot; button. If you accidentally delete a line or make a change you regret, simply type <code>u</code>, and Vim will revert it. Vim keeps a history of your changes, so you can press <code>u</code> multiple times to undo several previous actions.</p></li>
+<li><p><code>Ctrl-r</code>: <strong>Redo</strong> a previously undone change. If you undo something and then realize you actually wanted it back, <code>Ctrl-r</code> (hold <code>Ctrl</code> and press <code>r</code>) will reapply it. Think of it as the &quot;oops, never mind&quot; button after pressing &quot;oops.&quot;</p></li>
+</ul>
+<p>These two commands are fundamental for any text editing, but particularly when you&#39;re making critical changes to system configuration files. It gives you a safety net to experiment or correct errors without fear of irreversible damage.</p>
+<p>For example, if you typed <code>dd</code> and deleted a line, a quick <code>u</code> brings it right back. If you then decide you did want it deleted, <code>Ctrl-r</code> will remove it again.</p>
+<h2 id="saving-and-exiting-vim">Saving and Exiting Vim</h2>
+<p>All these commands are entered from <strong>Normal Mode</strong> by first typing a colon (<code>:</code>) which brings you into Command-line Mode at the bottom of the screen.</p>
+<p>Here are the essential commands:</p>
+<ul>
+<li><code>:w</code> (write): This command saves the changes you&#39;ve made to the file, but keeps you in Vim. You&#39;ll often use this if you want to save periodically while still working.</li>
+<li><code>:q</code> (quit): This command exits Vim. However, it will only work if you haven&#39;t made any unsaved changes. If you have unsaved changes, Vim will warn you.</li>
+<li><code>:wq</code> (write and quit): This is a very common command that saves your changes and then exits Vim. It&#39;s a shorthand for <code>:w</code> followed by <code>:q</code>.</li>
+<li><code>:x</code>: This command is similar to <code>:wq</code>. It saves the file only if changes have been made, and then exits Vim. It&#39;s slightly more &quot;intelligent&quot; than <code>:wq</code> in that it won&#39;t touch the file&#39;s modification timestamp if no changes were actually made. For daily use, <code>:wq</code> and <code>:x</code> are largely interchangeable for saving and quitting.</li>
+<li><code>:q!</code> (quit forcefully): This command exits Vim without saving any changes. The <code>!</code> means &quot;force.&quot; Use this when you&#39;ve made a mess and just want to abandon all changes and revert to the last saved version of the file. Be careful with this one, as any unsaved work will be lost!</li>
+</ul>
+<p><strong>A word of caution for sysadmins</strong>: When editing critical system files (like <code>/etc/fstab</code> or <code>/etc/network/interfaces</code>), always double-check your changes before saving. And never use :q! unless you are absolutely sure you want to discard everything!</p>
+<h2 id="practical-tips">Practical Tips</h2>
+<h3 id="command-line-mode">Command-line Mode</h3>
+<p>Sometimes, while you&#39;re in Vim editing a file, you might need to quickly execute a shell command without actually quitting Vim. This is where the <code>!</code> command in Command-line Mode comes in handy.</p>
+<ul>
+<li><code>:!command</code>: This allows you to execute an external shell <code>command</code> from within Vim. The output of the command will be displayed in your terminal, and then you&#39;ll be returned to your Vim session.</li>
+</ul>
+<p>For example, if you&#39;re editing a configuration file and want to quickly check the status of a service without leaving Vim, you could type:</p>
+<pre class="vim"><code>:!systemctl status sshd</code></pre>
+<p>Or, if you just saved a change and want to immediately apply it by restarting a service:</p>
+<pre class="vim"><code>:!sudo systemctl restart nginx</code></pre>
+<p>This command is incredibly powerful because it lets you interact with the underlying system while staying focused on your editing task. It prevents the need to constantly exit Vim, run a command, and then re-open Vim.</p>
+</body>
+</html>

@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="setting-up-firewalld">Setting Up <code>firewalld</code></h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#setting-up-firewalld">Setting Up <code>firewalld</code></a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#key-firewalld-concepts">Key <code>firewalld</code> Concepts</a></li>
+</ul></li>
+<li><a href="#basic-firewalld-management">Basic <code>firewalld</code> Management</a>
+<ul>
+<li><a href="#changing-the-default-zone">Changing the Default Zone</a></li>
+</ul></li>
+<li><a href="#working-with-zones">Working with Zones</a>
+<ul>
+<li><a href="#assign-network-interfaces-to-specific-zones">Assign Network Interfaces to Specific Zones</a></li>
+</ul></li>
+<li><a href="#managing-services">Managing Services</a>
+<ul>
+<li><a href="#allowing-specific-services-in-a-zone">Allowing Specific Services in a Zone</a></li>
+</ul></li>
+<li><a href="#working-with-ports-and-protocols">Working with Ports and Protocols</a>
+<ul>
+<li><a href="#tcp-and-udp-protocols">TCP and UDP Protocols</a></li>
+</ul></li>
+<li><a href="#advanced-rules-and-concepts-optional">Advanced Rules and Concepts (Optional)</a>
+<ul>
+<li><a href="#icmp-blocking">ICMP Blocking</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<p>In the context of server administration, security hardening is paramount. One of the foundational elements of this is controlling network access to your server. This is where a firewall comes into play. Think of your server as a critical business asset, like a secure data vault. This vault has entry points (network interfaces) that need to be carefully guarded to prevent unauthorized access and potential breaches.</p>
+<p><code>firewalld</code> is a robust and dynamically managed firewall service available on many Linux distributions. It provides a structured and more manageable approach to configuring your server&#39;s network security policies compared to directly manipulating lower-level tools such as <code>iptables</code>. While <code>iptables</code> operates directly on the Linux kernel&#39;s network filtering rules, <code>firewalld</code> offers an abstraction layer with concepts like zones and services, making rule management more intuitive and less error-prone for administrators.</p>
+<p>The importance of a properly configured firewall cannot be overstated. Without it, your server is exposed to a multitude of network-based threats. For instance, malicious actors could attempt to gain unauthorized access to sensitive data, disrupt services through denial-of-service attacks, or exploit vulnerabilities in running applications. <code>firewalld</code> allows you to define precise rules that dictate what types of network traffic are permitted to enter or leave your server, significantly reducing its attack surface and enhancing its overall security posture.</p>
+<h3 id="key-firewalld-concepts">Key <code>firewalld</code> Concepts</h3>
+<p>Understanding these concepts is fundamental to effectively managing your firewall. The three main concepts we&#39;ll cover are:</p>
+<ul>
+<li><p><strong>Zones</strong>: Think of zones as different security levels or trust levels for your network interfaces. For example, your home network might be considered a trusted zone, while a public Wi-Fi network would be an untrusted zone. <code>firewalld</code> comes with several pre-defined zones, each with a default set of rules. We&#39;ll explore these in more detail later. For now, just understand that a zone dictates what traffic is allowed.</p></li>
+<li><p><strong>Services</strong>: These are pre-defined rules for common network applications or protocols. Instead of manually specifying ports and protocols for services like SSH (for remote access) or HTTP (for web servers), <code>firewalld</code> provides these as easy-to-use service names. This simplifies rule creation and makes it more readable.</p></li>
+<li><p><strong>Rules</strong>: These are the specific instructions that determine whether network traffic is allowed or blocked. Rules can be based on source/destination IP addresses, ports, protocols, and the zone the network interface belongs to. Services are essentially collections of pre-defined rules.</p></li>
+</ul>
+<p>Let&#39;s relate this to a real-world scenario: Imagine you&#39;re setting up a web server on your Ubuntu Server. You want it to be accessible from the internet but also want to secure it. You might assign the network interface connected to the internet to the <code>public</code> <strong>zone</strong>. Then, you would <strong>allow the</strong> <code>http</code> <strong>and</strong> <code>https</code> <strong>services</strong> in this zone, which automatically opens the necessary ports (80 and 443 respectively) for web traffic. You would likely want to block all other incoming traffic by default in the <code>public</code> zone to protect your server.</p>
+<h2 id="basic-firewalld-management">Basic <code>firewalld</code> Management</h2>
+<p>To start using <code>firewalld</code>, you&#39;ll need to know a few essential commands. We&#39;ll cover how to check its status and see what its current configuration looks like.</p>
+<p>Here are a couple of fundamental commands:</p>
+<ol type="1">
+<li><p><strong>Checking the status of</strong> <code>firewalld</code>: You can use the <code>systemctl</code> command to check if the <code>firewalld</code> service is running on your server. Open your terminal and type:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> status firewalld</span></code></pre></div>
+<p>This command will tell you if the service is active (running), inactive (stopped), or in a failed state. As a system administrator, you&#39;ll often use <code>systemctl</code> to manage various system services.</p></li>
+<li><p><strong>Checking the state of</strong> <code>firewalld</code>: <code>firewalld</code> also has its own command-line tool, <code>firewall-cmd</code>, which you&#39;ll use extensively. To check the overall state of the firewall, use:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--state</span></span></code></pre></div>
+<p>This command should simply output &quot;running&quot; if <code>firewalld</code> is active.</p></li>
+<li><p><strong>Listing active zones</strong>: Remember those zones we talked about? To see which zones are currently active and which network interfaces are associated with them, use:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--get-active-zones</span></span></code></pre></div>
+<p>This will show you a list of zones and the network interfaces (like <code>eth0</code> or <code>ens3</code>) that are currently assigned to each zone. This is useful for understanding how your network traffic is being categorized.</p></li>
+<li><p><strong>Getting the default zone</strong>: <code>firewalld</code> has a default zone that new network interfaces will be assigned to automatically unless you specify otherwise. To find out what the default zone is, use:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--get-default-zone</span></span></code></pre></div>
+<p>Understanding the default zone is important because it dictates the initial security posture of any new network connection to your server.</p></li>
+</ol>
+<p>Think of these commands as your basic diagnostic tools for understanding how <code>firewalld</code> is currently configured and running on your server.</p>
+<h3 id="changing-the-default-zone">Changing the Default Zone</h3>
+<p>The default zone in <code>firewalld</code> is like the standard security setting for any new network interface that gets added to your server. When a network interface starts up, if you haven&#39;t explicitly assigned it to a specific zone, it will automatically be placed in the default zone.</p>
+<p>To see what the current default zone is, as we learned, you use:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--get-default-zone</span></span></code></pre></div>
+<p>Let&#39;s say the output is <code>public</code>. This means that by default, any new network interface will have the security rules associated with the <code>public</code> zone applied to it. The <code>public</code> zone is generally intended for untrusted networks, like the internet, and has a more restrictive set of allowed traffic by default.</p>
+<p>To change the default zone, you use the following command:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--set-default-zone</span><span class="op">=&lt;</span>zone<span class="op">&gt;</span></span></code></pre></div>
+<p>Replace <code>&lt;zone&gt;</code> with the name of the zone you want to set as the new default. For example, if you have a server that primarily interacts with a trusted internal network, you might want to set the default zone to <code>private</code>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--set-default-zone</span><span class="op">=</span>private</span></code></pre></div>
+<p><strong>Important Considerations</strong>:</p>
+<ul>
+<li><strong>Implications</strong>: Changing the default zone affects any new network interfaces that are added to your system after you run this command. It does not change the zone of any interfaces that are already active. You&#39;ll need to change those explicitly, which we&#39;ll cover in the next step.</li>
+<li><strong>Common Zones</strong>: You&#39;ll often encounter zones like <code>public</code>, <code>private</code>, and <code>dmz</code> (Demilitarized Zone - often used for servers exposed to the internet but isolated from the internal network). We&#39;ll discuss these zones in more detail in the next step as well.</li>
+<li><strong>Persistence</strong>: Like many <code>firewall-cmd</code> operations, this change is usually runtime only. To make it permanent across reboots, you&#39;ll typically need to add the <code>--permanent</code> flag to the command. However, for setting the default zone, the change usually persists.</li>
+</ul>
+<p>Think of setting the default zone as choosing the standard security posture for any new network connection to your server. Choosing the right default zone depends on the primary role and network environment of your server.</p>
+<h2 id="working-with-zones">Working with Zones</h2>
+<p>As we touched upon earlier, zones are a core concept in <code>firewalld</code>. They represent different levels of trust in the networks your server is connected to. <code>firewalld</code> comes with several pre-defined zones, each with its own default rules regarding what traffic is allowed. Understanding these zones is crucial for applying the right security policies to your network interfaces.</p>
+<p>Here are some of the most common pre-defined zones in firewalld:</p>
+<ul>
+<li><p><code>public</code>: This zone is intended for untrusted public networks, like the internet. By default, it&#39;s very restrictive, typically only allowing explicitly defined incoming connections. This is the zone you&#39;d usually assign to your server&#39;s internet-facing network interface.</p></li>
+<li><p><code>private</code>: This zone is for trusted private networks, such as your home or internal office network. It generally allows more incoming connections from other devices on the same network.</p></li>
+<li><p><code>dmz</code> <strong>(Demilitarized Zone)</strong>: This is used for servers that are exposed to the internet but need to be isolated from your internal network. It typically allows only specific incoming services.</p></li>
+<li><p><code>trusted</code>: This zone allows all network traffic. You would typically only use this for highly trusted networks, and you should be very cautious when assigning an interface to this zone.</p></li>
+<li><p><code>block</code>: Any incoming connections are rejected with an <code>icmp-host-prohibited</code> message for IPv4 and <code>icmp6-adm-prohibited</code> for IPv6. Only outgoing connections are allowed.</p></li>
+<li><p><code>drop</code>: All incoming connections are silently dropped without any response. Only outgoing connections are allowed. This is the most restrictive zone.</p></li>
+</ul>
+<p>Think of these zones like security profiles you can apply to your network interfaces. For example, if your server has one network card connected to the internet and another connected to your internal network, you would likely assign the internet-facing interface to the <code>public</code> zone and the internal interface to the <code>private</code> zone. This allows different security rules to be applied to each network based on its trust level.</p>
+<h3 id="assign-network-interfaces-to-specific-zones">Assign Network Interfaces to Specific Zones</h3>
+<p>Your server might have multiple network interfaces, each connecting to a different network. For example, you might have <code>eth0</code> connected to the internet and <code>eth1</code> connected to your internal network. It&#39;s crucial to assign the appropriate zone to each interface to enforce the correct security policies. You wouldn&#39;t want your internal network interface to have the same wide-open rules as an internet-facing interface!</p>
+<p>To assign a network interface to a specific zone, you use the <code>firewall-cmd</code> command with the <code>--change-interface</code> option. Here&#39;s the basic syntax:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--zone</span><span class="op">=&lt;</span>zone<span class="op">&gt;</span> --change-interface=<span class="op">&lt;</span>interface<span class="op">&gt;</span></span></code></pre></div>
+<p>Replace <code>&lt;zone&gt;</code> with the name of the zone you want to assign (e.g., <code>public</code>, <code>private</code>) and <code>&lt;interface&gt;</code> with the name of the network interface (e.g., <code>eth0</code>, <code>ens3</code>).</p>
+<p><strong>Important</strong>: This command, by default, only makes the change in the current runtime. This means that if you reboot your server, the changes will be lost. To make the assignment permanent across reboots, you need to add the <code>--permanent</code> flag:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--zone</span><span class="op">=&lt;</span>zone<span class="op">&gt;</span> --change-interface=<span class="op">&lt;</span>interface<span class="op">&gt;</span> --permanent</span></code></pre></div>
+<p>After making permanent changes, you need to reload the firewalld configuration for them to take effect in the running firewall:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--reload</span></span></code></pre></div>
+<p>Let&#39;s look at an example. Suppose you want to assign your internet-facing network interface, <code>eth0</code>, to the <code>public</code> zone permanently. You would use these commands:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--zone</span><span class="op">=</span>public <span class="at">--change-interface</span><span class="op">=</span>eth0 <span class="at">--permanent</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--reload</span></span></code></pre></div>
+<p>Similarly, if you wanted to assign your internal network interface, <code>eth1</code>, to the <code>private</code> zone permanently:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--zone</span><span class="op">=</span>private <span class="at">--change-interface</span><span class="op">=</span>eth1 <span class="at">--permanent</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--reload</span></span></code></pre></div>
+<p>Think of this as putting different security guards at different doors of your server, depending on who you expect to be coming through that door. Assigning the correct zone to each interface is a fundamental step in network segmentation, which is a key security practice to limit the impact of a potential security breach.</p>
+<h2 id="managing-services">Managing Services</h2>
+<p>One of the really convenient features of <code>firewalld</code> is its concept of pre-defined <strong>services</strong>. These are essentially bundles of rules that define the necessary ports and protocols for common network applications. Instead of having to remember and manually configure the specific port and protocol for, say, an SSH server, <code>firewalld</code> provides a ready-made &quot;ssh&quot; service.</p>
+<p>To see a list of all the <code>pre-defined</code> services that firewalld knows about, you can use the following command:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--get-services</span></span></code></pre></div>
+<p>This will give you a long list of service names. Some common ones you might recognize include:</p>
+<ul>
+<li><code>ssh</code>: For secure remote access using SSH (usually on TCP port 22).</li>
+<li><code>http</code>: For standard web traffic (usually on TCP port 80).</li>
+<li><code>https</code>: For secure web traffic using SSL/TLS (usually on TCP port 443).</li>
+<li><code>smtp</code>: For sending email (usually on TCP port 25).</li>
+<li><code>dns</code>: For DNS name resolution (usually on UDP port 53).</li>
+</ul>
+<p>Using these services simplifies firewall configuration. Instead of remembering that SSH uses TCP port 22, you can just allow the <code>ssh</code> service in a specific zone. <code>firewalld</code> will then automatically handle the underlying port and protocol rules for you in that zone.</p>
+<p>Think of these services as shortcuts for common applications. Instead of writing out the full address and room number every time you want to allow someone into your server&#39;s &quot;room&quot; (port), you can just say &quot;let in anyone who&#39;s here for the &#39;SSH service&#39;.&quot;</p>
+<h3 id="allowing-specific-services-in-a-zone">Allowing Specific Services in a Zone</h3>
+<p>To allow a specific service in a particular zone, you use the <code>firewall-cmd</code> command with the <code>--add-service</code> option. Here&#39;s the syntax:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--zone</span><span class="op">=&lt;</span>zone<span class="op">&gt;</span> --add-service=<span class="op">&lt;</span>service<span class="op">&gt;</span></span></code></pre></div>
+<p>Replace <code>&lt;zone&gt;</code> with the name of the zone where you want to allow the service (e.g., <code>public</code>, <code>private</code>) and <code>&lt;service&gt;</code> with the name of the service you want to enable (e.g., <code>ssh</code>, <code>http</code>).</p>
+<p>Just like with assigning interfaces to zones, this command only applies to the current runtime by default. To make the rule permanent across reboots, you need to add the <code>--permanent</code> flag:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--zone</span><span class="op">=&lt;</span>zone<span class="op">&gt;</span> --add-service=<span class="op">&lt;</span>service<span class="op">&gt;</span> --permanent</span></code></pre></div>
+<p>And again, after making permanent changes, you need to reload the <code>firewalld</code> configuration:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--reload</span></span></code></pre></div>
+<p>Let&#39;s consider our web server example again. Your server&#39;s internet-facing interface (<code>eth0</code>) is in the <code>public</code> zone. To allow web traffic (both standard HTTP on port 80 and secure HTTPS on port 443), you would enable the <code>http</code> and <code>https</code> services in the public zone like this:</p>
+<pre class="code"><code>firewall-cmd --zone=public --add-service=http --permanent
+firewall-cmd --zone=public --add-service=https --permanent
+firewall-cmd --reload</code></pre>
+<p>Similarly, if you need to allow SSH access to your server (which is crucial for remote administration), you would typically allow the <code>ssh</code> service in the appropriate zone. If you&#39;re accessing it from your trusted internal network (which might be assigned to the <code>private</code> zone), you would do:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--zone</span><span class="op">=</span>private <span class="at">--add-service</span><span class="op">=</span>ssh <span class="at">--permanent</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--reload</span></span></code></pre></div>
+<p><strong>Security Implications</strong>: It&#39;s crucial to only enable the services that are absolutely necessary for your server&#39;s function. Allowing unnecessary services opens up potential attack vectors. For example, if your server doesn&#39;t host email, you should not enable the <code>smtp</code> service. This principle of only allowing what is needed is a fundamental aspect of security hardening.</p>
+<h2 id="working-with-ports-and-protocols">Working with Ports and Protocols</h2>
+<p>Sometimes, the pre-defined services in <code>firewalld</code> might not cover all your needs. You might have a custom application running on a specific port or need to allow a protocol that isn&#39;t associated with a standard service. In these cases, you can directly specify the port and protocol you want to allow in a particular zone.</p>
+<p>To allow traffic on a specific port and protocol, you use the <code>--add-port</code> option with the <code>firewall-cmd</code> command. The syntax is as follows:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--zone</span><span class="op">=&lt;</span>zone<span class="op">&gt;</span> --add-port=<span class="op">&lt;</span>port<span class="op">&gt;</span>/<span class="op">&lt;</span>protocol<span class="op">&gt;</span></span></code></pre></div>
+<p>Replace <code>&lt;zone&gt;</code> with the zone where you want to allow the traffic, <code>&lt;port&gt;</code> with the port number, and <code>&lt;protocol&gt;</code> with either <code>tcp</code> or <code>udp</code>.</p>
+<p>Again, remember to add the <code>--permanent</code> flag to make the rule persistent across reboots and then reload <code>firewalld</code>:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--zone</span><span class="op">=&lt;</span>zone<span class="op">&gt;</span> --add-port=<span class="op">&lt;</span>port<span class="op">&gt;</span>/<span class="op">&lt;</span>protocol<span class="op">&gt;</span> --permanent</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--reload</span></span></code></pre></div>
+<p>Here are a few common examples:</p>
+<ul>
+<li><p>To allow standard HTTP traffic (port 80) using the TCP protocol in the <code>public</code> zone:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--zone</span><span class="op">=</span>public <span class="at">--add-port</span><span class="op">=</span>80/tcp <span class="at">--permanent</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--reload</span></span></code></pre></div></li>
+<li><p>To allow secure HTTPS traffic (port 443) using the TCP protocol in the <code>public</code> zone:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--zone</span><span class="op">=</span>public <span class="at">--add-port</span><span class="op">=</span>443/tcp <span class="at">--permanent</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--reload</span></span></code></pre></div></li>
+<li><p>To allow a custom application running on UDP port 12345 in the <code>private</code> zone:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--zone</span><span class="op">=</span>private <span class="at">--add-port</span><span class="op">=</span>12345/udp <span class="at">--permanent</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--reload</span></span></code></pre></div></li>
+</ul>
+<p>Think of this as opening a specific numbered door (<code>port</code>) and specifying who is allowed to use that door (<code>protocol</code> - either the &quot;TCP people&quot; or the &quot;UDP people&quot;). This gives you very granular control over the network traffic allowed to your server.</p>
+<h3 id="tcp-and-udp-protocols">TCP and UDP Protocols</h3>
+<p>Understanding the difference between TCP and UDP is important when configuring firewall rules at the port level. They are the two most common transport layer protocols used on the internet.</p>
+<p>Think of them like two different ways of sending packages:</p>
+<ul>
+<li><p><strong>TCP (Transmission Control Protocol)</strong>: Imagine sending a registered letter. With TCP:</p>
+<ul>
+<li>A connection is established between the sender and receiver before any data is sent (like saying &quot;Hello, are you ready to receive?&quot;).</li>
+<li>Data is broken down into packets, and each packet is numbered.</li>
+<li>The receiver acknowledges the receipt of each packet.</li>
+<li>If a packet is lost or arrives out of order, it is retransmitted and reassembled correctly.</li>
+<li>This makes TCP reliable and ensures that all data arrives in the correct order.</li>
+<li>Common uses: Web browsing (HTTP/HTTPS), email (SMTP, POP3, IMAP), file transfer (FTP, SFTP), and secure shell (SSH). These applications require reliable data transmission.</li>
+</ul></li>
+<li><p><strong>UDP (User Datagram Protocol)</strong>: Imagine sending postcards. With UDP:</p>
+<ul>
+<li>No connection is established beforehand.</li>
+<li>Data is sent in packets (datagrams) without numbering or guarantees of delivery.</li>
+<li>The sender doesn&#39;t know if the packets arrived, and the receiver doesn&#39;t acknowledge them.</li>
+<li>If packets are lost or arrive out of order, there&#39;s no mechanism for retransmission or reordering at the UDP level.</li>
+<li>This makes UDP faster and more efficient for applications where occasional data loss is acceptable or where low latency is critical.</li>
+<li><strong>Common uses</strong>: Online gaming, streaming video and audio, Voice over IP (VoIP), and DNS lookups. These applications often prioritize speed and real-time data over guaranteed delivery of every single packet.</li>
+</ul></li>
+</ul>
+<p>When configuring firewall rules, you need to know which protocol your application or service uses. For example, web servers primarily use TCP on ports 80 and 443 because reliable delivery of web pages is essential. DNS, on the other hand, often uses UDP on port 53 because quick lookups are important, and lost packets can be easily retransmitted by the application if needed. SSH uses TCP on port 22 because a reliable connection is crucial for secure remote access.</p>
+<h2 id="advanced-rules-and-concepts-optional">Advanced Rules and Concepts (Optional)</h2>
+<p>So far, we&#39;ve been allowing traffic based on zones, services, and ports. <code>firewalld</code> also allows you to create much more specific rules using what are called &quot;rich rules.&quot; These rules let you define criteria based on source or destination IP addresses, network ranges, MAC addresses, and more.</p>
+<p>Think of basic rules as saying &quot;anyone can come to this door if they are here for the &#39;web service&#39;.&quot; Rich rules are like saying &quot;only people with this specific ID card (IP address) can come to this door, and only if they are here for the &#39;web service&#39; during these specific hours.&quot;</p>
+<p>Here&#39;s a simplified example of how you might add a rich rule to allow TCP traffic on port 80 only from the IP address <code>192.168.1.100</code> in the <code>public</code> zone (remember to use <code>--permanent</code> and <code>--reload</code> to make it persistent):</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--zone</span><span class="op">=</span>public <span class="at">--add-rich-rule</span><span class="op">=</span><span class="st">&#39;rule family=&quot;ipv4&quot; source address=&quot;192.168.1.100&quot; port protocol=tcp port=80 accept&#39;</span> <span class="at">--permanent</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--reload</span></span></code></pre></div>
+<p>This rule is much more specific than simply allowing the <code>http</code> service in the <code>public</code> zone. Rich rules provide a powerful way to fine-tune your firewall policies for very specific security requirements.</p>
+<p>While we won&#39;t go into all the details of rich rule syntax right now, it&#39;s good to be aware that this capability exists for more advanced scenarios where you need very granular control over network access based on various criteria.</p>
+<h3 id="icmp-blocking">ICMP Blocking</h3>
+<p><strong>ICMP (Internet Control Message Protocol)</strong> is used for various network diagnostic and control purposes. Common ICMP messages include &quot;ping&quot; requests (echo requests) and responses (echo replies), as well as error messages like &quot;destination unreachable.&quot;</p>
+<p>While ICMP can be useful for network troubleshooting, allowing all ICMP traffic can sometimes pose a security risk. For example, attackers might use ICMP echo requests (pings) to discover active hosts on your network (a process called &quot;ping sweeping&quot;). They might also exploit other types of ICMP messages for denial-of-service attacks or to gather information about your network infrastructure.</p>
+<p>Because of these potential risks, some system administrators choose to block certain types of ICMP traffic on their servers, especially on internet-facing interfaces. However, it&#39;s important to be cautious when blocking ICMP entirely, as some legitimate network functions rely on it. For instance, Path MTU Discovery, a process that determines the optimal packet size for a network path, uses ICMP messages. Blocking necessary ICMP types can sometimes lead to connectivity issues.</p>
+<p><strong>How to block ICMP using</strong> <code>firewalld</code>:</p>
+<p>You can use rich rules to block specific ICMP types or all ICMP traffic in a particular zone. For example, to block all incoming ICMP echo requests (pings) in the <code>public</code> zone permanently, you could use a rich rule like this:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--zone</span><span class="op">=</span>public <span class="at">--add-rich-rule</span><span class="op">=</span><span class="st">&#39;rule family=&quot;ipv4&quot; protocol=icmp type=echo-request drop&#39;</span> <span class="at">--permanent</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--reload</span></span></code></pre></div>
+<p>To block all incoming ICMP traffic in the <code>public</code> zone, you could use:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--zone</span><span class="op">=</span>public <span class="at">--add-rich-rule</span><span class="op">=</span><span class="st">&#39;rule family=&quot;ipv4&quot; protocol=icmp drop&#39;</span> <span class="at">--permanent</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--reload</span></span></code></pre></div>
+<p><strong>Important Considerations</strong>:</p>
+<ul>
+<li><strong>Think carefully before blocking ICMP</strong>. Ensure that blocking specific types won&#39;t negatively impact legitimate network communication.</li>
+<li><strong>Monitor your network</strong>. If you do block ICMP, be aware that you might lose some basic network diagnostic capabilities.</li>
+</ul>
+<p>This is just a brief introduction to the concept of ICMP blocking. It&#39;s a more advanced topic, and whether or not you choose to implement it depends on your specific security requirements and network environment.</p>
+</body>
+</html>

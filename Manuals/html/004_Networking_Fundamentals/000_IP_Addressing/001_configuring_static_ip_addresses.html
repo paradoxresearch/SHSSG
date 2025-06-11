@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="configuring-static-ip-addresses-on-your-linux-system">Configuring Static IP Addresses On Your Linux System</h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#configuring-static-ip-addresses-on-your-linux-system">Configuring Static IP Addresses On Your Linux System</a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#gather-network-information">Gather Network Information</a>
+<ul>
+<li><a href="#get-your-routers-gateway-address">Get Your Routers Gateway Address</a></li>
+<li><a href="#get-your-routers-name-servers">Get Your Routers Name Servers</a></li>
+</ul></li>
+<li><a href="#configure-your-static-ip-address">Configure Your Static IP Address</a>
+<ul>
+<li><a href="#configure-your-static-ip-address-with-netplan">Configure Your Static IP Address with Netplan</a>
+<ul>
+<li><a href="#backup-your-netplan-configuration">Backup Your Netplan Configuration</a></li>
+<li><a href="#edit-your-netplan-configuration">Edit Your Netplan Configuration</a></li>
+<li><a href="#troubleshooting-your-netplan-configuration">Troubleshooting Your Netplan Configuration</a></li>
+</ul></li>
+<li><a href="#configure-your-static-ip-address-with-networkmanager">Configure Your Static IP Address with NetworkManager</a>
+<ul>
+<li><a href="#set-a-static-ip-address-using-networkmanager-gui">Set A Static IP Address Using NetworkManager GUI</a></li>
+<li><a href="#set-a-static-ip-address-using-the-command-line-with-networkmanager">Set A Static IP Address Using the Command-Line with NetworkManager</a></li>
+<li><a href="#troubleshooting-your-networkmanager-configuration">Troubleshooting Your NetworkManager Configuration</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<p>Think of an IP address like a home address for your computer on a network. It allows devices to find each other and communicate. Now, there are two main ways a device can get an IP address: dynamically or statically.</p>
+<p><strong>Dynamic IP addresses</strong> are like temporary addresses assigned by a central system (usually your router) each time a device connects to the network. It&#39;s convenient, like a hotel assigning you a room number when you check in.</p>
+<p><strong>Static IP addresses</strong>, on the other hand, are like owning your home – the address stays the same. You manually configure it on your device, and it doesn&#39;t change unless you change it.</p>
+<p>Why might you want a static IP? Well, for things like hosting a web server, running a file server, or even for consistent access to a printer on your home network. It ensures that the address of your service or device remains constant, making it easier for others (or other devices on your network) to find it reliably.</p>
+<p>In the Linux world, different tools help manage these network addresses. Two common ones are <strong>Netplan</strong> and <strong>NetworkManager</strong>.</p>
+<p><strong>Netplan</strong> is a relatively newer configuration utility that uses YAML files to define network interfaces. It then works with a &quot;renderer&quot; (like <code>networkd</code> or <code>NetworkManager</code>) in the background to apply these configurations. It&#39;s often the default on newer Ubuntu server versions.</p>
+<p><strong>NetworkManager</strong> is a more traditional and widely used service, especially in desktop environments. It can manage network connections through both graphical interfaces and command-line tools like nmcli.</p>
+<p>So, how do you tell which one is active? Here are a couple of ways:</p>
+<ul>
+<li><p><strong>Check for Netplan configuration files</strong>: If you see files ending with <code>.yaml</code> in the <code>/etc/netplan/</code> directory, it&#39;s a strong indicator that Netplan is being used. You can check this using the command:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /etc/netplan</span></code></pre></div>
+<p>If you see an output like <code>50-cloud-init.yaml</code>, Netplan is likely managing the network configuration.</p></li>
+<li><p><strong>Check the status of NetworkManager service</strong>: You can check if the NetworkManager service is running using the <code>systemctl</code> command:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> status NetworkManager</span></code></pre></div>
+<p>If it&#39;s active and running, NetworkManager is likely managing your network. However, keep in mind that on systems using Netplan, NetworkManager might still be installed but acting as the renderer for Netplan&#39;s configurations.</p>
+<p>A key thing to remember is that often, only one of these will be actively managing the main network interfaces.</p></li>
+</ul>
+<h2 id="gather-network-information">Gather Network Information</h2>
+<p>The first step, is to gather some essential information about your current network setup while it&#39;s still connected via DHCP. This information includes:</p>
+<ul>
+<li><strong>Router Gateway Address</strong>: This is the IP address of your router, which acts as the gateway to the outside internet. Your computer needs to know this address to send traffic beyond your local network. Think of it as the main exit door of your network.</li>
+<li><strong>DNS Servers</strong>: These servers translate website names (like <a href="https://www.google.com/search?q=google.com">https://www.google.com/search?q=google.com</a>) into IP addresses that computers understand. Without DNS servers, you&#39;d have to remember the numerical IP address of every website you want to visit! Your router often provides DNS server addresses, or you can use public ones.</li>
+</ul>
+<h3 id="get-your-routers-gateway-address">Get Your Routers Gateway Address</h3>
+<p>To obtain your network&#39;s gateway address, type the following command in your terminal:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ip</span> route</span></code></pre></div>
+<p>The line starting with <code>default via</code> will show you the gateway IP.</p>
+<p><strong>Example Output</strong>:</p>
+<pre class="shell"><code>default via 192.168.1.254 dev eth0 proto dhcp src 192.168.1.240 metric 100</code></pre>
+<p>The network gateway address is: <code>192.168.1.254</code></p>
+<h3 id="get-your-routers-name-servers">Get Your Routers Name Servers</h3>
+<p>To obtain your routers name servers, type the following commands in your terminal:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">resolvectl</span> status <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;DNS Servers&quot;</span></span></code></pre></div>
+<p><strong>Example Output</strong>:</p>
+<pre class="shell"><code>DNS Servers: 192.168.1.254 2600:1701:400:df0::1</code></pre>
+<p>The network nameservers are: <code>192.168.1.254</code> <code>2600:1701:400:df0::1</code></p>
+<p>Why is this information important? When you set a static IP, you&#39;ll need to manually provide these details so your computer knows how to communicate with the rest of the network and the internet. It&#39;s like manually setting the coordinates for your home address and the directions to the main highway!</p>
+<h2 id="configure-your-static-ip-address">Configure Your Static IP Address</h2>
+<h3 id="configure-your-static-ip-address-with-netplan">Configure Your Static IP Address with Netplan</h3>
+<h4 id="backup-your-netplan-configuration">Backup Your Netplan Configuration</h4>
+<p>Alright, now that you&#39;ve gathered your gateway and DNS server information, the next crucial step is to take a look at your current Netplan configuration file. It&#39;s always a good idea to see what&#39;s there before you start making changes, and even better to make a backup, just in case!</p>
+<p>The Netplan configuration files are usually located in the <code>/etc/netplan/</code> directory. The filenames can vary, but often they have names like <code>50-cloud-init.yaml</code> or <code>01-network-manager-all.yaml</code>.</p>
+<p>To see the files in this directory, you&#39;d use the command:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /etc/netplan</span></code></pre></div>
+<p>Once you identify the <code>.yaml</code> file (or files), it&#39;s wise to make a copy before you start editing. This way, if anything goes wrong, you can easily revert to the original configuration. You can do this using the <code>cp</code> command (copy):</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /etc/netplan/your_config_file.yaml your_config_file-backup.yaml</span></code></pre></div>
+<p><strong>Important</strong>: You&#39;ll need to replace <code>your_config_file.yaml</code> with the actual name of the file you found in the <code>/etc/netplan/</code> directory. The <code>sudo</code> command is used because these configuration files require administrator privileges to modify or copy. You might be asked for your password when you run this command.</p>
+<p>Making a backup is a simple step that can save you a lot of potential headaches later on!</p>
+<h4 id="edit-your-netplan-configuration">Edit Your Netplan Configuration</h4>
+<p>Now for the part where we tell Netplan to use a static IP address instead of DHCP. This involves editing the YAML configuration file you found in <code>/etc/netplan/</code>. You&#39;ll use a text editor for this, and <code>nano</code> is a common and user-friendly option.</p>
+<p>To open the configuration file for editing, you&#39;d use a command like this (again, replace your_config_file.yaml with the actual filename):</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nano /etc/netplan/your_config_file.yaml</span></code></pre></div>
+<p>This will open the file in the <code>nano</code> text editor within your terminal. You&#39;ll likely see something similar to the default configuration you included in your notes:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode YAML"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This file is generated from information provided by the datasource. Changes</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># to it will not persist across an instance reboot. To disable cloud-init&#39;s</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># network configuration capabilities, write a file</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># network: {config: disabled}</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">network</span><span class="kw">:</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ethernets</span><span class="kw">:</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">eth0</span><span class="kw">:</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">dhcp4</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">optional</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span></code></pre></div>
+<p>Now, you&#39;ll need to modify this file to configure your static IP address. Here&#39;s how you&#39;d typically do it, incorporating the information you gathered earlier:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode YAML"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">network</span><span class="kw">:</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ethernets</span><span class="kw">:</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">eth0</span><span class="kw">:</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">dhcp4</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span><span class="co">  # Disable DHCP for IPv4</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">addresses</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">192.168.1.20/</span><span class="dv">24</span><span class="kw">]</span><span class="co">  # Your desired static IP and subnet mask</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">routes</span><span class="kw">:</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> </span><span class="fu">to</span><span class="kw">:</span><span class="at"> default</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="at">                  </span><span class="fu">via</span><span class="kw">:</span><span class="at"> </span><span class="fl">192.168.1.254</span><span class="co">  # Your router&#39;s gateway address</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">nameservers</span><span class="kw">:</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">addresses</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="fl">192.168.1.254</span><span class="kw">,</span><span class="at"> </span><span class="fl">8.8.8.8</span><span class="kw">]</span><span class="co">  # Your router&#39;s DNS and a public DNS (optional)</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">optional</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
+<p>Let&#39;s break down these changes:</p>
+<ul>
+<li><code>dhcp4: false</code>: This line tells Netplan to disable DHCP for the IPv4 address on the eth0 interface (you might have a different interface name like enp0s3).</li>
+<li><code>addresses: [192.168.1.20/24]</code>: Here, you specify the static IP address you want to use (<code>192.168.1.20</code> in this example). The <code>/24</code> indicates the subnet mask (<code>255.255.255.0</code>), which defines the range of IP addresses in your local network. You&#39;ll want to choose an IP address within your network&#39;s range that isn&#39;t already in use.</li>
+<li><code>routes:</code>: This section defines how your computer should send traffic outside your local network.</li>
+<li><code>- to: default</code>: This means the default route (for all traffic not within your local network).</li>
+<li><code>via: 192.168.1.254</code>: This is where you put the gateway address of your router that you found earlier.</li>
+<li><code>nameservers:</code>: This section specifies the DNS servers your computer should use.</li>
+<li><code>addresses: [192.168.1.254, 8.8.8.8]</code>: Here, you list the IP addresses of your DNS servers. In this example, we&#39;ve included the router&#39;s IP as the primary DNS server and Google&#39;s public DNS server (8.8.8.8) as a secondary option for redundancy. You can use the DNS servers you found earlier.</li>
+</ul>
+<p><strong>Important Considerations</strong>:</p>
+<ul>
+<li><strong>Interface Name</strong>: Make sure that eth0 in the configuration matches the actual name of your network interface. You can usually find this using the <code>ip addr show</code> command.</li>
+<li><strong>IP Address Choice</strong>: Choose a static IP address within the same network range as your router but outside the range that your router typically assigns via DHCP to avoid conflicts. For example, if your router assigns IPs in the range of <code>192.168.1.100</code> to <code>192.168.1.200</code>, an IP like <code>192.168.1.20</code> would likely be a safe choice.</li>
+<li><strong>Subnet Mask</strong>: The <code>/24</code> subnet mask is common for home networks. If you&#39;re unsure about your subnet mask, it&#39;s usually the same as the one listed when you checked your IP configuration with <code>ip addr show</code>.</li>
+</ul>
+<p>After making these changes in <code>nano</code>, you would save the file by pressing <code>Ctrl+O</code>, then press <code>Enter</code> to confirm, and then exit by pressing <code>Ctrl+X</code>.</p>
+<p>Now, the changes you&#39;ve made in the text file aren&#39;t active yet. You need to tell the system to apply this new configuration.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> netplan apply</span></code></pre></div>
+<p>This command reads the configuration files in <code>/etc/netplan/</code> and applies the settings to your network interfaces.</p>
+<p>After running this command, your network interface should attempt to reconfigure itself with the static IP address you specified. In some cases, especially on a server without a graphical interface, you might need to restart the networking service or even the entire system to ensure the changes are fully applied.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> shutdown <span class="at">-r</span> now</span></code></pre></div>
+<p><strong>Important Considerations After Applying</strong>:</p>
+<ul>
+<li><p><strong>Connectivity Check</strong>: After applying the configuration (and potentially restarting), it&#39;s crucial to check if your network connection is working as expected. You can do this by:</p>
+<ul>
+<li>Trying to ping your gateway address (e.g., <code>ping 192.168.1.254</code>). If you get a response, it means your computer can communicate with your router.</li>
+<li>Trying to ping an external website by its IP address (e.g., <code>ping 8.8.8.8</code>). If this works, it means you have internet connectivity and your DNS configuration is likely correct.</li>
+<li>Trying to ping a website by its name (e.g., <code>ping google.com</code>). If this works, it confirms that your DNS resolution is functioning.</li>
+</ul></li>
+<li><p><strong>Potential Issues</strong>: Sometimes, applying the new configuration might lead to issues, such as:</p>
+<ul>
+<li><strong>IP Address Conflicts</strong>: If the static IP address you chose is already being used by another device on your network, you might experience connectivity problems.</li>
+<li><strong>Incorrect Configuration</strong>: A typo in the Netplan YAML file (e.g., incorrect IP address, gateway, or subnet mask) can prevent the network from working correctly.</li>
+<li><strong>Firewall Issues</strong>: In some cases, firewall settings might need to be adjusted to allow traffic on the new static IP address, although this is less common with basic static IP configuration.</li>
+</ul></li>
+</ul>
+<p>If you encounter issues, the first step is usually to review your Netplan configuration file for any errors and ensure that the IP address you&#39;ve chosen is appropriate for your network. You can also try reverting to your backup configuration file if necessary.</p>
+<h4 id="troubleshooting-your-netplan-configuration">Troubleshooting Your Netplan Configuration</h4>
+<p>If you find yourself without network connectivity after running sudo netplan apply and potentially restarting, here are some steps you can take to troubleshoot:</p>
+<ol type="1">
+<li><p><strong>Check Your Netplan Configuration File</strong>:</p>
+<ul>
+<li>Use the <code>cat /etc/netplan/your_config_file.yaml</code> command (again, replace <code>your_config_file.yaml</code> with your actual filename) to view the contents of the file.</li>
+<li>Carefully review it for any typos or syntax errors. YAML is sensitive to indentation and spacing, so make sure everything is correctly aligned. For example, are the colons in the right place? Are there any extra spaces?</li>
+<li>Double-check that the IP address, gateway, and DNS server addresses are correct and match the information you gathered earlier.</li>
+<li>Ensure the interface name (eth0 or whatever it is on your system) is correct.</li>
+</ul></li>
+<li><p><strong>Try Applying Again</strong>: Sometimes, the configuration might not apply correctly on the first try. You can try running sudo netplan apply again.</p></li>
+<li><p><strong>Check Network Interface Status</strong>: Use the command <code>ip a</code> or <code>ip addr</code> show to see the status of your network interfaces. Look for your configured interface (e.g., <code>eth0</code>) and check if it has the static IP address you intended to set. If it doesn&#39;t, there&#39;s likely an issue with your Netplan configuration.</p></li>
+<li><p><strong>Ping Your Localhost</strong>: Try pinging your own computer using the command <code>ping 127.0.0.1</code>. This checks if the basic network interface is working. If this fails, there might be a more fundamental issue with your network setup.</p></li>
+<li><p><strong>Revert to the Backup</strong>: If you&#39;re still having trouble, the backup you created earlier can be a lifesaver! You can revert to the original configuration by copying the backup file back to the original filename:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /etc/netplan/your_config_file-backup.yaml /etc/netplan/your_config_file.yaml</span></code></pre></div>
+<ul>
+<li>Then, apply the configuration again with <code>sudo netplan apply</code> and restart if necessary. This will put your network configuration back to its previous state.</li>
+</ul></li>
+<li><p><strong>Check System Logs</strong>: The system logs can sometimes provide more detailed information about what went wrong during the network configuration process. You can view the logs using commands like <code>journalctl -u systemd-networkd</code> (if <code>networkd</code> is your Netplan renderer) or <code>journalctl -u NetworkManager</code> (if NetworkManager is the renderer). Look for any error messages related to network configuration.</p></li>
+<li><p><strong>Restart Your Router</strong>: Sometimes, network issues can be related to your router. A simple restart of your router can often resolve unexpected connectivity problems.</p></li>
+</ol>
+<p>Troubleshooting is a skill that develops with practice. Don&#39;t get discouraged if things don&#39;t work perfectly the first time. The error messages and the process of finding the solution are valuable learning experiences.</p>
+<h3 id="configure-your-static-ip-address-with-networkmanager">Configure Your Static IP Address with NetworkManager</h3>
+<p>You&#39;ll often encounter NetworkManager on desktop Linux distributions like Ubuntu Desktop, Fedora, Mint, etc. It provides both graphical and command-line tools for managing network connections.</p>
+<h4 id="set-a-static-ip-address-using-networkmanager-gui">Set A Static IP Address Using NetworkManager GUI</h4>
+<p>The most straightforward way to configure a static IP with NetworkManager in a desktop environment is usually through the <strong>graphical user interface (GUI)</strong>. The exact steps might vary slightly depending on your desktop environment (GNOME, KDE, XFCE, etc.), but the general process is similar:</p>
+<ol type="1">
+<li><p><strong>Open Network Settings</strong>: Look for the network icon in your system tray (usually in the top or bottom right corner of your screen). Click on it to open the network menu. You&#39;ll typically find an option like &quot;Network Connections,&quot; &quot;Edit Connections,&quot; or &quot;Network Settings.&quot;</p></li>
+<li><p><strong>Select Your Connection</strong>: In the network settings, you&#39;ll see a list of your network interfaces (e.g., Wi-Fi, Ethernet). Find the Ethernet connection you want to configure with a static IP and select it. There might be an &quot;Edit&quot; or &quot;Settings&quot; button associated with it.</p></li>
+<li><p><strong>IPv4 Settings</strong>: In the connection settings window, look for a tab or section related to &quot;IPv4 Settings&quot; or something similar. Here, you&#39;ll usually see a dropdown menu for &quot;IPv4 Method&quot; or &quot;Address Type.&quot; By default, it&#39;s likely set to &quot;Automatic (DHCP).&quot;</p></li>
+<li><p><strong>Manual Configuration</strong>: Change the &quot;IPv4 Method&quot; or &quot;Address Type&quot; to &quot;Manual.&quot; This will reveal fields where you can enter your static IP address, subnet mask, gateway, and DNS servers.</p></li>
+<li><p><strong>Enter Details</strong>:</p>
+<ul>
+<li><strong>Address</strong>: Enter your desired static IP address (e.g., <code>192.168.1.20</code>).</li>
+<li><strong>Netmask</strong>: Enter your network&#39;s subnet mask. Often, this will be <code>255.255.255.0</code> or you might see it represented as a prefix like /24.</li>
+<li><strong>Gateway</strong>: Enter the IP address of your router (the gateway you found earlier).</li>
+<li><strong>DNS Servers</strong>: Enter the IP addresses of your DNS servers, separated by commas if you have multiple. You can use your router&#39;s IP and/or public DNS servers like <code>8.8.8.8</code>.</li>
+</ul></li>
+<li><p><strong>Apply Changes</strong>: Once you&#39;ve entered all the necessary information, click &quot;Apply,&quot; &quot;Save,&quot; or a similar button to save your changes. You might need to disconnect and reconnect to the network interface for the new settings to take effect. Sometimes, a system reboot might be necessary.</p></li>
+</ol>
+<p>The key here is that NetworkManager provides a user-friendly graphical way to configure these settings without directly editing configuration files. It handles the underlying details for you.</p>
+<h4 id="set-a-static-ip-address-using-the-command-line-with-networkmanager">Set A Static IP Address Using the Command-Line with NetworkManager</h4>
+<p><code>nmcli</code> (NetworkManager Command Line Interface) allows you to control NetworkManager and manage network connections directly from your terminal. Here&#39;s how you can use it to set a static IP address:</p>
+<ol type="1">
+<li><p><strong>Identify Your Connection Name</strong>: First, you need to know the name of the network connection you want to modify. You can list the active connections using the command:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nmcli</span> connection show <span class="at">--active</span></span></code></pre></div>
+<p>This will display a table of active network connections. Look for the connection associated with your Ethernet interface (it might be something like &quot;Wired connection 1&quot; or the name of your interface like &quot;eth0&quot;). Note down the NAME of this connection.</p></li>
+<li><p><strong>Modify the Connection</strong>: Now, you&#39;ll use the <code>nmcli connection modify</code> command to set the static IP address. Here&#39;s the general syntax:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nmcli</span> connection modify <span class="st">&quot;your_connection_name&quot;</span> ipv4.method manual ipv4.addresses <span class="st">&quot;your_static_ip/subnet_mask&quot;</span> ipv4.gateway <span class="st">&quot;your_gateway_ip&quot;</span> ipv4.dns <span class="st">&quot;your_dns_ip1,your_dns_ip2&quot;</span></span></code></pre></div>
+<p><strong>Replace the placeholders with your actual information</strong>:</p>
+<ul>
+<li><code>&quot;your_connection_name&quot;</code>: The name of the connection you identified in the previous step (e.g., &quot;Wired connection 1&quot; or &quot;eth0&quot;).</li>
+<li><code>ipv4.method manual</code>: This tells NetworkManager to use manual IP configuration (i.e., static).</li>
+<li><code>ipv4.addresses &quot;your_static_ip/subnet_mask&quot;</code>: Replace &quot;your_static_ip&quot; with the desired static IP address and &quot;subnet_mask&quot; with your network&#39;s subnet mask (e.g., 192.168.1.20/24).</li>
+<li><code>ipv4.gateway &quot;your_gateway_ip&quot;</code>: Replace &quot;your_gateway_ip&quot; with the IP address of your router&#39;s gateway.</li>
+<li><code>ipv4.dns &quot;your_dns_ip1,your_dns_ip2&quot;</code>: Replace &quot;your_dns_ip1&quot; and &quot;your_dns_ip2&quot; with the IP addresses of your DNS servers, separated by a comma. You can specify one or more DNS servers.</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<p>Assuming your connection name is &quot;eth0&quot;, you want to set the static IP to <code>192.168.1.25</code>, the subnet mask is <code>/24</code>, the gateway is <code>192.168.1.1</code>, and you want to use the DNS servers <code>192.168.1.1</code> and <code>8.8.8.8</code>, the command would look like this:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nmcli</span> connection modify eth0 ipv4.method manual ipv4.addresses <span class="st">&quot;192.168.1.25/24&quot;</span> ipv4.gateway <span class="st">&quot;192.168.1.1&quot;</span> ipv4.dns <span class="st">&quot;192.168.1.1,8.8.8.8&quot;</span></span></code></pre></div></li>
+<li><p><strong>Apply the Changes</strong>: After modifying the connection, you need to tell NetworkManager to apply the new settings. You can do this by deactivating and then reactivating the connection:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nmcli</span> connection down <span class="st">&quot;your_connection_name&quot;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">nmcli</span> connection up <span class="st">&quot;your_connection_name&quot;</span></span></code></pre></div>
+<p>Again, replace &quot;your_connection_name&quot; with the name of your connection.</p></li>
+</ol>
+<p>After these steps, your network interface should be configured with the static IP address you specified. You can verify this using the <code>ip a</code> or <code>ip addr show</code> command.</p>
+<h4 id="troubleshooting-your-networkmanager-configuration">Troubleshooting Your NetworkManager Configuration</h4>
+<p>Just like with Netplan, things might not always go perfectly when you apply the static IP configuration using <code>nmcli</code>. If you lose network connectivity or encounter other issues, here are some troubleshooting steps you can take:</p>
+<ol type="1">
+<li><p><strong>Verify Your <code>nmcli</code> Command</strong>: Double-check the command you used to modify the connection. Ensure there are no typos in the connection name, IP address, subnet mask, gateway, or DNS server addresses. Even a small mistake can cause problems. You can use <code>nmcli connection show &quot;your_connection_name&quot;</code> to review the current settings of the connection.</p></li>
+<li><p><strong>Check Your Network Interface Status</strong>: Use <code>ip a</code> or <code>ip addr show</code> to see if your network interface has the static IP address you intended to set. If it doesn&#39;t, the <code>nmcli connection up</code> command might not have applied the changes correctly. Try running it again.</p></li>
+<li><p><strong>Ping Your Localhost</strong>: As with Netplan, try <code>ping 127.0.0.1</code> to ensure your basic network interface is working.</p></li>
+<li><p><strong>Ping Your Gateway</strong>: Try pinging your router&#39;s IP address (<code>ping your_gateway_ip</code>). If this fails, there might be an issue with the IP address or gateway you configured.</p></li>
+<li><p><strong>Check DNS Resolution</strong>: Try pinging a public IP address like <code>8.8.8.8</code>. If this works but you can&#39;t access websites by name (e.g., <code>ping google.com</code> fails), there&#39;s likely an issue with your DNS server configuration. Double-check the IP addresses you provided for the DNS servers.</p></li>
+<li><p><strong>Review NetworkManager Logs</strong>: You can check the NetworkManager service logs for any error messages using <code>journalctl -u NetworkManager</code>. This might provide more specific details about what went wrong during the connection activation.</p></li>
+<li><p><strong>Try Restarting NetworkManager</strong>: Sometimes, restarting the NetworkManager service itself can resolve issues. You can do this with:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart NetworkManager</span></code></pre></div>
+<p>After restarting, try bringing your connection up again: <code>nmcli connection up &quot;your_connection_name&quot;</code>.</p></li>
+<li><p>Revert to DHCP: If you&#39;re still having trouble, you can easily switch back to DHCP to regain internet access and further troubleshoot. Use the following nmcli command:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nmcli</span> connection modify <span class="st">&quot;your_connection_name&quot;</span> ipv4.method auto</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="ex">nmcli</span> connection down <span class="st">&quot;your_connection_name&quot;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="ex">nmcli</span> connection up <span class="st">&quot;your_connection_name&quot;</span></span></code></pre></div>
+<p>This will set the connection back to automatically obtaining an IP address.</p></li>
+</ol>
+</body>
+</html>

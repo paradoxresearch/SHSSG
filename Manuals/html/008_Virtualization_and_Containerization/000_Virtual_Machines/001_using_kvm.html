@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="using-kvm">Using KVM</h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#using-kvm">Using KVM</a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#checking-if-your-system-supports-virtualization">Checking If Your System Supports Virtualization</a></li>
+<li><a href="#installing-kvm-and-its-tools">Installing KVM and its Tools</a></li>
+<li><a href="#creating-the-virtual-machine">Creating the Virtual Machine</a>
+<ul>
+<li><a href="#using-the-graphical-virt-manager-interface-to-create-a-virtual-machine">Using the Graphical virt-manager Interface to Create a Virtual Machine</a>
+<ul>
+<li><a href="#configuring-a-bridged-network-with-virt-manager">Configuring a Bridged Network with virt-manager</a></li>
+<li><a href="#basic-vm-management-with-virt-manager">Basic VM Management with virt-manager</a></li>
+<li><a href="#connect-to-the-console-of-a-running-vm-with-virt-manager">Connect to the Console of a Running VM with virt-manager</a></li>
+<li><a href="#modifying-an-existing-nat-network-to-bridged-with-virt-manager">Modifying an Existing NAT Network to Bridged with virt-manager</a></li>
+</ul></li>
+<li><a href="#using-virt-install-in-the-command-line-to-create-a-virtual-machine">Using virt-install in the Command Line to Create a Virtual Machine</a>
+<ul>
+<li><a href="#basic-vm-mangement-in-the-command-line-interface">Basic VM Mangement in the Command-Line Interface</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<p><strong>KVM</strong> is a widely adopted and powerful virtualization technology on Linux. Many cloud providers and enterprise environments rely on KVM or technologies built upon it.</p>
+<p><strong>KVM</strong>, which stands for <strong>Kernel-based Virtual Machine</strong>, is a powerful virtualization technology built right into the Linux kernel. Think of your Linux kernel as the core of your operating system. KVM essentially allows this core to act as a <strong>hypervisor</strong>.</p>
+<p>Now, there are two main types of hypervisors. <strong>Type 1</strong> hypervisors run directly on the system&#39;s hardware (like KVM or VMware ESXi), offering excellent performance because they have direct access to resources. <strong>Type 2</strong> hypervisors, like VirtualBox, run as an application on top of a traditional operating system.</p>
+<p>Here&#39;s a simple way to visualize it:</p>
+<pre class="shell"><code>+-----------------+      +-----------------+
+|   Applications  |      |   Applications  |
++-----------------+      +-----------------+
+| VirtualBox      |      |      VMs        |
++-----------------+      +-----------------+
+| Host OS (Linux) |      | KVM (in Kernel) |
++-----------------+      +-----------------+
+|     Hardware    | &lt;--&gt; |     Hardware    |
++-----------------+      +-----------------+
+      Type 2                    Type 1</code></pre>
+<p><strong>Benefits of KVM</strong>:</p>
+<ul>
+<li><strong>Performance</strong>: Because it&#39;s integrated into the kernel, KVM offers near-native performance for your virtual machines.</li>
+<li><strong>Integration</strong>: It works seamlessly with other Linux features.</li>
+<li><strong>Industry Standard</strong>: As mentioned, it&#39;s a widely used technology in professional environments.</li>
+</ul>
+<p><strong>Key components you&#39;ll encounter with KVM</strong>:</p>
+<ul>
+<li><strong>QEMU</strong>: This is a generic machine emulator and virtualizer. KVM uses QEMU for the actual emulation of the virtual machine&#39;s hardware.</li>
+<li><strong>libvirt</strong>: This is a toolkit and API to manage virtual machines. It provides a consistent way to interact with different virtualization technologies, including KVM.</li>
+<li><strong>virt-manager</strong>: This is a user-friendly graphical tool built on top of libvirt, making it easier to manage your virtual machines.</li>
+</ul>
+<h2 id="checking-if-your-system-supports-virtualization">Checking If Your System Supports Virtualization</h2>
+<p>Checking if your Linux system supports virtualization is a pretty straightforward process.</p>
+<p>Open your terminal, and run the following command:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-E</span> <span class="at">--color</span> <span class="st">&#39;vmx|svm&#39;</span> /proc/cpuinfo</span></code></pre></div>
+<p>Let&#39;s break down what this command does:</p>
+<ul>
+<li><code>grep</code>: This is a powerful command-line utility used for searching plain-text data sets for lines matching a regular expression.</li>
+<li><code>-E</code>: This tells <code>grep</code> to interpret the pattern as an extended regular expression.</li>
+<li><code>--color</code>: This will highlight the matching text in the output, making it easier to see.</li>
+<li><code>&#39;vmx|svm&#39;</code>: This is the regular expression we&#39;re searching for:
+<ul>
+<li><code>vmx</code>: This indicates Intel&#39;s virtualization technology (Virtualization Technology eXtension).</li>
+<li><code>svm</code>: This indicates AMD&#39;s virtualization technology (Secure Virtual Machine).</li>
+<li><code>|</code>: This actions as an &quot;OR&quot; operator, so we&#39;re searching for either &quot;vmx&quot; or &quot;svm&quot;.</li>
+</ul></li>
+<li><code>/proc/cpuinfo</code>: This is a virtual file in Linux that contains detailed information about your system&#39;s CPU.</li>
+</ul>
+<p><strong>What to look for in the output</strong>:</p>
+<ul>
+<li>If you see lines with <code>vmx</code> (for Intel) or <code>svm</code> (for AMD) highlighted in the output, it means your CPU supports hardware virtualization, and it&#39;s likely enabled in your BIOS/UEFI settings.</li>
+<li>If you don&#39;t see any output after running the command, it could mean that your CPU doesn&#39;t support hardware virtualization, or it might be disabled in your BIOS/UEFI.</li>
+</ul>
+<h2 id="installing-kvm-and-its-tools">Installing KVM and its Tools</h2>
+<p>The process for installing KVM and its related tools can vary slightly depending on which Linux distribution you&#39;re using. These are instructions for a common distribution like Ubuntu.</p>
+<p>For Ubuntu, you&#39;ll need to install the following packages:</p>
+<ul>
+<li><code>qemu-kvm</code>: This provides the core KVM functionality.</li>
+<li><code>libvirt-daemon-system</code>: This is the system service for managing virtual machines.</li>
+<li><code>libvirt-clients</code>: This provides the command-line tools for managing VMs (like virsh).</li>
+<li><code>virt-manager</code>: This is the graphical management tool we talked about.</li>
+<li><code>bridge-utils</code>: This is needed for setting up bridged networking, which allows your VMs to communicate directly with your network.</li>
+</ul>
+<p>To install these packages, open your terminal and run the following command:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install qemu-kvm libvirt-daemon-system libvirt-clients virt-manager bridge-utils</span></code></pre></div>
+<p>Let&#39;s break down this command:</p>
+<ul>
+<li><code>sudo</code>: This allows you to run commands with administrator privileges. You&#39;ll likely be prompted to enter your password.</li>
+<li><code>apt</code>: This is the package management tool used in Ubuntu (and other Debian-based distributions).</li>
+<li><code>update</code>: This command refreshes the list of available packages from the software repositories. It&#39;s always a good idea to run this before installing new software.</li>
+<li><code>install</code>: This command tells apt to download and install the specified packages.</li>
+<li><code>qemu-kvm libvirt-daemon-system libvirt-clients virt-manager bridge-utils</code>: These are the names of the packages we want to install, separated by spaces.</li>
+</ul>
+<p>After running this command, <code>apt</code> will download and install the necessary software. You might see some output in the terminal as it progresses. Once it&#39;s finished, KVM and its tools should be installed on your system.</p>
+<h2 id="creating-the-virtual-machine">Creating the Virtual Machine</h2>
+<p>There are a couple of ways to create virtual machines with KVM:</p>
+<ol type="1">
+<li><strong>Graphical using <code>virt-manager</code></strong>: This provides a user-friendly interface to create and manage your virtual machines. It&#39;s often the easier way to get started.</li>
+<li><strong>Command Line using <code>virt-install</code></strong>: This is a powerful tool that allows you to define all the VM parameters directly in the terminal. It&#39;s very flexible but can be a bit daunting for beginners.</li>
+</ol>
+<h3 id="using-the-graphical-virt-manager-interface-to-create-a-virtual-machine">Using the Graphical virt-manager Interface to Create a Virtual Machine</h3>
+<p>To start <code>virt-manager</code>, simply open your application menu (or use a command launcher like Alt+F2) and search for &quot;Virtual Machine Manager&quot;. Click on it to open the application.</p>
+<p>Once <code>virt-manager</code> is open, you should see a window that might be empty if you haven&#39;t created any VMs before. To create a new virtual machine, you&#39;ll usually see a button that looks like a &quot;+&quot; or says &quot;Create a new virtual machine&quot;. Click on that button.</p>
+<p>A new window will pop up, guiding you through the steps of creating your virtual machine.</p>
+<p>Once you&#39;ve clicked the &quot;Create a new virtual machine&quot; button in <code>virt-manager</code>, you should see a window with several options. The first screen usually asks you to choose how you want to install the operating system. You&#39;ll likely see options like:</p>
+<ol type="1">
+<li><strong>Local install media (ISO image or CDROM)</strong></li>
+<li><strong>Network install (HTTP, FTP, NFS)</strong></li>
+<li><strong>Import existing disk image</strong></li>
+</ol>
+<p>Since we want to install Ubuntu Server from scratch, we&#39;ll use an ISO image. You&#39;ll need to have already downloaded the Ubuntu Server ISO file to your computer. You can usually find the latest version on the official Ubuntu website.</p>
+<p><strong>On this first screen of the wizard</strong>:</p>
+<ul>
+<li>Select the option <strong>&quot;Local install media (ISO image or CDROM)&quot;</strong>.</li>
+<li>Click the <strong>&quot;Forward&quot;</strong> button.</li>
+</ul>
+<p>The next screen will ask you to locate your installation media.</p>
+<p><strong>On the second screen</strong>:</p>
+<ul>
+<li>Click the <strong>&quot;Browse...&quot;</strong> button next to the &quot;ISO image or CDROM&quot; path.</li>
+<li>Navigate to the directory where you saved the Ubuntu Server ISO file, select it, and click <strong>&quot;Open&quot;</strong>.</li>
+</ul>
+<p>Once you&#39;ve selected the ISO file, <code>virt-manager</code> might automatically detect the operating system type. If it doesn&#39;t, you can manually select &quot;Linux&quot; as the OS type and &quot;Ubuntu&quot; as the version.</p>
+<p>After you&#39;ve selected the ISO, you should see the next screen in the &quot;Create a new virtual machine&quot; wizard. This screen is where you&#39;ll allocate CPU and memory resources for your virtual machine.</p>
+<p><strong>You&#39;ll typically see options to specify</strong>:</p>
+<ul>
+<li><p><strong>Memory (RAM)</strong>: This determines how much of your computer&#39;s RAM will be dedicated to the virtual machine when it&#39;s running. The recommended amount will depend on the operating system you&#39;re installing and what you plan to do with the VM. For a basic Ubuntu Server installation, 1GB (1024 MB) or 2GB (2048 MB) is usually sufficient to get started. You can always adjust this later.</p></li>
+<li><p><strong>CPUs</strong>: This determines how many of your computer&#39;s processor cores the virtual machine can use. Starting with 1 or 2 CPUs is usually a good idea for a server VM. Again, you can adjust this later if needed.</p></li>
+</ul>
+<p><code>virt-manager</code> will likely show you the total amount of RAM and the number of CPUs available on your host system. It&#39;s important not to allocate all of your resources to the VM, as your host operating system needs resources to run as well!</p>
+<p>After allocating CPU and memory, the next crucial step is to <strong>create a virtual disk</strong> for your Ubuntu Server VM. This virtual disk will act as the hard drive for your virtual machine, where the operating system and your data will be stored.</p>
+<p>On the next screen of the <code>virt-manager</code> wizard, you&#39;ll typically see options related to storage. You&#39;ll likely have a choice to:</p>
+<ol type="1">
+<li><p><strong>Create a disk image for the virtual machine</strong>: This is the most common option for a new VM. You&#39;ll specify the size and location of the virtual disk file on your host system.</p></li>
+<li><p><strong>Select or create custom storage</strong>: This allows you to use an existing disk partition or create more advanced storage configurations.</p></li>
+</ol>
+<p>For our Ubuntu Server setup, we&#39;ll choose the first option: <strong>&quot;Create a disk image for the virtual machine&quot;</strong>.</p>
+<p><strong>You&#39;ll then need to specify</strong>:</p>
+<ul>
+<li><p><strong>Size</strong>: This is the capacity of your virtual hard drive. For a basic Ubuntu Server installation, 20GB is usually a good starting point. You can always resize it later if needed, but it&#39;s generally easier to start with a reasonable size.</p></li>
+<li><p><strong>Location</strong>: This is where the virtual disk file will be stored on your host system. <code>virt-manager</code> will usually suggest a default location, which is often fine.</p></li>
+</ul>
+<p>Think of this virtual disk as an empty hard drive that we&#39;re creating within a file on your computer. The operating system installer will then format this virtual drive and install Ubuntu Server onto it.</p>
+<p>After configuring the virtual disk, the <code>virt-manager</code> wizard will usually present you with a summary of your virtual machine&#39;s configuration before you finalize the creation.</p>
+<p>On this final screen, you&#39;ll see all the settings you&#39;ve chosen:</p>
+<ul>
+<li><strong>Name</strong>: The name you gave your virtual machine.</li>
+<li><strong>Installation Source</strong>: The path to your Ubuntu Server ISO file.</li>
+<li><strong>Memory</strong>: The amount of RAM allocated.</li>
+<li><strong>CPUs</strong>: The number of virtual CPUs allocated.</li>
+<li><strong>Storage</strong>: The size and location of your virtual disk.</li>
+<li><strong>Network</strong>: The network configuration (it might be set to a default like &quot;NAT&quot; or &quot;Virtual network&quot;).</li>
+</ul>
+<p>Before clicking &quot;Finish,&quot; it&#39;s a good idea to review these settings to make sure everything looks correct.</p>
+<p>One important setting to pay attention to here is the Network configuration. By default, <code>virt-manager</code> might set your VM to use &quot;NAT&quot; (Network Address Translation). While this allows your VM to access the internet, it might not allow other machines on your local network to directly communicate with it.</p>
+<p>For a server VM, you often want it to have its own IP address on your local network, just like a physical machine. To achieve this, you&#39;ll typically want to configure <strong>bridged networking</strong>.</p>
+<h4 id="configuring-a-bridged-network-with-virt-manager">Configuring a Bridged Network with virt-manager</h4>
+<p>Setting up bridged networking is a key step for a server VM. Let&#39;s go over what it is and how to configure it in virt-manager.</p>
+<p><strong>NAT (Network Address Translation)</strong>, which is often the default, works like this: your VM shares the IP address of your host machine. When the VM sends out network traffic, your host machine rewrites the source address so it appears to be coming from the host itself. The host then forwards the responses back to the correct VM. This is simple to set up and works well for internet access, but it makes it difficult for other machines on your local network to directly connect to services running on your VM.</p>
+<p><strong>Bridged Networking</strong>, on the other hand, creates a virtual network bridge on your host machine. This bridge allows your VM to have its own IP address on the same network as your host machine, as if it were a separate physical computer connected to your router. This enables direct communication between your VM and other devices on your local network.</p>
+<p>Here&#39;s how to configure bridged networking in <code>virt-manager</code> before you click &quot;Finish&quot; on the VM creation wizard:</p>
+<ol type="1">
+<li><strong>Before clicking &quot;Finish&quot; on the summary screen, look for a section related to &quot;Network source&quot;</strong>. It will likely say something like &quot;Network: NAT&quot; or list a &quot;Virtual network&quot; name (like &quot;default&quot;).</li>
+<li><strong>Click on the &quot;Network source&quot; line</strong>. This should open up more detailed network options.</li>
+<li><strong>In the dropdown menu for &quot;Network source,&quot; you should see an option called &quot;Bridge device&quot;</strong>. Select this option.</li>
+<li><strong>Another dropdown menu will appear below &quot;Bridge device&quot;</strong>. This menu will list the network interfaces (like <code>eth0</code>, <code>wlan0</code>, or similar) that are active on your host machine and can be bridged. Choose the network interface that your host machine uses to connect to your local network. For example, if you&#39;re connected via Ethernet cable, it might be <code>eth0</code>. If you&#39;re using Wi-Fi, it might be <code>wlan0</code>.</li>
+<li><strong>Once you&#39;ve selected the correct bridge device, click &quot;Apply&quot; (if there&#39;s an &quot;Apply&quot; button) or simply proceed</strong>. The summary screen should now show your chosen bridge device as the network source.</li>
+</ol>
+<p>Now, when your Ubuntu Server VM starts, it will try to obtain an IP address from your router&#39;s DHCP server, just like any other device on your network.</p>
+<hr />
+<p>Now that you&#39;ve configured the network settings, you should be back on the summary screen of the &quot;Create a new virtual machine&quot; wizard in <code>virt-manager</code>.</p>
+<p>Take one last look at all the settings to ensure they are as you want them. You should see the name you chose for the VM, the path to the Ubuntu Server ISO, the allocated memory and CPUs, the size and location of the virtual disk, and the network source set to your bridge device.</p>
+<p>At the bottom of this summary screen, you should see a checkbox that says something like <strong>&quot;Start installation before finishing&quot;</strong> or <strong>&quot;Begin installation&quot;</strong>.</p>
+<p><strong>Make sure this checkbox is selected!</strong> This will automatically start the virtual machine as soon as you click the <strong>&quot;Finish&quot;</strong> button, and it will boot from the Ubuntu Server ISO image we selected.</p>
+<p>Once you&#39;re ready, click the <strong>&quot;Finish&quot;</strong> button.</p>
+<p>A new window will likely pop up. This is the <strong>virtual machine&#39;s console</strong>. It&#39;s like having a direct monitor and keyboard connected to your virtual Ubuntu Server machine. You should see the Ubuntu Server installation process begin in this window.</p>
+<p>The first screen you&#39;ll likely see will give you language options. You can use your arrow keys to navigate and press Enter to select. Follow the prompts in the installer. It will guide you through steps like choosing your language, configuring your keyboard layout, setting up networking (it should hopefully pick up an IP address via DHCP if bridged networking is configured correctly), creating a user account, and partitioning the virtual disk.</p>
+<p>Go ahead and proceed through the Ubuntu Server installation process in the virtual machine&#39;s console. It&#39;s very similar to installing an operating system on a physical machine.</p>
+<h4 id="basic-vm-management-with-virt-manager">Basic VM Management with virt-manager</h4>
+<p><code>virt-manager</code> provides a straightforward way to manage the lifecycle of your virtual machines. Here&#39;s how you can perform some basic actions:</p>
+<ol type="1">
+<li><strong>Starting a VM</strong>:
+<ul>
+<li>If your VM is shut down, you can start it by selecting it in the <code>virt-manager</code> window and clicking the &quot;Play&quot; button (it looks like a right-pointing triangle).</li>
+</ul></li>
+<li><strong>Stopping (Shutting Down) a VM</strong>:
+<ul>
+<li>To gracefully shut down your VM, it&#39;s best to do it from within the guest operating system (Ubuntu Server in this case) using the appropriate command-line command (e.g., <code>sudo shutdown -h now</code>).</li>
+<li>However, if the VM is unresponsive, you can force it to shut down by selecting it in <code>virt-manager</code> and clicking the <strong>&quot;Power Off&quot;</strong> button (it looks like a circle with a vertical line at the top). Be aware that this is like pulling the power cord on a physical machine and can lead to data loss if not done carefully.</li>
+</ul></li>
+<li><strong>Pausing a VM</strong>:
+<ul>
+<li>Pausing a VM saves its current state in memory and stops its execution. You can resume it later from the exact same point. To pause, select the VM and click the <strong>&quot;Pause&quot;</strong> button (it looks like two vertical lines).</li>
+<li>To resume a paused VM, select it and click the <strong>&quot;Play&quot;</strong> button again.</li>
+</ul></li>
+<li><strong>Deleting a VM</strong>:
+<ul>
+<li>To delete a VM, first, make sure it&#39;s shut down. Then, right-click on the VM in the <code>virt-manager</code> window and select <strong>&quot;Delete&quot;</strong> (or sometimes &quot;Remove&quot;).</li>
+<li>A dialog box will appear asking if you also want to delete the storage volumes (the virtual disk files) associated with the VM. <strong>Be very careful here!</strong> If you only want to remove the VM configuration but keep the virtual disk, uncheck the option to delete storage. If you want to completely remove the VM and its data, leave the option checked.</li>
+</ul></li>
+</ol>
+<h4 id="connect-to-the-console-of-a-running-vm-with-virt-manager">Connect to the Console of a Running VM with virt-manager</h4>
+<p>You&#39;ve already seen the console during the Ubuntu Server installation. Here&#39;s how to access it again if you close the window:</p>
+<ol type="1">
+<li><strong>Open <code>virt-manager</code></strong>: If it&#39;s not already open, find it in your application menu and launch it.</li>
+<li><strong>Select your running VM</strong>: In the virt-manager window, you&#39;ll see a list of your virtual machines. The ones that are running will likely have a green &quot;Play&quot; icon next to them. Click on your Ubuntu Server VM to select it.</li>
+<li><strong>Open the virtual console</strong>: Once the VM is selected, you&#39;ll see various buttons and information in the main <code>virt-manager</code> window. Look for a button that says <strong>&quot;Open&quot;</strong> or has a monitor icon. Clicking this button will open a new window displaying the console of your virtual machine.</li>
+</ol>
+<p>This console gives you direct text-based access to your VM, allowing you to log in, run commands, and interact with the server. It&#39;s incredibly useful for managing your server, especially if you don&#39;t have a graphical interface installed on the VM (which is the case with Ubuntu Server by default).</p>
+<h4 id="modifying-an-existing-nat-network-to-bridged-with-virt-manager">Modifying an Existing NAT Network to Bridged with virt-manager</h4>
+<p>Let&#39;s go over <strong>configuring bridged networking if you didn&#39;t do it during the VM creation</strong> or <strong>if you need to modify it later</strong>.</p>
+<p>You can adjust the network settings of an existing virtual machine in <code>virt-manager</code> by following these steps:</p>
+<ol type="1">
+<li><strong>Open <code>virt-manager</code></strong>: Launch the Virtual Machine Manager application.</li>
+<li><strong>Select the VM</strong>: Right-click on your Ubuntu Server virtual machine in the list.</li>
+<li><strong>Open Virtual Machine Details</strong>: In the context menu that appears, select &quot;Open&quot; or &quot;Details&quot;. This will open a new window showing the configuration of your VM.</li>
+<li><strong>Navigate to Network Interface</strong>: In the left-hand pane of the details window, you should see a list of hardware components. Select the one that represents your network interface. It will likely be labeled something like &quot;Network Interface&quot; or have an icon of a network card.</li>
+<li><strong>Change Network Source</strong>: In the right-hand pane, you&#39;ll see the current network configuration. Look for the &quot;Network source&quot; setting. It might currently say &quot;NAT&quot; or the name of a virtual network. Use the dropdown menu next to it to select &quot;Bridge device&quot;.</li>
+<li><strong>Select Bridge Name</strong>: Another dropdown menu will appear labeled &quot;Bridge name&quot;. Here, you need to select the network bridge that corresponds to your host&#39;s physical network interface (e.g., <code>br0</code>, or the name of your Ethernet or Wi-Fi interface if a bridge hasn&#39;t been explicitly created yet). If a bridge doesn&#39;t exist, <code>virt-manager</code> might offer to create one for you, or you might need to create it manually using command-line tools (which is a more advanced topic we can discuss later if needed).</li>
+<li><strong>Click &quot;Apply&quot;</strong>: Once you&#39;ve selected the &quot;Bridge device&quot; and the appropriate bridge name, click the &quot;Apply&quot; button at the bottom of the details window to save your changes.</li>
+<li><strong>Restart the VM</strong>: For the new network configuration to take effect, you&#39;ll likely need to shut down and then restart your Ubuntu Server virtual machine.</li>
+</ol>
+<p>After the VM restarts, you can again use the <code>ip a</code> or <code>ip r</code> commands within the VM&#39;s console to verify that it has obtained an IP address on your local network.</p>
+<p>Understanding how to reconfigure your VM&#39;s network settings is essential for adapting to different networking needs. It&#39;s like being able to change how a physical computer connects to the network without having to physically move cables!</p>
+<h3 id="using-virt-install-in-the-command-line-to-create-a-virtual-machine">Using virt-install in the Command Line to Create a Virtual Machine</h3>
+<p><code>virt-install</code> is a powerful tool that allows you to create virtual machines directly from your terminal. It takes various command-line options to define the VM&#39;s configuration, such as its name, memory, CPU allocation, disk size, and installation source.</p>
+<p>While it might seem a bit more complex than the graphical <code>virt-manager</code>, using <code>virt-install</code> can be very efficient, especially when you want to automate VM creation or when you&#39;re working on a server without a graphical environment.</p>
+<p>Here&#39;s a basic structure of a <code>virt-install</code> command for creating an Ubuntu Server VM:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">virt-install</span> <span class="dt">\</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>--name=ubuntu-server-cli <span class="dt">\</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>--memory=2048 <span class="dt">\</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>--vcpus=2 <span class="dt">\</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>--disk size=20,format=qcow2,bus=virtio <span class="dt">\</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>--cdrom=/path/to/your/ubuntu-server.iso <span class="dt">\</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>--network bridge=br0 <span class="dt">\</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>--os-type=linux <span class="dt">\</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>--os-variant=ubuntuserver-22.04 <span class="dt">\</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>--graphics none <span class="dt">\</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>--console pty,target_type=serial <span class="dt">\</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>--extra-args=<span class="st">&quot;console=ttyS0,115200n8&quot;</span></span></code></pre></div>
+<p><strong>Let&#39;s break down some of these options</strong>:</p>
+<ul>
+<li><code>--name</code>: Specifies the name of your virtual machine (ubuntu-server-cli in this case).</li>
+<li><code>--memory</code>: Allocates RAM in megabytes (2048 MB = 2 GB).</li>
+<li><code>--vcpus</code>: Assigns the number of virtual CPUs (2 in this case).</li>
+<li><code>--disk</code>: Defines the virtual disk.</li>
+<li><code>size</code>: The size of the disk in gigabytes (20 GB).</li>
+<li><code>format</code>: The disk image format (qcow2 is a common and efficient format).</li>
+<li><code>bus</code>: The type of virtual disk controller (virtio generally offers better performance).</li>
+<li><code>--cdrom</code>: Specifies the path to your Ubuntu Server ISO file. You&#39;ll need to replace /path/to/your/ubuntu-server.iso with the actual path to your downloaded ISO.</li>
+<li><code>--network bridge=br0</code>: Configures the network to use the br0 bridge (assuming you have one configured for bridged networking. If your bridge has a different name, use that instead).</li>
+<li><code>--os-type</code>: Specifies the type of operating system (linux).</li>
+<li><code>--os-variant</code>: Provides a more specific OS variant for better configuration (ubuntuserver-22.04). You might need to adjust this based on the exact version of Ubuntu Server you&#39;re installing. You can often find a list of valid variants using osinfo-query os.</li>
+<li><code>--graphics none</code>: Indicates that we don&#39;t want a graphical display for the installation (since it&#39;s a server).</li>
+<li><code>--console pty,target_type=serial</code>: Sets up a serial console for interacting with the installer.</li>
+<li><code>--extra-args</code>: Passes kernel arguments to enable the serial console.</li>
+</ul>
+<p>To use this command, you would open your terminal, replace the placeholder path to the ISO file with the correct path on your system, and then run the entire command. The <code>virt-install</code> tool will then create the virtual machine based on these specifications and start the installation process. You&#39;ll then interact with the Ubuntu Server installer through the serial console in your terminal.</p>
+<h4 id="basic-vm-mangement-in-the-command-line-interface">Basic VM Mangement in the Command-Line Interface</h4>
+<p>For those who prefer the command line or are working in environments without a GUI, <code>libvirt</code> provides a powerful tool called <code>virsh</code> that allows you to manage your KVM virtual machines. Think of <code>virsh</code> as the command-line equivalent of <code>virt-manager</code>.</p>
+<p>Here&#39;s how you can perform some of the actions we discussed using <code>virsh</code>:</p>
+<ul>
+<li><p><strong>Listing VMs</strong>: To see a list of your defined virtual machines (both running and stopped), you can use the command:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">virsh</span> list <span class="at">--all</span></span></code></pre></div></li>
+</ul>
+<p>This will show you the ID, name, and state of each VM.</p>
+<ul>
+<li><p><strong>Starting a VM</strong>: To start a stopped virtual machine, use the command:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">virsh</span> start <span class="op">&lt;</span>VM_NAME<span class="op">&gt;</span></span></code></pre></div>
+<p>Replace &lt;VM_NAME&gt; with the actual name of your virtual machine (e.g., <code>ubuntu-server-cli</code>).</p></li>
+<li><p><strong>Stopping a VM (Gracefully)</strong>: To attempt a clean shutdown of a running VM, you can use:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">virsh</span> shutdown <span class="op">&lt;</span>VM_NAME<span class="op">&gt;</span></span></code></pre></div>
+<p>This sends a shutdown signal to the guest operating system. It relies on the guest OS to respond and shut down properly.</p></li>
+<li><p><strong>Forcefully Stopping a VM</strong>: If a VM is unresponsive, you can forcefully stop it using:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">virsh</span> destroy <span class="op">&lt;</span>VM_NAME<span class="op">&gt;</span></span></code></pre></div>
+<p><strong>Warning</strong>: This is like pulling the power cord and can lead to data loss. Use it as a last resort.</p></li>
+<li><p><strong>Connecting to the Console</strong>: To connect to the text console of a running VM (especially one without a GUI, like Ubuntu Server), you can use:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">virsh</span> console <span class="op">&lt;</span>VM_NAME<span class="op">&gt;</span></span></code></pre></div>
+<p>You might need to press <code>Ctrl+]</code> to exit the console and return to your host terminal.</p></li>
+<li><p><strong>Getting VM Information</strong>: To see detailed information about a specific VM, use:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">virsh</span> dominfo <span class="op">&lt;</span>VM_NAME<span class="op">&gt;</span></span></code></pre></div></li>
+<li><p><strong>Suspending (Pausing) a VM</strong>: To pause a running VM and save its state:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">virsh</span> suspend <span class="op">&lt;</span>VM_NAME<span class="op">&gt;</span></span></code></pre></div></li>
+<li><p><strong>Resuming a VM</strong>: To resume a suspended VM:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">virsh</span> resume <span class="op">&lt;</span>VM_NAME<span class="op">&gt;</span></span></code></pre></div></li>
+<li><p><strong>Return to your terminal while leaving the VM running in the background</strong>:</p>
+<p>To exit the virsh console and return to your host terminal while leaving the virtual machine running in the background, you need to use a specific key combination. This combination is:</p>
+<p><code>Ctrl + ]</code></p>
+<p>That is, press and hold the Ctrl key, and then press the right square bracket key (]). This will disconnect you from the VM&#39;s console, and the virtual machine will continue to run.</p></li>
+</ul>
+<p>These are just some of the basic commands you can use with <code>virsh</code>. It&#39;s a very powerful tool that gives you complete control over your virtual machines from the command line.</p>
+</body>
+</html>

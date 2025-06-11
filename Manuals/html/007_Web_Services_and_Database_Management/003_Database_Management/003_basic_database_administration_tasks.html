@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="basic-database-administration-tasks">Basic Database Administration Tasks</h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#basic-database-administration-tasks">Basic Database Administration Tasks</a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#connecting-to-the-database-server">Connecting to the Database Server</a></li>
+<li><a href="#user-and-privilege-management">User and Privilege Management</a>
+<ul>
+<li><a href="#creating-users">Creating Users</a>
+<ul>
+<li><a href="#creating-users-with-mysql-and-mariadb">Creating Users with MySQL and MariaDB</a></li>
+<li><a href="#creating-users-with-postgresql">Creating Users with PostgreSQL</a></li>
+</ul></li>
+<li><a href="#granting-and-revoking-privileges">Granting and Revoking Privileges</a>
+<ul>
+<li><a href="#granting-and-revoking-privileges-with-mysql-and-mariadb">Granting and Revoking Privileges with MySQL and MariaDB</a></li>
+<li><a href="#granting-and-revoking-privileges-with-postgresql">Granting and Revoking Privileges with PostgreSQL</a></li>
+</ul></li>
+<li><a href="#removing-users">Removing Users</a>
+<ul>
+<li><a href="#removing-users-with-mysql-and-mariadb">Removing Users with MySQL and MariaDB</a></li>
+<li><a href="#removing-users-with-postgresql">Removing Users with PostgreSQL</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#database-and-table-management">Database and Table Management</a>
+<ul>
+<li><a href="#database-management">Database Management</a>
+<ul>
+<li><a href="#database-management-with-mysql-and-mariadb">Database Management with MySQL and MariaDB</a></li>
+<li><a href="#database-management-with-postgresql">Database Management with PostgreSQL</a>
+<ul>
+<li><a href="#schemas-in-postgresql">Schemas in PostgreSQL</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#table-management">Table Management</a>
+<ul>
+<li><a href="#table-management-with-mysql-and-mariadb">Table Management with MySQL and MariaDB</a></li>
+<li><a href="#table-management-with-postgresql">Table Management with PostgreSQL</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#basic-data-manipulation">Basic Data Manipulation</a>
+<ul>
+<li><a href="#select">SELECT</a></li>
+<li><a href="#insert">INSERT</a></li>
+<li><a href="#update">UPDATE</a></li>
+<li><a href="#delete">DELETE</a></li>
+</ul></li>
+<li><a href="#backup-and-restore">Backup and Restore</a>
+<ul>
+<li><a href="#backup-your-database">Backup Your Database</a>
+<ul>
+<li><a href="#backup-with-mysql-and-mariadb">Backup with MySQL and MariaDB</a></li>
+<li><a href="#backup-with-postgresql">Backup with PostgreSQL</a></li>
+</ul></li>
+<li><a href="#restore-your-database">Restore Your Database</a>
+<ul>
+<li><a href="#restore-with-mysql-and-mariadb">Restore with MySQL and MariaDB</a></li>
+<li><a href="#restore-with-postgresql">Restore with PostgreSQL</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<p>This manual briefly covers basic database administration tasks for MySQL, MariaDB, and PostgreSQL on Debian-based Linux Distributions.</p>
+<h2 id="connecting-to-the-database-server">Connecting to the Database Server</h2>
+<p>Each of the databases we&#39;re discussing – MySQL, MariaDB, and PostgreSQL – has its own command-line tool that allows you to interact with it directly from your Ubuntu Server terminal.</p>
+<ul>
+<li><p>For <strong>MySQL</strong> and <strong>MariaDB</strong>, the tool is usually <code>mysql</code> (since MariaDB was initially a fork of MySQL, they share a lot of client tools). To connect, you&#39;ll typically use a command like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> <span class="op">&lt;</span>username<span class="op">&gt;</span> -p</span></code></pre></div>
+<p>Here, <code>&lt;username&gt;</code> is the name you use to log in. The <code>-p</code> flag tells MySQL to prompt you for your password. If you want to connect to a specific database right away, you can add its name at the end:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> <span class="op">&lt;</span>username<span class="op">&gt;</span> -p <span class="op">&lt;</span>database_name<span class="op">&gt;</span></span></code></pre></div></li>
+<li><p>For <strong>PostgreSQL</strong>, the command-line tool is <code>psql</code>. The basic command to connect is similar:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">psql</span> <span class="at">-U</span> <span class="op">&lt;</span>username<span class="op">&gt;</span> -W</span></code></pre></div>
+<p>Here, <code>-U</code> specifies the username, and <code>-W</code> prompts for the password. Just like with MySQL/MariaDB, you can specify a database to connect to:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">psql</span> <span class="at">-U</span> <span class="op">&lt;</span>username<span class="op">&gt;</span> -W <span class="op">&lt;</span>database_name<span class="op">&gt;</span></span></code></pre></div></li>
+</ul>
+<p>Think of these commands as your personal entry codes. You provide your username, and the server asks for the secret password to let you in.</p>
+<h2 id="user-and-privilege-management">User and Privilege Management</h2>
+<p>This is a crucial aspect of database administration, as it allows you to control who can access your databases and what actions they can perform. Think of it as setting up a security system for your database, ensuring that only authorized personnel have the necessary permissions.</p>
+<p>The principle of <strong>least privilege</strong> is key here. It means granting users only the specific permissions they need to do their job and nothing more. For example, a user who only needs to read data should only have <code>SELECT</code> privileges, not the ability to <code>DELETE</code> or <code>ALTER</code> tables. This helps prevent accidental or malicious damage to your data.</p>
+<p>Here&#39;s how it generally works across the three database systems:</p>
+<ul>
+<li><strong>Creating Users</strong>: Each system has its own SQL command to create new users. You&#39;ll typically specify a username and a password (often hashed for security).</li>
+<li><strong>Granting Privileges</strong>: You then grant specific permissions to these users on particular databases or even specific tables. Common privileges include <code>SELECT</code> (read data), <code>INSERT</code> (add data), <code>UPDATE</code> (modify data), <code>DELETE</code> (remove data), <code>CREATE</code> (create new databases or tables), <code>ALTER</code> (modify the structure of databases or tables), and <code>DROP</code> (delete databases or tables).</li>
+<li><strong>Revoking Privileges</strong>: Just as you can grant privileges, you can also revoke them if a user&#39;s role changes or if they no longer need certain access.</li>
+</ul>
+<h3 id="creating-users">Creating Users</h3>
+<h4 id="creating-users-with-mysql-and-mariadb">Creating Users with MySQL and MariaDB</h4>
+<p>You use the <code>CREATE USER</code> statement. The basic syntax is:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="fu">USER</span> <span class="st">&#39;&lt;username&gt;&#39;</span>@<span class="st">&#39;&lt;host&gt;&#39;</span> <span class="kw">IDENTIFIED</span> <span class="kw">BY</span> <span class="st">&#39;&lt;password&gt;&#39;</span>;</span></code></pre></div>
+<ul>
+<li><code>&#39;&lt;username&gt;&#39;</code>: The name you want to give to the new user.</li>
+<li><code>&#39;&lt;host&gt;&#39;</code>: Specifies where the user can connect from (e.g., <code>&#39;localhost&#39;</code> for connections from the same server, <code>&#39;%&#39;</code> for connections from any host - be cautious with this!).</li>
+<li><code>&#39;&lt;password&gt;&#39;</code>: The password for the new user. It&#39;s important to choose a strong, unique password for security.</li>
+</ul>
+<p>For example, to create a user named <code>john</code> who can connect from <code>localhost</code> with the password <code>securepassword</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="fu">USER</span> <span class="st">&#39;john&#39;</span>@<span class="st">&#39;localhost&#39;</span> <span class="kw">IDENTIFIED</span> <span class="kw">BY</span> <span class="st">&#39;securepassword&#39;</span>;</span></code></pre></div>
+<p>Now you need to grant privileges to the user.</p>
+<h4 id="creating-users-with-postgresql">Creating Users with PostgreSQL</h4>
+<p>You use the <code>CREATE ROLE</code> command to create new users (in PostgreSQL, users are a type of role).</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">ROLE</span> <span class="op">&lt;</span>username<span class="op">&gt;</span> <span class="kw">WITH</span> LOGIN <span class="kw">PASSWORD</span> <span class="st">&#39;&lt;password&gt;&#39;</span>;</span></code></pre></div>
+<ul>
+<li><code>&lt;username&gt;</code>: The name for the new user.</li>
+<li><code>WITH LOGIN</code>: This specifies that this role can be used to log in.</li>
+<li><code>PASSWORD &#39;&lt;password&gt;&#39;</code>: Sets the password for the user.</li>
+</ul>
+<p>For example, to create a user named jane with the password anotherstrongpassword:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">ROLE</span> jane <span class="kw">WITH</span> LOGIN <span class="kw">PASSWORD</span> <span class="st">&#39;anotherstrongpassword&#39;</span>;</span></code></pre></div>
+<h3 id="granting-and-revoking-privileges">Granting and Revoking Privileges</h3>
+<h4 id="granting-and-revoking-privileges-with-mysql-and-mariadb">Granting and Revoking Privileges with MySQL and MariaDB</h4>
+<ul>
+<li><p><strong>Granting Privileges</strong>: You use the <code>GRANT</code> statement. The basic syntax looks like this:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="op">&lt;</span><span class="kw">privilege</span>(s)<span class="op">&gt;</span> <span class="kw">ON</span> <span class="op">&lt;</span>database_name<span class="op">&gt;</span>.<span class="op">&lt;</span>table_name<span class="op">&gt;</span> <span class="kw">TO</span> <span class="st">&#39;&lt;username&gt;&#39;</span>@<span class="st">&#39;&lt;host&gt;&#39;</span>;</span></code></pre></div>
+<ul>
+<li><p><code>&lt;privilege(s)&gt;</code>: A comma-separated list of privileges (e.g., <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>). Use <code>ALL PRIVILEGES</code> to grant all permissions (generally not recommended for the principle of least privilege!).</p></li>
+<li><p><code>&lt;database_name&gt;</code>.<code>&lt;table_name&gt;</code>: Specifies where the privileges apply. You can use <code>*.*</code> for all databases and all tables, <code>&lt;database_name&gt;.*</code> for all tables in a specific database, or <code>&lt;database_name&gt;</code>.<code>&lt;table_name&gt;</code> for a specific table.</p></li>
+<li><p><code>&#39;&lt;username&gt;&#39;@&#39;&lt;host&gt;&#39;</code>: Identifies the user. The <code>&#39;&lt;host&gt;&#39;</code> part specifies where the user can connect from (e.g., <code>&#39;localhost&#39;</code> for connections from the same server, <code>&#39;%&#39;</code> for connections from any host - be cautious with this!).</p>
+<p>For example, to grant a user named <code>alice</code> connecting from <code>localhost</code> the ability to <code>SELECT</code> and <code>INSERT</code> data into the users table in the mydatabase database, you&#39;d do:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">GRANT</span> <span class="kw">SELECT</span>, <span class="kw">INSERT</span> <span class="kw">ON</span> mydatabase.users <span class="kw">TO</span> <span class="st">&#39;alice&#39;</span>@<span class="st">&#39;localhost&#39;</span>;</span></code></pre></div>
+<p>Don&#39;t forget to run <code>FLUSH PRIVILEGES;</code> after granting or revoking privileges to make the changes take effect.</p></li>
+</ul></li>
+<li><p><strong>Revoking Privileges</strong>: You use the <code>REVOKE</code> statement. The syntax is very similar to <code>GRANT</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">REVOKE</span> <span class="op">&lt;</span><span class="kw">privilege</span>(s)<span class="op">&gt;</span> <span class="kw">ON</span> <span class="op">&lt;</span>database_name<span class="op">&gt;</span>.<span class="op">&lt;</span>table_name<span class="op">&gt;</span> <span class="kw">FROM</span> <span class="st">&#39;&lt;username&gt;&#39;</span>@<span class="st">&#39;&lt;host&gt;&#39;</span>;</span></code></pre></div>
+<p>For example, to remove the INSERT privilege from alice on the users table:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">REVOKE</span> <span class="kw">INSERT</span> <span class="kw">ON</span> mydatabase.users <span class="kw">FROM</span> <span class="st">&#39;alice&#39;</span>@<span class="st">&#39;localhost&#39;</span>;</span></code></pre></div>
+<p>Again, remember to run <code>FLUSH PRIVILEGES;</code>.</p></li>
+<li><p><strong>Viewing Privileges</strong>: To see the privileges granted to a user, you can query the <code>mysql.user</code> and <code>mysql.db</code> tables (and other privilege-related tables) or use the <code>SHOW GRANTS</code> command:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>SHOW GRANTS <span class="cf">FOR</span> <span class="st">&#39;alice&#39;</span>@<span class="st">&#39;localhost&#39;</span>;</span></code></pre></div></li>
+</ul>
+<h4 id="granting-and-revoking-privileges-with-postgresql">Granting and Revoking Privileges with PostgreSQL</h4>
+<ul>
+<li><p><strong>Granting Privileges</strong>: You use the <code>GRANT</code> command. The syntax is a bit different:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="op">&lt;</span><span class="kw">privilege</span>(s)<span class="op">&gt;</span> <span class="kw">ON</span> <span class="op">&lt;</span>object_type<span class="op">&gt;</span> <span class="op">&lt;</span>object_name<span class="op">&gt;</span> <span class="kw">TO</span> <span class="op">&lt;</span>username<span class="op">&gt;</span>;</span></code></pre></div>
+<ul>
+<li><p><code>&lt;privilege(s)&gt;</code>: A comma-separated list of privileges (e.g., <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>, <code>CREATE</code>, <code>USAGE</code> (for databases and schemas), etc.). <code>ALL PRIVILEGES</code> also exists here.</p></li>
+<li><p><code>&lt;object_type&gt;</code>: The type of database object the privilege applies to (e.g., <code>TABLE</code>, <code>DATABASE</code>, <code>SCHEMA</code>).</p></li>
+<li><p><code>&lt;object_name&gt;</code>: The name of the database object.</p></li>
+<li><p><code>&lt;username&gt;</code>: The user to whom the privilege is granted.</p>
+<p>For example, to grant a user named <code>bob</code> the ability to <code>SELECT</code> and <code>INSERT</code> data into the users table in the mydatabase database:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="kw">SELECT</span>, <span class="kw">INSERT</span> <span class="kw">ON</span> <span class="kw">TABLE</span> mydatabase.users <span class="kw">TO</span> bob;</span></code></pre></div>
+<p>To grant <code>bob</code> the ability to connect to the <code>mydatabase</code> database, you&#39;d use the <code>USAGE</code> privilege:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="kw">USAGE</span> <span class="kw">ON</span> <span class="kw">DATABASE</span> mydatabase <span class="kw">TO</span> bob;</span></code></pre></div></li>
+</ul></li>
+<li><p><strong>Revoking Privileges</strong>: You use the REVOKE command:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">REVOKE</span> <span class="op">&lt;</span><span class="kw">privilege</span>(s)<span class="op">&gt;</span> <span class="kw">ON</span> <span class="op">&lt;</span>object_type<span class="op">&gt;</span> <span class="op">&lt;</span>object_name<span class="op">&gt;</span> <span class="kw">FROM</span> <span class="op">&lt;</span>username<span class="op">&gt;</span>;</span></code></pre></div>
+<p>For example, to remove the <code>INSERT</code> privilege from <code>bob</code> on the <code>users</code> table:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">REVOKE</span> <span class="kw">INSERT</span> <span class="kw">ON</span> <span class="kw">TABLE</span> mydatabase.users <span class="kw">FROM</span> bob;</span></code></pre></div></li>
+<li><p><strong>Viewing Privileges</strong>: You can view privileges by querying the system catalogs, particularly tables in the <code>pg_catalog</code> schema, or by using the <code>\dp</code> command in <code>psql</code> to list access privileges for tables, schemas, and databases. For a specific user, you might look at the output of:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>\dp <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code></pre></div></li>
+</ul>
+<p>It might seem like a lot of commands, but the underlying concept is the same across all three: you specify what a user can do (<em>privileges</em>) on what (<em>database/table/object</em>) for whom (<em>user</em>).</p>
+<h3 id="removing-users">Removing Users</h3>
+<h4 id="removing-users-with-mysql-and-mariadb">Removing Users with MySQL and MariaDB</h4>
+<p>You use the <code>DROP USER</code> statement to remove a user. The syntax is:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="fu">USER</span> <span class="st">&#39;&lt;username&gt;&#39;</span>@<span class="st">&#39;&lt;host&gt;&#39;</span>;</span></code></pre></div>
+<ul>
+<li><code>&#39;&lt;username&gt;&#39;@&#39;&lt;host&gt;&#39;</code>: This precisely identifies the user you want to remove. You need to specify both the username and the host from which they connect.</li>
+</ul>
+<p>For example, to remove the user <code>john</code> who connects from <code>localhost</code>:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="fu">USER</span> <span class="st">&#39;john&#39;</span>@<span class="st">&#39;localhost&#39;</span>;</span></code></pre></div>
+<p>It&#39;s important to note that dropping a user will also revoke any privileges specifically granted to that user.</p>
+<h4 id="removing-users-with-postgresql">Removing Users with PostgreSQL</h4>
+<p>You use the <code>DROP ROLE</code> command to remove a user (remember, users are a type of role in PostgreSQL).</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">ROLE</span> <span class="op">&lt;</span>username<span class="op">&gt;</span>;</span></code></pre></div>
+<ul>
+<li><code>&lt;username&gt;</code>: The name of the user you want to remove.</li>
+</ul>
+<p>For example, to remove the user jane:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">ROLE</span> jane;</span></code></pre></div>
+<p>Similar to MySQL/MariaDB, dropping a role (user) will also revoke any privileges directly associated with that role. However, if the user is a member of any groups (roles), the privileges granted to those groups will still apply to other members.</p>
+<h2 id="database-and-table-management">Database and Table Management</h2>
+<p>This is where you learn how to organize your data by creating and managing the containers that hold it. Think of databases as large filing cabinets, and tables as the individual drawers within those cabinets where you store specific types of information.</p>
+<h3 id="database-management">Database Management</h3>
+<h4 id="database-management-with-mysql-and-mariadb">Database Management with MySQL and MariaDB</h4>
+<ul>
+<li><p><strong>Creating Databases</strong>: You use the <code>CREATE DATABASE</code> statement:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">DATABASE</span> <span class="op">&lt;</span>database_name<span class="op">&gt;</span>;</span></code></pre></div></li>
+<li><p><strong>Listing Databases</strong>: To see all the databases on the server, you use:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>SHOW DATABASES;</span></code></pre></div></li>
+<li><p><strong>Selecting a Database</strong>: To work with a specific database, you use the <code>USE</code> statement:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">USE</span> <span class="op">&lt;</span>database_name<span class="op">&gt;</span>;</span></code></pre></div></li>
+<li><p><strong>Dropping Databases</strong>: To delete a database (and all the tables and data it contains - be very careful with this!), you use:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">DATABASE</span> <span class="op">&lt;</span>database_name<span class="op">&gt;</span>;</span></code></pre></div></li>
+</ul>
+<h4 id="database-management-with-postgresql">Database Management with PostgreSQL</h4>
+<ul>
+<li><p><strong>Creating Databases</strong>:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">DATABASE</span> <span class="op">&lt;</span>database_name<span class="op">&gt;</span>;</span></code></pre></div></li>
+<li><p><strong>Listing Databases</strong>: You can use the <code>\l</code> command in <code>psql</code>:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>\l</span></code></pre></div>
+<p>Alternatively, you can query the system catalog:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> datname <span class="kw">FROM</span> pg_database;</span></code></pre></div></li>
+<li><p><strong>Connecting to a Database</strong>: You specify the database when you connect with <code>psql</code>:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">psql</span> <span class="at">-U</span> <span class="op">&lt;</span>username<span class="op">&gt;</span> -W <span class="op">&lt;</span>database_name<span class="op">&gt;</span></span></code></pre></div>
+<p>Or, if you&#39;re already connected, you can use the <code>\c</code> command:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>\c <span class="op">&lt;</span>database_name<span class="op">&gt;</span></span></code></pre></div></li>
+<li><p><strong>Dropping Databases</strong>: Again, be cautious! This deletes the database and its contents:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">DATABASE</span> <span class="op">&lt;</span>database_name<span class="op">&gt;</span>;</span></code></pre></div></li>
+</ul>
+<h5 id="schemas-in-postgresql">Schemas in PostgreSQL</h5>
+<p>PostgreSQL has an additional concept called <strong>schemas</strong>. Think of a schema as a namespace within a database that can hold tables, views, and other database objects. By default, PostgreSQL has a <code>public</code> schema. You can create additional schemas to further organize your database objects. This can be helpful for managing different applications or sets of data within the same database.</p>
+<ul>
+<li><p><strong>Creating Schemas</strong>:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">SCHEMA</span> <span class="op">&lt;</span>schema_name<span class="op">&gt;</span>;</span></code></pre></div></li>
+<li><p>When creating tables or other objects, you can specify the schema:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="op">&lt;</span>schema_name<span class="op">&gt;</span>.<span class="op">&lt;</span>table_name<span class="op">&gt;</span> (<span class="op">..</span>.);</span></code></pre></div></li>
+<li><p>Or you can set the current search path to work within a specific schema:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SET</span> search_path <span class="kw">TO</span> <span class="op">&lt;</span>schema_name<span class="op">&gt;</span>;</span></code></pre></div></li>
+</ul>
+<h3 id="table-management">Table Management</h3>
+<h4 id="table-management-with-mysql-and-mariadb">Table Management with MySQL and MariaDB</h4>
+<ul>
+<li><p><strong>Creating Tables</strong>: You use the <code>CREATE TABLE</code> statement. You&#39;ll need to define the table name and the columns it will contain, along with their data types (e.g., <code>INT</code> for integers, <code>VARCHAR</code> for strings, <code>DATE</code> for dates). You can also specify constraints like <code>NOT NULL</code> (the column can&#39;t be empty) and primary keys (unique identifiers for each row).</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> users (</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">id</span> <span class="dt">INT</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span> AUTO_INCREMENT,</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    username <span class="dt">VARCHAR</span>(<span class="dv">50</span>) <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">UNIQUE</span>,</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    email <span class="dt">VARCHAR</span>(<span class="dv">100</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    registration_date <span class="dt">DATE</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div></li>
+<li><p><strong>Listing Tables</strong>: To see the tables in the currently selected database, you use:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>SHOW <span class="kw">TABLES</span>;</span></code></pre></div></li>
+<li><p><strong>Describing Tables</strong>: To see the structure of a table (its columns, data types, and constraints), you use the <code>DESCRIBE</code> or <code>EXPLAIN</code> command:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>DESCRIBE users;</span></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">EXPLAIN</span> users;</span></code></pre></div></li>
+<li><p><strong>Altering Tables</strong>: To modify the structure of an existing table (e.g., add or remove columns, change data types, add or remove constraints), you use the <code>ALTER TABLE</code> statement. This is a powerful command with various options.</p>
+<ul>
+<li><p><strong>Adding a column</strong>:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> users <span class="kw">ADD</span> <span class="kw">COLUMN</span> city <span class="dt">VARCHAR</span>(<span class="dv">50</span>);</span></code></pre></div></li>
+<li><p><strong>Modifying a column&#39;s data type</strong>:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> users <span class="kw">MODIFY</span> <span class="kw">COLUMN</span> email <span class="dt">VARCHAR</span>(<span class="dv">150</span>);</span></code></pre></div></li>
+<li><p><strong>Adding a</strong> <code>NOT NULL</code> <strong>constraint</strong>:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> users <span class="kw">MODIFY</span> <span class="kw">COLUMN</span> city <span class="dt">VARCHAR</span>(<span class="dv">50</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>;</span></code></pre></div></li>
+<li><p><strong>Adding a unique constraint to an existing column</strong>:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> users <span class="kw">ADD</span> <span class="kw">UNIQUE</span> (email);</span></code></pre></div></li>
+<li><p><strong>Dropping Tables</strong>: To delete a table and all its data (again, be careful!), you use:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> users;</span></code></pre></div></li>
+</ul></li>
+</ul>
+<h4 id="table-management-with-postgresql">Table Management with PostgreSQL</h4>
+<ul>
+<li><p><strong>Creating Tables</strong>: Similar to MySQL, you use <code>CREATE TABLE</code> with column definitions, data types, and constraints.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> users (</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">id</span> SERIAL <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    username <span class="dt">VARCHAR</span>(<span class="dv">50</span>) <span class="kw">UNIQUE</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>    email <span class="dt">VARCHAR</span>(<span class="dv">100</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>    registration_date <span class="dt">DATE</span></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div>
+<p>Note the use of <code>SERIAL</code> which automatically creates an auto-incrementing integer column and a related sequence.</p></li>
+<li><p><strong>Listing Tables</strong>: To see tables in the current database (and schema), you can use the <code>\dt</code> command in <code>psql</code>:</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>\dt</span></code></pre></div>
+<p>To see tables in all schemas, you can use:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>\dt <span class="op">*</span>.<span class="op">*</span></span></code></pre></div>
+<p>Alternatively, query the system catalog:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> table_name <span class="kw">FROM</span> information_schema.<span class="kw">tables</span> <span class="kw">WHERE</span> table_schema <span class="op">=</span> <span class="st">&#39;public&#39;</span>; <span class="co">-- Or another schema name</span></span></code></pre></div></li>
+<li><p><strong>Describing Tables</strong>: Use the <code>\d</code> command followed by the table name in <code>psql</code>:</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>\d users</span></code></pre></div></li>
+<li><p><strong>Altering Tables</strong>: The <code>ALTER TABLE</code> statement is also used in PostgreSQL, with similar capabilities:</p>
+<ul>
+<li><p><strong>Adding a column</strong>:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> users <span class="kw">ADD</span> <span class="kw">COLUMN</span> city <span class="dt">VARCHAR</span>(<span class="dv">50</span>);</span></code></pre></div></li>
+<li><p><strong>Modifying a column&#39;s data type</strong>:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> users <span class="kw">ALTER</span> <span class="kw">COLUMN</span> email <span class="kw">TYPE</span> <span class="dt">VARCHAR</span>(<span class="dv">150</span>);</span></code></pre></div></li>
+<li><p><strong>Adding a</strong> <code>NOT NULL</code> <strong>constraint</strong>:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> users <span class="kw">ALTER</span> <span class="kw">COLUMN</span> city <span class="kw">SET</span> <span class="kw">NOT</span> <span class="kw">NULL</span>;</span></code></pre></div></li>
+<li><p><strong>Adding a unique constraint to an existing column</strong>:</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> users <span class="kw">ADD</span> <span class="kw">UNIQUE</span> (email);</span></code></pre></div></li>
+<li><p><strong>Dropping Tables</strong>:</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> users;</span></code></pre></div></li>
+</ul></li>
+</ul>
+<p>As you can see, the fundamental operations are quite similar across the systems, although the specific syntax might have slight variations. Understanding data types is also important here, as they determine what kind of data can be stored in each column.</p>
+<h2 id="basic-data-manipulation">Basic Data Manipulation</h2>
+<p>This is where you&#39;ll learn how to interact with the data inside your tables. The four fundamental SQL commands for this are:</p>
+<ul>
+<li><strong>SELECT</strong>: Used to retrieve data from one or more tables. It&#39;s how you ask the database to show you specific information.</li>
+<li><strong>INSERT</strong>: Used to add new rows of data into a table. It&#39;s how you put new information into your database.</li>
+<li><strong>UPDATE</strong>: Used to modify existing data in a table. It&#39;s how you change information that&#39;s already there.</li>
+<li><strong>DELETE</strong>: Used to remove rows from a table. It&#39;s how you take information out of your database.</li>
+</ul>
+<p>Let&#39;s look at a simple example for each:</p>
+<h3 id="select">SELECT</h3>
+<p>Imagine you have a <code>users</code> table with columns like <code>id</code>, <code>username</code>, and <code>email</code>. To retrieve all the usernames and emails from this table, you would use:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> username, email <span class="kw">FROM</span> users;</span></code></pre></div>
+<p>To retrieve all columns, you can use <code>*</code>:</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> users;</span></code></pre></div>
+<p>You can also add conditions using the <code>WHERE</code> clause. For example, to get the information for the user with the <code>ID</code> of <code>1</code>:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> users <span class="kw">WHERE</span> <span class="kw">id</span> <span class="op">=</span> <span class="dv">1</span>;</span></code></pre></div>
+<h3 id="insert">INSERT</h3>
+<p>To add a new user to the <code>users</code> table, you would specify the table name and the values for each column:</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> users (username, email, registration_date) <span class="kw">VALUES</span> (<span class="st">&#39;newuser&#39;</span>, <span class="st">&#39;newuser@example.com&#39;</span>, <span class="st">&#39;2025-05-13&#39;</span>);</span></code></pre></div>
+<p>If you are providing values for all columns in the table in their defined order, you can omit the column names:</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> users <span class="kw">VALUES</span> (<span class="kw">NULL</span>, <span class="st">&#39;anotheruser&#39;</span>, <span class="st">&#39;another@example.com&#39;</span>, <span class="st">&#39;2025-05-13&#39;</span>);</span></code></pre></div>
+<p>(Note: <code>NULL</code> is used here for the id column assuming it&#39;s auto-incrementing.)</p>
+<h3 id="update">UPDATE</h3>
+<p>To change the email address of the user with the ID of 1, you would use the <code>UPDATE</code> command along with the <code>SET</code> clause to specify which column to modify and the <code>WHERE</code> clause to identify the row(s) to update:</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> users <span class="kw">SET</span> email <span class="op">=</span> <span class="st">&#39;updated@example.com&#39;</span> <span class="kw">WHERE</span> <span class="kw">id</span> <span class="op">=</span> <span class="dv">1</span>;</span></code></pre></div>
+<h3 id="delete">DELETE</h3>
+<p>To remove the user with the ID of 2 from the users table, you would use the <code>DELETE FROM</code> command with a <code>WHERE</code> clause to specify which rows to delete:</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DELETE</span> <span class="kw">FROM</span> users <span class="kw">WHERE</span> <span class="kw">id</span> <span class="op">=</span> <span class="dv">2</span>;</span></code></pre></div>
+<p><strong>Important Note</strong>: Be very careful when using <code>DELETE</code> without a <code>WHERE</code> clause, as it will remove all rows from the table!</p>
+<p>These four commands form the basis of interacting with data in any relational database. The syntax is generally consistent across MySQL, MariaDB, and PostgreSQL.</p>
+<h2 id="backup-and-restore">Backup and Restore</h2>
+<p>This is arguably one of the most critical aspects of database administration. Imagine all the valuable data you&#39;ve been managing – losing it due to a hardware failure, a software glitch, or even a simple human error would be a major setback! Regular backups are your safety net, allowing you to restore your database to a previous working state.</p>
+<p>There are different types of backups, but we&#39;ll focus on basic logical backups using command-line tools. Logical backups contain the structure of your database (schemas, tables) and the data itself in a format that can be re-executed to rebuild the database.</p>
+<p>Here&#39;s how you can perform basic logical backups for each of our databases:</p>
+<h3 id="backup-your-database">Backup Your Database</h3>
+<h4 id="backup-with-mysql-and-mariadb">Backup with MySQL and MariaDB</h4>
+<p>The primary tool for creating logical backups is <code>mysqldump</code>. You can use it to back up entire databases or specific tables.</p>
+<ul>
+<li><p><strong>Backing up an entire database</strong>:</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysqldump</span> <span class="at">-u</span> <span class="op">&lt;</span>username<span class="op">&gt;</span> -p <span class="op">&lt;</span>database_name<span class="op">&gt;</span> <span class="op">&gt;</span> <span class="op">&lt;</span>backup_file.sql<span class="op">&gt;</span></span></code></pre></div>
+<p>Replace <code>&lt;username&gt;</code> with your MySQL user, <code>&lt;database_name&gt;</code> with the name of the database you want to back up, and <code>&lt;backup_file.sql&gt;</code> with the name you want to give to your backup file (it&#39;s common to use the <code>.sql</code> extension). You&#39;ll be prompted for the password.</p></li>
+<li><p><strong>Backing up specific tables</strong>:</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysqldump</span> <span class="at">-u</span> <span class="op">&lt;</span>username<span class="op">&gt;</span> -p <span class="op">&lt;</span>database_name<span class="op">&gt;</span> <span class="op">&lt;</span>table1<span class="op">&gt;</span> <span class="op">&lt;</span>table2<span class="op">&gt;</span> <span class="op">&gt;</span> <span class="op">&lt;</span>backup_file.sql<span class="op">&gt;</span></span></code></pre></div>
+<p>Just list the names of the tables you want to include in the backup.</p></li>
+</ul>
+<p>The resulting <code>&lt;backup_file.sql&gt;</code> is a text file containing SQL commands to recreate your database and insert the data.</p>
+<h4 id="backup-with-postgresql">Backup with PostgreSQL</h4>
+<p>The main tool for creating logical backups in PostgreSQL is <code>pg_dump</code>.</p>
+<ul>
+<li><p><strong>Backing up an entire database</strong>:</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pg_dump</span> <span class="at">-U</span> <span class="op">&lt;</span>username<span class="op">&gt;</span> -d <span class="op">&lt;</span>database_name<span class="op">&gt;</span> -f <span class="op">&lt;</span>backup_file.sql<span class="op">&gt;</span></span></code></pre></div>
+<p>Here, <code>-U</code> specifies the PostgreSQL user, <code>-d</code> specifies the database name, and <code>-f</code> specifies the output file. You might be prompted for the password.</p></li>
+<li><p><strong>Backing up specific tables</strong>:</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pg_dump</span> <span class="at">-U</span> <span class="op">&lt;</span>username<span class="op">&gt;</span> -d <span class="op">&lt;</span>database_name<span class="op">&gt;</span> -t <span class="op">&lt;</span>table1<span class="op">&gt;</span> -t <span class="op">&lt;</span>table2<span class="op">&gt;</span> -f <span class="op">&lt;</span>backup_file.sql<span class="op">&gt;</span></span></code></pre></div>
+<p>Use the <code>-t</code> option followed by the table name for each table you want to back up.</p></li>
+</ul>
+<p>Just like <code>mysqldump</code>, <code>pg_dump</code> creates a <code>.sql</code> file with the necessary SQL commands.</p>
+<p>It&#39;s a good practice to regularly perform backups and to store these backup files in a secure location separate from your database server. You might also consider automating this process using cron jobs.</p>
+<h3 id="restore-your-database">Restore Your Database</h3>
+<p>The process involves using the command-line tools we discussed earlier to execute the SQL commands stored in your backup file against the database server.</p>
+<p>Here&#39;s how you generally restore:</p>
+<h4 id="restore-with-mysql-and-mariadb">Restore with MySQL and MariaDB</h4>
+<p>You use the mysql command-line client to execute the SQL file you created with mysqldump.</p>
+<ul>
+<li><p><strong>Restoring an entire database</strong>:</p>
+<p>First, you might need to create an empty database if it doesn&#39;t already exist:</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">DATABASE</span> <span class="op">&lt;</span>database_name<span class="op">&gt;</span>;</span></code></pre></div>
+<p>Then, you can restore the data by redirecting the content of your backup file to the mysql command:</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> <span class="op">&lt;</span>username<span class="op">&gt;</span> -p <span class="op">&lt;</span>database_name<span class="op">&gt;</span> <span class="op">&lt;</span> <span class="op">&lt;</span>backup_file.sql<span class="op">&gt;</span></span></code></pre></div>
+<p>Replace <code>&lt;username&gt;</code> with your MySQL user, <code>&lt;database_name&gt;</code> with the name of the database you want to restore into, and <code>&lt;backup_file.sql&gt;</code> with the path to your backup file. You&#39;ll be prompted for the password.</p></li>
+</ul>
+<h4 id="restore-with-postgresql">Restore with PostgreSQL</h4>
+<p>You use the <code>psql</code> command-line client or the <code>pg_restore</code> tool. For a .sql format backup created with <code>pg_dump</code> (which we discussed), <code>psql</code> is typically used:</p>
+<ul>
+<li><p><strong>Restoring an entire database</strong>:</p>
+<p>Similar to MySQL, you might need to create the database first if it&#39;s a full restore:</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode SQL"><code class="sourceCode sql"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">DATABASE</span> <span class="op">&lt;</span>database_name<span class="op">&gt;</span>;</span></code></pre></div>
+<p>Then, you can restore by using <code>psql</code> and redirecting the backup file:</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="ex">psql</span> <span class="at">-U</span> <span class="op">&lt;</span>username<span class="op">&gt;</span> -d <span class="op">&lt;</span>database_name<span class="op">&gt;</span> -f <span class="op">&lt;</span>backup_file.sql<span class="op">&gt;</span></span></code></pre></div>
+<p>Here, <code>-U</code> is your PostgreSQL user, <code>-d</code> is the target database, and <code>-f</code> specifies the backup file. You might be prompted for the password.</p></li>
+</ul>
+<p>It&#39;s important to ensure that the database you are restoring into exists (or you create it first) and that the user you are using for the restore has the necessary privileges to create objects and insert data.</p>
+</body>
+</html>

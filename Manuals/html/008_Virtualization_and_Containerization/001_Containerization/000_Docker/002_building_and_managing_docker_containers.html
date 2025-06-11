@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="building-and-managing-docker-containers">Building and Managing Docker Containers</h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#building-and-managing-docker-containers">Building and Managing Docker Containers</a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#understanding-docker-fundamentals">Understanding Docker Fundamentals</a></li>
+<li><a href="#install-docker">Install Docker</a></li>
+</ul></li>
+<li><a href="#working-with-docker-images">Working with Docker Images</a>
+<ul>
+<li><a href="#pulling-images">Pulling Images</a></li>
+<li><a href="#list-local-images-docker-images-remove-images-docker-rmi">List Local Images (<code>docker images</code>), Remove Images (<code>docker rmi</code>)</a>
+<ul>
+<li><a href="#listing-local-images">Listing Local Images</a></li>
+<li><a href="#removing-images">Removing Images</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#running-and-managing-docker-containers">Running and Managing Docker Containers</a>
+<ul>
+<li><a href="#run-a-docker-container-using-docker-run">Run a Docker Container Using <code>docker run</code></a></li>
+<li><a href="#list-stop-start-and-remove-containers">List, Stop, Start, and Remove Containers</a>
+<ul>
+<li><a href="#list-running-containers">List Running Containers</a></li>
+<li><a href="#stopping-containers">Stopping Containers</a></li>
+<li><a href="#starting-containers">Starting Containers</a></li>
+<li><a href="#removing-containers">Removing Containers</a></li>
+<li><a href="#execute-commands-inside-a-running-container-docker-exec">Execute Commands Inside a Running Container (<code>docker exec</code>)</a></li>
+<li><a href="#viewing-container-logs">Viewing Container Logs</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#building-custom-docker-images-with-dockerfiles">Building Custom Docker Images with Dockerfiles</a>
+<ul>
+<li><a href="#common-dockerfile-instructions">Common Dockerfile Instructions</a>
+<ul>
+<li><a href="#creating-a-dockerfile-for-a-basic-web-application">Creating a Dockerfile for a Basic Web Application</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#docker-networking-basics">Docker Networking Basics</a>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#port-mapping">Port Mapping</a></li>
+</ul></li>
+<li><a href="#data-management-in-docker-containers-volumes">Data Management in Docker Containers (Volumes)</a>
+<ul>
+<li><a href="#docker-volumes">Docker Volumes</a>
+<ul>
+<li><a href="#managing-docker-volumes-via-the-command-line">Managing Docker Volumes via the Command Line</a></li>
+<li><a href="#mount-a-volume-using-the--v-option">Mount a Volume Using the <code>-v</code> Option</a>
+<ul>
+<li><a href="#running-a-postgresql-database-with-persistent-data">Running a PostgreSQL Database with Persistent Data</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<h3 id="understanding-docker-fundamentals">Understanding Docker Fundamentals</h3>
+<p>Docker is an open-source platform designed to simplify the creation, deployment, and management of applications by using <strong>containerization</strong>. This technology encapsulates an application and its entire operating environment—including code, runtime, system tools, libraries, and settings—into a standardized, portable unit called a <strong>container</strong>.</p>
+<p>The primary problem Docker solves is environmental inconsistency. Traditionally, deploying software could be challenging due to differences in development, testing, and production environments. A software application might function correctly on a developer&#39;s machine but fail in a production environment due to missing dependencies, different configurations, or incompatible system libraries. Docker addresses this by ensuring that the application runs uniformly across any infrastructure that supports Docker. This consistency streamlines the software development lifecycle, from coding to deployment, by eliminating environment-related discrepancies.</p>
+<p>Key components of the Docker ecosystem include:</p>
+<ul>
+<li><strong>Docker Engine</strong>: This is the core runtime that builds and runs containers. It comprises a daemon (server), a REST API for programmatic interaction, and a command-line interface (CLI) client.</li>
+<li><strong>Docker Images</strong>: These are read-only templates that contain the instructions for creating a Docker container. An image is a lightweight, standalone, executable package of software that includes everything needed to run an application.</li>
+<li><strong>Docker Containers</strong>: These are runnable instances of Docker images. A container is an isolated environment where an application executes, sharing the host OS kernel but remaining isolated from the host and other containers.</li>
+<li><strong>Dockerfile</strong>: This is a text document that contains all the commands a user could call on the command line to assemble a Docker image. It provides a reproducible and automated way to define how an image is built.</li>
+</ul>
+<h3 id="install-docker">Install Docker</h3>
+<ol type="1">
+<li><p><strong>Update the</strong> <code>apt</code> <strong>package index</strong>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span></code></pre></div>
+<blockquote>
+<p>This ensures that your system has access to the latest available software packages.</p>
+</blockquote></li>
+<li><p><strong>Install packages to allow apt to use a repository over HTTPS</strong>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> ca-certificates curl gnupg</span></code></pre></div>
+<blockquote>
+<p>These packages allow your system to securely retrieve Docker packages from a trusted source.</p>
+</blockquote></li>
+<li><p><strong>Add Docker&#39;s official GPG key</strong>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> install <span class="at">-m</span> 0755 <span class="at">-d</span> /etc/apt/keyrings</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fsSL</span> https://download.docker.com/linux/ubuntu/gpg <span class="kw">|</span> <span class="fu">sudo</span> gpg <span class="at">--dearmor</span> <span class="at">-o</span> /etc/apt/keyrings/docker.gpg</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chmod a+r /etc/apt/keyrings/docker.gpg</span></code></pre></div>
+<blockquote>
+<p>This step verifies the authenticity of the Docker packages you will download, ensuring they have not been tampered with.</p>
+</blockquote></li>
+<li><p><strong>Set up the stable Docker repository</strong>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="dt">\</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;deb [arch=</span><span class="dt">\&quot;</span><span class="va">$(</span><span class="ex">dpkg</span> <span class="at">--print-architecture</span><span class="va">)</span><span class="dt">\&quot;</span><span class="st"> signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu </span><span class="dt">\</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="st">  </span><span class="dt">\&quot;</span><span class="va">$(</span><span class="bu">.</span> /etc/os-release <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$VERSION_CODENAME</span><span class="st">&quot;</span><span class="va">)</span><span class="dt">\&quot;</span><span class="st"> stable&quot;</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> tee /etc/apt/sources.list.d/docker.list <span class="op">&gt;</span> /dev/null</span></code></pre></div>
+<blockquote>
+<p>This adds the official Docker repository to your system&#39;s package sources, making Docker Engine available for installation via <code>apt</code></p>
+</blockquote></li>
+<li><p><strong>Install Docker Engine, containerd, and Docker Compose</strong>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span></code></pre></div>
+<blockquote>
+<p>These are the core components. containerd is a runtime that manages the lifecycle of containers, and Docker Compose is a tool for defining and running multi-container Docker applications.</p>
+</blockquote></li>
+<li><p><strong>Verify Docker installation by running the</strong> <code>hello-world</code> <strong>image</strong>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker run hello-world</span></code></pre></div>
+<p>(This command will output a message confirming Docker is working.)</p></li>
+<li><p><strong>Add your user to the docker group (for running commands without</strong> <code>sudo</code><strong>)</strong>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> usermod <span class="at">-aG</span> docker <span class="va">$USER</span></span></code></pre></div>
+<blockquote>
+<p>This is a crucial step for a new system administrator. By default, running Docker commands requires <code>sudo</code> privileges. Adding your user to the <code>docker</code> group allows you to run Docker commands without <code>sudo</code>, which is more convenient for day-to-day operations, though it requires a log out/log in to take effect.</p>
+</blockquote>
+<p>(Note: You would need to log out and log back in for this change to take effect.)</p></li>
+</ol>
+<h2 id="working-with-docker-images">Working with Docker Images</h2>
+<h3 id="pulling-images">Pulling Images</h3>
+<p>As we discussed, Docker images are read-only templates that contain the instructions for creating a Docker container. You can think of an image as a blueprint or a snapshot of an entire application environment. This blueprint includes the operating system (or a subset of it), the application code, dependencies, libraries, and configuration files—everything required for the application to run.</p>
+<p>The relationship between images and containers is analogous to that between a class and an object in object-oriented programming. An <strong>image</strong> is the static, immutable definition, while a container is a runnable, dynamic instance of that image. You can create multiple containers from a single image, and each container will run in isolation, but they will all be based on the same underlying image blueprint.</p>
+<p><strong>Docker Hub</strong> is a cloud-based registry service provided by Docker, Inc. It serves as a central repository where Docker users can find, share, and manage Docker images. It hosts official images (maintained by Docker and trusted vendors) and user-contributed images. It&#39;s essentially the primary public library for Docker images.</p>
+<p>To obtain an image from Docker Hub and store it locally on your Ubuntu server, you use the docker <code>pull</code> command. The basic syntax is:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> pull <span class="pp">[</span><span class="ss">image_name</span><span class="pp">]</span>:<span class="pp">[</span><span class="ss">tag</span><span class="pp">]</span></span></code></pre></div>
+<ul>
+<li><code>image_name</code>: This refers to the name of the image (e.g., <code>ubuntu</code>, <code>nginx</code>, <code>mysql</code>).</li>
+<li><code>tag</code>: This specifies a particular version or variant of the image (e.g., <code>latest</code>, <code>20.04</code>, <code>1.21</code>). If no tag is specified, Docker defaults to latest.</li>
+</ul>
+<p>For example, to download the official Ubuntu 22.04 image, you would use:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> pull ubuntu:22.04</span></code></pre></div>
+<p>This command would connect to Docker Hub, download the specified Ubuntu image, and store it in your local Docker image cache.</p>
+<h3 id="list-local-images-docker-images-remove-images-docker-rmi">List Local Images (<code>docker images</code>), Remove Images (<code>docker rmi</code>)</h3>
+<p>Once you have pulled images to your local machine, it&#39;s essential to know how to view what you have and how to remove those you no longer need. This helps in managing disk space and keeping your environment organized.</p>
+<h4 id="listing-local-images">Listing Local Images</h4>
+<p>To view all the Docker images currently stored on your local system, you use the <code>docker images</code> command. This command provides a list of images, including details such as their <strong>REPOSITORY, TAG, IMAGE ID, CREATED date, and SIZE</strong>.</p>
+<p>Here&#39;s an example of what the output might look like:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> images</span></code></pre></div>
+<pre class="shell"><code>REPOSITORY    TAG       IMAGE ID       CREATED         SIZE
+ubuntu        latest    4e5021ee8804   2 weeks ago     77.9MB
+nginx         latest    603584852ad9   3 weeks ago     187MB</code></pre>
+<ul>
+<li><strong>REPOSITORY</strong>: The name of the image.</li>
+<li><strong>TAG</strong>: The specific version or variant of the image. <code>latest</code> is often the default if a tag isn&#39;t specified.</li>
+<li><strong>IMAGE ID</strong>: A unique identifier for the image.</li>
+<li><strong>CREATED</strong>: How long ago the image was created.</li>
+<li><strong>SIZE</strong>: The disk space the image consumes.</li>
+</ul>
+<h4 id="removing-images">Removing Images</h4>
+<p>When you no longer need an image, you can remove it from your local system using the <code>docker rmi</code> command. It&#39;s important to note that you cannot remove an image if there are active containers running from it. You would need to stop and remove those containers first.</p>
+<p>The basic syntax for removing an image is:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> rmi <span class="pp">[</span><span class="ss">image_id</span><span class="pp">]</span></span></code></pre></div>
+<p>You can use either the full <strong>IMAGE ID</strong> or the combination of <strong>REPOSITORY</strong> and <strong>TAG</strong> to specify which image to remove. For instance, to remove the <code>ubuntu:latest</code> image from the previous example, you could use:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> rmi 4e5021ee8804</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># or</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> rmi ubuntu:latest</span></code></pre></div>
+<p>This command would delete the specified image from your local system.</p>
+<h2 id="running-and-managing-docker-containers">Running and Managing Docker Containers</h2>
+<h3 id="run-a-docker-container-using-docker-run">Run a Docker Container Using <code>docker run</code></h3>
+<p>The docker run command is fundamental to working with Docker, as it allows you to create and start a new container from a Docker image. When you execute docker run, Docker performs several actions: it checks if the image exists locally, pulls it if it doesn&#39;t, creates a new container instance from that image, and then starts it.</p>
+<p>The basic syntax for docker run is: Bash</p>
+<p>docker run [OPTIONS] IMAGE [COMMAND] [ARG...]</p>
+<p>While <code>docker run</code> has many options, some are particularly common and crucial for system administration:</p>
+<ul>
+<li><p><code>-d</code> or <code>--detach</code> <strong>(Detached Mode)</strong>:</p>
+<p>When you run a container in &quot;detached mode,&quot; it means the container will run in the background, freeing up your terminal. Without this option, the container&#39;s output would be streamed to your terminal, and the container would stop if you closed the terminal session. This is analogous to running a process in the background using <code>nohup</code> or <code>&amp;</code> in traditional Linux environments.</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> nginx</span></code></pre></div>
+<p>This command would start an Nginx web server container in the background.</p></li>
+<li><p><code>-p</code> or <code>--publish</code> <strong>(Port Mapping)</strong>:</p>
+<p>Containers run in isolation, meaning their internal network ports are not directly accessible from the host system or external networks. Port mapping allows you to map a port on your host machine to a port inside the container. This makes the application running inside the container accessible from outside the Docker host. The syntax is <code>host_port:container_port</code>.</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> <span class="at">-p</span> 8080:80 nginx</span></code></pre></div>
+<p>This command starts an Nginx container and maps port <code>8080</code> on your server to port <code>80</code> inside the Nginx container. Now, if you access <code>http://your_server_ip:8080</code> from a web browser, you will reach the Nginx server running inside the container.</p></li>
+<li><p><code>--name</code> <strong>(Assign a Name to the Container)</strong>:</p>
+<p>By default, Docker assigns a random, whimsical name to your containers (e.g., <code>silly_tesla</code>, <code>upbeat_mahavira</code>). For better manageability and easier referencing, especially in automated scripts or when dealing with multiple containers, it is highly recommended to assign a meaningful name using the <code>--name</code> option. This name must be unique among your containers.</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> <span class="at">-p</span> 8080:80 <span class="at">--name</span> my-nginx-webserver nginx</span></code></pre></div>
+<p>This command does the same as the previous Nginx example but also names the container <code>my-nginx-webserver</code>, making it much easier to identify and manage later.</p></li>
+</ul>
+<h3 id="list-stop-start-and-remove-containers">List, Stop, Start, and Remove Containers</h3>
+<h4 id="list-running-containers">List Running Containers</h4>
+<ul>
+<li><p><code>docker ps</code>:</p>
+<p>To see a list of all currently running containers on your Docker host, you use the docker ps command. This command is invaluable for getting a quick overview of your active containerized applications.</p>
+<p>The output typically includes:</p>
+<ul>
+<li><p><strong>CONTAINER ID</strong>: A unique identifier for the container.</p></li>
+<li><p><strong>IMAGE</strong>: The image from which the container was launched.</p></li>
+<li><p><strong>COMMAND</strong>: The command executed when the container started.</p></li>
+<li><p><strong>CREATED</strong>: How long ago the container was created.</p></li>
+<li><p><strong>STATUS</strong>: The current state of the container (e.g., &quot;Up X minutes&quot;, &quot;Exited (0) X minutes ago&quot;).</p></li>
+<li><p><strong>PORTS</strong>: Any port mappings configured for the container.</p></li>
+<li><p><strong>NAMES</strong>: The name you assigned to the container (or a random one if not specified).</p>
+<p>To see all containers, including those that have stopped or exited, you can add the <code>-a</code> or <code>--all</code> flag: <code>docker ps -a</code>. This is useful for debugging or cleaning up resources.</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> ps</span></code></pre></div>
+<p>(This would show containers currently active.)</p></li>
+</ul></li>
+</ul>
+<h4 id="stopping-containers">Stopping Containers</h4>
+<ul>
+<li><p><code>docker stop</code>:</p>
+<p>To gracefully stop a running container, you use the <code>docker stop</code> command. This sends a <code>SIGTERM</code> signal to the main process inside the container, giving it a chance to shut down cleanly. If the container does not stop within a grace period (defaulting to 10 seconds), Docker will send a <code>SIGKILL</code> to force termination.</p>
+<p>You can stop a container by its <strong>CONTAINER ID</strong> or its <strong>NAME</strong>.</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> stop my-nginx-webserver</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># or if you know the ID:</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> stop <span class="pp">[</span><span class="ss">CONTAINER_ID</span><span class="pp">]</span></span></code></pre></div></li>
+</ul>
+<h4 id="starting-containers">Starting Containers</h4>
+<ul>
+<li><p><code>docker start</code>:</p>
+<p>If a container has been stopped but not removed, you can restart it using the <code>docker start</code> command. This brings a previously stopped container back into a running state, preserving its state and any data not stored in volumes (which we&#39;ll discuss later).</p>
+<p>Similar to docker stop, you can use the <strong>CONTAINER ID</strong> or <strong>NAME</strong>.</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> start my-nginx-webserver</span></code></pre></div></li>
+</ul>
+<h4 id="removing-containers">Removing Containers</h4>
+<ul>
+<li><p><code>docker rm</code>:</p>
+<p>To permanently remove a container, you use the docker <code>rm command</code>. You can only remove a container if it is stopped. If you attempt to remove a running container, Docker will return an error. To force removal of a running container, you can use the <code>-f</code> or <code>--force flag</code>, but this is generally not recommended as it does not allow the container to shut down gracefully.</p>
+<p>Again, you can remove by <strong>CONTAINER ID</strong> or <strong>NAME</strong>.</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> rm my-nginx-webserver</span></code></pre></div>
+<p>To remove all exited containers (a common cleanup task), you can combine commands:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> rm <span class="va">$(</span><span class="ex">docker</span> ps <span class="at">-aq</span> <span class="at">--filter</span> status=exited<span class="va">)</span></span></code></pre></div></li>
+</ul>
+<h4 id="execute-commands-inside-a-running-container-docker-exec">Execute Commands Inside a Running Container (<code>docker exec</code>)</h4>
+<ul>
+<li><p><code>docker exec</code>:</p>
+<p>The <code>docker exec</code> command allows you to run a new command inside a running Docker container. This is extremely useful for debugging, performing administrative tasks, or checking the state of an application without having to stop and restart the container.</p>
+<p>The basic syntax is:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> exec <span class="pp">[</span><span class="ss">OPTIONS</span><span class="pp">]</span> CONTAINER COMMAND <span class="pp">[</span><span class="ss">ARG...</span><span class="pp">]</span></span></code></pre></div>
+<ul>
+<li><p><strong>CONTAINER</strong>: This can be the container&#39;s ID or its assigned name.</p></li>
+<li><p><strong>COMMAND</strong>: The command you wish to execute inside the container.</p></li>
+<li><p><strong>ARG...</strong>: Any arguments for the command.</p>
+<p>Common options include:</p>
+<ul>
+<li><code>-it</code>: This combination is very common.
+<ul>
+<li><code>-i</code> or <code>--interactive</code>: Keeps STDIN open even if not attached. This is essential for interactive commands.</li>
+<li><code>-t</code> or <code>--tty</code>: Allocates a pseudo-TTY, providing a more interactive shell experience (like a typical terminal).</li>
+</ul></li>
+</ul>
+<p>Example: Accessing a shell inside a running Nginx container:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> exec <span class="at">-it</span> my-nginx-webserver bash</span></code></pre></div>
+<p>Upon executing this, you would be presented with a shell prompt inside the <code>my-nginx-webserver</code> container, allowing you to navigate its filesystem, inspect processes, or run diagnostics as if you were SSHed into a minimal Linux environment. When you are finished, you can type <code>exit</code> to leave the container&#39;s shell and return to your host terminal.</p></li>
+</ul></li>
+</ul>
+<h4 id="viewing-container-logs">Viewing Container Logs</h4>
+<ul>
+<li><p><code>docker logs</code>:</p>
+<p>Applications running inside containers typically output their logs to standard output (<code>stdout</code>) and standard error (<code>stderr</code>). The <code>docker logs</code> command allows you to retrieve these logs from a container, which is crucial for monitoring application behavior, troubleshooting issues, and auditing.</p>
+<p>The basic syntax is:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> logs <span class="pp">[</span><span class="ss">OPTIONS</span><span class="pp">]</span> CONTAINER</span></code></pre></div>
+<ul>
+<li><p><strong>CONTAINER</strong>: Again, this can be the container&#39;s ID or its name.</p>
+<p>Common options include:</p></li>
+<li><p><code>-f</code> or <code>--follow</code>: This &quot;follows&quot; the log output, similar to <code>tail -f</code>. New log entries will be displayed as they are generated. This is excellent for real-time monitoring.</p></li>
+<li><p><code>--tail N</code>: Shows only the last <code>N</code> lines of the logs. Useful for viewing recent activity without seeing the entire log history.</p></li>
+<li><p><code>--since STRING</code>: Shows logs generated since a specific timestamp or relative duration (e.g., <code>--since 10m</code> for logs from the last 10 minutes).</p>
+<p>Example: Viewing live logs of a web server:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> logs <span class="at">-f</span> my-nginx-webserver</span></code></pre></div>
+<p>This command would continuously display new log entries from the my-nginx-webserver container, which would typically show web access requests and error messages.</p></li>
+</ul></li>
+</ul>
+<h2 id="building-custom-docker-images-with-dockerfiles">Building Custom Docker Images with Dockerfiles</h2>
+<p>As a system administrator, you will frequently encounter scenarios where existing public Docker images do not perfectly meet your application&#39;s requirements. This is where <strong>Dockerfiles</strong> become indispensable. A Dockerfile is a simple text file that contains a series of instructions that Docker reads to automatically build an image. It acts as a reproducible blueprint for creating custom images, ensuring that your application&#39;s environment is consistent every time the image is built.</p>
+<p>Each instruction in a Dockerfile creates a new layer in the Docker image. These layers are cached, which makes subsequent builds faster if previous layers haven&#39;t changed.</p>
+<p>Let&#39;s explore some of the most common and essential Dockerfile instructions:</p>
+<h3 id="common-dockerfile-instructions">Common Dockerfile Instructions</h3>
+<ul>
+<li><p><code>FROM</code>:</p>
+<ul>
+<li><strong>Purpose</strong>: This is the first instruction in almost every Dockerfile. It specifies the base image from which your custom image will be built. This base image can be an official image (like <code>ubuntu</code>, <code>nginx</code>, <code>node</code>) or an image you&#39;ve previously built.</li>
+<li><strong>Example</strong>: <code>FROM ubuntu:22.04</code> (Starts building your image on top of the Ubuntu 22.04 base.)</li>
+</ul></li>
+<li><p><code>RUN</code>:</p>
+<ul>
+<li><code>Purpose</code>: Executes any commands in a new layer on top of the current image and commits the results. These commands are typically used for installing software packages, creating directories, or performing other system setup tasks.</li>
+<li><strong>Example</strong>: <code>RUN apt-get update &amp;&amp; apt-get install -y nginx</code> (Updates package lists and installs Nginx.)</li>
+</ul></li>
+<li><p><code>COPY</code>:</p>
+<ul>
+<li><strong>Purpose</strong>: Copies new files or directories from a specified source path on the build host into the filesystem of the image at the destination path. This is commonly used for bringing your application code or configuration files into the image.</li>
+<li><strong>Example</strong>: <code>COPY ./app /var/www/html</code> (Copies the <code>app</code> directory from your build context into <code>/var/www/html</code> inside the image.)</li>
+</ul></li>
+<li><p><code>ADD</code>:</p>
+<ul>
+<li><strong>Purpose</strong>: Similar to <code>COPY</code>, but with additional features. <code>ADD</code> can automatically extract compressed files (tar, gzip, bzip2) and can also fetch files from URLs. While <code>ADD</code> has more features, <code>COPY</code> is generally preferred for simply copying local files due to its clarity and predictability.</li>
+<li><strong>Example</strong>: <code>ADD https://example.com/software.tar.gz /tmp/</code> (Downloads and extracts the tarball.)</li>
+</ul></li>
+<li><p><code>EXPOSE</code>:</p>
+<ul>
+<li><strong>Purpose</strong>: Informs Docker that the container listens on the specified network ports at runtime. This is purely for documentation and communication between the image developer and user; it does not actually publish the port. Port mapping (using <code>-p</code> with <code>docker run</code>) is still required to make the port accessible from the host.</li>
+<li><strong>Example</strong>: <code>EXPOSE 80</code> (Indicates that the application inside the container will use port 80.)</li>
+</ul></li>
+<li><p><code>CMD</code>:</p>
+<ul>
+<li><strong>Purpose</strong>: Provides defaults for an executing container. There can only be one <code>CMD</code> instruction in a Dockerfile. If you specify a <code>COMMAND</code> with <code>docker run</code>, it will override the <code>CMD</code> instruction.</li>
+<li><strong>Example</strong>: <code>CMD [&quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot;]</code> (When a container starts from this image, it will execute the Nginx web server in the foreground.)</li>
+</ul></li>
+<li><p><code>ENTRYPOINT</code>:</p>
+<ul>
+<li><strong>Purpose</strong>: Configures a container that will run as an executable. Unlike <code>CMD</code>, the <code>ENTRYPOINT</code> command is always executed when the container starts. Any arguments provided to <code>docker run</code> are appended to the <code>ENTRYPOINT</code> command. This is useful for wrapping an application with a script or for always running a specific executable.</li>
+<li><strong>Example</strong>: <code>ENTRYPOINT [&quot;/usr/bin/supervisord&quot;]</code> (Ensures that supervisord is always the main process.)</li>
+<li><strong>Relationship between</strong> <code>CMD</code> <strong>and</strong> <code>ENTRYPOINT</code>: When both are present, <code>ENTRYPOINT</code> defines the executable, and <code>CMD</code> provides default arguments to that executable. For example, <code>ENTRYPOINT [&quot;echo&quot;]</code> and <code>CMD [&quot;Hello World&quot;]</code> would print &quot;Hello World&quot;. If you run docker <code>run myimage Docker</code>, it would print &quot;Docker&quot;.</li>
+</ul></li>
+</ul>
+<h4 id="creating-a-dockerfile-for-a-basic-web-application">Creating a Dockerfile for a Basic Web Application</h4>
+<p>For this example, we will create a Dockerfile that builds an Nginx web server image configured to serve a simple static HTML page. This is a common scenario for deploying lightweight web content.</p>
+<p>First, imagine you have a project directory on your server. Inside this directory, you would create two files:</p>
+<ol type="1">
+<li><p>A simple HTML file named <code>index.html</code>:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode HTML"><code class="sourceCode html"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="dt">&gt;</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>   <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>My Docker Webpage<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>   <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Welcome to My Dockerized Nginx Server!<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>   <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>This page is served from a Docker container.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div>
+<p>This file represents the content your web server will display.</p>
+<p>The Dockerfile itself, named Dockerfile (with no file extension):</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode Dockerfile"><code class="sourceCode dockerfile"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use an official Nginx image as the base</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> nginx:latest</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the default Nginx index.html</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="fu">rm</span> /etc/nginx/html/index.html</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy our custom index.html into the Nginx web root</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> index.html /etc/nginx/html/</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Expose port 80 to indicate that the container listens on this port</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="kw">EXPOSE</span> 80</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Command to run Nginx in the foreground</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="kw">CMD</span> [<span class="st">&quot;nginx&quot;</span>, <span class="st">&quot;-g&quot;</span>, <span class="st">&quot;daemon off;&quot;</span>]</span></code></pre></div>
+<p>Let&#39;s break down each line of this Dockerfile:</p>
+<ul>
+<li><code>FROM nginx:latest</code>: This instruction sets our base image. We are starting with the official nginx image, using the <code>latest</code> tag. This means Docker will first download the Nginx image from Docker Hub if it&#39;s not already present locally.</li>
+<li><code>RUN rm /etc/nginx/html/index.html</code>: The <code>RUN</code> instruction executes a command inside the image during the build process. Here, we are removing the default <code>index.html</code> file that comes with the Nginx image, preparing to replace it with our own.</li>
+<li><code>COPY index.html /etc/nginx/html/</code>: This <code>COPY</code> instruction takes our local index.html file (from the same directory as the Dockerfile) and places it into the <code>/etc/nginx/html/</code> directory inside the image. This is where Nginx typically serves its web content.</li>
+<li><code>EXPOSE 80</code>: This instruction documents that the container will listen on port <code>80</code> at runtime. Remember, this is informational; actual port mapping is done with docker <code>run -p</code>.</li>
+<li><code>CMD [&quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot;]</code>: This <code>CMD</code> instruction defines the default command to execute when a container is started from this image. <code>nginx -g &quot;daemon off;&quot;</code> is the standard way to run Nginx in the foreground within a container, which is necessary for Docker to keep the container running.</li>
+</ul></li>
+</ol>
+<h4 id="build-an-image-from-a-dockerfile">Build an Image from a Dockerfile</h4>
+<p>The <code>docker build</code> command processes a Dockerfile and creates a Docker image. It reads the instructions from the Dockerfile, executes them sequentially, and commits the result of each instruction as a new layer in the image.</p>
+<p>To build an image, you typically navigate to the directory containing your <code>Dockerfile</code> and any associated files (like our <code>index.html</code> in the previous example). This directory is referred to as the <strong>build context</strong>.</p>
+<p>The basic syntax for <code>docker build</code> is:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="pp">[</span><span class="ss">OPTIONS</span><span class="pp">]</span> PATH <span class="kw">|</span> <span class="ex">URL</span> <span class="kw">|</span> <span class="ex">-</span></span></code></pre></div>
+<ul>
+<li><code>PATH</code>: This is the path to the build context. Most commonly, you will use <code>.</code> to indicate the current directory as the build context. Docker will send the contents of this directory to the Docker daemon.</li>
+<li><code>-t</code> or <code>--tag</code>: This option allows you to assign a name and optional tag to the image. It&#39;s best practice to always tag your images for easy identification and versioning. The format is <code>name:tag</code>. If no tag is provided, Docker defaults to <code>latest</code>.</li>
+</ul>
+<p>Using our previous example of the <code>Dockerfile</code> and <code>index.html</code> in the current directory, you would execute the following command to build your custom Nginx image:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> my-custom-nginx:1.0 .</span></code></pre></div>
+<p>Let&#39;s break down this command:</p>
+<ul>
+<li><code>docker build</code>: The command to initiate an image build.</li>
+<li><code>-t my-custom-nginx:1.0</code>: This tags the resulting image with the name <code>my-custom-nginx</code> and the version <code>1.0</code>. This makes it easy to refer to and distinguish this specific image.</li>
+<li><code>.</code>: This specifies the build context as the current directory. Docker will look for a <code>Dockerfile</code> in this directory and use all files within this directory (that are not excluded by a <code>.dockerignore</code> file) as part of the build context.</li>
+</ul>
+<p>When you run this command, you will see output in your terminal indicating the steps of the build process. Each <code>RUN</code> instruction will execute, and each <code>COPY</code> or <code>FROM</code> instruction will create a new layer. If a layer can be pulled from the cache (because nothing has changed since the last build of that layer), Docker will indicate &quot;Using cache.&quot;</p>
+<p>Upon successful completion, you can then verify that your new image has been created by running:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> images</span></code></pre></div>
+<p>You should see my-custom-nginx listed among your local images.</p>
+<h2 id="docker-networking-basics">Docker Networking Basics</h2>
+<h3 id="overview">Overview</h3>
+<p>Networking is a crucial aspect of managing Docker containers, as applications often need to communicate with other services or be accessible from outside the Docker host. Docker provides several networking options, but the most common and default setup is the bridge network.</p>
+<p>When you install Docker, a default bridge network named <code>bridge</code> is automatically created. This network functions similarly to a virtual switch on your Docker host.</p>
+<p>Here&#39;s how it generally works and facilitates communication:</p>
+<ol type="1">
+<li><p><strong>Container IP Addresses</strong>: When a new container is launched without specifying a particular network, it is automatically attached to this default <code>bridge</code> network. Docker assigns each container a private IP address from a range within this bridge network (e.g., <code>172.17.0.x</code>). These IP addresses are internal to the Docker host and are not directly routable from outside the host.</p></li>
+<li><p><strong>Container-to-Container Communication (on the same bridge network)</strong>:</p>
+<ul>
+<li>Containers attached to the same bridge network can communicate with each other using their internal IP addresses.</li>
+<li>More importantly, Docker provides <strong>DNS resolution</strong> for container names (or aliases). This means if you have two containers, say <code>app-server</code> and <code>database</code>, on the same default bridge network, the <code>app-server</code> can often reach the <code>database</code> container simply by using its name (<code>database</code>) as the hostname, rather than needing its IP address. This is a significant convenience for application configuration.</li>
+</ul></li>
+<li><p><strong>Container-to-Host Communication</strong>:</p>
+<ul>
+<li>Containers can communicate with the Docker host. The host itself has an IP address on the <code>bridge</code> network (e.g., <code>172.17.0.1</code>), which containers can use to reach services running directly on the host.</li>
+<li>The host can also communicate with containers, primarily through the use of port mapping (which we discussed earlier with the <code>-p</code> flag in <code>docker run</code>).</li>
+</ul></li>
+<li><p><strong>Host-to-External Network Communication</strong>:</p>
+<ul>
+<li>For containers to communicate with services outside the Docker host (e.g., the internet, external databases), Docker uses <strong>Network Address Translation (NAT)</strong>. When a container sends out a network request, Docker rewrites the source IP address of the request to be the IP address of the Docker host, acting as a gateway. This allows containers to access external resources.</li>
+</ul></li>
+</ol>
+<p>In essence, the default bridge network creates an isolated virtual network segment for your containers on your Docker host, enabling them to communicate with each other and with the host, while also providing outbound connectivity to external networks.</p>
+<h3 id="port-mapping">Port Mapping</h3>
+<p>As previously mentioned, containers are isolated environments. By default, services running inside a container are not directly accessible from the Docker host&#39;s external network interfaces. This isolation enhances security but also requires a mechanism to expose specific services. This mechanism is called port mapping, and it is achieved using the <code>-p</code> or <code>--publish</code> option with the docker run command.</p>
+<p><strong>What is Port Mapping?</strong></p>
+<p>Port mapping creates a network redirection rule that forwards traffic from a specific port on the Docker host to a specific port inside the Docker container. It essentially acts as a gateway, allowing external network requests to reach your containerized application.</p>
+<p>The syntax for port mapping is flexible, but the most common format is:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">-p</span> host_port:container_port</span></code></pre></div>
+<ul>
+<li><code>host_port</code>: This is the port number on your Docker host (e.g., your server&#39;s IP address) that you want to expose to the outside world. This port must be available (not already in use by another application on the host).</li>
+<li><code>container_port</code>: This is the port number on which the application inside your Docker container is listening. This port is defined by the application itself (e.g., Nginx typically listens on port 80, a web application might listen on 3000 or 8080).</li>
+</ul>
+<p><strong>Importance for External Access</strong>:</p>
+<p>Port mapping is crucial for making your containerized applications usable by external clients, including web browsers, other servers, or users on your network. Without it, your application would be running in isolation within the container and could not receive incoming connections.</p>
+<p><strong>Illustrative Examples</strong>:</p>
+<ol type="1">
+<li><p><strong>Mapping a standard HTTP port</strong>:</p>
+<p>If you have an Nginx container listening on its default HTTP port 80, and you want it accessible via port 8080 on your host:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> <span class="at">-p</span> 8080:80 <span class="at">--name</span> my-web-app nginx</span></code></pre></div>
+<p>Now, anyone connecting to <code>http://&lt;YourHostIPAddress&gt;:8080</code> will reach the Nginx server inside the container.</p></li>
+<li><p><strong>Mapping a random host port</strong>:</p>
+<p>If you don&#39;t care which host port is used (e.g., for testing), you can omit the <code>host_port</code> and Docker will assign a random available ephemeral port:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> <span class="at">-p</span> 80 <span class="at">--name</span> my-test-app nginx</span></code></pre></div>
+<p>To find out which host port was assigned, you would use <code>docker ps</code>:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> ps</span></code></pre></div>
+<p>Output might show something like <code>0.0.0.0:32768-&gt;80</code>/tcp, indicating that host port 32768 was mapped to container port <code>80</code>.</p></li>
+<li><p><strong>Mapping UDP ports</strong>:</p>
+<p>Port mapping isn&#39;t limited to TCP. You can specify UDP ports as well:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> <span class="at">-p</span> 53:53/udp <span class="at">--name</span> dns-server bind9</span></code></pre></div></li>
+</ol>
+<p>It is a common practice to map well-known container ports (like 80 for web servers or 3306 for MySQL) to higher, less common host ports (like 8080, 8000, 33060) to avoid conflicts with services already running on the host system, or to run multiple instances of the same service on different host ports.</p>
+<h2 id="data-management-in-docker-containers-volumes">Data Management in Docker Containers (Volumes)</h2>
+<p>A fundamental concept in Docker is that containers are, by design, <strong>ephemeral</strong>. This means that when a container is stopped and then removed (e.g., using <code>docker rm</code>), any data written to its writable layer (i.e., data created or modified inside the container during its runtime) is lost. This ephemeral nature is a desirable characteristic for stateless applications and allows containers to be easily discarded and recreated without concern for their internal state.</p>
+<p>However, many applications, such as databases, logging systems, or applications that handle user uploads, are <strong>stateful</strong>. They generate, modify, or rely on persistent data. If this data is lost every time the container is removed or updated, the application becomes impractical. For instance, if you run a database inside a container and all your data disappears when the container is replaced, it defeats the purpose of the database.</p>
+<p>This is where the need for <strong>data persistence</strong> arises. As a system administrator, ensuring that critical application data survives container lifecycles (stopping, starting, upgrading, or removing containers) is paramount. Without a mechanism for persistence, Docker&#39;s benefits for stateful applications would be severely limited.</p>
+<p>Docker provides several options for data persistence, with volumes being the preferred and most robust method. Volumes are designed to persist data independently of the container&#39;s lifecycle.</p>
+<h3 id="docker-volumes">Docker Volumes</h3>
+<p><strong>Docker Volumes</strong> are the preferred mechanism for persisting data generated by and used by Docker containers. Unlike data stored within a container&#39;s writable layer, volumes are entirely managed by Docker and stored on the host filesystem outside of the container&#39;s lifecycle. This means that data stored in a volume will persist even if the container that created it is stopped, removed, or replaced.</p>
+<p>Consider a database container. If its data resides within the container&#39;s writable layer, and you update the database image, you would lose all your data. By using a Docker volume, the database data is stored separately and can be mounted into the new container, ensuring continuity and persistence.</p>
+<p><strong>Key advantages of Docker Volumes</strong>:</p>
+<ul>
+<li><strong>Persistence</strong>: Data remains intact even after the container is removed.</li>
+<li><strong>Performance</strong>: Volumes often offer better I/O performance compared to other persistence options like bind mounts (which directly map a host directory).</li>
+<li><strong>Portability</strong>: Volumes can be easily backed up, restored, and migrated between Docker hosts.</li>
+<li><strong>Management</strong>: Docker&#39;s CLI provides dedicated commands for managing volumes, making them easier to control.</li>
+</ul>
+<h4 id="managing-docker-volumes-via-the-command-line">Managing Docker Volumes via the Command Line</h4>
+<p>Docker provides a set of <code>docker volume</code> commands to manage these persistent storage units:</p>
+<ol type="1">
+<li><p><strong>Creating a Volume (</strong><code>docker volume create</code><strong>)</strong>:</p>
+<p>You can explicitly create a named volume before using it. Named volumes are easier to reference and manage.</p>
+<p>Syntax:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> volume create <span class="pp">[</span><span class="ss">volume_name</span><span class="pp">]</span></span></code></pre></div>
+<p>Example:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> volume create my_database_data</span></code></pre></div>
+<p>This command creates a new volume named <code>my_database_data</code> on your Docker host. Docker handles the underlying storage location for you, typically in <code>/var/lib/docker/volumes/</code> on Linux systems.</p></li>
+<li><p><strong>Listing Volumes (</strong><code>docker volume ls</code><strong>)</strong>:</p>
+<p>To see all the volumes currently managed by Docker on your host, use the <code>docker volume ls</code> command. This will show you a list of named volumes and their drivers.</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> volume ls</span></code></pre></div>
+<p>Output might look like:</p>
+<pre class="shell"><code>DRIVER    VOLUME NAME
+local     my_database_data
+local     another_app_data</code></pre></li>
+<li><p><strong>Inspecting a Volume (</strong><code>docker volume inspect</code><strong>)</strong>:</p>
+<p>To get detailed information about a specific volume, such as its mount point on the host filesystem, use <code>docker volume inspect</code>.</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> volume inspect my_database_data</span></code></pre></div>
+<p>This will show you JSON output with details including the <code>Mountpoint</code>, which is the actual directory on your host where the volume&#39;s data is stored.</p></li>
+<li><p><strong>Removing a Volume (</strong><code>docker volume rm</code><strong>)</strong>:</p>
+<p>When a volume is no longer needed, you can remove it. You can only remove volumes that are not currently in use by any running container.</p>
+<p>Syntax:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> volume rm <span class="pp">[</span><span class="ss">volume_name</span><span class="pp">]</span></span></code></pre></div>
+<p>Example:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> volume rm my_database_data</span></code></pre></div></li>
+</ol>
+<h4 id="mount-a-volume-using-the--v-option">Mount a Volume Using the <code>-v</code> Option</h4>
+<p>Once a Docker volume is created, or even if you want Docker to create an anonymous volume for you on the fly, you mount it into a container using the <code>-v</code> or <code>--volume</code> option with the docker run command. This option establishes the link between the host&#39;s volume storage and a specific directory inside the container.</p>
+<p>The syntax for mounting a named volume is:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="ex">-v</span> <span class="pp">[</span><span class="ss">volume_name</span><span class="pp">]</span>:<span class="pp">[</span><span class="ss">container_path</span><span class="pp">]</span></span></code></pre></div>
+<ul>
+<li><code>[volume_name]</code>: This is the name of the Docker volume you created (e.g., <code>my_database_data</code>).</li>
+<li><code>[container_path]</code>: This is the absolute path to the directory inside the container where you want the volume&#39;s data to appear. This is where your application within the container will read from and write to.</li>
+</ul>
+<h5 id="running-a-postgresql-database-with-persistent-data">Running a PostgreSQL Database with Persistent Data</h5>
+<p>Let&#39;s assume you want to run a PostgreSQL database in a Docker container and ensure its data persists. PostgreSQL typically stores its data in a directory like <code>/var/lib/postgresql/data</code> inside its container.</p>
+<ol type="1">
+<li><p><strong>First, ensure you have created a volume (if not already done)</strong>:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> volume create pg_data_volume</span></code></pre></div></li>
+<li><p><strong>Now, run the PostgreSQL container, mounting your volume</strong>:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> <span class="dt">\</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--name</span> my-postgres <span class="dt">\</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-p</span> 5432:5432 <span class="dt">\</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">-e</span> POSTGRES_PASSWORD=mysecretpassword <span class="dt">\</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">-v</span> pg_data_volume:/var/lib/postgresql/data <span class="dt">\</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  postgres:13</span></code></pre></div>
+<p>Let&#39;s dissect the <code>-v</code> part of this <code>docker run</code> command:</p>
+<ul>
+<li><code>-v pg_data_volume:/var/lib/postgresql/data</code>: This tells Docker to mount the named volume <code>pg_data_volume</code> into the container at the path <code>/var/lib/postgresql/data</code>. Any data written to <code>/var/lib/postgresql/data</code> by the PostgreSQL application inside the container will actually be stored on your Docker host within the <code>pg_data_volume</code>.</li>
+</ul></li>
+</ol>
+<p><strong>What happens if the container is removed?</strong></p>
+<p>If you later stop and remove the <code>my-postgres</code> container (<code>docker stop my-postgres &amp;&amp; docker rm my-postgres</code>), the <code>pg_data_volume</code> (and all your database data within it) remains intact on your Docker host. You can then launch a new PostgreSQL container, mounting the same <code>pg_data_volume</code>, and your database will resume with all its previous data.</p>
+<p><strong>Anonymous Volumes</strong>:</p>
+<p>You can also use the <code>-v</code> flag without specifying a volume name, in which case Docker creates an anonymous volume. While these also provide persistence, they are harder to manage and reference since they are identified by a long, random ID. Named volumes are generally preferred for clarity and explicit management.</p>
+</body>
+</html>

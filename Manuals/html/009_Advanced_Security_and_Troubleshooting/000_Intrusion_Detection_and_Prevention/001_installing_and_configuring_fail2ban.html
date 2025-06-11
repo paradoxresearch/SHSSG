@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="installing-and-configuring-fail2ban">Installing and Configuring Fail2ban</h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#installing-and-configuring-fail2ban">Installing and Configuring Fail2ban</a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#installing-fail2ban">Installing Fail2ban</a></li>
+<li><a href="#basic-configuration---jails">Basic Configuration - Jails</a>
+<ul>
+<li><a href="#fail2ban-configuration">Fail2ban Configuration</a></li>
+</ul></li>
+<li><a href="#understanding-filters">Understanding Filters</a></li>
+<li><a href="#taking-action---banning-and-unbanning">Taking Action - Banning and Unbanning</a>
+<ul>
+<li><a href="#banning">Banning</a></li>
+<li><a href="#unbanning">Unbanning</a></li>
+</ul></li>
+<li><a href="#applying-configurations-and-restarting">Applying Configurations and Restarting</a>
+<ul>
+<li><a href="#testing-your-configuration">Testing Your Configuration</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<p>Think of Fail2ban as a diligent security guard for your server. It constantly watches the logs of various services, like a security camera feed. If it sees too many suspicious activities, like repeated failed login attempts from the same source, it acts by temporarily blocking the troublemaking IP address, just like a security guard might temporarily deny access to someone causing repeated issues.</p>
+<h2 id="installing-fail2ban">Installing Fail2ban</h2>
+<p>Our first step is to install this helpful security guard on your server. We&#39;ll use the <code>apt</code> package manager for this.</p>
+<p>To install Fail2ban, you&#39;ll use the following command in your terminal:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt install fail2ban</span></code></pre></div>
+<p>Let&#39;s break this command down:</p>
+<ul>
+<li><code>sudo</code>: This command gives you temporary superuser (administrator) privileges, which are needed to install software. You&#39;ll be asked for your password.</li>
+<li><code>apt update</code>: This command refreshes the list of available packages from the software repositories. It&#39;s always a good idea to run this before installing new software to make sure you have the latest information.</li>
+<li><code>&amp;&amp;</code>: This means that the second command (<code>sudo apt install fail2ban</code>) will only run if the first command (<code>sudo apt update</code>) is successful.</li>
+<li><code>sudo apt install fail2ban</code>: This is the command that actually downloads and installs the Fail2ban software and its dependencies.</li>
+</ul>
+<h2 id="basic-configuration---jails">Basic Configuration - Jails</h2>
+<p>Let&#39;s talk about how you tell Fail2ban what to protect. This is where the concept of jails comes in.</p>
+<p>Think of a jail as a specific set of rules that Fail2ban uses to monitor a particular service on your server. Each jail is like a dedicated security detail assigned to watch over a specific area, such as your SSH login attempts, your web server access logs, or your mail server.</p>
+<p>For example, you might have one jail specifically configured to watch the logs of your SSH server. This jail will have its own rules defining what constitutes a suspicious activity (like too many failed password attempts) and what action to take when such activity is detected (like blocking the offending IP address).</p>
+<p>You can have multiple jails running simultaneously, each monitoring a different service with its own tailored rules. This allows you to have granular control over the security of each part of your server.</p>
+<h3 id="fail2ban-configuration">Fail2ban Configuration</h3>
+<p>The main configuration file for Fail2ban is located at <code>/etc/fail2ban/jail.conf</code>.</p>
+<p>Think of <code>jail.conf</code> as the master blueprint for all the potential security measures Fail2ban can take. It contains the default configurations for various services. However, <strong>it&#39;s strongly recommended that you do not directly edit this file</strong>. Why? Because if Fail2ban gets updated, your changes in <code>jail.conf</code> might be overwritten, and you&#39;d lose your custom settings.</p>
+<p>Instead, the best practice is to create a local override file named <code>jail.local</code> in the same directory (<code>/etc/fail2ban/</code>). Any settings you put in <code>jail.local</code> will override the corresponding settings in <code>jail.conf</code>. This way, your configurations are preserved during updates.</p>
+<p>You can create <code>jail.local</code> by copying the <code>jail.conf</code> file:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local</span></code></pre></div>
+<p>Then, you can edit <code>jail.local</code> using a command-line text editor like <code>nano</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nano /etc/fail2ban/jail.local</span></code></pre></div>
+<p>Inside <code>jail.local</code>, you&#39;ll find sections for different services (jails), like <code>[sshd]</code>, <code>[apache-auth]</code>, <code>[nginx-http-auth]</code>, and many others. You can enable and configure these jails as needed.</p>
+<p>Inside this file, you&#39;ll likely see a section that looks something like this (it might be commented out with <code>#</code> at the beginning of each line):</p>
+<pre class="Ini,"><code>[sshd]
+enabled = false
+port = ssh
+logpath = /var/log/auth.log
+bantime = 600
+findtime = 600
+maxretry = 3</code></pre>
+<p>Let&#39;s break down these key parameters:</p>
+<ul>
+<li><code>[sshd]</code>: This is the name of the jail. It specifically applies to SSH connections.</li>
+<li><code>enabled = false</code>: By default, most jails are disabled. To activate the SSH jail, you need to change this to <code>enabled = true</code>. Think of it as flipping the switch to turn on the security monitoring for SSH.</li>
+<li><code>port = ssh</code>: This specifies the port that Fail2ban should monitor for the SSH service. <code>ssh</code> is a symbolic name that usually resolves to port 22, the standard SSH port. You can also specify the port number directly if your SSH server is running on a different port.</li>
+<li><code>logpath = /var/log/auth.log</code>: This tells Fail2ban the location of the SSH server&#39;s log file. Fail2ban will scan this file for failed login attempts and other suspicious activities.</li>
+<li><code>bantime = 600</code>: This sets the duration, in seconds, for which an offending IP address will be banned. In this case, 600 seconds equals 10 minutes. After this time, the ban is automatically lifted.</li>
+<li><code>findtime = 600</code>: This defines the time window, in seconds, during which failed login attempts are counted. Here, Fail2ban will look at the last 600 seconds (10 minutes) of the log file.</li>
+<li><code>maxretry = 3</code>: This is the maximum number of failed login attempts allowed from a single IP address within the <code>findtime</code> period before that IP is banned. In this example, if an IP tries to log in unsuccessfully 3 times within 10 minutes, it will be banned for 10 minutes.</li>
+</ul>
+<p>To enable the SSH jail with these default settings, you would change <code>enabled = false</code> to <code>enabled = true</code> in your <code>jail.local</code> file.</p>
+<p>Imagine <code>findtime</code> as the period the security guard reviews their camera footage, and <code>maxretry</code> as the number of suspicious actions they&#39;ll tolerate within that period before taking action (<code>bantime</code>).</p>
+<h2 id="understanding-filters">Understanding Filters</h2>
+<p>Think of filters as the specific instructions given to our security guard on how to identify a potential intruder in the security camera footage. These instructions are defined using regular expressions, which are like powerful search patterns that can match specific text within the log files.</p>
+<p>For each jail you enable (like the <code>[sshd]</code> jail we just looked at), there&#39;s a corresponding filter that tells Fail2ban what patterns to look for in the log file (<code>/var/log/auth.log</code> in the case of SSH) that indicate a failed login attempt.</p>
+<p>The configuration files for these filters are located in the <code>/etc/fail2ban/filter.d/</code> directory. Inside this directory, you&#39;ll find various <code>.conf</code> files, each corresponding to a different service. For example, the filter for the <code>[sshd]</code> jail is usually defined in a file named <code>sshd.conf</code>.</p>
+<p>When the <code>[sshd]</code> jail is enabled, Fail2ban uses the rules defined in the <code>sshd.conf</code> filter to scan the <code>/var/log/auth.log file</code>. If it finds a line that matches one of the patterns defined in the filter (indicating a failed login), it increments a counter for the IP address that made the attempt. If this counter reaches the <code>maxretry</code> threshold within the <code>findtime</code> period, the <code>bantime</code> action (blocking the IP) is triggered.</p>
+<p>So, to summarize, <strong>jails</strong> define <em>what</em> to protect and <em>how</em> to react, while <strong>filters</strong> define <em>how</em> to recognize the malicious activity within the logs of those services.</p>
+<hr />
+<p>The filters that Fail2ban uses to identify suspicious activity are located in the <code>/etc/fail2ban/filter.d/</code> directory. If you were to list the contents of this directory using the <code>ls</code> command, you&#39;d see a variety of <code>.conf</code> files, each named after a service that Fail2ban can monitor (e.g., <code>apache-auth.conf</code>, <code>nginx-http-auth.conf</code>, <code>sshd.conf</code>, etc.).</p>
+<p>For the <code>[sshd]</code> jail we&#39;ve been focusing on, the corresponding filter configuration is usually in the <code>sshd.conf</code> file. This file contains the regular expressions that Fail2ban uses to scan the <code>/var/log/auth.log</code> file for patterns indicating failed SSH login attempts.</p>
+<h2 id="taking-action---banning-and-unbanning">Taking Action - Banning and Unbanning</h2>
+<h3 id="banning">Banning</h3>
+<p>When Fail2ban, guided by its jails and filters, detects that an IP address has exceeded the <code>maxretry</code> threshold within the <code>findtime</code> period, it takes action by <strong>banning</strong> that IP address. This means that Fail2ban adds a rule to your server&#39;s firewall (usually <code>iptables</code> or <code>firewalld</code>) to block all network traffic coming from that specific IP address for the duration specified by the <code>bantime</code>.</p>
+<p>Think of it like our security guard spotting someone causing trouble repeatedly. They don&#39;t just watch; they actively prevent that person from entering the premises for a certain amount of time.</p>
+<p>So, how do you know which IP addresses Fail2ban has currently banned? You can use the <code>fail2ban-client</code> command-line tool. This is your primary way to interact with the Fail2ban service once it&#39;s running.</p>
+<p>To see the status of Fail2ban and the currently banned IPs for each jail, you can use the following command:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> fail2ban-client status</span></code></pre></div>
+<p>This command will give you an overview of all the active jails and, for each jail, it will show you the number of currently banned IPs and the list of those IPs.</p>
+<p>For example, if the <code>[sshd]</code> jail has banned one IP address, the output might look something like this:</p>
+<pre class="shell"><code>Status for the jail: sshd
+|- Filter
+|  |- Currently failed: 0
+|  |- Total failed: 5
+`- Actions
+   |- Currently banned: 1
+   `- IP list: 203.0.113.45</code></pre>
+<p>Here, you can see that under the &quot;Actions&quot; section for the &quot;sshd&quot; jail, there is one &quot;Currently banned&quot; IP, and the &quot;IP list&quot; shows the banned IP address (<code>203.0.113.45</code> is just an example).</p>
+<p>This command is very useful for monitoring Fail2ban&#39;s activity and seeing who is being blocked.</p>
+<h3 id="unbanning">Unbanning</h3>
+<p>Fail2ban might block an IP address that you trust, or perhaps you&#39;ve resolved the issue that caused the ban. In such cases, you&#39;ll need to know how to manually unban an IP address.</p>
+<p>You can do this using the <code>fail2ban-client</code> tool as well. The command to unban an IP address is:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> fail2ban-client set <span class="op">&lt;</span>jailname<span class="op">&gt;</span> unbanip <span class="op">&lt;</span>ipaddress<span class="op">&gt;</span></span></code></pre></div>
+<p>Let&#39;s break this down:</p>
+<ul>
+<li><code>sudo fail2ban-client</code>: This is the main command to interact with the Fail2ban service.</li>
+<li><code>set</code>: This tells <code>fail2ban-client</code> that you want to change something.</li>
+<li><code>&lt;jailname&gt;</code>: Here, you need to specify the name of the jail from which you want to unban the IP address. For example, if you want to unban an IP from the SSH jail, you would use <code>sshd</code>.</li>
+<li><code>unbanip</code>: This is the specific action you want to perform – to unban an IP address.</li>
+<li><code>&lt;ipaddress&gt;</code>: This is the IP address that you want to unban.</li>
+</ul>
+<p>So, if you wanted to unban the IP address <code>203.0.113.45</code> from the sshd jail, you would run the command:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> fail2ban-client set sshd unbanip 203.0.113.45</span></code></pre></div>
+<p>After running this command, Fail2ban will remove the blocking rule for that IP address from your server&#39;s firewall, and the IP will be able to connect again to the service monitored by that jail.</p>
+<h2 id="applying-configurations-and-restarting">Applying Configurations and Restarting</h2>
+<p>Simply editing <code>jail.local</code> doesn&#39;t automatically make Fail2ban use those new settings. You need to tell the Fail2ban service to reload its configuration. The standard way to manage system services on Ubuntu (and many other Linux distributions) is using <code>systemctl</code>.</p>
+<p>To restart the Fail2ban service, which will cause it to reload its configuration files (including your <code>jail.local</code>), you&#39;ll use the following command:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart fail2ban</span></code></pre></div>
+<p>Think of this as telling our security guard to read the updated instructions you&#39;ve given them in <code>jail.local</code>. After you run this command, Fail2ban will start using the enabled jails, the specified log paths, the filters, and the banning rules you&#39;ve set.</p>
+<p>It&#39;s also a good idea to check the status of the Fail2ban service after restarting to make sure there were no errors during the reload. You can do this with the command:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status fail2ban</span></code></pre></div>
+<p>This command will show you whether the Fail2ban service is active (running) and if there were any issues during startup or the last reload.</p>
+<p>Finally, and this is a very important point: always test your Fail2ban configuration. You can do this by intentionally triggering a ban (e.g., by trying to SSH into your server with the wrong password multiple times from an IP address you control). Then, use <code>fail2ban-client status</code> to verify that the IP address has been banned in the <code>[sshd]</code> jail. After confirming the ban, remember to unban your test IP address using the command we discussed earlier.</p>
+<h3 id="testing-your-configuration">Testing Your Configuration</h3>
+<p>The best way to test your Fail2ban setup is to simulate a failed login attempt. Here&#39;s how you can do it for the SSH jail we&#39;ve been configuring:</p>
+<ol type="1">
+<li><strong>Identify an IP address you can use for testing</strong>. This could be your home computer or another machine you control.</li>
+<li><strong>Attempt to SSH into your server from that test IP address using an incorrect password multiple times</strong>. Make sure you exceed the <code>maxretry</code> value you set in your <code>jail.local</code> file (which was 3 in our example).</li>
+<li><strong>Wait for the</strong> <code>findtime</code> <strong>period to elapse</strong>. In our example, this was 600 seconds (10 minutes).</li>
+<li><strong>On your server, use the</strong> <code>fail2ban-client status sshd</code> <strong>command</strong>. You should see the IP address you used for testing listed under the &quot;Currently banned&quot; section.</li>
+</ol>
+<p>If you see your test IP address listed as banned, congratulations! Your basic Fail2ban configuration for SSH is working.</p>
+<p><strong>Important</strong>: After you&#39;ve confirmed that Fail2ban is working correctly, remember to <strong>unban your test IP</strong> address using the <code>sudo fail2ban-client set sshd unbanip &lt;your_test_ip&gt;</code> command so you don&#39;t accidentally lock yourself out of your server.</p>
+</body>
+</html>

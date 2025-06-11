@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="configuring-ufw-for-common-services">Configuring <code>ufw</code> for Common Services</h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#configuring-ufw-for-common-services">Configuring <code>ufw</code> for Common Services</a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#basic-ufw-commands">Basic UFW Commands</a>
+<ul>
+<li><a href="#how-to-check-the-current-ufw-status-and-interpret-the-output">How to Check the Current UFW Status and Interpret the Output</a></li>
+</ul></li>
+<li><a href="#allowing-connections-for-common-services">Allowing Connections for Common Services</a>
+<ul>
+<li><a href="#how-to-allow-connections-on-specific-ports-and-protocols">How to Allow Connections on Specific Ports and Protocols</a></li>
+<li><a href="#how-to-allow-connections-from-specific-ip-addresses-or-subnets">How to Allow Connections from Specific IP Addresses or Subnets</a></li>
+</ul></li>
+<li><a href="#denying-connections">Denying Connections</a>
+<ul>
+<li><a href="#when-denying-specific-connections-might-be-necessary-for-server-hardening">When Denying Specific Connections Might Be Necessary for Server Hardening</a></li>
+</ul></li>
+<li><a href="#managing-ufw-rules">Managing UFW Rules</a>
+<ul>
+<li><a href="#how-to-delete-ufw-rules-using-their-line-number">How to Delete UFW Rules Using Their Line Number</a></li>
+</ul></li>
+<li><a href="#logging-with-ufw">Logging with UFW</a>
+<ul>
+<li><a href="#different-logging-levels">Different Logging Levels</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<p>In the context of server administration, security is paramount. One fundamental aspect of securing an Ubuntu Server is implementing a robust firewall. A <strong>firewall</strong> functions as a network security system that monitors and controls incoming and outgoing network traffic based on pre-defined security rules. Its primary purpose is to establish a protective barrier between your server and potentially malicious external entities, thereby safeguarding sensitive data and ensuring system integrity.</p>
+<p><strong>UFW (Uncomplicated Firewall)</strong> is a user-friendly, command-line interface designed to simplify the management of <code>iptables</code>, the underlying packet filtering framework in the Linux kernel. For a headless server environment, where graphical interfaces are absent, UFW provides an efficient and straightforward means to configure your server&#39;s firewall rules directly from the terminal. It abstracts much of the complexity of <code>iptables</code> into a more intuitive command set, making it an ideal tool for system administrators to quickly and effectively manage network access to their servers.</p>
+<p>Think of UFW as a well-organized gatekeeper for your server. You define the rules about who is allowed to pass through the gate (access specific services or ports) and who is denied. This controlled access is essential for preventing unauthorized intrusion and mitigating various security threats.</p>
+<h2 id="basic-ufw-commands">Basic UFW Commands</h2>
+<p>Think of these commands as the basic instructions you give to your server&#39;s gatekeeper.</p>
+<p>Here are some of the most essential UFW commands:</p>
+<ul>
+<li><code>ufw enable</code>: This command is like telling your gatekeeper to start actively checking everyone who wants to come in. It activates the UFW firewall.</li>
+<li><code>ufw disable</code>: This is like telling your gatekeeper to take a break and let everyone pass freely. It deactivates the UFW firewall. Be very careful when using this command on a production server, as it leaves it unprotected!</li>
+<li><code>ufw status</code>: This command asks your gatekeeper for a report on who is currently allowed or denied access. It shows you the current status of the firewall and the active rules.</li>
+<li><code>ufw default allow incoming</code>: This sets the default policy for incoming traffic. Imagine it as the gatekeeper&#39;s general instruction: &quot;By default, let everyone in unless I have specific instructions otherwise.&quot; This is generally not recommended for servers as it leaves them open to potential attacks.</li>
+<li><code>ufw default deny incoming</code>: This is the more secure default policy for incoming traffic. It tells the gatekeeper: &quot;By default, don&#39;t let anyone in unless I specifically say they can.&quot; You&#39;ll then add rules to allow specific services or connections.</li>
+<li><code>ufw default allow outgoing</code>: This sets the default policy for traffic going out of your server. It&#39;s usually safe to allow all outgoing traffic by default, as your server needs to communicate with other systems.</li>
+<li><code>ufw default deny outgoing</code>: This is a more restrictive policy for outgoing traffic, where you would only allow connections to specific destinations. This is less common for typical server setups but can be used in highly controlled environments.</li>
+</ul>
+<p>Think of the &quot;default&quot; policies as the initial stance of your gatekeeper before you give them specific instructions for certain people or services. It&#39;s generally much safer to start with <code>ufw default deny incoming</code> and then explicitly allow the traffic your server needs.</p>
+<h3 id="how-to-check-the-current-ufw-status-and-interpret-the-output">How to Check the Current UFW Status and Interpret the Output</h3>
+<p>Once you&#39;ve enabled UFW or made changes to its rules, you&#39;ll want to know what the current configuration looks like. The command for this is, as we mentioned earlier:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ufw</span> status</span></code></pre></div>
+<p>When you run this command, you&#39;ll typically see output that looks something like this:</p>
+<pre class="shell"><code>Status: active
+
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW       Anywhere
+80/tcp                     ALLOW       Anywhere
+443/tcp                    ALLOW       Anywhere
+Anywhere                   ALLOW       192.168.1.10
+22/tcp (v6)                ALLOW       Anywhere (v6)
+80/tcp (v6)                ALLOW       Anywhere (v6)
+443/tcp (v6)               ALLOW       Anywhere (v6)
+Anywhere (v6)              ALLOW       2001:db8::10</code></pre>
+<p>Let&#39;s break down what this output tells us:</p>
+<ul>
+<li><code>Status: active</code>: This clearly indicates that the UFW firewall is currently enabled and actively filtering traffic. If it said <code>Status: inactive</code>, the firewall would not be doing anything.</li>
+<li><code>To</code>: This column specifies the destination port and protocol on your server. For example, <code>22/tcp</code> refers to TCP traffic on port 22 (which is typically used for SSH).</li>
+<li><code>Action</code>: This column shows what action UFW is taking for traffic matching the rule. <code>ALLOW</code> means that connections to the specified port and protocol from the specified source are permitted. <code>DENY</code> would mean they are blocked.</li>
+<li><code>From</code>: This column indicates the source of the traffic that the rule applies to. <code>Anywhere</code> means that connections from any IP address are allowed. You might also see specific IP addresses or network ranges listed here.</li>
+<li><strong>(v6)</strong>: These entries indicate rules that apply to IPv6 addresses.</li>
+</ul>
+<p>So, in this example, the server is allowing incoming TCP connections on ports 22 (SSH), 80 (HTTP), and 443 (HTTPS) from any IP address. It&#39;s also allowing all traffic from the specific IPv4 address <code>192.168.1.10</code> and the IPv6 address <code>2001:db8::10</code>.</p>
+<p>Understanding the output of <code>ufw status</code> is crucial for verifying that your firewall rules are configured correctly and that your server is protected as intended.</p>
+<h2 id="allowing-connections-for-common-services">Allowing Connections for Common Services</h2>
+<p>One of the great things about UFW is that it understands common network services by name. Instead of having to remember the specific port numbers for these services, you can often just use their names.</p>
+<p>For example:</p>
+<ul>
+<li><p><strong>SSH (Secure Shell)</strong>: This is the primary way you&#39;ll remotely access your server via the command line. UFW knows that SSH typically uses port 22 with the TCP protocol. To allow SSH connections, you can simply use the command:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow ssh</span></code></pre></div></li>
+<li><p><strong>HTTP (Hypertext Transfer Protocol)</strong>: This is the standard protocol for serving web pages. It usually uses port 80 with the TCP protocol. To allow incoming HTTP requests, use:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow http</span></code></pre></div></li>
+<li><p><strong>HTTPS (HTTP Secure)</strong>: This is the secure version of HTTP, often used for websites that handle sensitive information. It typically uses port 443 with the TCP protocol. To allow incoming HTTPS requests, use:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow https</span></code></pre></div></li>
+</ul>
+<p>When you use these service names with <code>ufw allow</code>, UFW looks up the corresponding port and protocol in its predefined list and creates the necessary firewall rule. This makes it much easier to manage common services.</p>
+<p>It&#39;s important to only allow the services that your server actually needs to be accessible from the network. For example, if your server is only used for running a web server, you would typically need to allow HTTP and HTTPS, but you might restrict SSH access to specific IP addresses for added security (which we&#39;ll discuss in the next substep of this section).</p>
+<h3 id="how-to-allow-connections-on-specific-ports-and-protocols">How to Allow Connections on Specific Ports and Protocols</h3>
+<p>Sometimes, the service you need to allow doesn&#39;t have a predefined name in UFW, or it might be running on a non-standard port. In these cases, you need to specify the port number and the protocol (either TCP or UDP).</p>
+<p>Here&#39;s how you do it:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow <span class="op">&lt;</span>port<span class="op">&gt;</span>/<span class="op">&lt;</span>protocol<span class="op">&gt;</span></span></code></pre></div>
+<p>Let&#39;s break this down:</p>
+<ul>
+<li><code>&lt;port&gt;</code>: This is the numerical port number that the service uses. For example, the default port for a custom web application might be 8080.</li>
+<li><code>&lt;protocol&gt;</code>: This specifies the network protocol. The most common ones you&#39;ll encounter are <code>tcp</code> and <code>udp</code>. Most services use TCP, but some, like DNS or certain game servers, might use UDP. You&#39;ll need to know which protocol the service you&#39;re allowing uses.</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<p>Let&#39;s say you have a web application running on port 8080 using the TCP protocol. To allow incoming connections to this application, you would use the command:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow 8080/tcp</span></code></pre></div>
+<p>Similarly, if you had a game server running on port 27015 using the UDP protocol, you would use:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow 27015/udp</span></code></pre></div>
+<p>It&#39;s important to know the port number and the protocol of the service you want to allow. This information is usually provided in the service&#39;s documentation or configuration files.</p>
+<p>When would you need to use this method instead of allowing by service name? You&#39;d use it when:</p>
+<ul>
+<li>The service doesn&#39;t have a predefined name in UFW.</li>
+<li>The service is running on a non-standard port (i.e., not the usual port associated with its name).</li>
+</ul>
+<h3 id="how-to-allow-connections-from-specific-ip-addresses-or-subnets">How to Allow Connections from Specific IP Addresses or Subnets</h3>
+<p>Sometimes, you might want to restrict access to certain services to only specific IP addresses or ranges of IP addresses for enhanced security. For example, you might want to allow SSH access only from your home or office IP address. UFW allows you to do this.</p>
+<p>Here&#39;s how:</p>
+<ul>
+<li><p><strong>Allowing from a specific IP address</strong>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow from <span class="op">&lt;</span>IP address<span class="op">&gt;</span> to any port <span class="op">&lt;</span>port<span class="op">&gt;</span>/<span class="op">&lt;</span>protocol<span class="op">&gt;</span></span></code></pre></div>
+<p>Replace <code>&lt;IP address&gt;</code> with the specific IP you want to allow, <code>&lt;port&gt;</code> with the port number, and <code>&lt;protocol&gt;</code> with either tcp or udp.</p>
+<p><strong>Example</strong>: To allow SSH (port 22, TCP) connections only from the IP address <code>192.168.1.100</code>, you would use:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow from 192.168.1.100 to any port 22/tcp</span></code></pre></div></li>
+<li><p><strong>Allowing from a specific network (subnet)</strong>: You can also allow traffic from an entire range of IP addresses using CIDR (Classless Inter-Domain Routing) notation.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow from <span class="op">&lt;</span>network<span class="op">&gt;</span>/<span class="op">&lt;</span>mask<span class="op">&gt;</span> to any port <span class="op">&lt;</span>port<span class="op">&gt;</span>/<span class="op">&lt;</span>protocol<span class="op">&gt;</span></span></code></pre></div>
+<p>Here, <code>&lt;network&gt;</code> is the base IP address of the network, and <code>&lt;mask&gt;</code> is the subnet mask in CIDR format (e.g., <code>/24</code>). A <code>/24</code> mask typically represents a range of 256 IP addresses.</p>
+<p><strong>Example</strong>: To allow HTTP (port 80, TCP) connections from the entire <code>192.168.1.0</code> network (with a subnet mask of 255.255.255.0, which is <code>/24</code> in CIDR), you would use:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow from 192.168.1.0/24 to any port 80/tcp</span></code></pre></div></li>
+</ul>
+<p>This level of control is very important for security. By restricting access to essential services like SSH to only trusted IP addresses, you significantly reduce the risk of unauthorized access.</p>
+<p>Why is this more secure than just allowing a service from &quot;Anywhere&quot;? Because it limits the potential attackers to only those who might be able to route traffic from the allowed IP addresses.</p>
+<h2 id="denying-connections">Denying Connections</h2>
+<p>The <code>ufw deny</code> command works very similarly to the <code>ufw allow</code> command. You can deny connections based on service name, port and protocol, or source IP address/subnet.</p>
+<p>Here are some examples:</p>
+<ul>
+<li><p><strong>Denying a service by name</strong>: Let&#39;s say you had previously allowed a service like Telnet (which is generally insecure) for testing, and now you want to explicitly block it. You could use:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw deny telnet</span></code></pre></div>
+<p>This would block any incoming connections to the standard Telnet port (usually port 23 TCP) from any IP address.</p></li>
+<li><p><strong>Denying traffic on a specific port and protocol</strong>: If you know a specific port and protocol are being used for malicious activity, you can block them. For example, to block all UDP traffic on port 12345:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw deny 12345/udp</span></code></pre></div></li>
+<li><p><strong>Denying traffic from a specific IP address</strong>: If you notice suspicious activity coming from a particular IP address, you can block all traffic from it:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw deny from <span class="op">&lt;</span>suspicious IP address<span class="op">&gt;</span></span></code></pre></div>
+<p>For example:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw deny from 203.0.113.15</span></code></pre></div>
+<p>You can also specify a port and protocol if you only want to block traffic from that IP on a specific service:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw deny from 203.0.113.15 to any port 22/tcp</span></code></pre></div>
+<p>This would block SSH connections specifically from the IP address <code>203.0.113.15</code>.</p></li>
+<li><p><strong>Denying traffic from a specific subnet</strong>: Similar to allowing, you can also deny traffic from an entire network range:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw deny from <span class="op">&lt;</span>malicious network<span class="op">&gt;</span>/<span class="op">&lt;</span>mask<span class="op">&gt;</span></span></code></pre></div>
+<p>For example, to block all traffic from the <code>10.0.0.0/8</code> network:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw deny from 10.0.0.0/8</span></code></pre></div></li>
+</ul>
+<p><strong>Important Note</strong>: <code>deny</code> rules take precedence over <code>allow</code> rules. So, if you have a rule allowing traffic from a specific IP address on port 80, but you also have a rule denying all traffic from that same IP address, the deny rule will be enforced.</p>
+<p>Why would you need to explicitly deny connections?</p>
+<ul>
+<li><strong>Security Hardening</strong>: To block potentially insecure or unnecessary services.</li>
+<li><strong>Mitigating Attacks</strong>: To block traffic from known malicious IP addresses or networks.</li>
+<li><strong>Granular Control</strong>: To override broader <code>allow</code> rules for specific sources.</li>
+</ul>
+<h3 id="when-denying-specific-connections-might-be-necessary-for-server-hardening">When Denying Specific Connections Might Be Necessary for Server Hardening</h3>
+<p>Explicitly denying connections, beyond just not allowing them, can be a crucial part of hardening your server&#39;s security posture. Here are a few scenarios where using <code>ufw deny</code> is particularly important:</p>
+<ul>
+<li><p><strong>Blocking Known Malicious Actors</strong>: If you identify specific IP addresses or entire networks that are consistently trying to attack your server (e.g., through log analysis or intrusion detection systems), you can use ufw deny from <code>&lt;IP address&gt;</code> or ufw deny from <code>&lt;network&gt;/&lt;mask&gt;</code> to block all communication from them. This proactively prevents them from even attempting to connect to any services on your server.</p></li>
+<li><p><strong>Disabling Insecure or Unnecessary Services</strong>: Even if you haven&#39;t explicitly allowed a service, if it&#39;s running and listening on a port, there&#39;s a potential (though often small with default configurations) risk. Using ufw deny <code>&lt;service name&gt;</code> or ufw deny <code>&lt;port&gt;/&lt;protocol&gt;</code> ensures that these services are actively blocked at the firewall level, adding an extra layer of security. For example, you might want to explicitly deny Telnet or other outdated protocols that you know you&#39;ll never use.</p></li>
+<li><p><strong>Overriding Broader Allow Rules</strong>: Imagine you&#39;ve allowed connections from an entire internal network (<code>192.168.1.0/24</code>) to your web server on port 80. However, you know that a specific IP address within that network (<code>192.168.1.50</code>) has been compromised. Instead of completely blocking the entire internal network, you can create a specific <code>ufw deny from 192.168.1.50 to any port 80/tcp</code> rule. This will block the compromised host from accessing the web server while still allowing other hosts on the same network. Remember, <code>deny</code> rules take precedence.</p></li>
+<li><p><strong>Geoblocking (with caution)</strong>: In some advanced scenarios, if you know that the vast majority of legitimate traffic to your server comes from a specific geographic region, you could potentially deny traffic from other parts of the world. However, this needs to be done with extreme caution as IP address geolocation isn&#39;t always perfectly accurate, and you might inadvertently block legitimate users. UFW itself doesn&#39;t have built-in geoblocking capabilities, but this illustrates the concept of denying based on origin.</p></li>
+</ul>
+<p>In essence, <code>ufw deny</code> provides you with a powerful tool to actively block unwanted communication, adding a significant layer of defense to your server. It&#39;s about being proactive in identifying and blocking potential threats or unnecessary access points.</p>
+<h2 id="managing-ufw-rules">Managing UFW Rules</h2>
+<p>As you add more rules to your firewall, it becomes important to be able to see them in an organized way and to make changes when necessary.</p>
+<p>UFW provides a convenient way to list your rules with line numbers. This is particularly useful when you want to delete a specific rule. To see your rules with line numbers, you use the command:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status numbered</span></code></pre></div>
+<p>The output will look similar to the regular <code>ufw status</code>, but with an added column for the rule number:</p>
+<pre class="shell"><code>Status: active
+
+     To                         Action      From
+[ 1] 22/tcp                     ALLOW       Anywhere
+[ 2] 80/tcp                     ALLOW       Anywhere
+[ 3] 443/tcp                    ALLOW       Anywhere
+[ 4] Anywhere                   ALLOW       192.168.1.10
+[ 5] 22/tcp (v6)                ALLOW       Anywhere (v6)
+[ 6] 80/tcp (v6)                ALLOW       Anywhere (v6)
+[ 7] 443/tcp (v6)               ALLOW       Anywhere (v6)
+[ 8] Anywhere (v6)              ALLOW       2001:db8::10</code></pre>
+<p>Notice the <code>[ ]</code> brackets at the beginning of each rule line containing a number. This is the line number associated with that specific rule.</p>
+<p>Why are these line numbers important? Because you use them to delete rules. Instead of having to remember the exact syntax of a rule you want to remove, you can simply refer to its line number.</p>
+<h3 id="how-to-delete-ufw-rules-using-their-line-number">How to Delete UFW Rules Using Their Line Number</h3>
+<p>To delete a rule, you use the command:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw delete <span class="op">&lt;</span>number<span class="op">&gt;</span></span></code></pre></div>
+<p>You simply replace <code>&lt;number&gt;</code> with the line number of the rule you want to remove, as shown in the output of <code>ufw status numbered</code>.</p>
+<p><strong>Example</strong>:</p>
+<p>Let&#39;s say you want to remove the rule that allows HTTP traffic (port 80/tcp) from anywhere, and when you ran <code>sudo ufw status numbered</code>, it showed up as line number 2:</p>
+<pre class="shell"><code>Status: active
+
+     To                         Action      From
+[ 1] 22/tcp                     ALLOW       Anywhere
+[ 2] 80/tcp                     ALLOW       Anywhere
+[ 3] 443/tcp                    ALLOW       Anywhere
+...</code></pre>
+<p>To delete this rule, you would use the command:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw delete 2</span></code></pre></div>
+<p>UFW will then ask you to confirm if you really want to delete the rule:</p>
+<pre class="shell"><code>Deleting:
+ allow 80/tcp
+Proceed with operation (y|n)?</code></pre>
+<p>Type <code>y</code> and press Enter to confirm the deletion. After the rule is deleted, if you run <code>sudo ufw status</code>, you should see that the rule for port 80 is no longer listed.</p>
+<p><strong>Important Caution</strong>: Be very careful when deleting rules, especially if you&#39;re working on a production server. Accidentally deleting a rule that allows access to a critical service (like SSH) can lock you out of your server. Always double-check the rule number before deleting it.</p>
+<p>Also, be extremely cautious about deleting the <strong>default incoming/outgoing policies</strong> unless you fully understand the implications. These default policies are the foundation of your firewall&#39;s security stance. Removing or changing them incorrectly can have unintended and potentially severe security consequences.</p>
+<h2 id="logging-with-ufw">Logging with UFW</h2>
+<p>Think of UFW logging as keeping a record of who tried to come to your server&#39;s door and whether they were allowed in or turned away. This can be incredibly valuable for monitoring your server&#39;s security and troubleshooting connection issues.</p>
+<p>UFW has its own logging mechanism that records firewall activity. You can control whether logging is enabled or disabled using the following commands:</p>
+<ul>
+<li><p><strong>Enable Logging</strong>:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw logging on</span></code></pre></div>
+<p>This command starts the UFW logging service. After enabling it, UFW will begin recording firewall-related events in your system logs.</p></li>
+<li><p><strong>Disable Logging</strong>:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw logging off</span></code></pre></div>
+<p>This command stops the UFW logging service. You might want to temporarily disable logging if you are performing a lot of network activity and don&#39;t need the logs at that moment, or if you&#39;re troubleshooting something specific. However, for continuous security monitoring, it&#39;s generally a good idea to keep logging enabled.</p></li>
+</ul>
+<p>Why is logging important?</p>
+<ul>
+<li><strong>Security Analysis</strong>: Logs can help you identify potential security threats, such as repeated failed connection attempts from a specific IP address, which might indicate a brute-force attack.</li>
+<li><strong>Troubleshooting</strong>: If a legitimate user is having trouble connecting to a service on your server, the logs can provide clues about whether the firewall is blocking their connection and why.</li>
+<li><strong>Auditing</strong>: Logs provide a record of network activity and firewall decisions, which can be useful for security audits and compliance requirements.</li>
+</ul>
+<p>Once logging is enabled, the firewall logs are typically stored in the standard system log files, often located in <code>/var/log/ufw.log</code> or <code>/var/log/syslog</code> (depending on your system configuration). You can use standard Linux command-line tools like <code>cat</code>, <code>grep</code>, <code>less</code>, or <code>tail</code> to view and analyze these logs.</p>
+<h3 id="different-logging-levels">Different Logging Levels</h3>
+<p>UFW offers different levels of logging, which control the verbosity of the information recorded in your logs. Choosing the right logging level is a balance between getting enough detail for security analysis and not overwhelming your logs with excessive information.</p>
+<p>Here are the common logging levels in UFW:</p>
+<ul>
+<li><p><code>off</code>: As we discussed, this disables logging entirely. You would typically only use this temporarily for specific troubleshooting or performance testing where log activity might interfere. Generally, you&#39;ll want logging to be enabled for security reasons.</p></li>
+<li><p><code>low</code>: This level logs only blocked packets and dropped invalid packets. It&#39;s the least verbose level and is often sufficient for general security monitoring. You&#39;ll see records of attempts to connect to ports that are not open or packets that are malformed and discarded by the firewall. This level can help you identify basic attack attempts.</p></li>
+<li><p><code>medium</code>: This level includes everything logged in <code>low</code> mode, plus allowed packets and new connections. This provides a more comprehensive view of the network traffic passing through your firewall. While it gives you more detail, it can also generate a larger volume of log data, especially on a busy server. This level can be useful for more detailed troubleshooting or when you need to understand which connections were successfully established.</p></li>
+<li><p><code>high</code>: This is the most verbose logging level. It logs all packets, including those that are blocked, allowed, and dropped due to invalid state. This level provides the most detailed information about every network interaction. However, it can generate a significant amount of log data very quickly, potentially impacting disk space and system performance if not managed properly (e.g., through log rotation). You might use this level temporarily when investigating a specific security incident or network issue that requires very granular details.</p></li>
+</ul>
+<p><strong>When to use each level</strong>:</p>
+<ul>
+<li><code>off</code>: Use sparingly, primarily for temporary troubleshooting or specific scenarios where logging is not needed.</li>
+<li><code>low</code>: Suitable for general, ongoing security monitoring on most production servers. It provides essential information about blocked attempts without being overly verbose.</li>
+<li><code>medium</code>: Useful for more in-depth troubleshooting of network connectivity issues or when you need to see both blocked and allowed connections. Be mindful of the increased log volume.</li>
+<li><code>high</code>: Best used temporarily when actively investigating a security incident or a complex network problem where you need to see every single packet. Remember to switch back to a lower level afterward to avoid excessive log growth.</li>
+</ul>
+<p>You can set the logging level using the command:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw logging <span class="op">&lt;</span>level<span class="op">&gt;</span></span></code></pre></div>
+<p>Replace <code>&lt;level&gt;</code> with <code>off</code>, <code>low</code>, <code>medium</code>, or <code>high</code>. For example, to set the logging level to medium, you would use:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw logging medium</span></code></pre></div>
+<p>Understanding these different logging levels allows you to tailor the amount of information you collect to your specific needs and the resources of your server.</p>
+</body>
+</html>

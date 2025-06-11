@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="setting-up-a-chroot-environment">Setting Up a Chroot Environment</h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#setting-up-a-chroot-environment">Setting Up a Chroot Environment</a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#understanding-chroot-environments">Understanding Chroot Environments</a>
+<ul>
+<li><a href="#the-limitations-of-chroot">The Limitations of Chroot</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#planning-the-chroot-setup">Planning the Chroot Setup</a>
+<ul>
+<li><a href="#deciding-on-the-location-for-the-chroot-directories">Deciding on the Location For the Chroot Directories</a></li>
+</ul></li>
+<li><a href="#creating-the-chroot-directory-structure">Creating the Chroot Directory Structure</a></li>
+<li><a href="#copying-necessary-binaries-and-libraries">Copying Necessary Binaries and Libraries</a>
+<ul>
+<li><a href="#sftp-server">sftp-server</a></li>
+<li><a href="#git">git</a></li>
+<li><a href="#nano">nano</a></li>
+<li><a href="#bash">bash</a></li>
+</ul></li>
+<li><a href="#setting-up-user-accounts">Setting Up User Accounts</a></li>
+<li><a href="#configuring-ssh-for-chroot">Configuring SSH for Chroot</a></li>
+<li><a href="#testing-the-chroot-environment">Testing the Chroot Environment</a>
+<ul>
+<li><a href="#understanding-potential-issues-and-troubleshooting">Understanding Potential Issues and Troubleshooting</a></li>
+</ul></li>
+<li><a href="#change-a-users-shell-to-rssh">Change a Users Shell to RSSH</a></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<p>Setting up chroot environments is a good way to enhance security of your server. In a nutshell, a chroot environment restricts a user&#39;s access to a specific directory tree, making it seem like that directory is the root of their file system. This limits what they can see and do on your server.</p>
+<h3 id="understanding-chroot-environments">Understanding Chroot Environments</h3>
+<p>Imagine a child playing in a sandbox. The sandbox is their limited world - they can play with the sand and toys inside, but they can&#39;t wander off into the wider garden or the house. A chroot environment is similar to this sandbox for users on your server.</p>
+<p><strong>Definition</strong>: A chroot environment, short for &quot;change root&quot;, is a way to isolate a user or process to a specific directory tree on your system. For a user inside a chroot jail, this designated directory becomes their apparent root directory (<code>/</code>). They cannot access any files or directories outside of this restricted view.</p>
+<p><strong>Security Benefits</strong>: This isolation provides significant security benefits:</p>
+<ul>
+<li><strong>Limited Damage</strong>: If a chrooted user&#39;s account is compromised, the attacker&#39;s access is limited to the chroot environment. They cannot easily access or modify critical system files or other user&#39;s data outside of this jail.</li>
+<li><strong>Restricted Actions</strong>: By controlling which files and commands are available within the chroot, you can limit what actions a user can perform on your server.</li>
+</ul>
+<p>Think of it like giving someone a locked briefcase with only the tools they need for a specific task. They can use those tools, but they can&#39;t access anything else you haven&#39;t provided.</p>
+<h4 id="the-limitations-of-chroot">The Limitations of Chroot</h4>
+<p>It&#39;s important to understand that while chroot adds a significant layer of security, it&#39;s not a completely foolproof solution. Think of our sandbox analogy again. While the child can&#39;t easily get out of the sandbox, a determined and clever child might find ways to dig under the walls or use tools in unexpected ways.</p>
+<p>Here are some limitations of chroot:</p>
+<ul>
+<li><strong>Escape Vulnerabilities</strong>: Historically, there have been ways for skilled users or attackers to &quot;escape&quot; the chroot jail by exploiting vulnerabilities in the kernel or in the setuid/setgid binaries within the chroot. While modern systems are more robust, it&#39;s not impossible.</li>
+<li><strong>Kernel Access</strong>: The chrooted environment still shares the same kernel as the host system. Therefore, a user inside the chroot could potentially exploit kernel vulnerabilities to gain broader access.</li>
+<li><strong>Resource Exhaustion</strong>: A malicious user within the chroot could potentially try to exhaust system resouces (like CPU or memory), affecting other users and processes on the server.</li>
+</ul>
+<p>Chroot is a valuable <em>defense in depth</em> mechanism. It makes it significantly harder for unauthorized users to cause harm, but it should ideally be used in conjunction with other security best practices, such as keeping your system updated, using strong passwords, and limiting privileges of chrooted users as much as possible.</p>
+<h2 id="planning-the-chroot-setup">Planning the Chroot Setup</h2>
+<p>This is a crucial step as it will determine how useful and secure your chroot environments will be. Think back to the &quot;locked briefcase&quot; analogy. Before we can even create the briefcase, we need to decide what tools the user <em>actually</em> needs inside to do their specific job. Putting in too many tools increases the risk if the briefcase is compromised. Putting in too few will make it impossible for the user to do their work.</p>
+<p>Here are some key questions to consider during this planning phase:</p>
+<ol type="1">
+<li><strong>What specific tasks will these users need to perform on the server via SSH?</strong> Will they be transferring files (using <code>scp</code> or <code>sftp</code>)? Will they need to run specific commands? Do they need a shell prompt at all?</li>
+<li><strong>Based on these tasks, what are the absolute minimum set of commands and utilities they will require?</strong> For example, if they only need to transfer files using <code>sftp</code>, they might not need a full shell like <code>bash</code>.</li>
+<li><strong>What level of access do they need to the file system <em>within</em> their restricted environment?</strong> Do they need to be able to create directories? Read and write files in specific locations within their chroot?</li>
+</ol>
+<p>Answering these questions will help you determine which directories, binaries (executable programs), and libraries will be necessary to include in the chroot environment. The goal is to keep the chroot environment as minimal as possible, providing only what is strictly required for the intended purpose. This reduces the potential attack surface.</p>
+<p>For example, if a user only needs to upload and download files securely, you might only need to provide the <code>sftp</code> subsystem of SSH and the necessary supporting libraries, without giving them a shell or other commands.</p>
+<h3 id="deciding-on-the-location-for-the-chroot-directories">Deciding on the Location For the Chroot Directories</h3>
+<p>A common and logical place to create chroot environments is within the <code>/home</code> directory. We can create a dedicated subdirectory there, perhaps prefixed with <code>chroot-</code>, followed by the username. For example:</p>
+<ul>
+<li>For a username <code>alice</code>, the chroot directory could be <code>/home/chroot-alice</code>.</li>
+<li>For a username <code>bob</code>, the chroot directory could be <code>/home/chroot-bob</code>.</li>
+</ul>
+<p>This approach keeps the chroot environments organized and separate from the user&#39;s actual home directories (if they had any non-chrooted access, which in this case they won&#39;t).</p>
+<p>Why <code>/home</code>? It&#39;s a standard location for user-related data, and it often has reasonable default permissions.</p>
+<h2 id="creating-the-chroot-directory-structure">Creating the Chroot Directory Structure</h2>
+<p>Think of building the foundation for our &quot;sandbox&quot;. We need to create the basic folders that will make the chroot environment functional. Inside the <code>/home/chroot-username</code> directory (where <code>username</code> is the name of the user), we&#39;ll need to create some essential subdirectories. The most common ones are:</p>
+<ul>
+<li><code>bin</code>: This directory will hold the essential executable files (the commands) that the user will be allowed to run within the chroot. For our case, this will likely include <code>sftp-server</code> (part of the SSH suite), <code>git</code>, and perhaps the executable for your chosen editor (<code>nano</code> or <code>vim</code>), and a shell environment which is typically <code>bash</code>.</li>
+<li><code>lib</code> and <code>lib64</code>: These directories will contain the shared libraries that the executables in the <code>bin</code> directory depend on. Think of libraries as supporting files that the main programs need to run correctly.</li>
+<li><strong>Potentially other directories</strong>: Depending on the specific needs of your chosen executables, you might need other directories like <code>/usr</code>, <code>/etc</code>, or <code>/dev</code>.</li>
+</ul>
+<p>To create these basic directories for our example user <code>alice</code>, you would use the <code>mkdir</code> command in the terminal. Assuming you are logged in with <code>sudo</code> privileges, you would run something like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /home/chroot-alice/<span class="dt">{bin</span><span class="op">,</span><span class="dt">lib</span><span class="op">,</span><span class="dt">lib64}</span></span></code></pre></div>
+<p>The <code>-p</code> flag ensures that if the parent directory (<code>/home/chroot-alice</code>) doesn&#39;t exist, it will be created as well. We use curly braces <code>{}</code> to create multiple directories at once.</p>
+<h2 id="copying-necessary-binaries-and-libraries">Copying Necessary Binaries and Libraries</h2>
+<p>The next crucial step is copying the necessary binaries and libraries. This is where we put the actual &quot;tools&quot; and their &quot;helper parts&quot; into the chroot &quot;briefcase.&quot;</p>
+<p>The key is to copy only the <em>essential executables</em> and the <em>exact</em> libraries they depend on. Copying too much will make the chroot environment larger and potentially introduce security risks.</p>
+<p>How do we know which libraries a program needs? This is where the handy command <code>ldd</code> comes in. <code>ldd</code> (short for &quot;list dynamic dependencies&quot;) shows you the shared libraries that a given executable depends to run.</p>
+<p>For example, we&#39;ll first figure out the dependencies for <code>sftp-server</code>. Open your terminal and run the following command:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ldd</span> /usr/lib/openssh/sftp-server</span></code></pre></div>
+<p>(Note: The exact path to <code>sftp-server</code> might be slightly different on your system, but it&#39;s usually in a directory related to <code>openssh</code>.)</p>
+<p>The output of this command will be a list of shared libraries that <code>sftp-server</code> needs. Each line will typically show the name of a library (like libc.so.6) and the path to where that library is located on your system (like /lib/arm-linux-gnueabihf/libs.so.6).</p>
+<p>Our next step will be to copy the <code>sftp-server</code> executable itself into the <code>/home/chroot-alice/bin</code> directory, and then copy all the listed libraries into the appropriate <code>lib</code> or <code>lib64</code> directory within the chroot.</p>
+<p>We&#39;ll repeat this process for <code>git</code> and your chosen editor (<code>nano</code> or <code>vim</code>).</p>
+<blockquote>
+<p>Why is it important to use <code>ldd</code>? Because simply copying the executable file isn&#39;t enough. Without its dependent libraries, the program won&#39;t be able to run inside the isolated chroot environment. It&#39;s like having a car (the executable) but not the engine or wheels (the libraries) - it&#39;s not going anywhere!</p>
+</blockquote>
+<p>Now you should have the list of libraries that <code>sftp-server</code> depends on, let&#39;s proceed with <strong>Copying Necessary Binaries and Libraries</strong> into our chroot environment for <code>alice</code> (which we created at <code>/home/chroot-alice</code>).</p>
+<h3 id="sftp-server">sftp-server</h3>
+<p>Here&#39;s what you need to do:</p>
+<ol type="1">
+<li><p><strong>Copy the <code>sftp-server</code> executable</strong>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /usr/lib/openssh/sftp-server /home/chroot-alice/bin/</span></code></pre></div>
+<p>(or <code>sudo cp /bin/sftp-server /home/chroot-alice/bin/</code> if that&#39;s the path <code>ldd</code> showed for you).</p></li>
+<li><p><strong>Examine the output of <code>ldd</code> again</strong>. For each library listed (e.g., <code>/lib/arm-linux-gnueabihf/libc.so.6</code>), you need to copy that library file to the corresponding directory within your chroot environment.</p>
+<ul>
+<li><p>If the library path starts with <code>/lib/</code>, copy it to <code>/home/chroot-alice/lib</code>. For example:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /lib/arm-linux-gnueabifh/libc.so.6 /home/chroot/alice/lib/</span></code></pre></div></li>
+<li><p>If the library path starts with <code>/usr/lib/</code>, copy it to <code>/home/chroot-alice/usr/lib/</code> (you might need to create the <code>/usr/lib</code> directory inside your chroot first if it doesn&#39;t exist: <code>sudo mkdir -p /home/chroot-alice/lib</code>). For example:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /home/chroot-alice/usr/lib</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /usr/lib/your-library.so.X /home/chroot-alice/usr/lib/</span></code></pre></div>
+<p>(Replace <code>your-library-.so.X</code> with the actual library name from the <code>ldd</code> output).</p></li>
+<li><p>If the library path starts with <code>/lib64/</code>, copy it to <code>/home/chroot-alice/lib64/</code>. For example:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /lib64/your-library.so.X /home/chroot-alice/lib64/</span></code></pre></div>
+<p>(Replace your-library.so.X with the actual library name from the ldd output).</p></li>
+</ul></li>
+</ol>
+<p>It&#39;s important to copy the <em>actual library files</em>, not just the symbolic links (which are like shortcuts). <code>ldd</code> usually shows the resolved path to the actual library.</p>
+<p>This might seem a bit tedious, but its crucial for creating a self-contained chroot environment.</p>
+<p>Let&#39;s run through a output for <code>ldd /usr/lib/openssh/sftp-server</code> and go through the dependencies. Here is a sample output:</p>
+<pre class="shell"><code>  linux-vdso.so.1 (0x0000792d50bd6000)
+  libcrypto.so.3 =&gt; /lib/x86_64-linux-gnu/libcrypto.so.3 (0x0000792d50600000)
+  libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x0000792d50200000)
+  /lib64/ld-linux-x86-64.so.2 (0x0000792d50bd8000)</code></pre>
+<blockquote>
+<p><strong>What about the library <code>linux-vdso.so.1</code></strong>? <code>linux-vdso.so.1</code> is a bit special. It&#39;s a virtual dynamic shared object provided by the Linux kernel itself. It&#39;s not a real file on your file system that you can copy in the traditional way. So, for the <code>linux-vdso.so.1</code>, you don&#39;t need to do anything! You can simply ignore it in the <code>ldd</code> output when your thinking about which files to copy.</p>
+</blockquote>
+<p>Let&#39;s move on to the first real library dependency: <code>libcrypto.so.3</code> located at <code>/lib/x86_64-linux-gnu/libcrypto.so.3</code>.</p>
+<p>Now, to copy this library into our chroot environment for <code>alice</code> (<code>/home/chroot-alice</code>), we need to put it in the corresponding <code>lib</code> directory within the chroot. Since the original path starts with <code>/lib/</code>, we will copy it to <code>/home/chroot-alice/lib/</code>.</p>
+<p>Here&#39;s the command you would need to run:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /lib/x86_64-linux-gnu/libcrypto.so.3 /home/chroot-alice/lib/</span></code></pre></div>
+<p>After running this command, the <code>libcrypto.so.3</code> library will be present within the <code>lib</code> directory of Alice&#39;s chroot environment. This ensures that when <code>sftp-server</code> tries to use this library, it will be able to find it within its restricted view of the file system.</p>
+<p>Let&#39;s move on to the next library listed from our <code>ldd</code> command: <code>libc.so.6</code> located at <code>/lib/x86_64-linux-gnu/libc.so.6</code>. This is a very common and fundamental library that almost every program on a Linux system relies on.</p>
+<p>Just like we did with <code>libcrypto.so.3</code>, we need to copy <code>libc.so.6</code> into the corresponding <code>lib</code> directory within our chroot environment for <code>alice</code>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /lib/x86_64-linux-gnu/libc.so.6 /home/chroot-alice/lib/</span></code></pre></div>
+<p>This ensures that sftp-server will have access to the core system functions it needs to run.</p>
+<p>We successfully copied all the necessary libraries for the <code>sftp-server</code> command into the chroot environment for the user <code>alice</code>. This was a crucial step in making sure that <code>sftp</code> will be functional within the restricted environment.</p>
+<h3 id="git">git</h3>
+<p>Now, we need to repeat this process for the other commands we want to allow: <code>git</code> and your chosen editor.</p>
+<p>Let&#39;s move on to <code>git</code>.</p>
+<p>First let&#39;s copy the git binary into Alice&#39;s chroot environment:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /usr/bin/git /home/chroot-alice/bin/</span></code></pre></div>
+<p>Then we need to list its dependencies:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ldd</span> /usr/bin/git</span></code></pre></div>
+<p>Here is an example output:</p>
+<pre class="shell"><code>  linux-vdso.so.1 (0x00007160248ef000)
+  libpcre2-8.so.0 =&gt; /lib/x86_64-linux-gnu/libpcre2-8.so.0 (0x0000716024838000)
+  libz.so.1 =&gt; /lib/x86_64-linux-gnu/libz.so.1 (0x000071602481c000)
+  libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x0000716024000000)
+  /lib64/ld-linux-x86-64.so.2 (0x00007160248f1000)</code></pre>
+<p>Our first library to copy for <code>git</code> is: <code>libpcre2-8.so.0</code> located at <code>/lib/x86_64-linux-gnu/libpcre2-8.so.0</code>. This library provides support for Perl Compatible Regular Expressions, which git uses for pattern matching.</p>
+<p>Let&#39;s copy this library into the <code>lib</code> directory within Alice&#39;s chroot:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /lib/x86_64-linux-gnu/libpcre2-8.so.0 /home/chroot-alice/lib/</span></code></pre></div>
+<p>The next library for <code>git</code> is: <code>libz.so.1</code> located at <code>/lib/x86_64-linux-gnu/libz.so.1</code>. This library provides data compression and decompression functionalities, which git uses for handling repository data efficiently.</p>
+<p>Let&#39;s copy this library into the <code>lib</code> directory within Alice&#39;s chroot:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /lib/x86_64-linux-gnu/libz.so.1 /home/chroot-alice/lib/</span></code></pre></div>
+<p>The next library for <code>git</code> is: <code>libc.so.6</code>. We already copied this library for <code>sftp-server</code>, so we can skip this one.</p>
+<p>The last library for <code>git</code> is: <code>ld-linux-x86-64.so.2</code> located at <code>/lib64/ld-linux-x86-64.so.2</code>. This is a dynamic linker dependency. We need to copy this crucial file into the <code>/home/chroot-alice/lib64/</code> directory:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /lib64/ld-linux-x86-64.so.2 /home/chroot-alice/lib64/</span></code></pre></div>
+<p>That should cover the dependencies needed for <code>git</code>.</p>
+<h3 id="nano">nano</h3>
+<p>We can now move on to our text editor. For this example we will use <code>nano</code>. We&#39;ll first copy the executable and get a list of dependencies for <code>nano</code>.</p>
+<p>Copy the executable into Alice&#39;s chroot:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /usr/bin/nano /home/chroot-alice/bin/</span></code></pre></div>
+<p>Now list the dependencies for <code>nano</code>:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ldd</span> /usr/bin/nano</span></code></pre></div>
+<p>Here is an example output in the terminal:</p>
+<pre class="shell"><code>  linux-vdso.so.1 (0x0000736c6e544000)
+  libncursesw.so.6 =&gt; /lib/x86_64-linux-gnu/libncursesw.so.6 (0x0000736c6e4a1000)
+  libtinfo.so.6 =&gt; /lib/x86_64-linux-gnu/libtinfo.so.6 (0x0000736c6e46f000)
+  libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x0000736c6e200000)
+  /lib64/ld-linux-x86-64.so.2 (0x0000736c6e546000)</code></pre>
+<p>From this output, it looks like the only new libraries we need to add to Alice&#39;s chroot is <code>libncursesw.so.6</code>, and <code>libtinfo.so.6</code>.</p>
+<p>Let&#39;s get those dependencies copied over:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /lib/x86_64-linux-gnu/libncursesw.so.6 /home/chroot-alice/lib/</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /lib/x86_64-linux-gnu/libtinfo.so.6 /home/chroot-alice/lib/</span></code></pre></div>
+<h3 id="bash">bash</h3>
+<p>Finally, so that our user can interact with the server, we will provide them with the shell prompt <code>bash</code>.</p>
+<p>Let&#39;s copy over the executable to Alice&#39;s chroot:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /bin/bash /home/chroot-alice/bin/</span></code></pre></div>
+<p>Now, let&#39;s take a look at the dependencies we will need for <code>bash</code>:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ldd</span> /bin/bash</span></code></pre></div>
+<p>Here is a example output:</p>
+<pre class="shell"><code>  linux-vdso.so.1 (0x00007de3b301d000)
+  libtinfo.so.6 =&gt; /lib/x86_64-linux-gnu/libtinfo.so.6 (0x00007de3b2e6a000)
+  libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007de3b2c00000)
+  /lib64/ld-linux-x86-64.so.2 (0x00007de3b301f000)</code></pre>
+<p>It looks like we have already copied these libraries into Alice&#39;s chroot environment, so we don&#39;t need to copy any additional libraries.</p>
+<p>We&#39;ve now covered gathering all of the necessary binaries and libraries.</p>
+<h2 id="setting-up-user-accounts">Setting Up User Accounts</h2>
+<p>Think of this step as creating the &quot;inhabitants&quot; for our carefully constructed &quot;sandboxes&quot;. We need to create the actual user accounts on the server that will be restricted to these chroot environments.</p>
+<p>The standard way to create new user accounts on most Linux distributions is using the <code>adduser</code> command. This command is interactive and will guide you through the process of creating a new user, setting their password, and optionally adding some basic user information.</p>
+<p>To create a new user named, for example, <code>alice</code> (who will be confined to the <code>/home/chroot-alice</code> directory we&#39;ve been working on), you would run the following command in your terminal:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> adduser alice</span></code></pre></div>
+<p>When you run this, you will be prompted to:</p>
+<ol type="1">
+<li>Enter a password for <code>alice</code>. It&#39;s crucial to choose a <strong>strong and unique password</strong> for each user to maintain the security of your server.</li>
+<li>Re-enter the password to confirm it,</li>
+<li>Enter optional full name, room number, work phone, home phone, and other information. You can usually leave these fields blank by pressing Enter if you don&#39;t need them.</li>
+<li>Finally, you&#39;ll be asked to confirm the information you&#39;ve entered. Type <code>y</code> and press Enter to create the user account.</li>
+</ol>
+<p>You&#39;ll need to repeat this process for each new user you want to create who will have a chroot environment (e.g., for a user named <code>bob</code>, you&#39;d run <code>sudo adduer bob</code>, and so on, making sure you&#39;ve created a corresponding chroot directory like <code>/home/chroot-bob</code> and copied the necessary files into it).</p>
+<blockquote>
+<p>Why is creating separate user accounts important? Each user account has its own unique identifier and permissions on the system. This allows you to manage access and track actions on a per-user basis.</p>
+</blockquote>
+<p>After creating the user account, we&#39;ll later link it to its specific chroot directory.</p>
+<h2 id="configuring-ssh-for-chroot">Configuring SSH for Chroot</h2>
+<p>Now we need to tell the SSH server (<code>sshd</code>) to actually enforce the chroot restriction for the new users.</p>
+<p>Think of it like setting the rules for our &quot;sandbox&quot;. We&#39;ve built the sandbox (the chroot directory) and put the toys (binaries and libraries) inside. Now, we need to tell the &quot;playground supervisor&quot; (the SSH server) that certain kids (our new users) are only allowed to play in their specific sandbox and can&#39;t wander off.</p>
+<p>We configure the SSH server by editing its main configuration file, which is usually located at <code>/etc/ssh/sshd_config</code>. <strong>Be very careful when editing this file</strong>, as incorrect changes can lock you out of your server! It&#39;s always a good idea to make a backup of the file before making any modifications. You can do this with the command:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp /etc/ssh/sshd_config /etc/ssh/sshd_config.backup</span></code></pre></div>
+<p>Once you have a backup, you&#39;ll need to open the <code>sshd_config</code> file with a text editor that has sudo privileges (like <code>sudo nano /etc/ssh/sshd_config</code> or <code>sudo vim /etc/ssh/sshd_config</code>).</p>
+<p>Inside this file, you&#39;ll be looking for a section that starts with a comment like <code>#Subsystem sftp / usr/lib/openssh/sftp-server</code>. We need to modify this and add a new directive for chrooting.</p>
+<p>The key directive we&#39;ll be using is <code>ChrootDirectory</code>. This directive specifies the path to the directory that should become the root directory for the user or group.</p>
+<p>There are a couple of ways to apply the <code>ChrootDirectory</code> directive:</p>
+<ol type="1">
+<li><strong>Globally for a specific group</strong>: You can create a dedicated group (e.g., <code>chrooted_users</code>) and then specify that all members of this group should be chrooted to a particular directory (though typically, each user will have their own chroot directory).</li>
+<li><strong>For specific users</strong>: You can specify the <code>ChrootDirectory</code> for individual users. This is likely what we&#39;ll want to do in our case, where each user (<code>alice</code>, <code>bob</code>, etc.) will have their own unique chroot environment.</li>
+</ol>
+<p>To apply the chroot for a specific user, you&#39;ll typically use a <code>Match</code> block in the <code>sshd_config</code> file. This allows you to apply specific configurations only to users or groups that match certain criteria.</p>
+<p>Here&#39;s an example of how you might configure our user <code>alice</code>. Add these lines at the end of your <code>sshd_config</code> file:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Match</span> User alice</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ChrootDirectory</span> /home/chroot-alice</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">#ForceCommand internal-sftp</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">AllowTcpForwarding</span> no</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">X11Forwarding</span> no</span></code></pre></div>
+<p>Let&#39;s break down these lines:</p>
+<ul>
+<li><code>Match User alice</code>: This tells SSH that the following settings should apply to the user named <code>alice</code>.</li>
+<li><code>ChrootDirectory /home/chroot-alice</code>: This is the crucial part! It specifies that for <code>alice</code>, the <code>/home/chroot-alice</code> directory will become their root directory with they log in via SSH.</li>
+<li><code>ForceCommand internal-sftp</code>: This line is important if you <em>only</em> want to allow SFTP access and not a full shell, even if you copied <code>bash</code>. The <code>internal-sftp</code> is a built-in SFTP server within OpenSSH. If you want to allow a shell as well, you might omit or comment out this line. <strong>Since we added git and a text editor, we will comment out the <code>ForceCommand</code> line.</strong></li>
+<li><code>AllowTcpForwarding no</code> and <code>X11Forwarding no</code>: These are additional security measures that disable TCP forwarding and X11 forwarding for this user, further limiting their potential actions. These are generally good practices for chrooted users.</li>
+</ul>
+<p>You&#39;ll need to add a similar <code>Match</code> block for each user you want to chroot, making sure to replace <code>alice</code> with their username and <code>/home/chroot-alice</code> with their respective chroot directory.</p>
+<p>After you&#39;ve made these changes to the <code>/etc/ssh/sshd_config</code> file, you need to <strong>restart the SSH service</strong> for the changes to take effect. You can do this with the command:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart sshd</span></code></pre></div>
+<blockquote>
+<p><strong>Important Security Note</strong>: The owner of the chroot directory itself (<code>/home/chroot-alice</code> in our example) <strong>must be root</strong>, and it should not be writable by the chrooted user or any other non-root user. If the chroot directory is writable by the user, they might be able to escape the chroot.</p>
+</blockquote>
+<p>After restarting the SSH service, it&#39;s a good idea to quickly check if the service is running correctly. You can do this with the command:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status sshd</span></code></pre></div>
+<p>Look for the line that says &quot;Active: active (running)&quot; to confirm that the service restarted without any erros.</p>
+<h2 id="testing-the-chroot-environment">Testing the Chroot Environment</h2>
+<p>We should test if our &quot;sandbox&quot; is working as intended and if our &quot;playground supervisor&quot; (the SSH server) is enforcing rules correctly.</p>
+<p>To test this, you&#39;ll need to try logging into your server using the <code>alice</code> user account via SSH from another computer on your network. You&#39;ll use the standard <code>ssh</code> command followed by the username and the IP address of your server:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> alice@your_ip_or_hostname</span></code></pre></div>
+<p>When you connect, you&#39;ll be prompted for the password you set for the <code>alice</code> user.</p>
+<p>Once you&#39;re logged in, the first thing to check is your current location in the file system. If the chroot is working correctly, when you run the command <code>pwd</code> (print working directory), you should see <code>/</code> as the output. This is because, from <code>alice</code>&#39;s perspective within chroot, the <code>/home/chroot-alice</code> directory is now the root of the file system.</p>
+<p>Next, try listing the contents of the root directory using the command <code>ls -l</code>. You should only see the <code>bin</code>, <code>lib</code>, <code>lib64</code>, and any other directories you created inside <code>/home/chroot-alice</code>. You should <strong>not</strong> be able to see the regular top-level directories of your server like <code>/etc</code>, <code>/var</code>, <code>/usr</code> (unless you specifically created these inside <code>/home/chroot-alice</code>).</p>
+<p>Try running some of the commands we copied into the <code>bin</code> directory, like <code>ls</code>, <code>pwd</code>, <code>git --version</code>, or <code>nano --version</code> (or <code>vim --version</code>). These should hopefully work.</p>
+<p>Now, try to navigate outside of what should be the chroot environment. For example, try to change directory to <code>/home</code> or <code>/etc</code> using the <code>cd</code> command:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span></code></pre></div>
+<p>If the chroot is working correctly, you should either get an error message (like &quot;No such file or directory&quot;) or you might still appear to be in the <code>/</code> directory of the chroot. You definitely should not be able to access the actual <code>/home</code> directory of your server and see other directories.</p>
+<h3 id="understanding-potential-issues-and-troubleshooting">Understanding Potential Issues and Troubleshooting</h3>
+<p>Here are some common issues you might encounter when testing your chroot environment and how to troubleshoot them:</p>
+<ul>
+<li><strong>&quot;Command not found&quot; errors</strong>: If you try to run a command within the chroot and get this error, it likely means that either the executable for that command wasn&#39;t copied into the <code>bin</code> directory within the chroot, or one of its required libraries is missing from the <code>lib</code> or <code>lib64</code> directories. In this case, you&#39;ll need to go back, and use the <code>ldd</code> command, and make sure all the listed dependencies are present in the chroot.</li>
+<li><strong>Login failure via SSH</strong>: If you can&#39;t even log in as the chrooted user, double-check the sshd_config file for any typos in the username or the <code>ChrootDirectory</code> path. Also, ensure that you have restarted the <code>sshd</code> service after making changes to the configuration file. The permissions on the chroot directory itself are also crucial; it should be owned by <code>root</code> and not writable by the chrooted user.</li>
+<li><strong>Unexpected access to the file system</strong>: If, after logging in, you can navigate to directories outside of <code>/</code> (the apparent root of the chroot), it could indicate that an issue with the <code>ChrootDirectory</code> configuration in <code>sshd_config</code> or incorrect permissions on the chroot directory. Review the <code>sshd_config</code> and ensure the chroot directory&#39;s ownership and permissions are correctly set (owned by root, not writable by the user).</li>
+<li><strong>SFTP not working (if you intended only SFTP)</strong>: If you used the <code>ForceCommand internal-sftp</code> directive and SFTP isn&#39;t working, ensure that the <code>sftp-server</code> binary and its libraries were correctly copied to the chroot.</li>
+</ul>
+<h2 id="change-a-users-shell-to-rssh">Change a Users Shell to RSSH</h2>
+<p>For even tighter control, you could explore using restricted shells like <code>rssh</code>. <code>rssh</code> is a shell that only allows certain limited operations (like <code>scp</code> and <code>sftp</code>) and prevents users from executing arbitrary commands. This can be a good alternative to providing a full <code>bash</code> shell if your users primarily need file transfer capabilities. If you decide to use <code>rssh</code>, you could configure SSH to use <code>rssh</code> as the user&#39;s shell instead of <code>bash</code>.</p>
+<p>To change a user&#39;s shell to <code>rssh</code> in the <code>/etc/ssh/sshd_config</code> file, you would typically modify the <code>Match User</code> block for that specific user. Instead of just setting the <code>ChrootDirectory</code>, you would also add a <code>ForceCommand</code> directive that specifies the <code>rssh</code> command with the allowed options.</p>
+<p>First, you would need to make sure that the <code>rssh</code> package is installed on your server.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install rssh</span></code></pre></div>
+<p>Once <code>rssh</code> in installed, you can edit your <code>/etc/ssh/sshd_config</code> file (remember to make a backup first!):</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nano /etc/ssh/sshd_config</span></code></pre></div>
+<p>Then, within the <code>MatchUser</code> block for the user you want to restrict (e.g., <code>alice</code>), you would add the <code>ForceCommand</code> line. For example, if you only want to allow SFTP access with <code>rssh</code>, the block might look like this:</p>
+<pre class="shell"><code>Match User alice
+    ChrootDirectory /home/chroot-alice
+    ForceCommand /usr/bin/rssh -sftp
+    AllowTcpForwarding no
+    X11Forwarding no</code></pre>
+<p>Here, <code>/usr/bin/rssh</code> is the path to the <code>rssh</code> executable, and -sftp is an option that tells <code>rssh</code> to only allow SFTP connections.</p>
+<p>If you wanted to allow both SFTP and <code>scp</code> (secure copy) with <code>rssh</code>, the <code>ForceCommand</code> would be:</p>
+<p><code>ForceCommand /usr/bin/rssh -sftp -scp</code></p>
+<p>After making these changes, you would again need to restart the SSH service:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart sshd</span></code></pre></div>
+<p>Now, when <code>alice</code> logs in via SSH, instead of getting a regular shell (if we had allowed it), the <code>rssh</code> command will be executed, limited them to only the specified actions (in these examples, SFTP and/or SCP) within their chroot environment. Any attempt to run other commands will be blocked by <code>rssh</code>.</p>
+<p>Remember to only include the <code>rssh</code> options for the functionality you want to allow for that specific user.</p>
+</body>
+</html>

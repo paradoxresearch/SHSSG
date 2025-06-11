@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="diagnosing-network-connectivity-problems">Diagnosing Network Connectivity Problems</h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#diagnosing-network-connectivity-problems">Diagnosing Network Connectivity Problems</a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#understanding-network-basics">Understanding Network Basics</a></li>
+</ul></li>
+<li><a href="#initial-checks">Initial Checks</a></li>
+<li><a href="#verifying-ip-configuration">Verifying IP Configuration</a>
+<ul>
+<li><a href="#use-ip--a-and-ip--r-to-verify-ip-address-netmask-and-default-gateway-settings">Use <code>ip -a</code> and <code>ip -r</code> to Verify IP Address, Netmask, and Default Gateway Settings</a></li>
+<li><a href="#check-dns-server-configuration">Check DNS Server Configuration</a></li>
+</ul></li>
+<li><a href="#testing-reachability-to-local-network-devices">Testing Reachability to Local Network Devices</a>
+<ul>
+<li><a href="#using-ping-to-test-local-connectivity">Using <code>ping</code> to Test Local Connectivity</a>
+<ul>
+<li><a href="#success-reply-from-or-bytes-from">Success: &quot;Reply from...&quot; or &quot;bytes from...&quot;</a></li>
+<li><a href="#failure-destination-host-unreachable-or-request-timed-out">Failure: &quot;Destination Host Unreachable&quot; or &quot;Request timed out&quot;</a></li>
+</ul></li>
+<li><a href="#view-the-arp-cache">View the ARP Cache</a>
+<ul>
+<li><a href="#using-arp--a-or-ip-neigh">Using <code>arp -a</code> or <code>ip neigh</code></a></li>
+<li><a href="#interpreting-the-arp-cache-output">Interpreting the ARP Cache Output</a></li>
+<li><a href="#how-it-helps-troubleshoot">How it helps troubleshoot</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#testing-reachability-to-external-networks-and-services">Testing Reachability to External Networks and Services</a>
+<ul>
+<li><a href="#using-ping-to-check-connectivity-to-external-hosts">Using <code>ping</code> to Check Connectivity to External Hosts</a>
+<ul>
+<li><a href="#interpreting-output-and-potential-issues">Interpreting Output and Potential Issues</a></li>
+</ul></li>
+<li><a href="#identify-where-break-downs-occur-with-traceroute-or-mtr">Identify where Break Downs Occur with <code>traceroute</code> or <code>mtr</code></a>
+<ul>
+<li><a href="#the-traceroute-command">The traceroute Command</a>
+<ul>
+<li><a href="#interpreting-traceroute-output">Interpreting <code>traceroute</code> Output</a></li>
+</ul></li>
+<li><a href="#the-mtr-command-my-traceroute">The mtr Command (My Traceroute)</a></li>
+</ul></li>
+<li><a href="#using-dig-and-nslookup-to-diagnose-dns-resolution-problems">Using <code>dig</code> and <code>nslookup</code> to Diagnose DNS Resolution Problems</a>
+<ul>
+<li><a href="#the-dig-command-domain-information-groper">The <code>dig</code> Command (Domain Information Groper)</a></li>
+<li><a href="#the-nslookup-command-name-server-lookup">The <code>nslookup</code> Command (Name Server Lookup)</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#checking-firewall-rules">Checking Firewall Rules</a>
+<ul>
+<li><a href="#inspecting-iptables-rules">Inspecting <code>iptables</code> Rules</a></li>
+<li><a href="#inspecting-firewalld-rules">Inspecting <code>firewalld</code> Rules</a></li>
+<li><a href="#inspecting-ufw-rules">Inspecting <code>ufw</code> Rules</a></li>
+</ul></li>
+<li><a href="#analyzing-network-traffic">Analyzing Network Traffic</a>
+<ul>
+<li><a href="#capture-and-analyze-packets-with-tcpdump">Capture and Analyze Packets with <code>tcpdump</code></a>
+<ul>
+<li><a href="#what-to-look-for-and-why-its-advanced">What to Look For (and Why it&#39;s Advanced)</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<h3 id="understanding-network-basics">Understanding Network Basics</h3>
+<p>Imagine your Linux server is like a specific desk in a very large office building. For this desk to communicate, it needs some essential pieces of information:</p>
+<ul>
+<li><p><strong>IP Address (Your Desk&#39;s Unique Number)</strong>: Every desk in this building needs a unique number so people know exactly where to send a memo or where a visitor should go. Your server&#39;s IP address (e.g., <code>192.168.1.100</code>) is just like that unique number for your server on a computer network. It&#39;s how other computers find it and send information to it.</p></li>
+<li><p><strong>Subnet Mask (Your Section of the Office)</strong>: This is like knowing which &quot;section&quot; or &quot;department&quot; your desk belongs to. If you want to talk to someone in your same section, you just walk over. If they&#39;re in a different section, you send the memo to the mailroom. The subnet mask (<code>255.255.255.0</code>) helps your server figure out if another computer is in its immediate &quot;section&quot; of the network or if it needs to send the information &quot;outside its section.&quot;</p></li>
+<li><p><strong>Default Gateway (The Mailroom/Main Exit)</strong>: If you need to send a memo to someone in a different section of the building, or even to a different building altogether, you send it to the mailroom. The mailroom knows how to get it where it needs to go. For your server, the default gateway (e.g., <code>192.168.1.1</code>) is like that mailroom or main exit. If your server wants to talk to a computer outside its local network (like a website on the internet), it sends that data to the default gateway, which then handles forwarding it.</p></li>
+<li><p><strong>DNS Server (The Office Directory)</strong>: What if you want to send a memo to &quot;Mr. Smith in Accounting,&quot; but you don&#39;t know his desk number? You&#39;d look him up in the office directory, right? A DNS server is exactly that for computers. It translates human-friendly names like <code>google.com</code> (which is much easier for us to remember) into the computer&#39;s unique IP address (like <code>142.250.190.46</code>). Without a DNS server, your server would struggle to find websites or online services by their names.</p></li>
+</ul>
+<p>Think of it this way:</p>
+<ul>
+<li><strong>IP Address</strong>: Your unique identifier.</li>
+<li><strong>Subnet Mask</strong>: Defines your local group.</li>
+<li><strong>Default Gateway</strong>: Your path to the outside world.</li>
+<li><strong>DNS Server</strong>: Your internet phone book for names.</li>
+</ul>
+<h2 id="initial-checks">Initial Checks</h2>
+<p>When you&#39;re troubleshooting network problems on a Linux server, the very first thing you want to know is if the network adapter itself is even turned on and connected. Think of it like checking if your desk lamp is plugged in and switched on before you complain it&#39;s not giving light.</p>
+<p>In Linux, we use commands like <code>ip a</code> (short for <code>ip address</code>) or the older, but still common, <code>ifconfig</code> to check this. These commands show you information about your server&#39;s network interfaces. An &quot;interface&quot; is basically your server&#39;s network card, the piece of hardware that allows it to connect to the network.</p>
+<p>Let&#39;s look at what you might see:</p>
+<ol type="1">
+<li><p><code>ip a</code> <strong>(Recommended for modern Linux systems)</strong>:</p>
+<p>When you type <code>ip a</code> and press <code>Enter</code>, you&#39;ll see output that looks something like this:</p>
+<pre class="shell"><code>1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 00:1a:2b:3c:4d:5e brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.100/24 brd 192.168.1.255 scope global dynamic eth0
+       valid_lft 86242sec preferred_lft 86242sec
+    inet6 fe80::21a:2bff:fe3c:4d5e/64 scope link
+       valid_lft forever preferred_lft forever</code></pre>
+<ul>
+<li>You&#39;ll typically see lo (loopback interface, for internal communication) and one or more ethX (e.g., eth0, eth1) or enpXsY interfaces (these are your actual network cards).</li>
+<li><strong>Key things to look for</strong>:
+<ul>
+<li>The word <code>UP</code> in the <code>&lt;...&gt;</code> brackets: This indicates the interface is administratively enabled.</li>
+<li>The word <code>LOWER_UP</code>: This indicates that the physical link (like the network cable) is connected and active.</li>
+<li><code>state UP</code>: This explicitly confirms the interface is active and ready to transmit.</li>
+</ul></li>
+</ul>
+<p>If you don&#39;t see <code>UP</code> or <code>LOWER_UP</code>, it could mean the network cable is unplugged, or the interface has been disabled.</p></li>
+<li><p><code>ifconfig</code> <strong>(Older but still common)</strong>:</p>
+<p>The output looks similar:</p>
+<pre class="shell"><code>eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+        inet 192.168.1.100  netmask 255.255.255.0  broadcast 192.168.1.255
+        inet6 fe80::21a:2bff:fe3c:4d5e  prefixlen 64  scopeid 0x20&lt;link&gt;
+        ether 00:1a:2b:3c:4d:5e  txqueuelen 1000  (Ethernet)
+        RX packets 12345  bytes 1234567 (1.2 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 9876  bytes 987654 (987.6 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        loop  txqueuelen 1000  (Local Loopback)</code></pre>
+<ul>
+<li>Again, look for the <code>UP</code> and <code>RUNNING</code> flags. If <code>UP</code> is missing, the interface might be disabled. If <code>RUNNING</code> is missing, the physical link might be down.</li>
+<li>Also, check &quot;RX errors&quot; and &quot;TX errors.&quot; While some errors are normal, consistently high numbers here could indicate a faulty cable or network card.</li>
+</ul></li>
+</ol>
+<p>So, in summary, the first step is to visually check if your server&#39;s network connection is up and active using <code>ip a</code> or <code>ifconfig</code>.</p>
+<h2 id="verifying-ip-configuration">Verifying IP Configuration</h2>
+<h3 id="use-ip--a-and-ip--r-to-verify-ip-address-netmask-and-default-gateway-settings">Use <code>ip -a</code> and <code>ip -r</code> to Verify IP Address, Netmask, and Default Gateway Settings</h3>
+<p>Remember how we used <code>ip a</code> to see if the interface was &quot;UP&quot;? We can also use it to confirm the IP address, subnet mask, and other details.</p>
+<p>Let&#39;s revisit the <code>ip a</code> output, focusing on the inet line for your active network interface (like <code>eth0</code> or <code>enp0s3</code>):</p>
+<pre class="shell"><code>2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 00:1a:2b:3c:4d:5e brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.100/24 brd 192.168.1.255 scope global dynamic eth0
+       valid_lft 86242sec preferred_lft 86242sec</code></pre>
+<ul>
+<li><strong>IP Address</strong>: Here, <code>192.168.1.100</code> is your server&#39;s IP address. This is its unique identifier on the network.</li>
+<li><strong>Subnet Mask (CIDR notation)</strong>: The <code>/24</code> after the IP address is crucial. This is called CIDR (Classless Inter-Domain Routing) notation and it represents the subnet mask. A <code>/24</code> is equivalent to a subnet mask of <code>255.255.255.0</code>. This tells your server which part of the IP address identifies the network and which part identifies the specific host on that network.
+<ul>
+<li><strong>Common Misconfiguration</strong>: An incorrect IP address or subnet mask means your server might think it&#39;s on a different network than it actually is, preventing it from communicating.</li>
+</ul></li>
+</ul>
+<p>Next, let&#39;s look at the Default Gateway using the <code>ip r</code> (short for <code>ip route</code>) command. This command displays your server&#39;s routing table, which is like its internal map for sending traffic.</p>
+<p>When you type <code>ip r</code> and press <code>Enter</code>, you&#39;ll likely see something similar to this:</p>
+<pre class="shell"><code>default via 192.168.1.1 dev eth0 proto dhcp metric 100
+192.168.1.0/24 dev eth0 proto kernel scope link src 192.168.1.100 metric 100</code></pre>
+<ul>
+<li>The most important line here for troubleshooting is the one starting with <code>default via</code>.</li>
+<li><strong>Default Gateway</strong>: In this example, <code>192.168.1.1</code> is your default gateway. This is the &quot;mailroom&quot; IP address that your server sends all traffic to if the destination is not on its local network.
+<ul>
+<li><strong>Common Misconfiguration</strong>: If the default gateway is missing, incorrect, or unreachable, your server won&#39;t be able to communicate with devices outside its local network (like the internet). This is a very common cause of &quot;no internet&quot; issues.</li>
+</ul></li>
+</ul>
+<p><strong>In summary</strong>:</p>
+<ul>
+<li>Use <code>ip a</code> to check the IP address and subnet mask (the <code>/XX</code> part).</li>
+<li>Use <code>ip r</code> to check the default gateway (the <code>default via</code> address).</li>
+</ul>
+<p>Think of it like this: Your IP address is your house number, the subnet mask is the size of your block, and the default gateway is the exit road from your block. If any of these are wrong, you can&#39;t send or receive mail correctly!</p>
+<h3 id="check-dns-server-configuration">Check DNS Server Configuration</h3>
+<p>Even if your server has a correct IP address and can reach its default gateway, it might still struggle to access websites like <code>google.com</code> if it doesn&#39;t know how to translate that name into an IP address. That&#39;s where the DNS server comes in.</p>
+<p>On Linux, the primary file that tells your system which DNS servers to use is <code>/etc/resolv.conf</code>. You can view the contents of this file using the <code>cat</code> command, which simply prints the file&#39;s content to your screen.</p>
+<p>Type: <code>cat /etc/resolv.conf</code></p>
+<p>You might see output like this:</p>
+<pre class="shell"><code># Generated by NetworkManager
+search example.com
+nameserver 8.8.8.8
+nameserver 8.8.4.4</code></pre>
+<p>Here&#39;s what to look for:</p>
+<ul>
+<li><strong>nameserver lines</strong>: These lines list the IP addresses of the DNS servers your server will use. In this example, <code>8.8.8.8</code> and <code>8.8.4.4</code> are Google&#39;s public DNS servers. You might see IP addresses provided by your internet service provider (ISP) or your local network&#39;s DNS server.</li>
+<li><strong>Importance of Correct DNS Settings</strong>: If these nameserver entries are incorrect, missing, or point to DNS servers that are unreachable or not functioning, your server will not be able to resolve domain names. This means you won&#39;t be able to <code>ping google.com</code> (you&#39;d need to ping an IP address directly) or browse the web by name, even if your network connection is otherwise fine. It&#39;s like having a phone but no directory to look up numbers!</li>
+<li><code>search</code> <strong>line (Optional)</strong>: The search line specifies domain suffixes that your system will try to append to hostnames when resolving them. For instance, if you type <code>ping myinternalserver</code> and you have <code>search mycompany.local</code> in <code>resolv.conf</code>, your system might automatically try to resolve <code>myinternalserver.mycompany.local</code>.</li>
+</ul>
+<p><strong>Common Misconfiguration</strong>: A common issue is having no <code>nameserver</code> entries, or entries that point to non-existent or blocked DNS servers. This will almost certainly prevent your server from accessing internet resources by name.</p>
+<h2 id="testing-reachability-to-local-network-devices">Testing Reachability to Local Network Devices</h2>
+<h3 id="using-ping-to-test-local-connectivity">Using <code>ping</code> to Test Local Connectivity</h3>
+<p>The <code>ping</code> command is one of the most fundamental and widely used network troubleshooting tools. Think of it like shouting &quot;Hello!&quot; across the room and waiting to hear &quot;Hello!&quot; back. It sends small network packets to a target IP address or hostname and waits for a reply.</p>
+<p>First, you&#39;ll want to test if your server can reach devices on its local network. The most important device to <code>ping</code> first is your <strong>default gateway</strong>. Remember, that&#39;s your &quot;mailroom&quot; or &quot;main exit&quot; that routes all traffic going outside your local network.</p>
+<p>You identified your default gateway using <code>ip r</code> earlier. Let&#39;s assume it was <code>192.168.1.1</code>. To ping it, you would type:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ping</span> 192.168.1.1</span></code></pre></div>
+<p>Press <code>Ctrl+C</code> to stop the ping command after a few seconds.</p>
+<p><strong>Interpreting</strong> <code>ping</code> <strong>Output</strong></p>
+<p>Here&#39;s what you might see and what it means:</p>
+<h4 id="success-reply-from-or-bytes-from">Success: &quot;Reply from...&quot; or &quot;bytes from...&quot;</h4>
+<pre class="shell"><code>PING 192.168.1.1 (192.168.1.1) 56(84) bytes of data.
+64 bytes from 192.168.1.1: icmp_seq=1 ttl=64 time=0.5 ms
+64 bytes from 192.168.1.1: icmp_seq=2 ttl=64 time=0.4 ms
+64 bytes from 192.168.1.1: icmp_seq=3 ttl=64 time=0.4 ms
+^C
+--- 192.168.1.1 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2005ms
+rtt min/avg/max/mdev = 0.435/0.463/0.505/0.030 ms</code></pre>
+<ul>
+<li><code>64 bytes from 192.168.1.1: icmp_seq=X ttl=Y time=Z ms</code>: This means your server sent a packet, and the gateway responded successfully!
+<ul>
+<li><code>icmp_seq</code>: The sequence number of the packet.</li>
+<li><code>ttl</code> (Time To Live): This indicates how many &quot;hops&quot; the packet can make before being discarded. Don&#39;t worry too much about the exact number for now, just know it decreases with each hop.</li>
+<li><code>time</code>: The time it took for the packet to travel to the destination and back (latency). Lower is better!</li>
+</ul></li>
+<li><code>0% packet loss</code>: This is ideal. It means every packet you sent was received.</li>
+<li><strong>What it means</strong>: If you can ping your default gateway successfully, it&#39;s a very good sign that your server&#39;s network card is working, its IP address is correctly configured, and its connection to the local network is sound.</li>
+</ul>
+<h4 id="failure-destination-host-unreachable-or-request-timed-out">Failure: &quot;Destination Host Unreachable&quot; or &quot;Request timed out&quot;</h4>
+<div class="sourceCode" id="cb8"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PING</span> 192.168.1.1 <span class="er">(</span><span class="ex">192.168.1.1</span><span class="kw">)</span> <span class="ex">56</span><span class="er">(</span><span class="ex">84</span><span class="kw">)</span> <span class="ex">bytes</span> of data.</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">From</span> 192.168.1.100 icmp_seq=1 Destination Host Unreachable</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">From</span> 192.168.1.100 icmp_seq=2 Destination Host Unreachable</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">^C</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span> 192.168.1.1 ping statistics <span class="at">---</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="ex">3</span> packets transmitted, 0 received, 100% packet loss, time 2004ms</span></code></pre></div>
+<ul>
+<li><code>Destination Host Unreachable</code>: This typically means your server tried to send the packet, but it couldn&#39;t find a path to the destination on its local network. This often points back to:
+<ul>
+<li>An incorrect IP address on your server.</li>
+<li>An incorrect subnet mask.</li>
+<li>The target device (your gateway) being offline or having a problem.</li>
+</ul></li>
+<li><code>Request timed out</code>: This means your server sent the packet, but it never received a reply within a certain time limit. This could indicate:
+<ul>
+<li>The target device is offline.</li>
+<li>A firewall (either on your server or the target) is blocking the <code>ping</code> request.</li>
+<li>A faulty cable or network device between your server and the target.</li>
+</ul></li>
+<li><code>100% packet loss</code>: This means none of your packets reached the destination and returned. This is a clear sign of a connectivity problem.</li>
+</ul>
+<p><strong>Troubleshooting tip</strong>: If you can&#39;t ping your default gateway, you need to go back and double-check your server&#39;s IP address, subnet mask, and routing table (<code>ip a</code> and <code>ip r</code>). Also, physically check the network cable!</p>
+<h3 id="view-the-arp-cache">View the ARP Cache</h3>
+<p>Think of the &quot;office building&quot; analogy again. If you know Mr. Smith works in Accounting (his IP address), but you need to send him a physical memo, you also need to know his exact desk number or &quot;physical address&quot; within that section. In networking, this &quot;physical address&quot; is called a MAC address (Media Access Control address).</p>
+<p><strong>ARP (Address Resolution Protocol)</strong> is the mechanism computers use to find the MAC address of another device on the same local network when they only know its IP address. Your server keeps a temporary record of these IP-to-MAC address mappings in something called the <strong>ARP cache</strong>.</p>
+<p>If your server can&#39;t communicate with a device on the local network, even if it has the correct IP address for it, sometimes the issue is that it can&#39;t resolve the MAC address. This is where checking the ARP cache comes in handy.</p>
+<h4 id="using-arp--a-or-ip-neigh">Using <code>arp -a</code> or <code>ip neigh</code></h4>
+<p>You can inspect your server&#39;s ARP cache using one of these commands:</p>
+<ol type="1">
+<li><p>arp -a (Older but common):</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">arp</span> <span class="at">-a</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">?</span> <span class="er">(</span><span class="ex">192.168.1.1</span><span class="kw">)</span> <span class="ex">at</span> 00:11:22:33:44:55 <span class="pp">[</span><span class="ss">ether</span><span class="pp">]</span> on eth0</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">?</span> <span class="er">(</span><span class="ex">192.168.1.10</span><span class="kw">)</span> <span class="ex">at</span> 66:77:88:99:AA:BB <span class="pp">[</span><span class="ss">ether</span><span class="pp">]</span> on eth0</span></code></pre></div></li>
+<li><p><code>ip neigh</code> <strong>(Recommended for modern Linux systems, short for</strong> <code>ip neighbour</code><strong>)</strong>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ip</span> neigh</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">192.168.1.1</span> dev eth0 lladdr 00:11:22:33:44:55 REACHABLE</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">192.168.1.10</span> dev eth0 lladdr 66:77:88:99:AA:BB STALE</span></code></pre></div></li>
+</ol>
+<h4 id="interpreting-the-arp-cache-output">Interpreting the ARP Cache Output</h4>
+<ul>
+<li><strong>IP Address</strong>: The first column shows the IP address of the device.</li>
+<li><strong>MAC Address (lladdr)</strong>: This is the physical address (e.g., <code>00:11:22:33:44:55</code>).</li>
+<li><code>dev eth0</code> <strong>(or your interface name)</strong>: Shows which network interface the entry is associated with.</li>
+<li><strong>Status (</strong><code>ip neigh</code> <strong>only)</strong>:
+<ul>
+<li><code>REACHABLE</code>: The entry is valid and the device has been recently active. This is ideal.</li>
+<li><code>STALE</code>: The entry is still valid, but the system hasn&#39;t recently verified its reachability. It will try to re-verify if traffic is sent to it.</li>
+<li><code>FAILED</code>: This is a problem! It means the ARP resolution for that IP address failed. This can happen if the device is offline, if there&#39;s a misconfigured switch, or if your server can&#39;t physically reach the device at the MAC layer.</li>
+</ul></li>
+</ul>
+<h4 id="how-it-helps-troubleshoot">How it helps troubleshoot</h4>
+<p>If you can <code>ping</code> a device (meaning you&#39;re sending packets), but it&#39;s still not working as expected, and you see <code>FAILED</code> or a missing entry for its IP address in the ARP cache, it might indicate a low-level problem in the local network segment. This could be:</p>
+<ul>
+<li>The target device is truly offline.</li>
+<li>The target device&#39;s network card is faulty.</li>
+<li>There&#39;s an issue with the switch port it&#39;s connected to.</li>
+<li>The IP address is configured correctly, but there&#39;s a conflict or problem at the physical (Layer 2) level.</li>
+</ul>
+<p>By checking the ARP cache, you can confirm if your server has successfully &quot;learned&quot; the physical address of local devices it&#39;s trying to communicate with.</p>
+<h2 id="testing-reachability-to-external-networks-and-services">Testing Reachability to External Networks and Services</h2>
+<h3 id="using-ping-to-check-connectivity-to-external-hosts">Using <code>ping</code> to Check Connectivity to External Hosts</h3>
+<p>Being able to ping your default gateway confirms your local connection, but it doesn&#39;t guarantee you can reach the internet. You might have a working connection to your &quot;mailroom,&quot; but the mailroom itself might be disconnected from the rest of the world!</p>
+<p><strong>Using</strong> <code>ping</code> <strong>for External Hosts</strong></p>
+<p>A common practice is to ping a well-known, reliable IP address on the internet, such as Google&#39;s public DNS server (<code>8.8.8.8</code>) or Cloudflare&#39;s public DNS server (<code>1.1.1.1</code>). These are usually very stable and widely reachable.</p>
+<p>To test, you would type:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ping</span> 8.8.8.8</span></code></pre></div>
+<p>And again, press <code>Ctrl+C</code> to stop it.</p>
+<h4 id="interpreting-output-and-potential-issues">Interpreting Output and Potential Issues</h4>
+<ul>
+<li><p><strong>Success (Similar to local ping)</strong>: If you see replies from <code>8.8.8.8</code> with <code>0% packet loss</code>, it&#39;s a great sign! It means your server can successfully send traffic out through your default gateway and receive replies from the internet. This confirms your server&#39;s IP configuration (including gateway) and the internet connection itself are generally working.</p>
+<pre class="shell"><code>PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+64 bytes from 8.8.8.8: icmp_seq=1 ttl=118 time=15.2 ms
+64 bytes from 8.8.8.8: icmp_seq=2 ttl=118 time=15.1 ms
+^C
+--- 8.8.8.8 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1001ms</code></pre></li>
+<li><p><strong>Failure (</strong><code>Request timed out</code> <strong>or</strong> <code>Destination Host Unreachable</code><strong>)</strong>: If ping <code>8.8.8.8</code> fails, and you could successfully <code>ping</code> your default gateway, then the problem is likely beyond your server and its local network. Common reasons include:</p>
+<ul>
+<li><strong>Incorrect Default Gateway</strong>: Double-check your <code>ip r</code> output. If the gateway address is wrong, traffic can&#39;t leave your local network.</li>
+<li><strong>Router/Firewall Issues</strong>: Your router (which is your default gateway) might have issues, or there might be a firewall blocking outgoing traffic on the router/network level.</li>
+<li><strong>ISP (Internet Service Provider) Problems</strong>: There might be an outage or issue with your internet service provider.</li>
+<li><strong>Firewall on your Linux Server</strong>: Although we&#39;ll cover this in more detail later, your server&#39;s own firewall might be blocking outgoing <code>ping</code> requests, or incoming replies.</li>
+</ul>
+<p>This failure indicates that while your server can talk to its immediate neighbor (the gateway), the gateway isn&#39;t successfully forwarding that traffic to the internet, or the internet isn&#39;t sending replies back.</p></li>
+</ul>
+<p>By starting with a <code>ping</code> to a known external IP address, you can quickly differentiate between local network issues and problems further upstream on the internet.</p>
+<h3 id="identify-where-break-downs-occur-with-traceroute-or-mtr">Identify where Break Downs Occur with <code>traceroute</code> or <code>mtr</code></h3>
+<p>Think of <code>traceroute</code> (or <code>mtr</code>) as a tool that maps the journey your network packets take from your server to a destination on the internet. Instead of just knowing if the mail arrived, this tool shows you every post office, sorting facility, and road segment the mail went through on its way to the destination. This is incredibly useful for pinpointing the exact &quot;hop&quot; or router where connectivity issues occur.</p>
+<h4 id="the-traceroute-command">The traceroute Command</h4>
+<p><code>traceroute</code> works by sending packets with increasing &quot;Time To Live&quot; (TTL) values. Each time a packet passes through a router (a &quot;hop&quot;), its TTL decreases by one. When the TTL reaches zero, the router sends an error message back to your server. By timing these error messages, <code>traceroute</code> can identify each router in the path.</p>
+<p>To use it, you&#39;ll typically specify an IP address or a hostname. Let&#39;s use Google&#39;s public DNS server again (<code>8.8.8.8</code>):</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">traceroute</span> 8.8.8.8</span></code></pre></div>
+<p>The output will list a series of numbered lines, one for each &quot;hop&quot; or router encountered:</p>
+<pre class="shell"><code>traceroute to 8.8.8.8 (8.8.8.8), 30 hops max, 60 byte packets
+ 1  _gateway (192.168.1.1)  0.722 ms  0.706 ms  0.686 ms
+ 2  some-isp-router-1.com (203.0.113.1)  5.123 ms  5.245 ms  5.301 ms
+ 3  another-isp-router-2.com (198.51.100.1)  12.345 ms  12.398 ms  12.411 ms
+ 4  google-router-a.net (172.253.x.x)  15.001 ms  15.023 ms  15.045 ms
+ 5  google-router-b.net (142.250.y.y)  15.111 ms  15.132 ms  15.154 ms
+ 6  dns.google (8.8.8.8)  15.222 ms  15.243 ms  15.265 ms</code></pre>
+<h5 id="interpreting-traceroute-output">Interpreting <code>traceroute</code> Output</h5>
+<ul>
+<li><strong>Hop Number (1, 2, 3...)</strong>: Each number represents a router your packets passed through.</li>
+<li><strong>Hostname/IP Address</strong>: The name (if resolvable) and IP address of the router at that hop.</li>
+<li><strong>Three Time Readings (e.g.,</strong> <code>0.722 ms 0.706 ms 0.686 ms</code><strong>)</strong>: These are the times (latency) for three different probes sent to that router. Lower numbers are better.</li>
+</ul>
+<p><strong>What to look for when troubleshooting</strong>:</p>
+<ul>
+<li><strong>Asterisks (</strong><code>* * *</code><strong>)</strong>: If you see three asterisks (<code>* * *</code>) for a hop, it means no response was received from that router. This is a strong indicator of a problem!
+<ul>
+<li>If asterisks appear at a specific hop and continue for all subsequent hops, it usually means the connection is breaking down at or after that point. The router at that hop might be down, misconfigured, or a firewall might be blocking traffic.</li>
+<li>If you see asterisks for some hops but then responses resume later, it might just mean that particular router doesn&#39;t prioritize responding to <code>traceroute</code> probes, or there&#39;s temporary congestion. It&#39;s the sustained <code>* * *</code> that&#39;s the real concern.</li>
+</ul></li>
+<li><strong>Sudden Increase in Latency</strong>: A sudden jump in the time readings at a specific hop (e.g., from 10ms to 200ms) can indicate network congestion or a problem with that particular router.</li>
+</ul>
+<h4 id="the-mtr-command-my-traceroute">The mtr Command (My Traceroute)</h4>
+<p><code>mtr</code> combines the functionality of <code>ping</code> and <code>traceroute</code> into a single, continuously updating display. It provides a real-time view of packet loss and latency to each hop. It&#39;s often preferred for continuous monitoring.</p>
+<p>To use it:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mtr</span> 8.8.8.8</span></code></pre></div>
+<p>It will show a live updating table. Press <code>q</code> to quit.</p>
+<pre class="shell"><code>                                 My traceroute  [v0.94]
+your_server (0.0.0.0)                                     2025-05-27T14:06:32-0700
+Keys:  Help   Display mode   Restart statistics   Order of fields   quit
+                                                              Packets               Pings
+ Host                                          Loss%   Snt   Last   Avg  Best  Wrst StDev
+ 1. _gateway                                    0.0%    10    0.7   0.7   0.6   0.8   0.1
+ 2. some-isp-router-1.com                       0.0%    10    5.2   5.3   5.1   5.5   0.1
+ 3. another-isp-router-2.com                    0.0%    10   12.4  12.4  12.3  12.5   0.0
+ 4. google-router-a.net                         0.0%    10   15.0  15.0  15.0  15.1   0.0
+ 5. google-router-b.net                         0.0%    10   15.1  15.1  15.1  15.2   0.0
+ 6. dns.google                                  0.0%    10   15.2  15.2  15.2  15.3   0.0</code></pre>
+<ul>
+<li><code>Loss%</code>: This is the most crucial column. If you see high or increasing packet loss at a particular hop, it indicates a problem at that specific point in the network path.</li>
+<li><code>Avg</code> <strong>(Average Ping)</strong>: The average latency to that hop.</li>
+</ul>
+<p><strong>When to use</strong> <code>traceroute</code><strong>/</strong><code>mtr</code>: After you&#39;ve confirmed that your server&#39;s local network connection and default gateway are working, but you <em>still</em> can&#39;t reach external services (e.g., <code>ping 8.8.8.8</code> fails), <code>traceroute</code> or <code>mtr</code> is your next go-to tool. It helps you determine if the problem is with your ISP, an upstream router, or the destination itself.</p>
+<h3 id="using-dig-and-nslookup-to-diagnose-dns-resolution-problems">Using <code>dig</code> and <code>nslookup</code> to Diagnose DNS Resolution Problems</h3>
+<p>Remember our &quot;office directory&quot; analogy for DNS? Even if your server&#39;s network connection is perfectly fine (you can ping <code>8.8.8.8</code> successfully!), if its DNS server settings (<code>/etc/resolv.conf</code>) are wrong, or if the DNS server itself is having issues, your server won&#39;t be able to translate <code>google.com</code> into an IP address. This means you won&#39;t be able to access websites or services by their human-readable names.</p>
+<h4 id="the-dig-command-domain-information-groper">The <code>dig</code> Command (Domain Information Groper)</h4>
+<p><code>dig</code> is a powerful and flexible tool for querying DNS name servers. It&#39;s often preferred by administrators for its detailed output.</p>
+<p>To check if your server can resolve a domain name like <code>google.com</code>, you&#39;d type:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dig</span> google.com</span></code></pre></div>
+<p><strong>Successful</strong> <code>dig</code> <strong>Output Example</strong>:</p>
+<pre class="shell"><code>; &lt;&lt;&gt;&gt; DiG 9.16.1-Ubuntu &lt;&lt;&gt;&gt; google.com
+;; global options: +cmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 36726
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 65494
+;; QUESTION SECTION:
+;google.com.                    IN      A
+
+;; ANSWER SECTION:
+google.com.             299     IN      A       142.250.190.46
+
+;; Query time: 15 msec
+;; SERVER: 127.0.0.53#53(127.0.0.53)
+;; WHEN: Tue May 27 14:06:01 PDT 2025
+;; MSG SIZE  rcvd: 55</code></pre>
+<p><strong>Key things to look for in successful dig output</strong>:</p>
+<ul>
+<li><code>status: NOERROR</code>: This is the most important part. It means the DNS query was successful and no error occurred.</li>
+<li><code>ANSWER SECTION</code>: This section will contain the IP address (or addresses) that correspond to the domain name you queried. In this example, <code>google.com</code> resolved to <code>142.250.190.46</code>.</li>
+<li><code>Query time</code>: How long it took to get the answer.</li>
+<li><code>SERVER</code>: The IP address of the DNS server that provided the answer. This should match one of the nameserver entries in your <code>/etc/resolv.conf</code>.</li>
+</ul>
+<p><strong>Unsuccessful</strong> <code>dig</code> <strong>Output Example (Common issues)</strong>:</p>
+<p>If you see output like this, it indicates a DNS problem:</p>
+<pre class="shell"><code>; &lt;&lt;&gt;&gt; DiG 9.16.1-Ubuntu &lt;&lt;&gt;&gt; non-existent-domain12345.com
+;; global options: +cmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NXDOMAIN, id: 12345
+;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1
+
+;; WARNING: recursion requested but not available from type
+;; SERVER: 127.0.0.53#53(127.0.0.53)
+;; WHEN: Tue May 27 14:07:01 PDT 2025
+;; MSG SIZE  rcvd: 139</code></pre>
+<ul>
+<li><code>status: NXDOMAIN</code>: This means &quot;Non-Existent Domain.&quot; The DNS server you queried responded that the domain name you asked for does not exist. This is usually what you&#39;d see if you typed a typo like <code>googe.com</code> or a domain that truly doesn&#39;t exist.</li>
+</ul>
+<p>Another common failure when the DNS server itself is unreachable:</p>
+<pre class="shell"><code>; &lt;&lt;&gt;&gt; DiG 9.16.1-Ubuntu &lt;&lt;&gt;&gt; google.com
+;; global options: +cmd
+;; connection timed out; no servers could be reached</code></pre>
+<ul>
+<li><code>connection timed out; no servers could be reached</code>: This is critical. It means your server couldn&#39;t even talk to its configured DNS servers. This points to issues like:
+<ul>
+<li>Incorrect DNS server IP addresses in <code>/etc/resolv.conf</code>.</li>
+<li>Your DNS server being down or unreachable (e.g., firewall blocking access to it).</li>
+<li>A network issue preventing access to any DNS server.</li>
+</ul></li>
+</ul>
+<h4 id="the-nslookup-command-name-server-lookup">The <code>nslookup</code> Command (Name Server Lookup)</h4>
+<p><code>nslookup</code> is another command-line tool for querying DNS. It&#39;s simpler and often used for quick checks.</p>
+<p>To query:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nslookup</span> google.com</span></code></pre></div>
+<p><strong>Successful</strong> <code>nslookup</code> <strong>Output Example</strong>:</p>
+<pre class="shell"><code>Server:         127.0.0.53
+Address:        127.0.0.53#53
+
+Non-authoritative answer:
+Name:   google.com
+Address: 142.250.190.46</code></pre>
+<p><strong>Unsuccessful</strong> <code>nslookup</code> <strong>Output Example</strong>:</p>
+<pre class="shell"><code>Server:         127.0.0.53
+Address:        127.0.0.53#53
+
+** server can&#39;t find non-existent-domain12345.com: NXDOMAIN</code></pre>
+<p>And if the DNS server is unreachable:</p>
+<pre class="shell"><code>;; connection timed out; no servers could be reached</code></pre>
+<p><strong>When to Use</strong> <code>dig</code> <strong>or</strong> <code>nslookup</code>:</p>
+<p>Use these tools when:</p>
+<ul>
+<li>You can <code>ping</code> external IP addresses (like <code>8.8.8.8</code>) successfully, but you cannot access websites or services by their domain names (e.g., <code>ping google.com</code> fails, but <code>ping 142.250.190.46</code> works). This specifically points to a DNS resolution problem.</li>
+<li>You want to verify which DNS server your system is actually using to resolve names.</li>
+</ul>
+<h2 id="checking-firewall-rules">Checking Firewall Rules</h2>
+<p>Think of your server&#39;s firewall like a security guard standing at the door of your &quot;house&quot; (your server). This guard has a strict set of rules about who can come in and who can go out, and what &quot;packages&quot; (network traffic) are allowed. If the guard&#39;s rules are too restrictive, even legitimate traffic might be blocked.</p>
+<p>Linux servers commonly use one of two main firewall management tools: <code>iptables</code> or <code>firewalld</code> (which uses <code>firewall-cmd</code>). You&#39;ll typically find one or the other active on a modern Linux distribution.</p>
+<h3 id="inspecting-iptables-rules">Inspecting <code>iptables</code> Rules</h3>
+<p>If your server uses <code>iptables</code> directly, you can list its rules with:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> iptables <span class="at">-L</span> <span class="at">-n</span> <span class="at">-v</span></span></code></pre></div>
+<ul>
+<li><code>sudo</code>: You&#39;ll often need superuser privileges to view or modify firewall rules.</li>
+<li><code>-L</code>: Lists all rules in all chains.</li>
+<li><code>-n</code>: Shows IP addresses and port numbers in numeric format, which is easier to read than names.</li>
+<li><code>-v</code>: Provides verbose output, including packet and byte counters, which can show if rules are actually being hit.</li>
+</ul>
+<p>The output can be quite detailed, but here&#39;s what to look for:</p>
+<pre class="shell"><code>Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+   10  600 ACCEPT     all  --  lo     any     0.0.0.0/0            0.0.0.0/0
+    5  300 ACCEPT     tcp  --  any    any     0.0.0.0/0            0.0.0.0/0            tcp dpt:22 state NEW,ESTABLISHED
+    0    0 DROP       all  --  any    any     0.0.0.0/0            0.0.0.0/0
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination</code></pre>
+<ul>
+<li><code>Chain INPUT</code>: Rules for traffic coming into your server.</li>
+<li><code>Chain OUTPUT</code>: Rules for traffic leaving your server.</li>
+<li><code>Chain FORWARD</code>: Rules for traffic passing through your server (if it&#39;s acting as a router).</li>
+<li><code>policy ACCEPT</code> <strong>or</strong> <code>policy DROP</code>: This is the default action for a chain if no specific rule matches. If it&#39;s <code>DROP</code> on <code>INPUT</code> or <code>OUTPUT</code> and you don&#39;t have explicit <code>ACCEPT</code> rules, that&#39;s a problem!</li>
+<li><code>target</code> <strong>(e.g.,</strong> <code>ACCEPT</code><strong>,</strong> <code>DROP</code><strong>,</strong> <code>REJECT</code><strong>)</strong>: What action to take if a packet matches the rule.</li>
+<li><code>prot</code> <strong>(protocol)</strong>: <code>tcp</code>, <code>udp</code>, <code>icmp</code> (for ping), or <code>all</code>.</li>
+<li><code>dpt</code> <strong>(destination port)</strong>: The port number the traffic is trying to reach (e.g., <code>22</code> for SSH, <code>80</code> for HTTP).</li>
+</ul>
+<h3 id="inspecting-firewalld-rules">Inspecting <code>firewalld</code> Rules</h3>
+<p>If your server uses <code>firewalld</code> (common on Red Hat-based systems like CentOS/RHEL/Fedora), you&#39;ll use the <code>firewall-cmd</code> command:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> firewall-cmd <span class="at">--list-all</span></span></code></pre></div>
+<p>The output will be structured by zones, which are like different security profiles for different network connections:</p>
+<pre class="shell"><code>public (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: eth0
+  sources:
+  services: ssh dhcpv6-client http
+  ports:
+  protocols:
+  masquerade: no
+  forward-ports:
+  source-ports:
+  icmp-blocks:
+  rich rules:</code></pre>
+<p><strong>Key things to look for in firewalld output</strong>:</p>
+<ul>
+<li><code>interfaces:</code>: Which network interfaces are assigned to this zone.</li>
+<li><code>services:</code>: Allowed services (like <code>ssh</code>, <code>http</code>, <code>https</code>, <code>dns</code>). If a service you expect to work isn&#39;t listed, it&#39;s likely blocked.</li>
+<li><code>ports:</code>: Specific port numbers allowed (e.g., <code>80/tcp</code>, <code>443/tcp</code>).</li>
+</ul>
+<p><strong>Common Firewall Scenarios Leading to Connectivity Issues</strong>:</p>
+<ul>
+<li><strong>Incoming Traffic Blocked</strong>: If you can&#39;t connect to your server (e.g., SSH, web server), but your server can connect out, the <code>INPUT</code> chain in <code>iptables</code> or the <code>services/ports</code> in <code>firewalld</code> are likely blocking the inbound connection.</li>
+<li><strong>Outgoing Traffic Blocked</strong>: Less common by default, but possible in highly secured environments. If your server can&#39;t reach anything even after passing all previous checks, the <code>OUTPUT</code> chain in <code>iptables</code> or specific outbound rules in <code>firewalld</code> might be the culprit. This would block things like ping and web requests originating from your server.</li>
+<li><strong>Specific Ports Blocked</strong>: Even if general connectivity works, a specific application might fail if its required port is blocked (e.g., your web server on port 80 is unreachable, but SSH on port 22 works).</li>
+</ul>
+<h3 id="inspecting-ufw-rules">Inspecting <code>ufw</code> Rules</h3>
+<p>If your server uses <code>ufw</code>, it&#39;s essentially a user-friendly front-end for <code>iptables</code>. While the underlying rules are still <code>iptables</code>, <code>ufw</code> simplifies their management.</p>
+<p>To check <code>ufw</code>&#39;s status and rules, you&#39;ll use:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status verbose</span></code></pre></div>
+<p>Here&#39;s what you might see:</p>
+<pre class="shell"><code>Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW       Anywhere
+80/tcp                     ALLOW       Anywhere
+Anywhere                   ALLOW       192.168.1.0/24</code></pre>
+<p>Key things to look for in <code>ufw</code> output:</p>
+<ul>
+<li><code>Status: active</code>: This indicates that <code>ufw</code> is running and enforcing its rules. If it says <code>inactive</code>, your firewall is off, and traffic isn&#39;t being filtered by <code>ufw</code>.</li>
+<li><code>Default: deny (incoming), allow (outgoing), disabled (routed)</code>: These are the default policies. A common secure setup is to <code>deny</code> incoming traffic by default and <code>allow</code> outgoing traffic. If your incoming traffic is blocked, this <code>deny (incoming)</code> policy is likely why, unless you have explicit <code>ALLOW</code> rules.</li>
+<li><strong>The rule list (e.g.,</strong> <code>22/tcp ALLOW Anywhere</code>)<strong>:</strong> These are the specific rules you&#39;ve configured.
+<ul>
+<li><code>To</code>: The destination port or service on your server.</li>
+<li><code>Action</code>: <code>ALLOW</code> (permit traffic), <code>DENY</code> (silently drop traffic), or <code>REJECT</code> (drop traffic and send an error back).</li>
+<li><code>From</code>: The source IP address or network that the rule applies to. <code>Anywhere</code> means from any source.</li>
+</ul></li>
+</ul>
+<p><strong>How</strong> <code>ufw</code> <strong>helps troubleshoot (and common</strong> <code>ufw</code> <strong>scenarios)</strong>:</p>
+<ul>
+<li><code>Status: inactive</code>: If <code>ufw</code> is inactive, it&#39;s not the cause of your network issues (unless the underlying <code>iptables</code> have been manipulated directly). You&#39;d need to look at <code>iptables</code> or <code>firewalld</code> if another firewall is active.</li>
+<li><strong>Default Deny, No Allow Rule</strong>: If <code>Default: deny (incoming)</code> is set, but you don&#39;t have an <code>ALLOW</code> rule for the specific service/port you&#39;re trying to reach (e.g., you&#39;re trying to connect to a web server on port 80 but there&#39;s no <code>80/tcp ALLOW</code> rule), then the traffic will be blocked. This is probably the most common <code>ufw</code> issue.</li>
+<li><strong>Incorrect Source</strong> <code>From</code> <strong>Rule</strong>: You might have an <code>ALLOW</code> rule, but it only allows traffic from a specific IP address or network, and the client trying to connect is coming from a different source.</li>
+</ul>
+<p>When troubleshooting, checking firewall rules is crucial because they can override all other network settings. If a rule says &quot;block this traffic,&quot; it will be blocked, regardless of correct IP addresses or routing.</p>
+<h2 id="analyzing-network-traffic">Analyzing Network Traffic</h2>
+<h3 id="capture-and-analyze-packets-with-tcpdump">Capture and Analyze Packets with <code>tcpdump</code></h3>
+<p>Think of <code>tcpdump</code> as a very specialized, high-speed camera that sits on your server&#39;s network card and takes snapshots of every single &quot;packet&quot; (piece of data) that passes by. It allows you to see the raw network communication, which can be invaluable for diagnosing complex or subtle issues that aren&#39;t apparent with <code>ping</code> or <code>traceroute</code>. It&#39;s like checking the mail, but also watching the mail carrier to see exactly what they&#39;re doing with each envelope. Basic Usage of tcpdump</p>
+<p>Because <code>tcpdump</code> can generate a lot of output, you usually want to filter what it shows you. You also need <code>sudo</code> privileges to run it.</p>
+<p>A common way to start is to specify the network interface you want to monitor (e.g., <code>eth0</code>) and a filter for the traffic you&#39;re interested in.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tcpdump <span class="at">-i</span> eth0 host 8.8.8.8</span></code></pre></div>
+<ul>
+<li><code>sudo</code>: Required to capture network traffic.</li>
+<li><code>-i eth0</code>: Specifies that you want to capture traffic on the eth0 network interface. Replace <code>eth0</code> with your server&#39;s actual interface name (which you can find using ip a).</li>
+<li><code>host 8.8.8.8</code>: This is a filter. It tells <code>tcpdump</code> to only show you packets that are either coming from or going to the IP address <code>8.8.8.8</code>.</li>
+</ul>
+<p>You can also filter by port (e.g., to see web traffic):</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tcpdump <span class="at">-i</span> eth0 port 80</span></code></pre></div>
+<ul>
+<li><code>port 80</code>: Shows only traffic on port 80 (standard HTTP web traffic).</li>
+</ul>
+<p>Press <code>Ctrl+C</code> to stop <code>tcpdump</code>.</p>
+<h4 id="what-to-look-for-and-why-its-advanced">What to Look For (and Why it&#39;s Advanced)</h4>
+<p>The output of <code>tcpdump</code> can be very verbose and requires some understanding of network protocols. However, even a beginner can gain insight:</p>
+<ul>
+<li><p><strong>Seeing if Traffic is Reaching/Leaving</strong>: If you&#39;re trying to send a <code>ping</code> to <code>8.8.8.8</code> but ping is timing out, you can run <code>tcpdump -i eth0 host 8.8.8.8</code> and then try to ping <code>8.8.8.8</code> in another terminal.</p>
+<ul>
+<li><strong>If you see outgoing</strong> <code>echo request</code> <strong>packets</strong>: Your server is sending the ping. This tells you the problem is not with your server sending the request.</li>
+<li><strong>If you don&#39;t see outgoing</strong> <code>echo request</code> <strong>packets</strong>: Your server isn&#39;t even trying to send the packet, which points to an issue with its local configuration (IP, routing, or perhaps an outbound firewall rule).</li>
+<li><strong>If you see outgoing</strong> <code>echo request</code> <strong>but no incoming</strong> <code>echo reply</code> <strong>packets</strong>: This means the ping left your server, but the reply never came back. This points to a problem further out on the network, a return path issue, or a firewall blocking the reply.</li>
+</ul></li>
+<li><p><strong>Confirming Connections</strong>: If you expect a web server to be listening on port 80, you can use <code>tcpdump -i eth0 port 80</code> while trying to connect to it. You&#39;d look for TCP <code>SYN</code> packets (for connection initiation) and <code>SYN-ACK</code> (for acknowledgment). If you only see <code>SYN</code> from the client but no <code>SYN-ACK</code> from your server, it suggests your server isn&#39;t responding, possibly due to a firewall on the server itself, or the web server application not running.</p></li>
+</ul>
+<p><strong>When to Use</strong> <code>tcpdump</code>:</p>
+<p><code>tcpdump</code> is typically used as a last resort when basic checks (<code>ping</code>, <code>traceroute</code>, <code>firewall</code> rules) don&#39;t fully explain the problem. It allows you to confirm assumptions about network flow directly at the packet level. It&#39;s powerful, but it requires patience and some knowledge of networking fundamentals.</p>
+</body>
+</html>

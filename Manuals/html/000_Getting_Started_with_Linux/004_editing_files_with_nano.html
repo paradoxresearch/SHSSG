@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+}
+}
+</style>
+</head>
+<body>
+<h1 id="editing-files-with-nano">Editing Files with <code>nano</code></h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#editing-files-with-nano">Editing Files with <code>nano</code></a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#opening-and-creating-files">Opening and Creating Files</a></li>
+<li><a href="#basic-editing-operations">Basic Editing Operations</a></li>
+<li><a href="#saving-and-exiting">Saving and Exiting</a>
+<ul>
+<li><a href="#saving-your-work">Saving Your Work</a></li>
+<li><a href="#exiting-nano">Exiting nano</a></li>
+</ul></li>
+<li><a href="#essential-nano-shortcuts">Essential <code>nano</code> Shortcuts</a></li>
+</ul></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<p><code>nano</code> is a simple, command-line text editor for Unix-like operating systems, including Linux. Think of it like a very basic version of Notepad on Windows or TextEdit on macOS, but instead of a graphical interface, you interact with it directly in your terminal.</p>
+<p>Its primary purpose is to allow you to create, view, and modify text files directly within the command line. This is incredibly important for system administrators because many configuration files, scripts, and logs on a Linux server are just plain text files. You often won&#39;t have a graphical desktop environment on a server, so being comfortable with a command-line editor like <code>nano</code> is essential.</p>
+<p>One of the biggest reasons <code>nano</code> is great for new users is its simplicity. Unlike more powerful but complex editors like <code>vi</code> or <code>emacs</code>, <code>nano</code> has a straightforward interface with on-screen help, making it much easier to learn and use without memorizing many complex commands. It&#39;s like comparing a bicycle with training wheels to a high-performance racing bike – both get the job done, but one is much easier to start with!</p>
+<h2 id="opening-and-creating-files">Opening and Creating Files</h2>
+<p>The most fundamental action in <code>nano</code> is opening or creating a file. It&#39;s quite simple!</p>
+<p>To open an existing file, or to create a new one if it doesn&#39;t exist, you just type <code>nano</code> followed by the filename in your terminal. For example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode Bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> myfile.txt</span></code></pre></div>
+<p>If <code>myfile.txt</code> already exists, <code>nano</code> will open it for you to edit. If it doesn&#39;t exist, <code>nano</code> will open a blank buffer, and when you save your work, it will create <code>myfile.txt</code> with your content. It&#39;s that easy!</p>
+<p>Once you&#39;re inside <code>nano</code>, navigating around the file is intuitive. You can use your <strong>arrow keys</strong> (Up, Down, Left, Right) to move your cursor character by character and line by line.</p>
+<p>Here are a few other handy navigation keys:</p>
+<ul>
+<li><strong>Page Up / Page Down (or</strong> <code>Fn + Up/Down Arrow</code> <strong>on some smaller keyboards)</strong> to scroll through the file a screen at a time.</li>
+<li><strong>Home / End keys</strong> to jump to the beginning or end of the current line.</li>
+</ul>
+<p>Imagine you have a long shopping list; the arrow keys help you check off individual items, while Page Up/Down lets you quickly scan through sections of the list.</p>
+<h2 id="basic-editing-operations">Basic Editing Operations</h2>
+<p>Once you&#39;re inside <code>nano</code>, typing and deleting text is very straightforward, much like any other text editor. You just start typing, and the characters appear at your cursor&#39;s position. To delete, you use the <strong>Backspace</strong> or <strong>Delete</strong> keys.</p>
+<p>Now, for something a bit more advanced but incredibly useful: <strong>cut, copy, and paste</strong>. In nano, these operations use special keyboard shortcuts, usually involving the <strong>Control key (Ctrl)</strong>, sometimes abbreviated as <code>^</code> (caret) in the <code>nano</code> interface.</p>
+<p>Here are the basic shortcuts you&#39;ll use:</p>
+<ul>
+<li><strong>Cut a line</strong>: <code>Ctrl + K</code> (This &quot;cuts&quot; the entire line where your cursor is located)</li>
+<li><strong>Paste</strong>: <code>Ctrl + U</code> (This pastes the cut or copied text at your cursor&#39;s position)</li>
+</ul>
+<p>&quot;But what about copying?&quot; you might ask. <code>nano</code> doesn&#39;t have a direct &quot;copy&quot; command in the same way you might be used to with <code>Ctrl+C</code>. Instead, you perform a &quot;copy&quot; by first &quot;cutting&quot; the line (<code>Ctrl + K</code>) and then immediately &quot;uncutting&quot; it (<code>Ctrl + U</code>) to restore it, while the text remains in <code>nano</code>&#39;s internal clipboard for pasting elsewhere. It&#39;s a bit quirky but effective!</p>
+<h2 id="saving-and-exiting">Saving and Exiting</h2>
+<p>There&#39;s no point in making changes if you can&#39;t save them, right? <code>nano</code> uses a simple command to &quot;write out&quot; your changes, which means saving them to the file.</p>
+<h3 id="saving-your-work">Saving Your Work</h3>
+<p>To save your changes, you&#39;ll see a line at the bottom of the <code>nano</code> interface that says <code>^O Write Out</code>. This means you press <code>Ctrl + O</code>.</p>
+<p>When you press <code>Ctrl + O</code>, <code>nano</code> will ask you to confirm the filename at the bottom of the screen. Usually, you&#39;ll just press <strong>Enter</strong> to save it with the existing name. If you wanted to save it under a new name (effectively making a copy), you could type a different filename before pressing Enter.</p>
+<h3 id="exiting-nano">Exiting nano</h3>
+<p>Once you&#39;ve saved (or if you haven&#39;t made any changes and just want to quit), you&#39;ll want to exit <code>nano</code>. Look for <code>^X Exit</code> at the bottom of the screen. This means you press <code>Ctrl + X</code>.</p>
+<ul>
+<li>If you&#39;ve made changes and haven&#39;t saved them, nano will ask you if you want to save the modified buffer (Yes/No/Cancel). You can press Y for Yes, N for No, or <strong>Ctrl + C</strong> to cancel and stay in <code>nano</code>.</li>
+<li>If you have saved your changes or made no changes, <code>nano</code> will simply close and return you to your command prompt.</li>
+</ul>
+<h2 id="essential-nano-shortcuts">Essential <code>nano</code> Shortcuts</h2>
+<p>While the basics are crucial, knowing a few extra shortcuts can really speed up your workflow, especially when dealing with larger files or when you need to find and replace text.</p>
+<p>Here are a few key ones:</p>
+<ul>
+<li><p><code>Ctrl + W</code> <strong>(Where Is)</strong>: This is your search command. When you press <code>Ctrl + W</code>, <code>nano</code> will prompt you at the bottom of the screen to enter the text you want to search for. After you type it and press Enter, <code>nano</code> will jump to the first occurrence. You can then press <code>Alt + W</code> (or <code>Esc</code> then <code>W</code> on some systems) to find the next occurrence. This is super handy when you&#39;re looking for a specific configuration setting in a large file.</p></li>
+<li><p><code>Ctrl + \</code> <strong>(Replace)</strong>: This allows you to find and replace text. After pressing <code>Ctrl + \</code>, <code>nano</code> will ask you for the text to search for, and then the text to replace it with. It will then prompt you to replace the current instance, or all instances. Be careful with &quot;Replace All&quot; as it can sometimes have unintended consequences if you&#39;re not precise with your search!</p></li>
+<li><p><code>Ctrl + _</code> <strong>(Go To Line)</strong>: If you know exactly which line number you want to jump to, <code>Ctrl + _</code> is your friend. <code>nano</code> will ask for the line number, and then the column number (optional). This is particularly useful when a program gives you an error message pointing to a specific line in a configuration file or script.</p></li>
+<li><p><code>Ctrl + G</code> <strong>(Get Help)</strong>: If you ever forget a shortcut or want to see all the available commands, <code>Ctrl + G</code> will bring up nano&#39;s built-in help screen. It lists all the common commands and their corresponding key combinations. You can exit the help screen by pressing <code>Ctrl + X</code>.</p></li>
+</ul>
+</body>
+</html>
