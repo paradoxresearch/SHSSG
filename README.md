@@ -2,7 +2,21 @@
 
 The Self Hosted Server Survival Guide
 
+## Projects
+
+Coming Soon.
+
 ## Manuals
+
+### PDF Download
+
+[Download the Manuals as a pdf](https://raw.githubusercontent.com/paradoxresearch/SHSSG/main/Manuals/pdf/SHSSG_Manuals.pdf)
+
+### View manuals in HTML
+
+Coming soon.
+
+### Markdown Files
 
 - [Categories](https://github.com/paradoxresearch/SHSSG/tree/main/Manuals/md)
   - [Getting Started with Linux](https://github.com/paradoxresearch/SHSSG/tree/main/Manuals/md/000_Getting_Started_with_Linux)
