@@ -32,7 +32,7 @@ Coming soon.
 
 ## Feedback
 
-Any questions, feedback, corrections, or requests for different manuals can be sent to: [info@paradoxresearch.net](mailto:info@paradoxresearch.net?subject=Self Hosted Server Survival Guide)
+Any questions, feedback, corrections, or requests for different manuals can be sent to: [info@paradoxresearch.net](mailto:info@paradoxresearch.net)
 
 ## License
 
