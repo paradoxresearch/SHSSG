@@ -1,5 +1,9 @@
 # The Self Hosted Server Survival Guide
 
+[Projects](#projects) | [Manuals](#manuals) | [Feedback](#feedback) | [License](#license)
+
+---
+
 Welcome to the **Self-Hosted Server Survival Guide**, a resource for those looking to take control of their own infrastructure. This book is divided into two distinct parts.
 
 The first part focuses on hands-on projects, demonstrating different applications that can be hosted from a personal server at home. Each example is designed as a functional setup, providing real experience with deployment and management.
